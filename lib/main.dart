@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
         Locale('id', ''),
       ],
       onGenerateRoute: route.Router.generateRoutes,
-      initialRoute: path.SPLASH_SCREEN,
+      initialRoute: path.MAIN,
       debugShowCheckedModeBanner: false,
     );
   }
