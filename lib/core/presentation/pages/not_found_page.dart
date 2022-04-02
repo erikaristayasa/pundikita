@@ -14,6 +14,7 @@ class NotFoundPage extends StatelessWidget {
           child: Center(
             child: Text(
               getLocalizationString(context).pageIsNotFound,
+              style: Theme.of(context).textTheme.bodyMedium,
             ),
           ),
         ),
