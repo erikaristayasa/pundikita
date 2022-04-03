@@ -8,7 +8,7 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return const SafeArea(
       child: ColoredBox(
-        color: AppColors.SECONDARY,
+        color: AppColors.PRIMARY,
         child: SizedBox.expand(),
       ),
     );

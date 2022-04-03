@@ -4,3 +4,5 @@ const String SPLASH_SCREEN = '/';
 const String LOGIN = '/login';
 const String MAIN = '/main';
 const String PROFILE = '/profile';
+
+const String CAMPAIGN_ALL = '/campaign_all';

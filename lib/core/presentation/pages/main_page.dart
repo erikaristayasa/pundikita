@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../features/home/presentation/pages/home_page.dart';
@@ -29,56 +30,61 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: BlocBuilder<NavbarCubit, int>(
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: const SystemUiOverlayStyle(
+        statusBarColor: AppColors.PRIMARY,
+      ),
+      child: Scaffold(
+        body: SafeArea(
+          child: BlocBuilder<NavbarCubit, int>(
+            bloc: navbar,
+            builder: (context, state) {
+              if (state == 0) {
+                return const HomePage();
+              } else {
+                return const ProfilePage();
+              }
+            },
+          ),
+        ),
+        bottomNavigationBar: BlocBuilder<NavbarCubit, int>(
           bloc: navbar,
           builder: (context, state) {
-            if (state == 0) {
-              return const HomePage();
-            } else {
-              return const ProfilePage();
-            }
+            return BottomNavigationBar(
+              type: BottomNavigationBarType.shifting,
+              currentIndex: state,
+              backgroundColor: Colors.white,
+              unselectedFontSize: 10.0,
+              selectedFontSize: 12.0,
+              selectedItemColor: AppColors.PRIMARY,
+              unselectedItemColor: Colors.black45,
+              onTap: navbar.change,
+              iconSize: 26,
+              items: [
+                BottomNavigationBarItem(
+                  label: AppLocale.loc.home,
+                  icon: const Icon(Icons.home_rounded),
+                ),
+                BottomNavigationBarItem(
+                  label: AppLocale.loc.raiseFunds,
+                  icon: const Icon(Icons.handshake_rounded),
+                ),
+                BottomNavigationBarItem(
+                  label: AppLocale.loc.myDonation,
+                  icon: const Icon(Icons.list_alt_rounded),
+                ),
+                BottomNavigationBarItem(
+                  label: AppLocale.loc.inbox,
+                  icon: const Icon(Icons.email_rounded),
+                ),
+                BottomNavigationBarItem(
+                  label: AppLocale.loc.profile,
+                  icon: const Icon(Icons.person_rounded),
+                )
+              ],
+            );
           },
         ),
-      ),
-      bottomNavigationBar: BlocBuilder<NavbarCubit, int>(
-        bloc: navbar,
-        builder: (context, state) {
-          return BottomNavigationBar(
-            type: BottomNavigationBarType.shifting,
-            currentIndex: state,
-            backgroundColor: Colors.white,
-            unselectedFontSize: 10.0,
-            selectedFontSize: 12.0,
-            selectedItemColor: AppColors.PRIMARY,
-            unselectedItemColor: Colors.black45,
-            onTap: navbar.change,
-            iconSize: 26,
-            items: [
-              BottomNavigationBarItem(
-                label: AppLocale.loc.home,
-                icon: const Icon(Icons.home_rounded),
-              ),
-              BottomNavigationBarItem(
-                label: AppLocale.loc.raiseFunds,
-                icon: const Icon(Icons.handshake_rounded),
-              ),
-              BottomNavigationBarItem(
-                label: AppLocale.loc.myDonation,
-                icon: const Icon(Icons.list_alt_rounded),
-              ),
-              BottomNavigationBarItem(
-                label: AppLocale.loc.inbox,
-                icon: const Icon(Icons.email_rounded),
-              ),
-              BottomNavigationBarItem(
-                label: AppLocale.loc.profile,
-                icon: const Icon(Icons.person_rounded),
-              )
-            ],
-          );
-        },
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../features/campaign/presentation/pages/campaign_all_page.dart';
 import '../presentation/pages/main_page.dart';
 import '../presentation/pages/not_found_page.dart';
 import '../presentation/pages/splash_screen.dart';
@@ -12,6 +13,8 @@ class Router {
         return pageRoute(page: const SplashScreen());
       case path.MAIN:
         return pageRoute(page: const MainPage());
+      case path.CAMPAIGN_ALL:
+        return pageRoute(page: const CampaignAllPage());
       default:
         return pageRoute(page: const NotFoundPage());
     }

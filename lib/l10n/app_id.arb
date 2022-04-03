@@ -12,5 +12,10 @@
     "fundraiseNow": "Galang Dana Sekarang",
     "donationOptions": "Pilihan Donasi",
     "seeMore": "Lihat Lainnya",
-    "collected": "Terkumpul"
+    "collected": "Terkumpul",
+
+    "campaignList": "Daftar Kampanye",
+    "category": "Kategori",
+    "sort": "Urutkan",
+    "dayLeft": "Sisa hari"
 }

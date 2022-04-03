@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/routes/path.dart' as path;
 import '../../../../core/static/colors.dart';
 import '../../../../core/static/dimens.dart';
 import '../../../../core/static/extensions.dart';
@@ -24,7 +25,7 @@ class HomeCampaignList extends StatelessWidget {
             children: [
               HomeLabel(title: AppLocale.loc.donationOptions),
               TextButton(
-                onPressed: () {},
+                onPressed: () => Navigator.pushNamed(context, path.CAMPAIGN_ALL),
                 child: Text(
                   AppLocale.loc.seeMore,
                   style: Theme.of(context).textTheme.bodySmall!.withColor(AppColors.SECONDARY),
