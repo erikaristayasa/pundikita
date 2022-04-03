@@ -4,10 +4,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'core/static/colors.dart';
 
 import 'core/routes/path.dart' as path;
 import 'core/routes/router.dart' as route;
+import 'core/static/colors.dart';
 
 void main() {
   LicenseRegistry.addLicense(() async* {
@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
         Locale('id', ''),
       ],
       onGenerateRoute: route.Router.generateRoutes,
-      initialRoute: path.MAIN,
+      initialRoute: path.SPLASH_SCREEN,
       debugShowCheckedModeBanner: false,
     );
   }

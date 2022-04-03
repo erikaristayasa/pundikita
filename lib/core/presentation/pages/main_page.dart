@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../static/assets.dart';
+import '../../../features/home/presentation/pages/home_page.dart';
+import '../../../features/profile/presentation/pages/profile_page.dart';
 import '../cubits/navbar_cubit.dart';
-import '../widgets/navbar_icon.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -12,69 +12,66 @@ class MainPage extends StatefulWidget {
   State<MainPage> createState() => _MainPageState();
 }
 
-class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
-  late AnimationController _homeController;
-  late AnimationController _profileController;
+class _MainPageState extends State<MainPage> {
   final navbar = NavbarCubit(0);
 
   @override
   void initState() {
     super.initState();
-    _homeController = AnimationController(vsync: this, duration: const Duration(seconds: 2));
-    _profileController = AnimationController(vsync: this, duration: const Duration(seconds: 2));
   }
 
   @override
   void dispose() {
-    _homeController.dispose();
-    _profileController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    // void onChanged(int i) {}
-
     return Scaffold(
-      body: SafeArea(
-        child: Container(
-          height: double.maxFinite,
-          width: double.maxFinite,
-          color: Colors.teal,
-        ),
-      ),
-      bottomNavigationBar: BlocConsumer<NavbarCubit, int>(
+      body: BlocBuilder<NavbarCubit, int>(
         bloc: navbar,
-        listener: (context, state) {
+        builder: (context, state) {
           if (state == 0) {
-            _homeController.reset();
-            _homeController.forward();
+            return const HomePage();
           } else {
-            _profileController.reset();
-            _profileController.forward();
+            return const ProfilePage();
           }
         },
+      ),
+      bottomNavigationBar: BlocBuilder<NavbarCubit, int>(
+        bloc: navbar,
         builder: (context, state) {
           return BottomNavigationBar(
+            type: BottomNavigationBarType.shifting,
             currentIndex: state,
-            unselectedFontSize: 12.0,
+            backgroundColor: Colors.white,
+            unselectedFontSize: 10.0,
             selectedFontSize: 12.0,
+            selectedItemColor: Colors.black,
+            unselectedItemColor: Colors.black45,
             onTap: navbar.change,
-            items: [
+            iconSize: 26,
+            items: const [
               BottomNavigationBarItem(
                 label: 'Home',
-                icon: NavbarIcon(
-                  asset: Assets.LOTTIE_HOME,
-                  controller: _homeController,
-                ),
+                icon: Icon(Icons.home_rounded),
+              ),
+              BottomNavigationBarItem(
+                label: 'Galang Dana',
+                icon: Icon(Icons.handshake_rounded),
+              ),
+              BottomNavigationBarItem(
+                label: 'Donasi Saya',
+                icon: Icon(Icons.list_alt_rounded),
+              ),
+              BottomNavigationBarItem(
+                label: 'Inbox',
+                icon: Icon(Icons.email_rounded),
               ),
               BottomNavigationBarItem(
                 label: 'Profile',
-                icon: NavbarIcon(
-                  asset: Assets.LOTTIE_PROFILE,
-                  controller: _profileController,
-                ),
-              ),
+                icon: Icon(Icons.person_rounded),
+              )
             ],
           );
         },
