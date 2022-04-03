@@ -7,7 +7,7 @@ class HomeCampaignList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 300,
-      color: Colors.red,
+      color: Colors.white,
       child: SizedBox.expand(),
     );
   }

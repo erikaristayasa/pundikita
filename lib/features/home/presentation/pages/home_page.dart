@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pundi_kita/core/static/colors.dart';
-import 'package:pundi_kita/core/utility/helper.dart';
 
-import '../../../../core/static/dimens.dart';
+import '../../../../core/static/colors.dart';
+import '../../../../core/utility/helper.dart';
 import '../widgets/home_banner.dart';
 import '../widgets/home_campaign_list.dart';
 import '../widgets/home_campaign_type.dart';
