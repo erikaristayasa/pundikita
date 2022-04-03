@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../routes/path.dart' as path;
 import '../../static/colors.dart';
+import '../../utility/app_locale.dart';
+import '../../utility/helper.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -22,6 +24,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    AppLocale.setLoc = getLocalizationString(context);
+
     return const Scaffold(
       backgroundColor: AppColors.PRIMARY,
       body: SafeArea(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pundi_kita/core/static/colors.dart';
+
+import '../widgets/search_bar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -11,10 +12,13 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
-      child: ColoredBox(
-        color: AppColors.PRIMARY,
-        child: SizedBox.expand(),
+    return const Scaffold(
+      appBar: SearchBar(),
+      body: SafeArea(
+        child: ColoredBox(
+          color: Colors.red,
+          child: SizedBox.expand(),
+        ),
       ),
     );
   }

@@ -1,4 +1,11 @@
 {
     "appName": "Pundikita",
-    "pageIsNotFound": "Maaf, halaman tidak ditemukan :("
+    "pageIsNotFound": "Maaf, halaman tidak ditemukan :(",
+    "search": "Cari",
+    
+    "home": "Beranda",
+    "raiseFunds": "Galang Dana",
+    "myDonation": "Donasi Saya",
+    "inbox": "Kotak Masuk",
+    "profile": "Profil"
 }

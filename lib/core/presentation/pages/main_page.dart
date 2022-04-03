@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../features/home/presentation/pages/home_page.dart';
 import '../../../features/profile/presentation/pages/profile_page.dart';
+import '../../static/colors.dart';
+import '../../utility/app_locale.dart';
 import '../cubits/navbar_cubit.dart';
 
 class MainPage extends StatefulWidget {
@@ -28,15 +30,17 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocBuilder<NavbarCubit, int>(
-        bloc: navbar,
-        builder: (context, state) {
-          if (state == 0) {
-            return const HomePage();
-          } else {
-            return const ProfilePage();
-          }
-        },
+      body: SafeArea(
+        child: BlocBuilder<NavbarCubit, int>(
+          bloc: navbar,
+          builder: (context, state) {
+            if (state == 0) {
+              return const HomePage();
+            } else {
+              return const ProfilePage();
+            }
+          },
+        ),
       ),
       bottomNavigationBar: BlocBuilder<NavbarCubit, int>(
         bloc: navbar,
@@ -47,30 +51,30 @@ class _MainPageState extends State<MainPage> {
             backgroundColor: Colors.white,
             unselectedFontSize: 10.0,
             selectedFontSize: 12.0,
-            selectedItemColor: Colors.black,
+            selectedItemColor: AppColors.PRIMARY,
             unselectedItemColor: Colors.black45,
             onTap: navbar.change,
             iconSize: 26,
-            items: const [
+            items: [
               BottomNavigationBarItem(
-                label: 'Home',
-                icon: Icon(Icons.home_rounded),
+                label: AppLocale.loc.home,
+                icon: const Icon(Icons.home_rounded),
               ),
               BottomNavigationBarItem(
-                label: 'Galang Dana',
-                icon: Icon(Icons.handshake_rounded),
+                label: AppLocale.loc.raiseFunds,
+                icon: const Icon(Icons.handshake_rounded),
               ),
               BottomNavigationBarItem(
-                label: 'Donasi Saya',
-                icon: Icon(Icons.list_alt_rounded),
+                label: AppLocale.loc.myDonation,
+                icon: const Icon(Icons.list_alt_rounded),
               ),
               BottomNavigationBarItem(
-                label: 'Inbox',
-                icon: Icon(Icons.email_rounded),
+                label: AppLocale.loc.inbox,
+                icon: const Icon(Icons.email_rounded),
               ),
               BottomNavigationBarItem(
-                label: 'Profile',
-                icon: Icon(Icons.person_rounded),
+                label: AppLocale.loc.profile,
+                icon: const Icon(Icons.person_rounded),
               )
             ],
           );
