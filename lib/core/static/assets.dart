@@ -2,7 +2,9 @@
 
 class Assets {
   static const String LOGO = '';
+  static const String DEFAULT_IMAGE = 'assets/images/default_image.png';
 
+  static const String LOTTIE_SHIMMER = 'assets/lotties/shimmer.json';
   // static const String LOTTIE_HOME = 'assets/lottie/home.json';
   // static const String LOTTIE_RAISE_FUNDS = 'assets/lottie/raise_funds.json';
   // static const String LOTTIE_MY_DONATION = 'assets/lottie/my_donation.json';

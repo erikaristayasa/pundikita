@@ -1,12 +1,19 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
 
 import '../static/config.dart';
 import '../static/dimens.dart';
 
 AppLocalizations getLocalizationString(BuildContext context) {
   return AppLocalizations.of(context)!;
+}
+
+String getFormattedPrice(int price) {
+  final formatter = NumberFormat.currency(locale: "id_ID", symbol: 'Rp');
+  formatter.maximumFractionDigits = 0;
+  return formatter.format(price);
 }
 
 logMe(Object? object) {

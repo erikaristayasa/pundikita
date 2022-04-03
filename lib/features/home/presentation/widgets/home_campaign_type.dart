@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../../core/presentation/widgets/rounded_container.dart';
-import '../../../../core/static/colors.dart';
 import '../../../../core/static/dimens.dart';
+import '../../../../core/utility/app_locale.dart';
 import '../../../../core/utility/helper.dart';
+import 'home_label.dart';
 
 class HomeCampaignType extends StatelessWidget {
   const HomeCampaignType({Key? key}) : super(key: key);
@@ -17,24 +17,7 @@ class HomeCampaignType extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          RoundedContainer(
-            color: AppColors.SECONDARY.withOpacity(0.15),
-            padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: Dimension.SMALL),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Icon(
-                  Icons.label_important_rounded,
-                  color: AppColors.PRIMARY,
-                ),
-                smallHorizontalSpacing(),
-                Text(
-                  'Galang Dana Sekarang',
-                  style: Theme.of(context).textTheme.titleSmall,
-                ),
-              ],
-            ),
-          ),
+          HomeLabel(title: AppLocale.loc.fundraiseNow),
           mediumVerticalSpacing(),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
