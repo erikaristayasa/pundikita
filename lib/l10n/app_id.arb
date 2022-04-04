@@ -17,5 +17,20 @@
     "campaignList": "Daftar Kampanye",
     "category": "Kategori",
     "sort": "Urutkan",
-    "dayLeft": "Sisa hari"
+    "dayLeft": "Sisa hari",
+
+    "donateNow": "Donasi Sekarang!",
+    "collectedFrom": "Terkumpul dari {price}",
+    "@collectedFrom": {
+        "placeholders": {
+            "price": {
+                "type": "String",
+                "example": "Rp500.000"
+            }
+        }
+    },
+
+    "patient": "Pasien",
+    "fundraiser": "Penggalang Dana",
+    "fundraiserInfo": "Info Penggalang Dana"
 }

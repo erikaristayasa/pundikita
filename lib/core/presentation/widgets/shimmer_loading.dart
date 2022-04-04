@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:pundi_kita/core/static/assets.dart';
+import '../../static/assets.dart';
 
 class ShimmerLoading extends StatelessWidget {
   const ShimmerLoading({Key? key}) : super(key: key);

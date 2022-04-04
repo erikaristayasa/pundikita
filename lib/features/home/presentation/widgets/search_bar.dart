@@ -39,7 +39,7 @@ class SearchBar extends StatelessWidget with PreferredSizeWidget {
                   Expanded(
                     child: Text(
                       AppLocale.loc.search,
-                      style: Theme.of(context).textTheme.bodySmall!.withColor(Colors.white),
+                      style: context.textTheme().bodySmall!.withColor(Colors.white),
                     ),
                   ),
                   const Icon(

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import '../../../../core/static/extensions.dart';
 
+import '../../../../core/presentation/widgets/custom_label.dart';
 import '../../../../core/static/dimens.dart';
 import '../../../../core/utility/app_locale.dart';
 import '../../../../core/utility/helper.dart';
-import 'home_label.dart';
 
 class HomeCampaignType extends StatelessWidget {
   const HomeCampaignType({Key? key}) : super(key: key);
@@ -17,7 +18,7 @@ class HomeCampaignType extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          HomeLabel(title: AppLocale.loc.fundraiseNow),
+          CustomLabel(title: AppLocale.loc.fundraiseNow),
           mediumVerticalSpacing(),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -50,7 +51,7 @@ class CampaignTypeItem extends StatelessWidget {
         mediumVerticalSpacing(),
         Text(
           title,
-          style: Theme.of(context).textTheme.bodyMedium,
+          style: context.textTheme().bodyMedium,
         ),
       ],
     );

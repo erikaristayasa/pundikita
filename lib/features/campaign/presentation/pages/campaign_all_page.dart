@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pundi_kita/core/static/assets.dart';
 
 import '../../../../core/presentation/widgets/custom_app_bar.dart';
 import '../../../../core/static/colors.dart';
@@ -15,7 +16,6 @@ class CampaignAllPage extends StatelessWidget {
       appBar: CustomAppBar(
         title: AppLocale.loc.campaignList,
         canBack: true,
-        centerTitle: true,
       ),
       body: SafeArea(
         child: Column(
@@ -33,12 +33,18 @@ class CampaignAllPage extends StatelessWidget {
                 children: [
                   TextButton.icon(
                     onPressed: () {},
-                    icon: const Icon(Icons.filter_list_rounded),
+                    icon: Image.asset(
+                      Assets.FILTER,
+                      width: 18.0,
+                    ),
                     label: Text(AppLocale.loc.category),
                   ),
                   TextButton.icon(
                     onPressed: () {},
-                    icon: const Icon(Icons.sort_rounded),
+                    icon: Image.asset(
+                      Assets.SORT,
+                      width: 18.0,
+                    ),
                     label: Text(AppLocale.loc.sort),
                   ),
                 ],

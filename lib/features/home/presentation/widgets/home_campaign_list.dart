@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/presentation/widgets/custom_label.dart';
 import '../../../../core/routes/path.dart' as path;
 import '../../../../core/static/colors.dart';
 import '../../../../core/static/dimens.dart';
@@ -7,7 +8,6 @@ import '../../../../core/static/extensions.dart';
 import '../../../../core/utility/app_locale.dart';
 import '../../../../core/utility/helper.dart';
 import 'home_campaign_item.dart';
-import 'home_label.dart';
 
 class HomeCampaignList extends StatelessWidget {
   const HomeCampaignList({Key? key}) : super(key: key);
@@ -23,12 +23,12 @@ class HomeCampaignList extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              HomeLabel(title: AppLocale.loc.donationOptions),
+              CustomLabel(title: AppLocale.loc.donationOptions),
               TextButton(
                 onPressed: () => Navigator.pushNamed(context, path.CAMPAIGN_ALL),
                 child: Text(
                   AppLocale.loc.seeMore,
-                  style: Theme.of(context).textTheme.bodySmall!.withColor(AppColors.SECONDARY),
+                  style: context.textTheme().bodySmall!.withColor(AppColors.SECONDARY),
                 ),
               )
             ],

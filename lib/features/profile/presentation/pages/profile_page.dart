@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pundi_kita/core/static/colors.dart';
+
+import '../../../../core/static/colors.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);

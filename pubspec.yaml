@@ -92,6 +92,7 @@ flutter:
       - google_fonts/
       - assets/lotties/
       - assets/images/
+      - assets/icons/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

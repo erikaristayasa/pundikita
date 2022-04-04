@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../static/extensions.dart';
 import '../../utility/helper.dart';
 
 class NotFoundPage extends StatelessWidget {
@@ -14,7 +15,7 @@ class NotFoundPage extends StatelessWidget {
           child: Center(
             child: Text(
               getLocalizationString(context).pageIsNotFound,
-              style: Theme.of(context).textTheme.bodyMedium,
+              style: context.textTheme().bodyMedium,
             ),
           ),
         ),

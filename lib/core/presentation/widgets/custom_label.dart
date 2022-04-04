@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
+import '../../static/extensions.dart';
 
-import '../../../../core/presentation/widgets/rounded_container.dart';
-import '../../../../core/static/colors.dart';
-import '../../../../core/static/dimens.dart';
-import '../../../../core/utility/helper.dart';
+import '../../static/colors.dart';
+import '../../static/dimens.dart';
+import '../../utility/helper.dart';
+import 'rounded_container.dart';
 
-class HomeLabel extends StatelessWidget {
+class CustomLabel extends StatelessWidget {
   final String title;
-  const HomeLabel({Key? key, required this.title}) : super(key: key);
+  const CustomLabel({Key? key, required this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return RoundedContainer(
+      radius: Dimension.MEDIUM,
       color: AppColors.SECONDARY.withOpacity(0.15),
-      padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: Dimension.SMALL),
+      padding: const EdgeInsets.only(top: 4.0, bottom: 4.0, right: Dimension.MEDIUM, left: Dimension.SMALL),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -24,7 +26,7 @@ class HomeLabel extends StatelessWidget {
           smallHorizontalSpacing(),
           Text(
             title,
-            style: Theme.of(context).textTheme.titleSmall,
+            style: context.textTheme().titleSmall,
           ),
         ],
       ),

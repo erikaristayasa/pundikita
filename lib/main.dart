@@ -8,6 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'core/routes/path.dart' as path;
 import 'core/routes/router.dart' as route;
 import 'core/static/colors.dart';
+import 'core/static/extensions.dart';
 
 void main() {
   LicenseRegistry.addLicense(() async* {
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
       title: 'Pundikita',
       theme: ThemeData(
         textTheme: GoogleFonts.poppinsTextTheme(
-          Theme.of(context).textTheme,
+          context.textTheme(),
         ),
         colorScheme: ColorScheme.fromSwatch().copyWith(
           primary: AppColors.PRIMARY,

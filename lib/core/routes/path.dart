@@ -6,3 +6,4 @@ const String MAIN = '/main';
 const String PROFILE = '/profile';
 
 const String CAMPAIGN_ALL = '/campaign_all';
+const String CAMPAIGN_DETAIL = '/campaign_detail';

@@ -1,9 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:pundi_kita/core/presentation/widgets/rounded_container.dart';
-import 'package:pundi_kita/core/static/colors.dart';
-import 'package:pundi_kita/core/static/dimens.dart';
-import 'package:pundi_kita/core/utility/helper.dart';
+import '../../../../core/presentation/widgets/rounded_container.dart';
+import '../../../../core/static/colors.dart';
+import '../../../../core/static/dimens.dart';
+import '../../../../core/utility/helper.dart';
 
 class HomeBanner extends StatefulWidget {
   const HomeBanner({Key? key}) : super(key: key);
