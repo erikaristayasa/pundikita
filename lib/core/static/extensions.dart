@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -31,4 +32,10 @@ extension StringFormatting on String {
 
 extension ThemeOfContext on BuildContext {
   TextTheme textTheme() => Theme.of(this).textTheme;
+}
+
+extension DynamicHeader on Dio {
+  Dio withToken() {
+    return this..options.headers.addAll({'token': true});
+  }
 }
