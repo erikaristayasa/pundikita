@@ -1,3 +1,6 @@
+import 'package:dio/dio.dart';
+import 'package:image_picker/image_picker.dart';
+
 import '../../domain/entities/campaign_entity.dart';
 import '../../domain/entities/user_entity.dart';
 import '../../static/extensions.dart';
@@ -39,11 +42,12 @@ class CampaignModel extends Campaign {
     required String? eventName,
     required String? eventGoal,
     required String? eventAddress,
+    required String? detailOfUseOfFunds,
     required int status,
     required User user,
-    required CampaignType campaignType,
-    required CampaignCategory campaignCategory,
-    required CampaignSubCategory campaignSubCategory,
+    required CampaignType? campaignType,
+    required CampaignCategory? campaignCategory,
+    required CampaignSubCategory? campaignSubCategory,
   }) : super(
           id: id,
           userId: userId,
@@ -79,6 +83,7 @@ class CampaignModel extends Campaign {
           eventName: eventName,
           eventGoal: eventGoal,
           eventAddress: eventAddress,
+          detailOfUseOfFunds: detailOfUseOfFunds,
           status: status,
           user: user,
           campaignType: campaignType,
@@ -120,12 +125,46 @@ class CampaignModel extends Campaign {
         eventName: json['nama_acara'],
         eventGoal: json['tujuan_acara'],
         eventAddress: json['lokasi_acara'],
+        detailOfUseOfFunds: json['rincian_penggunaan_dana'],
         status: json['status'],
         user: UserModel.fromJson(json['user']),
         campaignType: CampaignTypeModel.fromJson(json['campaign_type']),
         campaignCategory: CampaignCategoryModel.fromJson(json['campaign_category']),
         campaignSubCategory: CampaignSubCategoryModel.fromJson(json['campaign_sub_category']),
       );
+
+  Future<FormData> createBody({
+    required XFile photoFile,
+    required XFile patienIdPhotoFile,
+    required XFile medicalCertificatePhotoFile,
+    required XFile medicalResultPhotoFile,
+    String? patientPhone,
+  }) async {
+    var map = {
+      'campaign_type_id': campaignTypeId,
+      'campaign_category_id': campaignCategoryId,
+      'campaign_sub_category_id': campaignSubCategoryid,
+      'telepon': phone,
+      'nama_pasien': patientName,
+      'nama_penyakit': patientIllness,
+      'status_rawat_inap': hospitalizationStatus,
+      'nama_rumah_sakit_rawat_inap': hospitalName,
+      'upaya_pengobatan': treatmentEfforts,
+      'sumber_dana_pengobatan': treatmentSources,
+      'jumlah_dana': amountOfFunds,
+      'tanggal_selesai': endDate.toText(),
+      'rincian_penggunaan_dana': detailOfUseOfFunds,
+      'judul': title,
+      'cerita': story,
+      'ajakan_singkat': sortInvitation,
+      if (patientPhone != null) 'telepon_pasien': patientPhone
+    };
+    map['foto'] = await MultipartFile.fromFile(photoFile.path, filename: photoFile.name);
+    map['foto_surat_identitas_pasien'] = await MultipartFile.fromFile(patienIdPhotoFile.path, filename: patienIdPhotoFile.name);
+    map['foto_surat_keterangan_medis'] = await MultipartFile.fromFile(medicalCertificatePhotoFile.path, filename: medicalCertificatePhotoFile.name);
+    map['foto_surat_hasil_pemeriksaan'] = await MultipartFile.fromFile(medicalResultPhotoFile.path, filename: medicalResultPhotoFile.name);
+    return FormData.fromMap(map);
+  }
 }
 
 class CampaignTypeModel extends CampaignType {
