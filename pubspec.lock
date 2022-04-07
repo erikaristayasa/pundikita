@@ -106,13 +106,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.4"
-  dio_logging_interceptor:
+  dio_logger:
     dependency: "direct main"
     description:
-      name: dio_logging_interceptor
+      name: dio_logger
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.1"
+    version: "4.0.8+8"
   equatable:
     dependency: "direct main"
     description:

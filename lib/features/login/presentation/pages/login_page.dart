@@ -6,6 +6,7 @@ import '../../../../core/presentation/widgets/custom_app_bar.dart';
 import '../../../../core/static/dimens.dart';
 import '../../../../core/utility/app_locale.dart';
 import '../../../../core/utility/helper.dart';
+import '../../../../core/utility/locator.dart';
 import '../bloc/login_bloc.dart';
 import '../widgets/login_form.dart';
 
@@ -15,7 +16,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<LoginBloc>(
-      create: (_) => LoginBloc(),
+      create: (_) => locator<LoginBloc>(),
       child: LoaderOverlay(
         child: Scaffold(
           backgroundColor: Colors.white,

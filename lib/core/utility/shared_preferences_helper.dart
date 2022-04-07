@@ -21,6 +21,10 @@ class SharedPreferencesHelper {
   static const String USER_TOKEN = 'userToken';
 
   // get logged in session
+  Future<bool> saveToken(String token) async {
+    return prefs.setString(USER_TOKEN, token);
+  }
+
   bool isLoggedIn() {
     return prefs.getBool(IS_LOGGED_IN) ?? false;
   }
