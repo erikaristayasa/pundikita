@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pundi_kita/features/login/presentation/pages/login_page.dart';
 
 import '../../features/campaign/presentation/pages/campaign_all_page.dart';
 import '../../features/campaign/presentation/pages/campaign_detail_page.dart';
@@ -12,6 +13,8 @@ class Router {
     switch (settings.name) {
       case path.SPLASH_SCREEN:
         return pageRoute(page: const SplashScreen());
+      case path.LOGIN:
+        return pageRoute(page: const LoginPage());
       case path.MAIN:
         return pageRoute(page: const MainPage());
       case path.CAMPAIGN_ALL:

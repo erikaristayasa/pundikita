@@ -32,5 +32,10 @@
 
     "patient": "Pasien",
     "fundraiser": "Penggalang Dana",
-    "fundraiserInfo": "Info Penggalang Dana"
+    "fundraiserInfo": "Info Penggalang Dana",
+
+    "loginPage": "Halaman Masuk",
+    "login": "Masuk",
+    "email": "Email",
+    "password": "Kata sandi"
 }

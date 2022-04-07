@@ -4,17 +4,20 @@ import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pundi_kita/core/utility/locator.dart';
 
 import 'core/routes/path.dart' as path;
 import 'core/routes/router.dart' as route;
 import 'core/static/colors.dart';
 import 'core/static/extensions.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   LicenseRegistry.addLicense(() async* {
     final license = await rootBundle.loadString('google_fonts/OFL.txt');
     yield LicenseEntryWithLineBreaks(['google_fonts'], license);
   });
+  locatorSetup();
   runApp(const MyApp());
 }
 
