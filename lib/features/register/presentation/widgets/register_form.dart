@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:pundi_kita/core/presentation/blocs/text_controller/text_controller_bloc.dart';
-import 'package:pundi_kita/core/utility/locator.dart';
-import 'package:pundi_kita/core/utility/validation_helper.dart';
-import 'package:pundi_kita/features/register/presentation/bloc/register_bloc.dart';
 
 import '../../../../core/presentation/widgets/custom_text_field.dart';
 import '../../../../core/presentation/widgets/rounded_button.dart';
+import '../../../../core/presentation/widgets/simple_alert_dialog.dart';
 import '../../../../core/utility/app_locale.dart';
 import '../../../../core/utility/helper.dart';
+import '../../../../core/utility/locator.dart';
+import '../../../../core/utility/validation_helper.dart';
+import '../bloc/register_bloc.dart';
 
 class RegisterForm extends StatefulWidget {
   const RegisterForm({Key? key}) : super(key: key);
@@ -38,12 +37,24 @@ class _RegisterFormState extends State<RegisterForm> {
             context.loaderOverlay.show();
             break;
           case RegisterSuccess:
-            Fluttertoast.showToast(msg: AppLocale.loc.registerSuccess);
+            showDialog(
+              context: context,
+              builder: (context) => SimpleAlertDialog(
+                title: AppLocale.loc.success,
+                message: AppLocale.loc.registerSuccess,
+              ),
+            );
             Navigator.pop(context);
             break;
           case RegisterError:
             context.loaderOverlay.hide();
-            Fluttertoast.showToast(msg: (state as RegisterError).message);
+            showDialog(
+              context: context,
+              builder: (context) => SimpleAlertDialog(
+                title: AppLocale.loc.failure,
+                message: (state as RegisterError).message,
+              ),
+            );
             break;
         }
       }, builder: (context, state) {

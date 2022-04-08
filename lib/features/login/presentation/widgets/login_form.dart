@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:pundi_kita/core/static/colors.dart';
-import 'package:pundi_kita/core/utility/validation_helper.dart';
 
 import '../../../../core/presentation/widgets/custom_text_field.dart';
 import '../../../../core/presentation/widgets/rounded_button.dart';
+import '../../../../core/presentation/widgets/simple_alert_dialog.dart';
 import '../../../../core/routes/path.dart' as path;
+import '../../../../core/static/colors.dart';
 import '../../../../core/utility/app_locale.dart';
 import '../../../../core/utility/helper.dart';
+import '../../../../core/utility/validation_helper.dart';
 import '../bloc/login_bloc.dart';
 
 class LoginForm extends StatefulWidget {
@@ -38,7 +39,13 @@ class _LoginFormState extends State<LoginForm> {
             break;
           case LoginError:
             context.loaderOverlay.hide();
-            Fluttertoast.showToast(msg: (state as LoginError).message);
+            showDialog(
+              context: context,
+              builder: (context) => SimpleAlertDialog(
+                title: AppLocale.loc.failure,
+                message: (state as LoginError).message,
+              ),
+            );
             break;
         }
       },

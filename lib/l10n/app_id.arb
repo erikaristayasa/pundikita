@@ -50,5 +50,9 @@
     "dontHaveAnAccountYet": "Belum punya akun?",
     "forgotPassword": "Lupa kata sandi?",
     "loginSuccess": "Berhasil masuk",
-    "registerSuccess": "Berhasil mendaftar, periksa email untuk verifikasi akun."
+    "failure": "Gagal",
+    "success": "Berhasil",
+    "registerSuccess": "Berhasil mendaftar, periksa email untuk verifikasi akun.",
+    "registerFailure": "Gagal mendaftar, periksa kembali data anda & coba kembali.",
+    "ok": "OK"
 }
