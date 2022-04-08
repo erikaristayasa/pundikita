@@ -5,10 +5,10 @@ enum TypeField { none, count, email, phone, password, confirmationPassword, name
 class ValidationHelper {
   final Function(bool value) isError;
   final TypeField typeField;
-  final String? pwd;
+  final String? valueMatcher;
 
   ValidationHelper({
-    this.pwd = '',
+    this.valueMatcher = '',
     required this.isError,
     required this.typeField,
   });
@@ -35,14 +35,14 @@ class ValidationHelper {
             Pattern pattern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
             RegExp phoneRegex = RegExp(pattern.toString());
             if (!phoneRegex.hasMatch(strValue)) {
-              message = 'Format nomor telephon salah';
+              message = 'Format nomor telepon salah';
               isError(true);
             } else {
               isError(false);
             }
             break;
           case TypeField.confirmationPassword:
-            if (strValue != pwd) {
+            if (strValue != valueMatcher) {
               message = 'Password tidak sama';
               isError(true);
             } else {

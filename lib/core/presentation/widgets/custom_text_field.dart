@@ -1,35 +1,40 @@
 import 'package:flutter/material.dart';
-import 'package:pundi_kita/core/static/extensions.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../static/extensions.dart';
+import '../../utility/locator.dart';
+import '../../utility/validation_helper.dart';
+import '../blocs/text_controller/text_controller_bloc.dart';
 
 class CustomTextField extends StatefulWidget {
   final String? title;
   final String placeholder;
   final bool isSecure;
-  final bool isError;
   final TextEditingController controller;
-  final FormFieldValidator fieldValidator;
+  final TextEditingController? controllerMatcher;
   final TextInputType inputType;
   final bool refresh;
   final Function? onTap;
   final String? suffixText;
   final bool border;
-  final void Function(String value)? onChanged;
   final bool enabled;
+  final TypeField typeField;
+  final String valueMatcher;
   const CustomTextField({
     Key? key,
     this.placeholder = '',
     this.title,
     this.isSecure = false,
-    this.isError = false,
     required this.controller,
-    required this.fieldValidator,
     this.inputType = TextInputType.text,
     this.refresh = false,
     this.onTap,
     this.suffixText,
     this.border = false,
-    this.onChanged,
     this.enabled = true,
+    this.typeField = TypeField.none,
+    this.valueMatcher = '',
+    this.controllerMatcher,
   }) : super(key: key);
 
   @override
@@ -67,66 +72,78 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        widget.title != null
-            ? Text(
-                widget.title ?? "",
-                style: context.textTheme().titleSmall,
-              )
-            : const SizedBox.shrink(),
-        const SizedBox(height: 4.0),
-        TextFormField(
-          enabled: widget.enabled,
-          onTap: () {
-            if (widget.refresh) {
-              widget.onTap!();
-            }
-          },
-          onChanged: widget.onChanged,
-          obscureText: _passwordVisible,
-          controller: widget.controller,
-          keyboardType: widget.inputType,
-          style: TextStyle(
-            color: widget.isError ? Colors.white : Colors.black,
-          ),
-          decoration: InputDecoration(
-            focusColor: Colors.white,
-            hintText: widget.placeholder,
-            border: InputBorder.none,
-            enabledBorder: normalBorder,
-            disabledBorder: normalBorder,
-            focusedBorder: normalBorder,
-            errorBorder: errorBorder,
-            focusedErrorBorder: errorBorder,
-            filled: true,
-            fillColor: widget.isError ? Colors.red : Colors.grey[200],
-            contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-            suffixIcon: widget.isSecure
-                ? Material(
-                    color: Colors.transparent,
-                    child: IconButton(
-                        splashRadius: 20.0,
-                        onPressed: () {
-                          setState(() {
-                            _passwordVisible = !_passwordVisible;
-                          });
-                        },
-                        icon: Icon(_passwordVisible ? Icons.visibility_rounded : Icons.visibility_off_rounded)),
-                  )
-                : widget.suffixText != null
-                    ? Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(widget.suffixText!, textAlign: TextAlign.center, style: context.textTheme().labelSmall),
-                        ],
-                      )
-                    : null,
-          ),
-          validator: widget.fieldValidator,
-        ),
-      ],
+    return BlocProvider(
+      create: (_) => locator<TextControllerBloc>(),
+      child: BlocBuilder<TextControllerBloc, TextControllerState>(
+        builder: (context, state) {
+          final bloc = context.read<TextControllerBloc>();
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              widget.title != null
+                  ? Text(
+                      widget.title ?? "",
+                      style: context.textTheme().titleSmall,
+                    )
+                  : const SizedBox.shrink(),
+              const SizedBox(height: 4.0),
+              TextFormField(
+                enabled: widget.enabled,
+                onTap: () {
+                  if (widget.refresh) {
+                    widget.onTap!();
+                  }
+                },
+                onChanged: (newValue) => bloc.add(TextControllerOnChanged(newValue: newValue)),
+                obscureText: _passwordVisible,
+                controller: widget.controller,
+                keyboardType: widget.inputType,
+                style: TextStyle(
+                  color: state.error ? Colors.white : Colors.black,
+                ),
+                decoration: InputDecoration(
+                  focusColor: Colors.white,
+                  hintText: widget.placeholder,
+                  border: InputBorder.none,
+                  enabledBorder: normalBorder,
+                  disabledBorder: normalBorder,
+                  focusedBorder: normalBorder,
+                  errorBorder: errorBorder,
+                  focusedErrorBorder: errorBorder,
+                  filled: true,
+                  fillColor: state.error ? Colors.red : Colors.grey[200],
+                  contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                  suffixIcon: widget.isSecure
+                      ? Material(
+                          color: Colors.transparent,
+                          child: IconButton(
+                              splashRadius: 20.0,
+                              onPressed: () {
+                                setState(() {
+                                  _passwordVisible = !_passwordVisible;
+                                });
+                              },
+                              icon: Icon(_passwordVisible ? Icons.visibility_rounded : Icons.visibility_off_rounded)),
+                        )
+                      : widget.suffixText != null
+                          ? Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(widget.suffixText!, textAlign: TextAlign.center, style: context.textTheme().labelSmall),
+                              ],
+                            )
+                          : null,
+                ),
+                validator: ValidationHelper(
+                  valueMatcher: widget.controllerMatcher?.text,
+                  isError: (error) => bloc.add(TextControllerOnError(error)),
+                  typeField: widget.typeField,
+                ).validate(),
+              ),
+            ],
+          );
+        },
+      ),
     );
   }
 }

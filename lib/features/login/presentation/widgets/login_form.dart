@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:pundi_kita/core/static/colors.dart';
+import 'package:pundi_kita/core/utility/validation_helper.dart';
 
 import '../../../../core/presentation/widgets/custom_text_field.dart';
 import '../../../../core/presentation/widgets/rounded_button.dart';
@@ -21,6 +23,7 @@ class _LoginFormState extends State<LoginForm> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<LoginBloc, LoginState>(
@@ -30,7 +33,7 @@ class _LoginFormState extends State<LoginForm> {
             context.loaderOverlay.show();
             break;
           case LoginSuccess:
-            Fluttertoast.showToast(msg: 'Login success');
+            Fluttertoast.showToast(msg: AppLocale.loc.loginSuccess);
             Navigator.pushReplacementNamed(context, path.MAIN);
             break;
           case LoginError:
@@ -40,30 +43,66 @@ class _LoginFormState extends State<LoginForm> {
         }
       },
       builder: (context, state) {
-        return Column(
-          children: [
-            CustomTextField(
-              title: AppLocale.loc.email,
-              placeholder: AppLocale.loc.email,
-              controller: _emailController,
-              fieldValidator: (_) => null,
-            ),
-            CustomTextField(
-              title: AppLocale.loc.password,
-              placeholder: AppLocale.loc.password,
-              isSecure: true,
-              controller: _passwordController,
-              fieldValidator: (_) => null,
-            ),
-            mediumVerticalSpacing(),
-            RoundedButton(
-              title: AppLocale.loc.login,
-              onTap: () => context.read<LoginBloc>().add(LoginSubmitted(
-                    email: _emailController.text,
-                    password: _passwordController.text,
-                  )),
-            ),
-          ],
+        return Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              CustomTextField(
+                title: AppLocale.loc.email,
+                placeholder: AppLocale.loc.email,
+                controller: _emailController,
+                inputType: TextInputType.emailAddress,
+                typeField: TypeField.email,
+              ),
+              mediumVerticalSpacing(),
+              CustomTextField(
+                title: AppLocale.loc.password,
+                placeholder: AppLocale.loc.password,
+                isSecure: true,
+                controller: _passwordController,
+                inputType: TextInputType.visiblePassword,
+                typeField: TypeField.password,
+              ),
+              smallVerticalSpacing(),
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  TextButton(
+                    style: TextButton.styleFrom(primary: AppColors.PRIMARY),
+                    onPressed: () {},
+                    child: Text(AppLocale.loc.forgotPassword),
+                  ),
+                ],
+              ),
+              smallVerticalSpacing(),
+              RoundedButton(
+                title: AppLocale.loc.login,
+                height: 54,
+                onTap: () {
+                  if (_formKey.currentState!.validate()) {
+                    context.read<LoginBloc>().add(LoginSubmitted(
+                          email: _emailController.text,
+                          password: _passwordController.text,
+                        ));
+                  }
+                },
+              ),
+              mediumVerticalSpacing(),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(AppLocale.loc.dontHaveAnAccountYet),
+                  TextButton(
+                    style: TextButton.styleFrom(primary: AppColors.PRIMARY),
+                    onPressed: () => Navigator.pushNamed(context, path.REGISTER),
+                    child: Text(AppLocale.loc.register),
+                  ),
+                ],
+              )
+            ],
+          ),
         );
       },
     );

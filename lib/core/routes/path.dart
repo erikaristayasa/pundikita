@@ -2,6 +2,8 @@
 
 const String SPLASH_SCREEN = '/';
 const String LOGIN = '/login';
+const String REGISTER = '/register';
+
 const String MAIN = '/main';
 const String PROFILE = '/profile';
 

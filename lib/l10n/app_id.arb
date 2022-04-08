@@ -2,6 +2,8 @@
     "appName": "Pundikita",
     "pageIsNotFound": "Maaf, halaman tidak ditemukan :(",
     "search": "Cari",
+
+    "unexpectedServerError": "Unexpected Server Error",
     
     "home": "Beranda",
     "raiseFunds": "Galang Dana",
@@ -39,5 +41,14 @@
     "email": "Email",
     "password": "Kata sandi",
     "loginWithGoogle": "Masuk dengan Google",
-    "loginWithFacebook": "Masuk dengan Facebook"
+    "loginWithFacebook": "Masuk dengan Facebook",
+    "registerPage": "Halaman Pendaftaran",
+    "register": "Daftar",
+    "passwordConfirmation": "Konfirmasi kata sandi",
+    "name": "Nama",
+    "phone": "Telepon",
+    "dontHaveAnAccountYet": "Belum punya akun?",
+    "forgotPassword": "Lupa kata sandi?",
+    "loginSuccess": "Berhasil masuk",
+    "registerSuccess": "Berhasil mendaftar, periksa email untuk verifikasi akun."
 }

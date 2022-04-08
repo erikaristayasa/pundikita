@@ -21,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
     Future.delayed(const Duration(seconds: 2), () async {
       final session = await locator.getAsync<SharedPreferencesHelper>();
-      if (session.isLoggedIn()) {
+      if (!session.isLoggedIn()) {
         Navigator.pushReplacementNamed(context, path.MAIN);
       } else {
         Navigator.pushReplacementNamed(context, path.LOGIN);

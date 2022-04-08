@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:pundi_kita/core/utility/helper.dart';
 
+import '../../../../core/utility/app_locale.dart';
 import '../../domain/repositories/login_repository.dart';
 import '../datasources/login_data_source.dart';
 
@@ -18,7 +18,7 @@ class LoginRepositoryImplementation implements LoginRepository {
       }
       return Left(result.data!);
     } catch (e) {
-      return const Left('Unexpected server error');
+      return Left(AppLocale.loc.unexpectedServerError);
     }
   }
 }
