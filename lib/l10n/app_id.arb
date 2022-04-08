@@ -37,5 +37,7 @@
     "loginPage": "Halaman Masuk",
     "login": "Masuk",
     "email": "Email",
-    "password": "Kata sandi"
+    "password": "Kata sandi",
+    "loginWithGoogle": "Masuk dengan Google",
+    "loginWithFacebook": "Masuk dengan Facebook"
 }
