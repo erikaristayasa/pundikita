@@ -77,7 +77,7 @@ class _LoginFormState extends State<LoginForm> {
                 children: [
                   TextButton(
                     style: TextButton.styleFrom(primary: AppColors.PRIMARY),
-                    onPressed: () {},
+                    onPressed: () => Navigator.pushNamed(context, path.FORGOT_PASSWORD),
                     child: Text(AppLocale.loc.forgotPassword),
                   ),
                 ],

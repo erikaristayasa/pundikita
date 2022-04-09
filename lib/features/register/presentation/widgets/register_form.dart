@@ -37,6 +37,8 @@ class _RegisterFormState extends State<RegisterForm> {
             context.loaderOverlay.show();
             break;
           case RegisterSuccess:
+            context.loaderOverlay.hide();
+            Navigator.pop(context);
             showDialog(
               context: context,
               builder: (context) => SimpleAlertDialog(
@@ -44,7 +46,6 @@ class _RegisterFormState extends State<RegisterForm> {
                 message: AppLocale.loc.registerSuccess,
               ),
             );
-            Navigator.pop(context);
             break;
           case RegisterError:
             context.loaderOverlay.hide();

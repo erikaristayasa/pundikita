@@ -54,5 +54,9 @@
     "success": "Berhasil",
     "registerSuccess": "Berhasil mendaftar, periksa email untuk verifikasi akun.",
     "registerFailure": "Gagal mendaftar, periksa kembali data anda & coba kembali.",
-    "ok": "OK"
+    "ok": "OK",
+
+    "forgotPasswordPage": "Halaman Lupa Kata Sandi",
+    "forgotPasswordSuccess": "Kata sandi baru anda telah dikirim ke email.",
+    "send": "Kirim"
 }

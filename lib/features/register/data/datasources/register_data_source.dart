@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
 
+import '../../../../core/data/models/common_response.model.dart';
 import '../../domain/entities/register_request_body.dart';
-import '../models/register_response_model.dart';
 
 abstract class RegisterDataSource {
-  Future<RegisterResponseModel> register(RegisterRequestBody body);
+  Future<CommonResponseModel> register(RegisterRequestBody body);
 }
 
 class RegisterDataSourceImplementation implements RegisterDataSource {
@@ -13,13 +13,13 @@ class RegisterDataSourceImplementation implements RegisterDataSource {
   RegisterDataSourceImplementation({required this.dio});
 
   @override
-  Future<RegisterResponseModel> register(RegisterRequestBody body) async {
+  Future<CommonResponseModel> register(RegisterRequestBody body) async {
     const path = 'api/user/register';
     final data = FormData.fromMap(body.toJson());
 
     try {
       final response = await dio.post(path, data: data);
-      return RegisterResponseModel.fromJson(response.data);
+      return CommonResponseModel.fromJson(response.data);
     } catch (e) {
       rethrow;
     }

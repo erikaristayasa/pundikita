@@ -3,6 +3,7 @@
 const String SPLASH_SCREEN = '/';
 const String LOGIN = '/login';
 const String REGISTER = '/register';
+const String FORGOT_PASSWORD = '/forgot_password';
 
 const String MAIN = '/main';
 const String PROFILE = '/profile';
