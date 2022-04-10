@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pundi_kita/core/static/dimens.dart';
 import 'package:pundi_kita/features/campaign/presentation/cubit/campaign_bottom_button.dart';
+import 'package:pundi_kita/features/campaign/presentation/widgets/campaign_prays.dart';
 import 'package:pundi_kita/features/campaign/presentation/widgets/campaign_story.dart';
 
 import '../../../../core/presentation/widgets/rounded_button.dart';
@@ -90,6 +91,8 @@ class _CampaignDetailPageState extends State<CampaignDetailPage> {
                   const CampaignFundraiserInfo(),
                   smallVerticalSpacing(),
                   const CampaignStory(),
+                  smallVerticalSpacing(),
+                  const CampaignPrays(),
                 ],
               ),
               childCount: 1,
