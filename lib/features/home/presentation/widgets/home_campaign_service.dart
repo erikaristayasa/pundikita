@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:pundi_kita/core/static/assets.dart';
 import '../../../../core/static/extensions.dart';
 
 import '../../../../core/presentation/widgets/custom_label.dart';
@@ -7,8 +8,8 @@ import '../../../../core/static/dimens.dart';
 import '../../../../core/utility/app_locale.dart';
 import '../../../../core/utility/helper.dart';
 
-class HomeCampaignType extends StatelessWidget {
-  const HomeCampaignType({Key? key}) : super(key: key);
+class HomeCampaignService extends StatelessWidget {
+  const HomeCampaignService({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +23,10 @@ class HomeCampaignType extends StatelessWidget {
           mediumVerticalSpacing(),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: const [
-              CampaignTypeItem(fileName: 'icon-galang-dana-medis.svg', title: 'type 1'),
-              CampaignTypeItem(fileName: 'icon-galang-dana-nonmedis.svg', title: 'type 2'),
+            children: [
+              Expanded(flex: 1, child: CampaignServiceItem(asset: Assets.HOME_DONATION, title: AppLocale.loc.donation)),
+              Expanded(flex: 1, child: CampaignServiceItem(asset: Assets.HOME_ZAKAT, title: AppLocale.loc.zakat)),
+              Expanded(flex: 1, child: CampaignServiceItem(asset: Assets.HOME_FUNDRASING, title: AppLocale.loc.raiseFunds)),
             ],
           ),
         ],
@@ -33,17 +35,23 @@ class HomeCampaignType extends StatelessWidget {
   }
 }
 
-class CampaignTypeItem extends StatelessWidget {
-  final String fileName;
+class CampaignServiceItem extends StatelessWidget {
+  final String asset;
   final String title;
-  const CampaignTypeItem({Key? key, required this.fileName, required this.title}) : super(key: key);
+  const CampaignServiceItem({Key? key, required this.asset, required this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SvgPicture.network(
-          getCampaignTypeImageUrl(fileName),
+        // SvgPicture.network(
+        //   getCampaignTypeImageUrl(fileName),
+        //   fit: BoxFit.cover,
+        //   height: 60,
+        //   width: 60,
+        // ),
+        Image.asset(
+          asset,
           fit: BoxFit.cover,
           height: 60,
           width: 60,

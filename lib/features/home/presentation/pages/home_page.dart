@@ -4,7 +4,7 @@ import '../../../../core/static/colors.dart';
 import '../../../../core/utility/helper.dart';
 import '../widgets/home_banner.dart';
 import '../widgets/home_campaign_list.dart';
-import '../widgets/home_campaign_type.dart';
+import '../widgets/home_campaign_service.dart';
 import '../widgets/search_bar.dart';
 
 class HomePage extends StatefulWidget {
@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             const HomeBanner(),
             smallVerticalSpacing(),
-            const HomeCampaignType(),
+            const HomeCampaignService(),
             smallVerticalSpacing(),
             const HomeCampaignList(),
           ],

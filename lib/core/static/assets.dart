@@ -7,6 +7,10 @@ class Assets {
   static const String GOOGLE = 'assets/icons/google.png';
   static const String FACEBOOK = 'assets/icons/facebook.png';
 
+  static const String HOME_DONATION = 'assets/icons/home/donation.png';
+  static const String HOME_ZAKAT = 'assets/icons/home/zakat.png';
+  static const String HOME_FUNDRASING = 'assets/icons/home/fundraising.png';
+
   static const String NAV_HOME = 'assets/icons/heart.png';
   static const String NAV_DONATION = 'assets/icons/donation_bag.png';
   static const String NAV_MY_DONATION = 'assets/icons/wishlist.png';
