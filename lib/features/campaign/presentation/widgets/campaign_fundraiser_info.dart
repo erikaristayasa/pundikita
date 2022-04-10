@@ -23,6 +23,8 @@ class CampaignFundraiserInfo extends StatelessWidget {
         children: [
           CustomLabel(title: AppLocale.loc.fundraiserInfo),
           mediumVerticalSpacing(),
+
+          // Fundraiser info
           RoundedContainer(
             padding: const EdgeInsets.all(Dimension.MEDIUM),
             radius: Dimension.MEDIUM,
@@ -68,6 +70,8 @@ class CampaignFundraiserInfo extends StatelessWidget {
             ),
           ),
           mediumVerticalSpacing(),
+
+          // Patient
           RoundedContainer(
             padding: const EdgeInsets.all(Dimension.MEDIUM),
             radius: Dimension.MEDIUM,
@@ -161,6 +165,28 @@ class CampaignFundraiserInfo extends StatelessWidget {
               ],
             ),
           ),
+          mediumVerticalSpacing(),
+
+          // Fund usage
+          RoundedContainer(
+            padding: const EdgeInsets.symmetric(horizontal: Dimension.MEDIUM),
+            width: double.maxFinite,
+            color: Colors.grey[200]!,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  AppLocale.loc.fundUsageDetail,
+                  style: context.textTheme().bodySmall,
+                ),
+                TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      AppLocale.loc.see,
+                    )),
+              ],
+            ),
+          )
         ],
       ),
     );

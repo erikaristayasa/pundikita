@@ -58,5 +58,9 @@
 
     "forgotPasswordPage": "Halaman Lupa Kata Sandi",
     "forgotPasswordSuccess": "Kata sandi baru anda telah dikirim ke email.",
-    "send": "Kirim"
+    "send": "Kirim",
+
+    "fundUsageDetail": "Rincian Penggunaan Dana",
+    "see": "Lihat",
+    "story": "Cerita"
 }

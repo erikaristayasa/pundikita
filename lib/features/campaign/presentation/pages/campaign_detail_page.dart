@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pundi_kita/core/static/dimens.dart';
+import 'package:pundi_kita/features/campaign/presentation/cubit/campaign_bottom_button.dart';
+import 'package:pundi_kita/features/campaign/presentation/widgets/campaign_story.dart';
 
+import '../../../../core/presentation/widgets/rounded_button.dart';
 import '../../../../core/static/colors.dart';
+import '../../../../core/utility/app_locale.dart';
 import '../../../../core/utility/helper.dart';
 import '../cubit/campaign_title_cubit.dart';
 import '../widgets/campaign_basic_info.dart';
@@ -24,6 +29,7 @@ class CampaignDetailPage extends StatefulWidget {
 class _CampaignDetailPageState extends State<CampaignDetailPage> {
   final ScrollController _controller = ScrollController();
   final CampaignTitleCubit campaignTitleCubit = CampaignTitleCubit("");
+  final CampaignBottomButtonCubit campaignBottomButtonCubit = CampaignBottomButtonCubit(false);
 
   @override
   void initState() {
@@ -34,9 +40,11 @@ class _CampaignDetailPageState extends State<CampaignDetailPage> {
   _scrollListener() {
     if (_controller.offset >= 200) {
       campaignTitleCubit.change("Campaign Title");
+      campaignBottomButtonCubit.show();
     }
     if (_controller.offset < 200) {
       campaignTitleCubit.change("");
+      campaignBottomButtonCubit.hide();
     }
   }
 
@@ -80,20 +88,29 @@ class _CampaignDetailPageState extends State<CampaignDetailPage> {
                   const CampaignBasicInfo(),
                   smallVerticalSpacing(),
                   const CampaignFundraiserInfo(),
-                  Container(
-                    height: 200,
-                    color: Colors.yellow,
-                  ),
-                  Container(
-                    height: 200,
-                    color: Colors.green,
-                  )
+                  smallVerticalSpacing(),
+                  const CampaignStory(),
                 ],
               ),
               childCount: 1,
             ),
           )
         ],
+      ),
+      bottomNavigationBar: BlocBuilder<CampaignBottomButtonCubit, bool>(
+        bloc: campaignBottomButtonCubit,
+        builder: (context, show) => show
+            ? Container(
+                color: Colors.white,
+                padding: const EdgeInsets.all(Dimension.MEDIUM),
+                child: RoundedButton(
+                  radius: 22,
+                  onTap: () {},
+                  title: AppLocale.loc.donateNow,
+                  color: Colors.red,
+                ),
+              )
+            : const SizedBox.shrink(),
       ),
     );
   }
