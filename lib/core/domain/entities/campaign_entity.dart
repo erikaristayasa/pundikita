@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:pundi_kita/core/utility/helper.dart';
 
 import '../../static/enums.dart';
 import 'user_entity.dart';
@@ -6,11 +7,11 @@ import 'user_entity.dart';
 class Campaign extends Equatable {
   final int id;
   final CampaignService campaignService;
-  final int userId;
-  final int campaignTypeId;
-  final int campaignCategoryId;
-  final int campaignSubCategoryid;
-  final int organizer;
+  final int? userId;
+  final int? campaignTypeId;
+  final int? campaignCategoryId;
+  final int? campaignSubCategoryid;
+  final int? organizer;
   final String? title;
   final DateTime endDate;
   final num amountOfFunds;
@@ -25,7 +26,7 @@ class Campaign extends Equatable {
   final String? medicalResultPhoto;
   final String? patientName;
   final String? patientIllness;
-  final int hospitalizationStatus;
+  final int? hospitalizationStatus;
   final String? hospitalName;
   final String? treatmentEfforts;
   final String? treatmentSources;
@@ -41,7 +42,7 @@ class Campaign extends Equatable {
   final String? eventAddress;
   final String? detailOfUseOfFunds;
   final int status;
-  final User user;
+  final User? user;
   final CampaignType? campaignType;
   final CampaignCategory? campaignCategory;
   final CampaignSubCategory? campaignSubCategory;
@@ -91,6 +92,18 @@ class Campaign extends Equatable {
     required this.campaignSubCategory,
     required this.donation,
   });
+
+  double get progress {
+    final result = amountOfFunds / amountOfCollectedFunds;
+    if (result.isInfinite || result.isNaN) {
+      return 0.0;
+    }
+    return result;
+  }
+
+  int get leftDate {
+    return daysBetween(DateTime.now(), endDate);
+  }
 
   @override
   List<Object?> get props => [
@@ -211,12 +224,12 @@ class CampaignDonation extends Equatable {
   final int paymentTransactionId;
   final PaymentMethod paymentMethod;
   final PaymentChannel paymentChannel;
-  final int paymentNumber;
+  final String paymentNumber;
   final String paymentName;
   final num paymentTotal;
   final num paymentFee;
   final DateTime paymentExpired;
-  final String paymentQRImage;
+  final String? paymentQRImage;
   final int status;
   final bool likeStatus;
 

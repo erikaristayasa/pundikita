@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pundi_kita/core/static/enums.dart';
+import 'package:pundi_kita/features/campaign/presentation/pages/campaign_all_page.dart';
 
 import '../../../../core/presentation/widgets/custom_label.dart';
 import '../../../../core/routes/path.dart' as path;
@@ -25,7 +27,7 @@ class HomeCampaignList extends StatelessWidget {
             children: [
               CustomLabel(title: AppLocale.loc.donationOptions),
               TextButton(
-                onPressed: () => Navigator.pushNamed(context, path.CAMPAIGN_ALL),
+                onPressed: () => Navigator.pushNamed(context, path.CAMPAIGN_ALL, arguments: CampaignAllPageRouteArguments(service: CampaignService.donasi)),
                 child: Text(
                   AppLocale.loc.seeMore,
                   style: context.textTheme().bodySmall!.withColor(AppColors.SECONDARY),

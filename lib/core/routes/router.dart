@@ -27,7 +27,10 @@ class Router {
           page: MainPage(fromLogin: args?.fromLogin ?? false),
         );
       case path.CAMPAIGN_ALL:
-        return pageRoute(page: const CampaignAllPage());
+        final args = settings.arguments as CampaignAllPageRouteArguments;
+        return pageRoute(
+          page: CampaignAllPage(service: args.service),
+        );
       case path.CAMPAIGN_DETAIL:
         final args = settings.arguments as CampaignDetailPageRouteArguments;
         return pageRoute(page: CampaignDetailPage(id: args.id));

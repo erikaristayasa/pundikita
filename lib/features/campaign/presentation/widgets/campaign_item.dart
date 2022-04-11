@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pundi_kita/core/domain/entities/campaign_entity.dart';
 import '../../../../core/static/extensions.dart';
 
 import '../../../../core/presentation/widgets/default_image.dart';
@@ -11,7 +12,8 @@ import '../../../../core/utility/helper.dart';
 import '../pages/campaign_detail_page.dart';
 
 class CampaignItem extends StatelessWidget {
-  const CampaignItem({Key? key}) : super(key: key);
+  final Campaign campaign;
+  const CampaignItem({Key? key, required this.campaign}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +34,7 @@ class CampaignItem extends StatelessWidget {
                 width: double.maxFinite,
                 height: double.maxFinite,
                 child: Image.network(
-                  getCampaignImageUrl('20220401143431-1648823671-BLE2uNRshhjBoDunrCygd2qu2vDGT2Z9txZmSavjeYUGsmqklB.jpg'),
+                  getCampaignImageUrl(campaign.photo ?? ''),
                   errorBuilder: (context, error, _) => const DefaultImage(),
                   fit: BoxFit.cover,
                 ),
@@ -49,7 +51,7 @@ class CampaignItem extends StatelessWidget {
                     RoundedContainer(
                       color: AppColors.SECONDARY.withOpacity(0.15),
                       child: Text(
-                        'Title Campaing Title Campaing Title Campaing Title Campaing',
+                        campaign.title ?? '',
                         style: context.textTheme().titleSmall,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
@@ -57,7 +59,7 @@ class CampaignItem extends StatelessWidget {
                     ),
                     smallVerticalSpacing(),
                     Text(
-                      'User Name User Name User Name User Name',
+                      campaign.user?.name ?? '',
                       style: context.textTheme().bodyMedium,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -65,7 +67,7 @@ class CampaignItem extends StatelessWidget {
                     smallVerticalSpacing(),
                     LinearProgressIndicator(
                       backgroundColor: AppColors.SECONDARY.withOpacity(0.3),
-                      value: 0.5,
+                      value: campaign.progress,
                     ),
                     Table(
                       columnWidths: const {
@@ -88,13 +90,13 @@ class CampaignItem extends StatelessWidget {
                         ]),
                         TableRow(children: [
                           Text(
-                            getFormattedPrice(123456),
+                            getFormattedPrice(campaign.amountOfCollectedFunds.toInt()),
                             style: context.textTheme().titleSmall,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
                           Text(
-                            '3',
+                            campaign.leftDate.toString(),
                             textAlign: TextAlign.end,
                             style: context.textTheme().titleSmall,
                             maxLines: 1,
