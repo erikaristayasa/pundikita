@@ -3,12 +3,14 @@ import 'package:image_picker/image_picker.dart';
 
 import '../../domain/entities/campaign_entity.dart';
 import '../../domain/entities/user_entity.dart';
+import '../../static/enums.dart';
 import '../../static/extensions.dart';
 import 'user_model.dart';
 
 class CampaignModel extends Campaign {
   const CampaignModel({
     required int id,
+    required CampaignService campaignService,
     required int userId,
     required int campaignTypeId,
     required int campaignCategoryId,
@@ -45,11 +47,13 @@ class CampaignModel extends Campaign {
     required String? detailOfUseOfFunds,
     required int status,
     required User user,
-    required CampaignType? campaignType,
-    required CampaignCategory? campaignCategory,
-    required CampaignSubCategory? campaignSubCategory,
+    required CampaignTypeModel? campaignType,
+    required CampaignCategoryModel? campaignCategory,
+    required CampaignSubCategoryModel? campaignSubCategory,
+    required List<CampaignDonationModel> donation,
   }) : super(
           id: id,
+          campaignService: campaignService,
           userId: userId,
           campaignTypeId: campaignTypeId,
           campaignCategoryId: campaignCategoryId,
@@ -89,9 +93,11 @@ class CampaignModel extends Campaign {
           campaignType: campaignType,
           campaignCategory: campaignCategory,
           campaignSubCategory: campaignSubCategory,
+          donation: donation,
         );
   factory CampaignModel.fromJson(Map<String, dynamic> json) => CampaignModel(
         id: json['id'],
+        campaignService: json['campaign_service'] == 0 ? CampaignService.donasi : CampaignService.zakat,
         userId: json['user_id'],
         campaignTypeId: json['campaign_type_id'],
         campaignCategoryId: json['campaign_category_id'],
@@ -131,6 +137,7 @@ class CampaignModel extends Campaign {
         campaignType: CampaignTypeModel.fromJson(json['campaign_type']),
         campaignCategory: CampaignCategoryModel.fromJson(json['campaign_category']),
         campaignSubCategory: CampaignSubCategoryModel.fromJson(json['campaign_sub_category']),
+        donation: json['donation'] != null ? List<CampaignDonationModel>.from(json['donation'].map((x) => CampaignDonationModel.fromJson(x))) : [],
       );
 
   Future<FormData> createBody({
@@ -222,5 +229,61 @@ class CampaignSubCategoryModel extends CampaignSubCategory {
         campaignCategoryId: json['campaign_category_id'],
         title: json['judul'],
         description: json['deskripsi'],
+      );
+}
+
+class CampaignDonationModel extends CampaignDonation {
+  const CampaignDonationModel({
+    required int id,
+    required int userId,
+    required int campaignId,
+    required num amountOfFunds,
+    required String? pray,
+    required int paymentTransactionId,
+    required PaymentMethod paymentMethod,
+    required PaymentChannel paymentChannel,
+    required int paymentNumber,
+    required String paymentName,
+    required num paymentTotal,
+    required num paymentFee,
+    required DateTime paymentExpired,
+    required String paymentQRImage,
+    required int status,
+    required bool likeStatus,
+  }) : super(
+          id: id,
+          userId: userId,
+          campaignId: campaignId,
+          amountOfFunds: amountOfFunds,
+          pray: pray,
+          paymentTransactionId: paymentTransactionId,
+          paymentMethod: paymentMethod,
+          paymentChannel: paymentChannel,
+          paymentNumber: paymentNumber,
+          paymentName: paymentName,
+          paymentTotal: paymentTotal,
+          paymentFee: paymentFee,
+          paymentExpired: paymentExpired,
+          paymentQRImage: paymentQRImage,
+          status: status,
+          likeStatus: likeStatus,
+        );
+  factory CampaignDonationModel.fromJson(Map<String, dynamic> json) => CampaignDonationModel(
+        id: json['id'],
+        userId: json['user_id'],
+        campaignId: json['campaign_id'],
+        amountOfFunds: json['jumplah_dana'],
+        pray: json['doa'],
+        paymentTransactionId: json['payment_transaction_id'],
+        paymentMethod: PaymentMethod.values.firstWhere((element) => element.name == json['payment_method']),
+        paymentChannel: PaymentChannel.values.firstWhere((element) => element.name == json['payment_channel']),
+        paymentNumber: json['payment_no'],
+        paymentName: json['payment_name'],
+        paymentTotal: json['payment_total'],
+        paymentFee: json['payment_fee'],
+        paymentExpired: (json['payment_expired'] as String).toDate(),
+        paymentQRImage: json['payment_qr_image'],
+        status: json['status'],
+        likeStatus: json['like_status'],
       );
 }

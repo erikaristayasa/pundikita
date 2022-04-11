@@ -1,8 +1,11 @@
 import 'package:equatable/equatable.dart';
+
+import '../../static/enums.dart';
 import 'user_entity.dart';
 
 class Campaign extends Equatable {
   final int id;
+  final CampaignService campaignService;
   final int userId;
   final int campaignTypeId;
   final int campaignCategoryId;
@@ -42,9 +45,11 @@ class Campaign extends Equatable {
   final CampaignType? campaignType;
   final CampaignCategory? campaignCategory;
   final CampaignSubCategory? campaignSubCategory;
+  final List<CampaignDonation> donation;
 
   const Campaign({
     required this.id,
+    required this.campaignService,
     required this.userId,
     required this.campaignTypeId,
     required this.campaignCategoryId,
@@ -84,11 +89,13 @@ class Campaign extends Equatable {
     required this.campaignType,
     required this.campaignCategory,
     required this.campaignSubCategory,
+    required this.donation,
   });
 
   @override
   List<Object?> get props => [
         id,
+        campaignService,
         userId,
         campaignTypeId,
         campaignCategoryId,
@@ -128,6 +135,7 @@ class Campaign extends Equatable {
         campaignType,
         campaignCategory,
         campaignSubCategory,
+        donation
       ];
 }
 
@@ -191,5 +199,63 @@ class CampaignSubCategory extends Equatable {
         campaignCategoryId,
         title,
         description,
+      ];
+}
+
+class CampaignDonation extends Equatable {
+  final int id;
+  final int userId;
+  final int campaignId;
+  final num amountOfFunds;
+  final String? pray;
+  final int paymentTransactionId;
+  final PaymentMethod paymentMethod;
+  final PaymentChannel paymentChannel;
+  final int paymentNumber;
+  final String paymentName;
+  final num paymentTotal;
+  final num paymentFee;
+  final DateTime paymentExpired;
+  final String paymentQRImage;
+  final int status;
+  final bool likeStatus;
+
+  const CampaignDonation({
+    required this.id,
+    required this.userId,
+    required this.campaignId,
+    required this.amountOfFunds,
+    required this.pray,
+    required this.paymentTransactionId,
+    required this.paymentMethod,
+    required this.paymentChannel,
+    required this.paymentNumber,
+    required this.paymentName,
+    required this.paymentTotal,
+    required this.paymentFee,
+    required this.paymentExpired,
+    required this.paymentQRImage,
+    required this.status,
+    required this.likeStatus,
+  });
+
+  @override
+  List<Object?> get props => [
+        id,
+        userId,
+        campaignId,
+        amountOfFunds,
+        pray,
+        paymentTransactionId,
+        paymentMethod,
+        paymentChannel,
+        paymentNumber,
+        paymentName,
+        paymentTotal,
+        paymentFee,
+        paymentExpired,
+        paymentQRImage,
+        status,
+        likeStatus,
       ];
 }
