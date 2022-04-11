@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:pundi_kita/core/presentation/pages/main_page.dart';
 
 import '../../../../core/presentation/widgets/custom_text_field.dart';
 import '../../../../core/presentation/widgets/rounded_button.dart';
@@ -35,7 +36,7 @@ class _LoginFormState extends State<LoginForm> {
             break;
           case LoginSuccess:
             Fluttertoast.showToast(msg: AppLocale.loc.loginSuccess);
-            Navigator.pushReplacementNamed(context, path.MAIN);
+            Navigator.pushReplacementNamed(context, path.MAIN, arguments: MainPageRouteArguments(fromLogin: true));
             break;
           case LoginError:
             context.loaderOverlay.hide();

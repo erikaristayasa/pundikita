@@ -22,7 +22,10 @@ class Router {
       case path.FORGOT_PASSWORD:
         return pageRoute(page: const ForgotPasswordPage());
       case path.MAIN:
-        return pageRoute(page: const MainPage());
+        final args = settings.arguments as MainPageRouteArguments?;
+        return pageRoute(
+          page: MainPage(fromLogin: args?.fromLogin ?? false),
+        );
       case path.CAMPAIGN_ALL:
         return pageRoute(page: const CampaignAllPage());
       case path.CAMPAIGN_DETAIL:

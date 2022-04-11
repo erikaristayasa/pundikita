@@ -8,9 +8,17 @@ import '../../static/assets.dart';
 import '../../static/colors.dart';
 import '../../utility/app_locale.dart';
 import '../cubits/navbar_cubit.dart';
+import '../widgets/popup_information_dialog.dart';
+
+class MainPageRouteArguments {
+  final bool fromLogin;
+
+  MainPageRouteArguments({required this.fromLogin});
+}
 
 class MainPage extends StatefulWidget {
-  const MainPage({Key? key}) : super(key: key);
+  final bool fromLogin;
+  const MainPage({Key? key, this.fromLogin = false}) : super(key: key);
 
   @override
   State<MainPage> createState() => _MainPageState();
@@ -22,6 +30,11 @@ class _MainPageState extends State<MainPage> {
   @override
   void initState() {
     super.initState();
+    if (widget.fromLogin) {
+      Future.delayed(const Duration(milliseconds: 300), () {
+        showDialog(context: context, builder: (context) => const PopUpInformationDialog());
+      });
+    }
   }
 
   @override

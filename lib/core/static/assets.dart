@@ -3,6 +3,7 @@
 class Assets {
   static const String LOGO = '';
   static const String DEFAULT_IMAGE = 'assets/images/default_image.png';
+  static const String POPUP_INFORMATION = 'assets/images/popup_information.jpeg';
 
   static const String GOOGLE = 'assets/icons/google.png';
   static const String FACEBOOK = 'assets/icons/facebook.png';
