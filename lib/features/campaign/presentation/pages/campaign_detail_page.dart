@@ -1,27 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pundi_kita/core/static/dimens.dart';
-import 'package:pundi_kita/features/campaign/presentation/cubit/campaign_bottom_button.dart';
-import 'package:pundi_kita/features/campaign/presentation/widgets/campaign_prays.dart';
-import 'package:pundi_kita/features/campaign/presentation/widgets/campaign_story.dart';
+import 'package:pundi_kita/core/domain/entities/campaign_entity.dart';
 
+import '../../../../core/presentation/pages/loading_page.dart';
+import '../../../../core/presentation/pages/not_found_page.dart';
 import '../../../../core/presentation/widgets/rounded_button.dart';
 import '../../../../core/static/colors.dart';
+import '../../../../core/static/dimens.dart';
+import '../../../../core/static/enums.dart';
 import '../../../../core/utility/app_locale.dart';
 import '../../../../core/utility/helper.dart';
+import '../../../../core/utility/locator.dart';
+import '../bloc/detail/campaign_detail_bloc.dart';
+import '../cubit/campaign_bottom_button.dart';
 import '../cubit/campaign_title_cubit.dart';
 import '../widgets/campaign_basic_info.dart';
 import '../widgets/campaign_fundraiser_info.dart';
+import '../widgets/campaign_prays.dart';
+import '../widgets/campaign_story.dart';
 
 class CampaignDetailPageRouteArguments {
   final num id;
+  final CampaignService service;
 
-  CampaignDetailPageRouteArguments({required this.id});
+  CampaignDetailPageRouteArguments({required this.id, required this.service});
 }
 
 class CampaignDetailPage extends StatefulWidget {
   final num id;
-  const CampaignDetailPage({Key? key, required this.id}) : super(key: key);
+  final CampaignService service;
+  const CampaignDetailPage({Key? key, required this.id, required this.service}) : super(key: key);
 
   @override
   State<CampaignDetailPage> createState() => _CampaignDetailPageState();
@@ -40,11 +48,11 @@ class _CampaignDetailPageState extends State<CampaignDetailPage> {
 
   _scrollListener() {
     if (_controller.offset >= 200) {
-      campaignTitleCubit.change("Campaign Title");
+      campaignTitleCubit.change();
       campaignBottomButtonCubit.show();
     }
     if (_controller.offset < 200) {
-      campaignTitleCubit.change("");
+      campaignTitleCubit.change(title: "");
       campaignBottomButtonCubit.hide();
     }
   }
@@ -57,63 +65,80 @@ class _CampaignDetailPageState extends State<CampaignDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.BG_Grey,
-      body: CustomScrollView(
-        controller: _controller,
-        slivers: [
-          SliverAppBar(
-            leading: const BackButton(),
-            title: BlocBuilder<CampaignTitleCubit, String>(
-              bloc: campaignTitleCubit,
-              builder: (context, state) => Text(state),
-            ),
-            flexibleSpace: FlexibleSpaceBar(
-              background: Image.network(
-                getCampaignImageUrl('20220401143431-1648823671-BLE2uNRshhjBoDunrCygd2qu2vDGT2Z9txZmSavjeYUGsmqklB.jpg'),
-                fit: BoxFit.cover,
-              ),
-            ),
-            elevation: 0.0,
-            floating: true,
-            pinned: true,
-            snap: false,
-            collapsedHeight: kToolbarHeight,
-            expandedHeight: 300,
-          ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (context, index) => Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  const CampaignBasicInfo(),
-                  smallVerticalSpacing(),
-                  const CampaignFundraiserInfo(),
-                  smallVerticalSpacing(),
-                  const CampaignStory(),
-                  smallVerticalSpacing(),
-                  const CampaignPrays(),
-                ],
-              ),
-              childCount: 1,
-            ),
-          )
-        ],
-      ),
-      bottomNavigationBar: BlocBuilder<CampaignBottomButtonCubit, bool>(
-        bloc: campaignBottomButtonCubit,
-        builder: (context, show) => show
-            ? Container(
-                color: Colors.white,
-                padding: const EdgeInsets.all(Dimension.MEDIUM),
-                child: RoundedButton(
-                  radius: 22,
-                  onTap: () {},
-                  title: AppLocale.loc.donateNow,
-                  color: Colors.red,
+    return BlocProvider<CampaignDetailBloc>(
+      create: (_) => locator<CampaignDetailBloc>()..add(GetDetail(widget.id, widget.service)),
+      child: BlocBuilder<CampaignDetailBloc, CampaignDetailState>(
+        builder: (context, state) {
+          switch (state.runtimeType) {
+            case CampaignDetailLoaded:
+              final Campaign campaign = (state as CampaignDetailLoaded).data;
+              campaignTitleCubit.setTitle(title: campaign.title ?? '');
+              return Scaffold(
+                backgroundColor: AppColors.BG_Grey,
+                body: CustomScrollView(
+                  controller: _controller,
+                  slivers: [
+                    SliverAppBar(
+                      leading: const BackButton(),
+                      title: BlocBuilder<CampaignTitleCubit, String>(
+                        bloc: campaignTitleCubit,
+                        builder: (context, state) => Text(state),
+                      ),
+                      flexibleSpace: FlexibleSpaceBar(
+                        background: Image.network(
+                          getCampaignImageUrl(campaign.photo ?? ''),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      elevation: 0.0,
+                      floating: false,
+                      pinned: true,
+                      snap: false,
+                      stretch: true,
+                      collapsedHeight: kToolbarHeight,
+                      expandedHeight: 300,
+                    ),
+                    SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                        (context, index) => Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            CampaignBasicInfo(campaign: campaign),
+                            smallVerticalSpacing(),
+                            CampaignFundraiserInfo(campaign: campaign),
+                            smallVerticalSpacing(),
+                            CampaignStory(story: campaign.story ?? ''),
+                            smallVerticalSpacing(),
+                            CampaignPrays(donations: campaign.donation),
+                          ],
+                        ),
+                        childCount: 1,
+                      ),
+                    )
+                  ],
                 ),
-              )
-            : const SizedBox.shrink(),
+                bottomNavigationBar: BlocBuilder<CampaignBottomButtonCubit, bool>(
+                  bloc: campaignBottomButtonCubit,
+                  builder: (context, show) => show
+                      ? Container(
+                          color: Colors.white,
+                          padding: const EdgeInsets.all(Dimension.MEDIUM),
+                          child: RoundedButton(
+                            radius: 22,
+                            onTap: () {},
+                            title: AppLocale.loc.donateNow,
+                            color: Colors.red,
+                          ),
+                        )
+                      : const SizedBox.shrink(),
+                ),
+              );
+            case CampaignDetailFailure:
+              return const NotFoundPage();
+            default:
+              return const LoadingPage();
+          }
+        },
       ),
     );
   }

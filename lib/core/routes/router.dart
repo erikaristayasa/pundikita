@@ -33,7 +33,9 @@ class Router {
         );
       case path.CAMPAIGN_DETAIL:
         final args = settings.arguments as CampaignDetailPageRouteArguments;
-        return pageRoute(page: CampaignDetailPage(id: args.id));
+        return pageRoute(
+          page: CampaignDetailPage(id: args.id, service: args.service),
+        );
       default:
         return pageRoute(page: const NotFoundPage());
     }

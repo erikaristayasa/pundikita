@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/domain/entities/campaign_entity.dart';
 import '../../../../core/presentation/widgets/custom_label.dart';
 import '../../../../core/presentation/widgets/rounded_container.dart';
 import '../../../../core/presentation/widgets/validation_icon.dart';
@@ -11,7 +12,8 @@ import '../../../../core/utility/app_locale.dart';
 import '../../../../core/utility/helper.dart';
 
 class CampaignFundraiserInfo extends StatelessWidget {
-  const CampaignFundraiserInfo({Key? key}) : super(key: key);
+  final Campaign campaign;
+  const CampaignFundraiserInfo({Key? key, required this.campaign}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -42,10 +44,11 @@ class CampaignFundraiserInfo extends StatelessWidget {
                   height: 45,
                   child: Row(
                     children: [
-                      const AspectRatio(
+                      AspectRatio(
                         aspectRatio: 1 / 1,
                         child: CircleAvatar(
-                          backgroundColor: Colors.black,
+                          backgroundColor: AppColors.SECONDARY.withOpacity(0.15),
+                          foregroundImage: NetworkImage(getUserImageUrl(campaign.user?.photo ?? '')),
                         ),
                       ),
                       mediumHorizontalSpacing(),
@@ -54,11 +57,11 @@ class CampaignFundraiserInfo extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'User name',
+                            campaign.user?.name ?? '',
                             style: context.textTheme().titleSmall,
                           ),
                           Text(
-                            'subtitle',
+                            '${campaign.user?.agencyStatus}', //TODO: get status verification
                             style: context.textTheme().bodySmall,
                           )
                         ],
@@ -105,17 +108,17 @@ class CampaignFundraiserInfo extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'User name',
+                            campaign.patientName ?? '',
                             style: context.textTheme().titleSmall,
                           ),
                           Row(
                             children: [
                               Text(
-                                'subtitle',
+                                AppLocale.loc.patientVerified,
                                 style: context.textTheme().bodySmall,
                               ),
                               smallHorizontalSpacing(),
-                              const ValidationIcon(isValidate: false),
+                              ValidationIcon(isValidate: campaign.patientVerified),
                             ],
                           )
                         ],
@@ -144,17 +147,17 @@ class CampaignFundraiserInfo extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Sickness',
+                            campaign.patientSickness ?? '-',
                             style: context.textTheme().titleSmall,
                           ),
                           Row(
                             children: [
                               Text(
-                                'subtitle',
+                                AppLocale.loc.patientSicknessVerified,
                                 style: context.textTheme().bodySmall,
                               ),
                               smallHorizontalSpacing(),
-                              const ValidationIcon(isValidate: true)
+                              ValidationIcon(isValidate: campaign.patientSicknessVerified)
                             ],
                           )
                         ],

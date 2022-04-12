@@ -25,7 +25,7 @@ class Campaign extends Equatable {
   final String? medicalCertificatePhoto;
   final String? medicalResultPhoto;
   final String? patientName;
-  final String? patientIllness;
+  final String? patientSickness;
   final int? hospitalizationStatus;
   final String? hospitalName;
   final String? treatmentEfforts;
@@ -69,7 +69,7 @@ class Campaign extends Equatable {
     required this.medicalCertificatePhoto,
     required this.medicalResultPhoto,
     required this.patientName,
-    required this.patientIllness,
+    required this.patientSickness,
     required this.hospitalizationStatus,
     required this.hospitalName,
     required this.treatmentEfforts,
@@ -94,7 +94,7 @@ class Campaign extends Equatable {
   });
 
   double get progress {
-    final result = amountOfFunds / amountOfCollectedFunds;
+    final result = (amountOfFunds / amountOfCollectedFunds) / 10;
     if (result.isInfinite || result.isNaN) {
       return 0.0;
     }
@@ -104,6 +104,9 @@ class Campaign extends Equatable {
   int get leftDate {
     return daysBetween(DateTime.now(), endDate);
   }
+
+  bool get patientVerified => patienIdPhoto != null;
+  bool get patientSicknessVerified => medicalCertificatePhoto != null;
 
   @override
   List<Object?> get props => [
@@ -127,7 +130,7 @@ class Campaign extends Equatable {
         medicalCertificatePhoto,
         medicalResultPhoto,
         patientName,
-        patientIllness,
+        patientSickness,
         hospitalizationStatus,
         hospitalName,
         treatmentEfforts,

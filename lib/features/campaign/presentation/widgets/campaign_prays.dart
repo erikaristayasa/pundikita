@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pundi_kita/core/presentation/widgets/rounded_container.dart';
-import 'package:pundi_kita/core/static/colors.dart';
-import 'package:pundi_kita/core/utility/app_locale.dart';
 
+import '../../../../core/domain/entities/campaign_entity.dart';
 import '../../../../core/presentation/widgets/custom_label.dart';
+import '../../../../core/presentation/widgets/rounded_container.dart';
+import '../../../../core/static/colors.dart';
 import '../../../../core/static/dimens.dart';
 import '../../../../core/static/enums.dart';
 import '../../../../core/static/extensions.dart';
+import '../../../../core/utility/app_locale.dart';
 import '../../../../core/utility/helper.dart';
 import '../cubit/campaign_pray_filter_cubit.dart';
 
 class CampaignPrays extends StatelessWidget {
-  const CampaignPrays({Key? key}) : super(key: key);
+  final List<CampaignDonation> donations;
+  const CampaignPrays({Key? key, required this.donations}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +41,10 @@ class CampaignPrays extends StatelessWidget {
           ListView.separated(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            itemCount: 10,
-            itemBuilder: (context, index) => const Prayer(),
+            itemCount: donations.length,
+            itemBuilder: (context, index) => Prayer(
+              donation: donations.elementAt(index),
+            ),
             separatorBuilder: (context, index) => smallVerticalSpacing(),
           )
         ],
@@ -50,7 +54,8 @@ class CampaignPrays extends StatelessWidget {
 }
 
 class Prayer extends StatelessWidget {
-  const Prayer({Key? key}) : super(key: key);
+  final CampaignDonation donation;
+  const Prayer({Key? key, required this.donation}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -70,12 +75,12 @@ class Prayer extends StatelessWidget {
                 smallHorizontalSpacing(),
                 Expanded(
                   child: Text(
-                    'User name',
+                    'donation.userId', //TODO: missing
                     style: context.textTheme().titleSmall,
                   ),
                 ),
                 Text(
-                  '2022-04-01',
+                  'tanggal', //TODO: missing
                   style: context.textTheme().labelSmall,
                 )
               ],
@@ -83,13 +88,13 @@ class Prayer extends StatelessWidget {
           ),
           mediumVerticalSpacing(),
           Text(
-            "Semoga lekas sehat. Aamiin.",
+            donation.pray ?? '',
             style: context.textTheme().bodyMedium,
           ),
           mediumVerticalSpacing(),
           Text.rich(
             TextSpan(children: [
-              TextSpan(text: '5 ', style: context.textTheme().titleSmall),
+              TextSpan(text: '5 ', style: context.textTheme().titleSmall), //TODO: missing
               TextSpan(text: AppLocale.loc.prayForThis, style: context.textTheme().bodySmall),
             ]),
           ),

@@ -11,7 +11,8 @@ import '../../../../core/utility/helper.dart';
 import '../cubit/campaign_story/campaign_story_cubit.dart';
 
 class CampaignStory extends StatelessWidget {
-  const CampaignStory({Key? key}) : super(key: key);
+  final String story;
+  const CampaignStory({Key? key, required this.story}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +37,7 @@ class CampaignStory extends StatelessWidget {
                         children: [
                           // Story text
                           Text(
-                            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                            story,
                             style: context.textTheme().bodyMedium,
                             maxLines: _isShrink ? 5 : null,
                             overflow: TextOverflow.fade,
@@ -86,7 +87,7 @@ class CampaignStory extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                _isShrink ? 'Baca selengkapnya' : 'Baca lebih ringkas',
+                                _isShrink ? AppLocale.loc.readMore : AppLocale.loc.readLess,
                                 style: context.textTheme().labelSmall!.withColor(Colors.white),
                               ),
                               smallHorizontalSpacing(),

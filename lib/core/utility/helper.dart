@@ -30,6 +30,7 @@ Widget smallHorizontalSpacing() => const SizedBox(width: Dimension.SMALL);
 Widget mediumHorizontalSpacing() => const SizedBox(width: Dimension.MEDIUM);
 Widget largeHorizontalSpacing() => const SizedBox(width: Dimension.LARGE);
 
+String getUserImageUrl(String fileName) => Config.BASE_URL + Config.PATH_PHOTO_USER + fileName;
 String getCampaignImageUrl(String fileName) => Config.BASE_URL + Config.PATH_PHOTO_CAMPAIGN + fileName;
 String getCampaignTypeImageUrl(String fileName) => Config.BASE_URL + Config.PATH_PHOTO_CAMPAIGN_TYPE + fileName;
 String getCampaignCategoryImageUrl(String fileName) => Config.BASE_URL + Config.PATH_PHOTO_CAMPAIGN_CATEGORY + fileName;

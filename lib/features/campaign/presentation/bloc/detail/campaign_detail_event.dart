@@ -6,3 +6,13 @@ abstract class CampaignDetailEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class GetDetail extends CampaignDetailEvent {
+  final num id;
+  final CampaignService service;
+
+  const GetDetail(this.id, this.service);
+
+  @override
+  List<Object> get props => [id, service];
+}

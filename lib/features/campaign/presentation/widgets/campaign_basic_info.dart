@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pundi_kita/core/domain/entities/campaign_entity.dart';
 
 import '../../../../core/presentation/widgets/rounded_button.dart';
 import '../../../../core/static/colors.dart';
@@ -8,7 +9,8 @@ import '../../../../core/utility/app_locale.dart';
 import '../../../../core/utility/helper.dart';
 
 class CampaignBasicInfo extends StatelessWidget {
-  const CampaignBasicInfo({Key? key}) : super(key: key);
+  final Campaign campaign;
+  const CampaignBasicInfo({Key? key, required this.campaign}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,19 +21,19 @@ class CampaignBasicInfo extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Campaign Title',
+            campaign.title ?? '',
             style: context.textTheme().titleLarge,
           ),
           mediumVerticalSpacing(),
           Row(
             children: [
               Text(
-                getFormattedPrice(150000),
+                getFormattedPrice(campaign.amountOfCollectedFunds.toInt()),
                 style: context.textTheme().titleMedium!.withColor(AppColors.PRIMARY),
               ),
               smallHorizontalSpacing(),
               Text(
-                AppLocale.loc.collectedFrom(getFormattedPrice(300000)),
+                AppLocale.loc.collectedFrom(getFormattedPrice(campaign.amountOfFunds.toInt())),
                 style: context.textTheme().bodySmall,
               )
             ],
@@ -39,7 +41,7 @@ class CampaignBasicInfo extends StatelessWidget {
           smallVerticalSpacing(),
           LinearProgressIndicator(
             backgroundColor: AppColors.SECONDARY.withOpacity(0.3),
-            value: 0.5,
+            value: campaign.progress,
           ),
           mediumVerticalSpacing(),
           RoundedButton(

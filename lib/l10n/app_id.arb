@@ -2,6 +2,7 @@
     "appName": "Pundikita",
     "pageIsNotFound": "Maaf, halaman tidak ditemukan :(",
     "search": "Cari",
+    "back": "Kembali",
 
     "unexpectedServerError": "Unexpected Server Error",
     
@@ -67,5 +68,12 @@
     "story": "Cerita",
     "praysGoodPeople": "Doa-doa #OrangBaik",
     "prayForThis": "mengaminkan doa ini",
-    "aamiin": "Aamiin"
+    "aamiin": "Aamiin",
+
+    "patientVerified": "Identitas sesuai dokumen medis",
+    "patientSicknessVerified": "Disertai dokumen medis",
+
+    "readMore": "Baca selengkapnya",
+    "readLess": "Baca lebih ringkas"
+
 }

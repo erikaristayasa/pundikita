@@ -18,3 +18,11 @@ class CampaignDetailLoaded extends CampaignDetailState {
   @override
   List<Object> get props => [data];
 }
+
+class CampaignDetailFailure extends CampaignDetailState {
+  final Failure failure;
+
+  const CampaignDetailFailure(this.failure);
+  @override
+  List<Object> get props => [failure];
+}

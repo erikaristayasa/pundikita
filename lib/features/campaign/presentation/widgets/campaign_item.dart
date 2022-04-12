@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:pundi_kita/core/domain/entities/campaign_entity.dart';
-import '../../../../core/static/extensions.dart';
 
+import '../../../../core/domain/entities/campaign_entity.dart';
 import '../../../../core/presentation/widgets/default_image.dart';
 import '../../../../core/presentation/widgets/rounded_container.dart';
 import '../../../../core/routes/path.dart' as path;
 import '../../../../core/static/colors.dart';
 import '../../../../core/static/dimens.dart';
+import '../../../../core/static/extensions.dart';
 import '../../../../core/utility/app_locale.dart';
 import '../../../../core/utility/helper.dart';
 import '../pages/campaign_detail_page.dart';
@@ -18,7 +18,7 @@ class CampaignItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => Navigator.pushNamed(context, path.CAMPAIGN_DETAIL, arguments: CampaignDetailPageRouteArguments(id: 1)),
+      onTap: () => Navigator.pushNamed(context, path.CAMPAIGN_DETAIL, arguments: CampaignDetailPageRouteArguments(id: 1, service: campaign.campaignService)),
       child: Container(
         height: 160,
         padding: const EdgeInsets.symmetric(horizontal: Dimension.MEDIUM, vertical: Dimension.SMALL),
