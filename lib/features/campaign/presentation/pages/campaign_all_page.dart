@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pundi_kita/core/presentation/pages/loading_page.dart';
 
 import '../../../../core/presentation/widgets/custom_app_bar.dart';
 import '../../../../core/static/assets.dart';
@@ -99,9 +100,7 @@ class _CampaignAllPageState extends State<CampaignAllPage> {
                         child: Text(AppLocale.loc.unexpectedServerError),
                       );
                     } else {
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
+                      return const LoadingPage(isList: true);
                     }
                   },
                 ),

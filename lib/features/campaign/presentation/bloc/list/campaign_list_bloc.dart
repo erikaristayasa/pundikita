@@ -22,13 +22,15 @@ class CampaignListBloc extends Bloc<CampaignListEvent, CampaignListState> {
 
       final _service = event.service;
       final _auth = event.auth;
-      final result = _auth ? await getUserCampaignList(_service) : await getAllCampaignList(_service);
-      result.fold(
-        (failure) => emit(CampaignListFailure(failure)),
-        (data) {
-          emit(CampaignListLoaded(data: data));
-        },
-      );
+      await Future.delayed(const Duration(milliseconds: 1500), () async {
+        final result = _auth ? await getUserCampaignList(_service) : await getAllCampaignList(_service);
+        result.fold(
+          (failure) => emit(CampaignListFailure(failure)),
+          (data) {
+            emit(CampaignListLoaded(data: data));
+          },
+        );
+      });
     });
 
     on<Filtering>((event, emit) {
