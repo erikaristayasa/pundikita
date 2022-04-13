@@ -8,4 +8,7 @@ abstract class CampaignRepository {
   Future<Either<Failure, List<Campaign>>> getAllCampaignList(CampaignService service);
   Future<Either<Failure, List<Campaign>>> getUserCampaignList(CampaignService service);
   Future<Either<Failure, Campaign>> getCampaignDetail(int id, {required CampaignService service});
+  Future<Either<Failure, List<CampaignType>>> getCampaignTypes();
+  Future<Either<Failure, List<CampaignCategory>>> getCampaignCategories();
+  Future<Either<Failure, List<CampaignSubCategory>>> getCampaignSubCategories();
 }

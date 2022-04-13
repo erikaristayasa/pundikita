@@ -1,5 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:pundi_kita/core/domain/usecases/get_campaign_categories.dart';
+import 'package:pundi_kita/features/campaign/presentation/bloc/category_filter/category_filter_bloc.dart';
+import 'package:pundi_kita/features/campaign/presentation/widgets/campaign_filter_selection.dart';
 
 import '../../features/campaign/presentation/bloc/detail/campaign_detail_bloc.dart';
 import '../../features/campaign/presentation/bloc/list/campaign_list_bloc.dart';
@@ -41,6 +44,7 @@ Future<void> locatorSetup() async {
         getAllCampaignList: locator(),
         getUserCampaignList: locator(),
       ));
+  locator.registerFactory<CategoryFilterBloc>(() => CategoryFilterBloc(getCampaignCategories: locator()));
 
   // use cases
   locator.registerLazySingleton<DoLogin>(() => DoLogin(locator()));
@@ -49,6 +53,7 @@ Future<void> locatorSetup() async {
   locator.registerLazySingleton<GetAllCampaignList>(() => GetAllCampaignList(locator()));
   locator.registerLazySingleton<GetUserCampaignList>(() => GetUserCampaignList(locator()));
   locator.registerLazySingleton<GetCampaignDetail>(() => GetCampaignDetail(locator()));
+  locator.registerLazySingleton<GetCampaignCategories>(() => GetCampaignCategories(locator()));
 
   // repositories
   locator.registerLazySingleton<LoginRepository>(() => LoginRepositoryImplementation(dataSource: locator()));

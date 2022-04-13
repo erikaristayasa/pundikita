@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pundi_kita/core/presentation/pages/loading_page.dart';
+import 'package:pundi_kita/core/presentation/pages/no_data_page.dart';
 
+import '../../../../core/presentation/pages/loading_page.dart';
 import '../../../../core/presentation/widgets/custom_app_bar.dart';
 import '../../../../core/static/assets.dart';
 import '../../../../core/static/colors.dart';
 import '../../../../core/static/enums.dart';
 import '../../../../core/utility/app_locale.dart';
 import '../../../../core/utility/locator.dart';
+import '../bloc/category_filter/category_filter_bloc.dart';
 import '../bloc/list/campaign_list_bloc.dart';
+import '../widgets/campaign_filter_selection.dart';
 import '../widgets/campaign_item.dart';
 
 class CampaignAllPageRouteArguments {
@@ -42,8 +45,11 @@ class _CampaignAllPageState extends State<CampaignAllPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => locator<CampaignListBloc>()..add(GetCampaignList(widget.service)),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => locator<CampaignListBloc>()..add(GetCampaignList(widget.service))),
+        BlocProvider(create: (_) => locator<CategoryFilterBloc>()..add(GetCategories())),
+      ],
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: CustomAppBar(
@@ -64,14 +70,22 @@ class _CampaignAllPageState extends State<CampaignAllPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    TextButton.icon(
-                      onPressed: () {},
-                      icon: Image.asset(
-                        Assets.FILTER,
-                        width: 18.0,
-                      ),
-                      label: Text(AppLocale.loc.category),
-                    ),
+                    BlocBuilder<CategoryFilterBloc, CategoryFilterState>(builder: (context, _) {
+                      return TextButton.icon(
+                        onPressed: () => showDialog(
+                          context: context,
+                          builder: (_) => BlocProvider<CategoryFilterBloc>.value(
+                            value: BlocProvider.of<CategoryFilterBloc>(context),
+                            child: const CampaignFilterSelection(),
+                          ),
+                        ),
+                        icon: Image.asset(
+                          Assets.FILTER,
+                          width: 18.0,
+                        ),
+                        label: Text(AppLocale.loc.category),
+                      );
+                    }),
                     TextButton.icon(
                       onPressed: () {},
                       icon: Image.asset(
@@ -99,6 +113,8 @@ class _CampaignAllPageState extends State<CampaignAllPage> {
                       return Center(
                         child: Text(AppLocale.loc.unexpectedServerError),
                       );
+                    } else if (state is CampaignListInitial) {
+                      return const NoDataPage();
                     } else {
                       return const LoadingPage(isList: true);
                     }

@@ -27,6 +27,7 @@ class Assets {
 
   static const String LOTTIE_SHIMMER = 'assets/lotties/shimmer.json';
   static const String LOTTIE_404 = 'assets/lotties/404-error.json';
+  static const String LOTTIE_NO_DATA = 'assets/lotties/no-data.json';
   static const String LOTTIE_LOADING_PAGE = 'assets/lotties/loading-page.json';
   static const String LOTTIE_LOADING_LIST = 'assets/lotties/loading-list.json';
   // static const String LOTTIE_HOME = 'assets/lottie/home.json';
