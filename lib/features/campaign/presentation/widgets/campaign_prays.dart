@@ -66,21 +66,41 @@ class Prayer extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            height: 35,
+            height: 50,
             child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CircleAvatar(
                   backgroundColor: AppColors.PRIMARY.withOpacity(0.5),
                 ),
                 smallHorizontalSpacing(),
                 Expanded(
-                  child: Text(
-                    'donation.userId', //TODO: missing
-                    style: context.textTheme().titleSmall,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        '_name: missing', //TODO: missing
+                        style: context.textTheme().titleSmall,
+                      ),
+                      Text.rich(
+                        TextSpan(
+                          children: [
+                            TextSpan(
+                              text: AppLocale.loc.donate + ': ',
+                              style: context.textTheme().bodySmall,
+                            ),
+                            TextSpan(
+                              text: getFormattedPrice(donation.amountOfFunds.toInt()),
+                              style: context.textTheme().titleSmall,
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
                   ),
                 ),
                 Text(
-                  'tanggal', //TODO: missing
+                  donation.createdAt.toText(),
                   style: context.textTheme().labelSmall,
                 )
               ],
@@ -90,17 +110,25 @@ class Prayer extends StatelessWidget {
           Text(
             donation.pray ?? '',
             style: context.textTheme().bodyMedium,
+            maxLines: 3,
+            overflow: TextOverflow.ellipsis,
           ),
           mediumVerticalSpacing(),
           Text.rich(
             TextSpan(children: [
-              TextSpan(text: '5 ', style: context.textTheme().titleSmall), //TODO: missing
+              TextSpan(text: '5 ', style: context.textTheme().titleSmall), //TODO: missing likes count
               TextSpan(text: AppLocale.loc.prayForThis, style: context.textTheme().bodySmall),
             ]),
           ),
           const Divider(thickness: 1.5),
           Center(
-            child: TextButton.icon(onPressed: () {}, icon: const Icon(Icons.favorite_border_rounded), label: Text(AppLocale.loc.aamiin)),
+            child: TextButton.icon(
+              onPressed: () {
+                //TODO: Implement like action
+              },
+              icon: Icon(donation.likeStatus ? Icons.favorite_rounded : Icons.favorite_border_rounded),
+              label: Text(AppLocale.loc.aamiin),
+            ),
           )
         ],
       ),

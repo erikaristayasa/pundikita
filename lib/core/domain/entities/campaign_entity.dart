@@ -250,6 +250,7 @@ class CampaignDonation extends Equatable {
   final String? paymentQRImage;
   final int status;
   final bool likeStatus;
+  final DateTime? createdAt;
 
   const CampaignDonation({
     required this.id,
@@ -268,6 +269,7 @@ class CampaignDonation extends Equatable {
     required this.paymentQRImage,
     required this.status,
     required this.likeStatus,
+    required this.createdAt,
   });
 
   @override
@@ -288,5 +290,6 @@ class CampaignDonation extends Equatable {
         paymentQRImage,
         status,
         likeStatus,
+        createdAt,
       ];
 }

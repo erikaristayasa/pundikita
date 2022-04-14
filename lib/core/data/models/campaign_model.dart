@@ -250,6 +250,7 @@ class CampaignDonationModel extends CampaignDonation {
     required String? paymentQRImage,
     required int status,
     required bool likeStatus,
+    required DateTime? createdAt,
   }) : super(
           id: id,
           userId: userId,
@@ -267,6 +268,7 @@ class CampaignDonationModel extends CampaignDonation {
           paymentQRImage: paymentQRImage,
           status: status,
           likeStatus: likeStatus,
+          createdAt: createdAt,
         );
   factory CampaignDonationModel.fromJson(Map<String, dynamic> json) => CampaignDonationModel(
         id: json['id'],
@@ -285,5 +287,6 @@ class CampaignDonationModel extends CampaignDonation {
         paymentQRImage: json['payment_qr_image'],
         status: json['status'],
         likeStatus: json['like_status'],
+        createdAt: (json['created_at'] as String).toDate(),
       );
 }

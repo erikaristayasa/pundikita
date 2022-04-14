@@ -4,6 +4,7 @@ import 'package:pundi_kita/core/domain/entities/campaign_entity.dart';
 import '../../../../core/presentation/widgets/rounded_button.dart';
 import '../../../../core/static/colors.dart';
 import '../../../../core/static/dimens.dart';
+import '../../../../core/static/enums.dart';
 import '../../../../core/static/extensions.dart';
 import '../../../../core/utility/app_locale.dart';
 import '../../../../core/utility/helper.dart';
@@ -47,8 +48,8 @@ class CampaignBasicInfo extends StatelessWidget {
           RoundedButton(
             radius: 22,
             onTap: () {},
-            title: AppLocale.loc.donateNow,
-            color: Colors.red,
+            title: campaign.campaignService == CampaignService.donasi ? AppLocale.loc.donateNow : AppLocale.loc.zakatNow,
+            color: campaign.campaignService == CampaignService.donasi ? Colors.red : Colors.blue,
           )
         ],
       ),

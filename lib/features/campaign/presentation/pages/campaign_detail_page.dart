@@ -126,8 +126,8 @@ class _CampaignDetailPageState extends State<CampaignDetailPage> {
                           child: RoundedButton(
                             radius: 22,
                             onTap: () {},
-                            title: AppLocale.loc.donateNow,
-                            color: Colors.red,
+                            title: widget.service == CampaignService.donasi ? AppLocale.loc.donateNow : AppLocale.loc.zakatNow,
+                            color: widget.service == CampaignService.donasi ? Colors.red : Colors.blue,
                           ),
                         )
                       : const SizedBox.shrink(),

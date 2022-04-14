@@ -25,6 +25,7 @@
     "dayLeft": "Sisa hari",
 
     "donateNow": "Donasi Sekarang!",
+    "zakatNow": "Zakat Sekarang!",
     "collectedFrom": "Terkumpul dari {price}",
     "@collectedFrom": {
         "placeholders": {
@@ -66,9 +67,10 @@
     "fundUsageDetail": "Rincian Penggunaan Dana",
     "see": "Lihat",
     "story": "Cerita",
-    "praysGoodPeople": "Doa-doa #OrangBaik",
+    "praysGoodPeople": "Doa-doa #Donasi",
     "prayForThis": "mengaminkan doa ini",
     "aamiin": "Aamiin",
+    "donate": "Berdonasi",
 
     "patientVerified": "Identitas sesuai dokumen medis",
     "patientSicknessVerified": "Disertai dokumen medis",
