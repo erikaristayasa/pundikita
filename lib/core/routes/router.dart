@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../features/campaign/presentation/pages/campaign_all_page.dart';
 import '../../features/campaign/presentation/pages/campaign_detail_page.dart';
+import '../../features/campaign/presentation/pages/fund_usage_detail_page.dart';
 import '../../features/forgot_password/presentation/pages/forgot_password_page.dart';
 import '../../features/login/presentation/pages/login_page.dart';
 import '../../features/register/presentation/pages/register_page.dart';
@@ -35,6 +36,11 @@ class Router {
         final args = settings.arguments as CampaignDetailPageRouteArguments;
         return pageRoute(
           page: CampaignDetailPage(id: args.id, service: args.service),
+        );
+      case path.FUND_USAGE_DETAIL:
+        final args = settings.arguments as FundUsageDetailUsageRouteArguments;
+        return pageRoute(
+          page: FundUsageDetailPage(usageDetail: args.usageDetail),
         );
       default:
         return pageRoute(page: const NotFoundPage());

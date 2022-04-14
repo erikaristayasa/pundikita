@@ -21,6 +21,7 @@ class Assets {
   static const String PATIENT = 'assets/icons/patient.png';
   static const String MEDICINE_BOX = 'assets/icons/medicine-box.png';
   static const String DONATION = 'assets/icons/donation.png';
+  static const String FUND_RECIPIENT = 'assets/icons/fund_recipient.png';
 
   static const String FILTER = 'assets/icons/filter.png';
   static const String SORT = 'assets/icons/sort.png';
