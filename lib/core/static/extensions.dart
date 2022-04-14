@@ -22,8 +22,13 @@ extension DateFormatting on DateTime? {
 }
 
 extension StringFormatting on String {
-  DateTime toDate({String? format}) {
-    return DateFormat(format ?? "yyyy-MM-dd").parse(this);
+  DateTime? toDate({String? format}) {
+    try {
+      final date = DateFormat(format ?? "yyyy-MM-dd").parse(this);
+      return date;
+    } catch (e) {
+      return null;
+    }
   }
 
   String toCapitalized() => length > 0 ? '${this[0].toUpperCase()}${substring(1).toLowerCase()}' : '';

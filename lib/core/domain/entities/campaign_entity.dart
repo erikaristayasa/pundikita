@@ -13,7 +13,7 @@ class Campaign extends Equatable {
   final int? campaignSubCategoryid;
   final int? organizer;
   final String? title;
-  final DateTime endDate;
+  final DateTime? endDate;
   final num amountOfFunds;
   final num amountOfCollectedFunds;
   final String? phone;
@@ -26,7 +26,7 @@ class Campaign extends Equatable {
   final String? medicalResultPhoto;
   final String? patientName;
   final String? patientSickness;
-  final int? hospitalizationStatus;
+  final bool? hospitalizationStatus;
   final String? hospitalName;
   final String? treatmentEfforts;
   final String? treatmentSources;
@@ -43,6 +43,16 @@ class Campaign extends Equatable {
   final String? detailOfUseOfFunds;
   final int status;
   final User? user;
+  // final dynamic recipientStatus;
+  // final bool personalRecipientStatus;
+  // final String? personalRecipientName;
+  // final String? personalRecipientAddress;
+  // final String? personalRecipientKtpPhoto;
+  // final String? personalRecipientKtpNumber;
+  // final String? personalRecipientKtpName;
+  // final String? personalRecipientKtpBirthPlace;
+  // final DateTime? personalRecipientKtpBirthDate;
+  // final String? personalRecipientKtpGender;
   final CampaignType? campaignType;
   final CampaignCategory? campaignCategory;
   final CampaignSubCategory? campaignSubCategory;
@@ -102,7 +112,12 @@ class Campaign extends Equatable {
   }
 
   int get leftDate {
-    return daysBetween(DateTime.now(), endDate);
+    try {
+      final left = daysBetween(DateTime.now(), endDate!);
+      return left;
+    } catch (e) {
+      return 0;
+    }
   }
 
   bool get patientVerified => patienIdPhoto != null;
@@ -231,7 +246,7 @@ class CampaignDonation extends Equatable {
   final String paymentName;
   final num paymentTotal;
   final num paymentFee;
-  final DateTime paymentExpired;
+  final DateTime? paymentExpired;
   final String? paymentQRImage;
   final int status;
   final bool likeStatus;

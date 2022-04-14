@@ -18,7 +18,7 @@ class CampaignItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => Navigator.pushNamed(context, path.CAMPAIGN_DETAIL, arguments: CampaignDetailPageRouteArguments(id: 1, service: campaign.campaignService)),
+      onTap: () => Navigator.pushNamed(context, path.CAMPAIGN_DETAIL, arguments: CampaignDetailPageRouteArguments(id: campaign.id, service: campaign.campaignService)),
       child: Container(
         height: 160,
         padding: const EdgeInsets.symmetric(horizontal: Dimension.MEDIUM, vertical: Dimension.SMALL),

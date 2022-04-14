@@ -2,21 +2,21 @@ import 'package:equatable/equatable.dart';
 
 class User extends Equatable {
   final num id;
-  final String name;
-  final String email;
-  final DateTime emailVerifiedAt;
-  final String phone;
-  final DateTime birthDate;
-  final String biodata;
-  final String photo;
-  final String ktpPhoto;
-  final String ktpNumber;
-  final String ktpName;
-  final num saldo;
+  final String? name;
+  final String? email;
+  final DateTime? emailVerifiedAt;
+  final String? phone;
+  final DateTime? birthDate;
+  final String? biodata;
+  final String? photo;
+  final String? ktpPhoto;
+  final String? ktpNumber;
+  final String? ktpName;
+  final num? saldo;
   final String? googleUid;
   final String? facebookUid;
   final String? firebaseUid;
-  final int agencyStatus;
+  final int? agencyStatus;
 
   const User({
     required this.id,

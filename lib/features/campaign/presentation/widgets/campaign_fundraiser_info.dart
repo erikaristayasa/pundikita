@@ -57,11 +57,11 @@ class CampaignFundraiserInfo extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            campaign.user?.name ?? '',
+                            campaign.user?.name ?? '-',
                             style: context.textTheme().titleSmall,
                           ),
                           Text(
-                            '${campaign.user?.agencyStatus}', //TODO: get status verification
+                            '${campaign.user?.agencyStatus ?? ''}', //TODO: get status verification
                             style: context.textTheme().bodySmall,
                           )
                         ],
@@ -108,7 +108,7 @@ class CampaignFundraiserInfo extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            campaign.patientName ?? '',
+                            campaign.patientName ?? '-',
                             style: context.textTheme().titleSmall,
                           ),
                           Row(
