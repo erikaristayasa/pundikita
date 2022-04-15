@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../static/extensions.dart';
@@ -16,10 +17,13 @@ class CustomTextField extends StatefulWidget {
   final bool refresh;
   final Function? onTap;
   final String? suffixText;
+  final String? prefixText;
   final bool border;
   final bool enabled;
   final TypeField typeField;
   final String valueMatcher;
+  final Function(String value)? onChange;
+  final List<TextInputFormatter>? formatters;
   const CustomTextField({
     Key? key,
     this.placeholder = '',
@@ -35,6 +39,9 @@ class CustomTextField extends StatefulWidget {
     this.typeField = TypeField.none,
     this.valueMatcher = '',
     this.controllerMatcher,
+    this.prefixText,
+    this.onChange,
+    this.formatters,
   }) : super(key: key);
 
   @override
@@ -89,12 +96,13 @@ class _CustomTextFieldState extends State<CustomTextField> {
               const SizedBox(height: 4.0),
               TextFormField(
                 enabled: widget.enabled,
+                inputFormatters: widget.formatters,
                 onTap: () {
                   if (widget.refresh) {
                     widget.onTap!();
                   }
                 },
-                onChanged: (newValue) => bloc.add(TextControllerOnChanged(newValue: newValue)),
+                onChanged: widget.onChange, //bloc.add(TextControllerOnChanged(newValue: newValue)),
                 obscureText: _passwordVisible,
                 controller: widget.controller,
                 keyboardType: widget.inputType,
@@ -113,6 +121,17 @@ class _CustomTextFieldState extends State<CustomTextField> {
                   filled: true,
                   fillColor: state.error ? Colors.red : Colors.grey[200],
                   contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                  prefixIcon: widget.prefixText != null
+                      ? Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              widget.prefixText ?? '',
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        )
+                      : null,
                   suffixIcon: widget.isSecure
                       ? Material(
                           color: Colors.transparent,

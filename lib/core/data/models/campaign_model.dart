@@ -332,7 +332,7 @@ class CampaignDonationModel extends CampaignDonation {
     required num paymentFee,
     required DateTime? paymentExpired,
     required String? paymentQRImage,
-    required int status,
+    required DonationPayStatus status,
     required bool likeStatus,
     required DateTime? createdAt,
   }) : super(
@@ -369,7 +369,7 @@ class CampaignDonationModel extends CampaignDonation {
         paymentFee: json['payment_fee'],
         paymentExpired: (json['payment_expired'] as String).toDate(),
         paymentQRImage: json['payment_qr_image'],
-        status: json['status'],
+        status: (json['status'] as num).donationPayStatus(),
         likeStatus: json['like_status'],
         createdAt: (json['created_at'] as String).toDate(),
       );

@@ -11,7 +11,7 @@ class RoundedButton extends StatelessWidget {
   final double width;
   final Color color;
   final dynamic title;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
   const RoundedButton({
     Key? key,
     this.enable = true,
@@ -36,11 +36,11 @@ class RoundedButton extends StatelessWidget {
           : Colors.grey,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(radius)),
-        side: BorderSide(color: color, width: 2),
+        side: enable ? BorderSide(color: color, width: 2) : BorderSide.none,
       ),
     );
     return ElevatedButton(
-      onPressed: () => enable ? onTap() : null,
+      onPressed: enable ? onTap : null,
       child: (title is String)
           ? Text(
               title,

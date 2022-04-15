@@ -78,6 +78,9 @@
     "recipientRekeningVerified": "Rekening bank terverifikasi",
 
     "readMore": "Baca selengkapnya",
-    "readLess": "Baca lebih ringkas"
+    "readLess": "Baca lebih ringkas",
 
+    "chooseDonateNominal": "Pilih nominal donasi",
+    "choosePaymentMethod": "Pilih Cara Pembayaran",
+    "next": "Selanjutnya"
 }

@@ -11,3 +11,5 @@ const String PROFILE = '/profile';
 const String CAMPAIGN_ALL = '/campaign_all';
 const String CAMPAIGN_DETAIL = '/campaign_detail';
 const String FUND_USAGE_DETAIL = '/fund_usage_detail';
+
+const String DONATION_NOMINAL_LIST = '/donation_nominal_list';

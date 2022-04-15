@@ -26,6 +26,8 @@ class Assets {
   static const String FILTER = 'assets/icons/filter.png';
   static const String SORT = 'assets/icons/sort.png';
 
+  static const String COIN = 'assets/icons/coin.png';
+
   static const String LOTTIE_SHIMMER = 'assets/lotties/shimmer.json';
   static const String LOTTIE_404 = 'assets/lotties/404-error.json';
   static const String LOTTIE_NO_DATA = 'assets/lotties/no-data.json';

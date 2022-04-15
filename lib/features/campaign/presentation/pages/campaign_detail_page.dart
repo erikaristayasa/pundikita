@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pundi_kita/core/domain/entities/campaign_entity.dart';
 
+import '../../../../core/domain/entities/campaign_entity.dart';
 import '../../../../core/presentation/pages/loading_page.dart';
 import '../../../../core/presentation/pages/not_found_page.dart';
 import '../../../../core/presentation/widgets/rounded_button.dart';
+import '../../../../core/routes/path.dart' as path;
 import '../../../../core/static/colors.dart';
 import '../../../../core/static/dimens.dart';
 import '../../../../core/static/enums.dart';
 import '../../../../core/utility/app_locale.dart';
 import '../../../../core/utility/helper.dart';
 import '../../../../core/utility/locator.dart';
+import '../../../donate/presentation/pages/donate_nominal_list_page.dart';
 import '../bloc/detail/campaign_detail_bloc.dart';
 import '../cubit/campaign_bottom_button.dart';
 import '../cubit/campaign_title_cubit.dart';
@@ -125,7 +127,11 @@ class _CampaignDetailPageState extends State<CampaignDetailPage> {
                           padding: const EdgeInsets.all(Dimension.MEDIUM),
                           child: RoundedButton(
                             radius: 22,
-                            onTap: () {},
+                            onTap: () => Navigator.pushNamed(
+                              context,
+                              path.DONATION_NOMINAL_LIST,
+                              arguments: DonateNominalListPageRouteArguments(campaignId: campaign.id),
+                            ),
                             title: widget.service == CampaignService.donasi ? AppLocale.loc.donateNow : AppLocale.loc.zakatNow,
                             color: widget.service == CampaignService.donasi ? Colors.red : Colors.blue,
                           ),

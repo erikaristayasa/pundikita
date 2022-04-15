@@ -339,7 +339,7 @@ class CampaignDonation extends Equatable {
   final num paymentFee;
   final DateTime? paymentExpired;
   final String? paymentQRImage;
-  final int status;
+  final DonationPayStatus status;
   final bool likeStatus;
   final DateTime? createdAt;
 

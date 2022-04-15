@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:pundi_kita/core/static/enums.dart';
 
 extension AdditionalStyle on TextStyle {
   TextStyle withColor(Color color) {
@@ -42,5 +43,17 @@ extension ThemeOfContext on BuildContext {
 extension DynamicHeader on Dio {
   Dio withToken() {
     return this..options.headers.addAll({'token': true});
+  }
+}
+
+extension DonationPaymentStatus on num {
+  DonationPayStatus donationPayStatus() {
+    if (this == 0) {
+      return DonationPayStatus.pending;
+    } else if (this == 1) {
+      return DonationPayStatus.paid;
+    } else {
+      return DonationPayStatus.failed;
+    }
   }
 }
