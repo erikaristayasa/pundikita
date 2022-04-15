@@ -39,6 +39,7 @@
     "patient": "Pasien",
     "fundraiser": "Penggalang Dana",
     "fundraiserInfo": "Info Penggalang Dana",
+    "fundRecipient": "Penerima Dana",
 
     "loginPage": "Halaman Masuk",
     "login": "Masuk",
@@ -74,6 +75,7 @@
 
     "patientVerified": "Identitas sesuai dokumen medis",
     "patientSicknessVerified": "Disertai dokumen medis",
+    "recipientRekeningVerified": "Rekening bank terverifikasi",
 
     "readMore": "Baca selengkapnya",
     "readLess": "Baca lebih ringkas"

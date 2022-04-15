@@ -28,226 +28,292 @@ class CampaignFundraiserInfo extends StatelessWidget {
           CustomLabel(title: AppLocale.loc.fundraiserInfo),
           mediumVerticalSpacing(),
 
-          // Fundraiser info
-          RoundedContainer(
-            padding: const EdgeInsets.all(Dimension.MEDIUM),
-            radius: Dimension.MEDIUM,
-            width: double.maxFinite,
-            shadow: true,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  AppLocale.loc.fundraiser,
-                  style: context.textTheme().titleSmall,
-                ),
-                smallVerticalSpacing(),
-                SizedBox(
-                  height: 45,
-                  child: Row(
-                    children: [
-                      AspectRatio(
-                        aspectRatio: 1 / 1,
-                        child: CircleAvatar(
-                          backgroundColor: AppColors.SECONDARY.withOpacity(0.15),
-                          foregroundImage: NetworkImage(getUserImageUrl(campaign.user?.photo ?? '')),
-                        ),
-                      ),
-                      mediumHorizontalSpacing(),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            campaign.user?.name ?? '-',
-                            style: context.textTheme().titleSmall,
-                          ),
-                          Text(
-                            '${campaign.user?.agencyStatus ?? ''}', //TODO: get status verification
-                            style: context.textTheme().bodySmall,
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ),
+          // Fundraiser
+          FundrasierField(campaign: campaign),
           mediumVerticalSpacing(),
 
           // Patient
-          RoundedContainer(
-            padding: const EdgeInsets.all(Dimension.MEDIUM),
-            radius: Dimension.MEDIUM,
-            width: double.maxFinite,
-            shadow: true,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  AppLocale.loc.patient,
-                  style: context.textTheme().titleSmall,
-                ),
-                smallVerticalSpacing(),
-                SizedBox(
-                  height: 45,
-                  child: Row(
-                    children: [
-                      AspectRatio(
-                        aspectRatio: 1 / 1,
-                        child: CircleAvatar(
-                          child: Image.asset(
-                            Assets.PATIENT,
-                            width: 24,
-                          ),
-                          backgroundColor: AppColors.SECONDARY.withOpacity(0.15),
-                        ),
-                      ),
-                      mediumHorizontalSpacing(),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            campaign.patientName ?? '-',
-                            style: context.textTheme().titleSmall,
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                AppLocale.loc.patientVerified,
-                                style: context.textTheme().bodySmall,
-                              ),
-                              smallHorizontalSpacing(),
-                              ValidationIcon(isValidate: campaign.patientVerified),
-                            ],
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-                smallVerticalSpacing(),
-                SizedBox(
-                  height: 45,
-                  child: Row(
-                    children: [
-                      AspectRatio(
-                        aspectRatio: 1 / 1,
-                        child: CircleAvatar(
-                          child: Image.asset(
-                            Assets.MEDICINE_BOX,
-                            width: 24,
-                          ),
-                          backgroundColor: AppColors.SECONDARY.withOpacity(0.15),
-                        ),
-                      ),
-                      mediumHorizontalSpacing(),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            campaign.patientSickness ?? '-',
-                            style: context.textTheme().titleSmall,
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                AppLocale.loc.patientSicknessVerified,
-                                style: context.textTheme().bodySmall,
-                              ),
-                              smallHorizontalSpacing(),
-                              ValidationIcon(isValidate: campaign.patientSicknessVerified)
-                            ],
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ),
+          PatientField(campaign: campaign),
           mediumVerticalSpacing(),
 
-          // Dana Receiver
-          RoundedContainer(
-            padding: const EdgeInsets.all(Dimension.MEDIUM),
-            radius: Dimension.MEDIUM,
-            width: double.maxFinite,
-            shadow: true,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  AppLocale.loc.fundraiser,
-                  style: context.textTheme().titleSmall,
-                ),
-                smallVerticalSpacing(),
-                SizedBox(
-                  height: 45,
-                  child: Row(
-                    children: [
-                      AspectRatio(
-                        aspectRatio: 1 / 1,
-                        child: CircleAvatar(
-                          backgroundColor: AppColors.SECONDARY.withOpacity(0.15),
-                          child: Image.asset(
-                            Assets.FUND_RECIPIENT,
-                            width: 24,
-                          ),
-                        ),
-                      ),
-                      mediumHorizontalSpacing(),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            campaign.user?.name ?? '-',
-                            style: context.textTheme().titleSmall,
-                          ),
-                          Text(
-                            '${campaign.user?.agencyStatus ?? ''}', //TODO: get status verification
-                            style: context.textTheme().bodySmall,
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ),
-
+          // Recipient
+          RecipientField(campaign: campaign),
           mediumVerticalSpacing(),
+
           // Fund usage
-          RoundedContainer(
-            padding: const EdgeInsets.symmetric(horizontal: Dimension.MEDIUM),
-            width: double.maxFinite,
-            color: Colors.grey[200]!,
+          UsageField(campaign: campaign),
+        ],
+      ),
+    );
+  }
+}
+
+class FundrasierField extends StatelessWidget {
+  final Campaign campaign;
+  const FundrasierField({Key? key, required this.campaign}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return RoundedContainer(
+      padding: const EdgeInsets.all(Dimension.MEDIUM),
+      radius: Dimension.MEDIUM,
+      width: double.maxFinite,
+      shadow: true,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            AppLocale.loc.fundraiser,
+            style: context.textTheme().titleSmall,
+          ),
+          smallVerticalSpacing(),
+          SizedBox(
+            height: 45,
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  AppLocale.loc.fundUsageDetail,
-                  style: context.textTheme().bodySmall,
+                AspectRatio(
+                  aspectRatio: 1 / 1,
+                  child: CircleAvatar(
+                    backgroundColor: AppColors.SECONDARY.withOpacity(0.15),
+                    foregroundImage: (campaign.user?.photo != null) ? NetworkImage(getUserImageUrl((campaign.user?.photo)!)) : null,
+                  ),
                 ),
-                TextButton(
-                  onPressed: () => Navigator.pushNamed(
-                    context,
-                    path.FUND_USAGE_DETAIL,
-                    arguments: FundUsageDetailUsageRouteArguments(
-                      usageDetail: campaign.detailOfUseOfFunds ?? '',
+                mediumHorizontalSpacing(),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      campaign.user?.name ?? '-',
+                      style: context.textTheme().titleSmall,
+                    ),
+                    Text(
+                      '${campaign.user?.agencyStatus ?? ''}', //TODO: get status verification
+                      style: context.textTheme().bodySmall,
+                    )
+                  ],
+                )
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class PatientField extends StatelessWidget {
+  final Campaign campaign;
+  const PatientField({Key? key, required this.campaign}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return RoundedContainer(
+      padding: const EdgeInsets.all(Dimension.MEDIUM),
+      radius: Dimension.MEDIUM,
+      width: double.maxFinite,
+      shadow: true,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            AppLocale.loc.patient,
+            style: context.textTheme().titleSmall,
+          ),
+          smallVerticalSpacing(),
+          SizedBox(
+            height: 45,
+            child: Row(
+              children: [
+                AspectRatio(
+                  aspectRatio: 1 / 1,
+                  child: CircleAvatar(
+                    child: Image.asset(
+                      Assets.PATIENT,
+                      width: 24,
+                    ),
+                    backgroundColor: AppColors.SECONDARY.withOpacity(0.15),
+                  ),
+                ),
+                mediumHorizontalSpacing(),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      campaign.patientName ?? '-',
+                      style: context.textTheme().titleSmall,
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          AppLocale.loc.patientVerified,
+                          style: context.textTheme().bodySmall,
+                        ),
+                        smallHorizontalSpacing(),
+                        ValidationIcon(isValidate: campaign.patientVerified),
+                      ],
+                    )
+                  ],
+                )
+              ],
+            ),
+          ),
+          smallVerticalSpacing(),
+          SizedBox(
+            height: 45,
+            child: Row(
+              children: [
+                AspectRatio(
+                  aspectRatio: 1 / 1,
+                  child: CircleAvatar(
+                    child: Image.asset(
+                      Assets.MEDICINE_BOX,
+                      width: 24,
+                    ),
+                    backgroundColor: AppColors.SECONDARY.withOpacity(0.15),
+                  ),
+                ),
+                mediumHorizontalSpacing(),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      campaign.patientSickness ?? '-',
+                      style: context.textTheme().titleSmall,
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          AppLocale.loc.patientSicknessVerified,
+                          style: context.textTheme().bodySmall,
+                        ),
+                        smallHorizontalSpacing(),
+                        ValidationIcon(isValidate: campaign.patientSicknessVerified)
+                      ],
+                    )
+                  ],
+                )
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class RecipientField extends StatefulWidget {
+  final Campaign campaign;
+  const RecipientField({Key? key, required this.campaign}) : super(key: key);
+
+  @override
+  State<RecipientField> createState() => _RecipientFieldState();
+}
+
+class _RecipientFieldState extends State<RecipientField> {
+  String _recipientName = '-';
+
+  @override
+  void initState() {
+    super.initState();
+
+    if (widget.campaign.personalRecipientStatus) {
+      _recipientName = widget.campaign.personalRecipientName ?? '';
+    } else if (widget.campaign.foundationRecipientStatus) {
+      _recipientName = widget.campaign.foundationRecipientName ?? '';
+    } else {
+      _recipientName = widget.campaign.user?.name ?? '';
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return RoundedContainer(
+      padding: const EdgeInsets.all(Dimension.MEDIUM),
+      radius: Dimension.MEDIUM,
+      width: double.maxFinite,
+      shadow: true,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            AppLocale.loc.fundRecipient,
+            style: context.textTheme().titleSmall,
+          ),
+          smallVerticalSpacing(),
+          SizedBox(
+            height: 45,
+            child: Row(
+              children: [
+                AspectRatio(
+                  aspectRatio: 1 / 1,
+                  child: CircleAvatar(
+                    backgroundColor: AppColors.SECONDARY.withOpacity(0.15),
+                    child: Image.asset(
+                      Assets.FUND_RECIPIENT,
+                      width: 24,
                     ),
                   ),
-                  child: Text(
-                    AppLocale.loc.see,
-                  ),
                 ),
+                mediumHorizontalSpacing(),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      _recipientName,
+                      style: context.textTheme().titleSmall,
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          AppLocale.loc.recipientRekeningVerified,
+                          style: context.textTheme().bodySmall,
+                        ),
+                        smallHorizontalSpacing(),
+                        ValidationIcon(isValidate: widget.campaign.recipientBankVerified),
+                      ],
+                    )
+                  ],
+                )
               ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class UsageField extends StatelessWidget {
+  final Campaign campaign;
+  const UsageField({Key? key, required this.campaign}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return RoundedContainer(
+      padding: const EdgeInsets.symmetric(horizontal: Dimension.MEDIUM),
+      width: double.maxFinite,
+      color: Colors.grey[200]!,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            AppLocale.loc.fundUsageDetail,
+            style: context.textTheme().bodySmall,
+          ),
+          TextButton(
+            onPressed: () => Navigator.pushNamed(
+              context,
+              path.FUND_USAGE_DETAIL,
+              arguments: FundUsageDetailUsageRouteArguments(
+                usageDetail: campaign.detailOfUseOfFunds ?? '',
+              ),
+            ),
+            child: Text(
+              AppLocale.loc.see,
             ),
           ),
         ],
