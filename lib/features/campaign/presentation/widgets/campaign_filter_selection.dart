@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pundi_kita/core/static/dimens.dart';
 
 import '../../../../core/domain/entities/campaign_entity.dart';
 import '../../../../core/presentation/pages/loading_page.dart';
@@ -25,7 +26,7 @@ class CampaignFilterSelection extends StatelessWidget {
             ),
             const Divider(),
             AspectRatio(
-              aspectRatio: 1 / 1,
+              aspectRatio: 2 / 2.5,
               child: BlocBuilder<CategoryFilterBloc, CategoryFilterState>(builder: (context, state) {
                 if (state is CategoryFilterLoaded) {
                   final _selectedData = state.selectedData;
@@ -35,7 +36,12 @@ class CampaignFilterSelection extends StatelessWidget {
                     itemBuilder: (context, index) {
                       final _category = state.data.elementAt(index);
                       return RadioListTile<CampaignCategory>(
-                        title: Text(_category.categoryName ?? ''),
+                        title: Text(
+                          _category.categoryName ?? '',
+                          style: context.textTheme().bodyMedium,
+                        ),
+                        dense: true,
+                        contentPadding: const EdgeInsets.all(Dimension.SMALL),
                         value: _category,
                         groupValue: _selectedData,
                         onChanged: (newValue) {
