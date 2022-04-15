@@ -103,6 +103,7 @@ class DonateRequestInquiryPage extends StatelessWidget {
                           onTap: () => showModalBottomSheet(
                               context: context,
                               backgroundColor: Colors.transparent,
+                              isScrollControlled: true,
                               builder: (_) {
                                 return BlocProvider<DonatePaymentMethodCubit>.value(
                                   value: BlocProvider.of<DonatePaymentMethodCubit>(context),
