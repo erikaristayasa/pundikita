@@ -40,7 +40,7 @@ class DonateForm extends StatelessWidget {
                   ],
                 );
               }
-              return const SizedBox.expand();
+              return const SizedBox.shrink();
             },
           ),
           const Divider(),

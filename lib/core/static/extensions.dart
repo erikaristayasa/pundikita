@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:pundi_kita/core/static/assets.dart';
 import 'package:pundi_kita/core/static/enums.dart';
 
 extension AdditionalStyle on TextStyle {
@@ -55,5 +56,87 @@ extension DonationPaymentStatus on num {
     } else {
       return DonationPayStatus.failed;
     }
+  }
+}
+
+extension PaymentInfo on PaymentChannel {
+  String get icon {
+    switch (this) {
+      case PaymentChannel.bag:
+        return Assets.BAG;
+      case PaymentChannel.bca:
+        return Assets.BCA;
+      case PaymentChannel.bni:
+        return Assets.BNI;
+      case PaymentChannel.cimb:
+        return Assets.CIMB;
+      case PaymentChannel.mandiri:
+        return Assets.MANDIRI;
+      case PaymentChannel.bmi:
+        return Assets.BMI;
+      case PaymentChannel.bri:
+        return Assets.BRI;
+      case PaymentChannel.bsi:
+        return Assets.BSI;
+      case PaymentChannel.permata:
+        return Assets.PERMATA;
+      case PaymentChannel.qris:
+        return Assets.QRIS;
+      case PaymentChannel.saldo:
+        return Assets.WALLET;
+    }
+  }
+
+  String get title {
+    switch (this) {
+      case PaymentChannel.bag:
+        return 'Bank Artha Graha';
+      case PaymentChannel.bca:
+        return 'Bank Central Asia';
+      case PaymentChannel.bni:
+        return 'Bank Negara Indonesia';
+      case PaymentChannel.cimb:
+        return 'Bank CIMB Niaga';
+      case PaymentChannel.mandiri:
+        return 'Bank Mandiri';
+      case PaymentChannel.bmi:
+        return 'Bank Muamalat Indonesia';
+      case PaymentChannel.bri:
+        return 'Bank Rakyat Indonesia';
+      case PaymentChannel.bsi:
+        return 'Bank Syariah Indonesia';
+      case PaymentChannel.permata:
+        return 'Bank Permata';
+      case PaymentChannel.qris:
+        return 'QRIS';
+      case PaymentChannel.saldo:
+        return 'Dompet';
+    }
+  }
+
+  BoxFit get fit {
+    switch (this) {
+      case PaymentChannel.bmi:
+      case PaymentChannel.bri:
+        return BoxFit.fitHeight;
+      case PaymentChannel.bag:
+      case PaymentChannel.bca:
+      case PaymentChannel.bni:
+      case PaymentChannel.cimb:
+      case PaymentChannel.mandiri:
+      case PaymentChannel.bsi:
+      case PaymentChannel.permata:
+      case PaymentChannel.qris:
+        return BoxFit.fitWidth;
+      case PaymentChannel.saldo:
+        return BoxFit.contain;
+    }
+  }
+
+  double get iconWidth {
+    if (this == PaymentChannel.saldo) {
+      return 40;
+    }
+    return 60;
   }
 }

@@ -27,6 +27,17 @@ class Assets {
   static const String SORT = 'assets/icons/sort.png';
 
   static const String COIN = 'assets/icons/coin.png';
+  static const String WALLET = 'assets/icons/wallet.png';
+  static const String BAG = 'assets/icons/payment_channel/bag.png';
+  static const String BCA = 'assets/icons/payment_channel/bca.png';
+  static const String BNI = 'assets/icons/payment_channel/bni.png';
+  static const String CIMB = 'assets/icons/payment_channel/cimb.png';
+  static const String MANDIRI = 'assets/icons/payment_channel/mandiri.png';
+  static const String BMI = 'assets/icons/payment_channel/muamalat.png';
+  static const String BRI = 'assets/icons/payment_channel/bri.png';
+  static const String BSI = 'assets/icons/payment_channel/bsi.png';
+  static const String PERMATA = 'assets/icons/payment_channel/permata.png';
+  static const String QRIS = 'assets/icons/payment_channel/qris.png';
 
   static const String LOTTIE_SHIMMER = 'assets/lotties/shimmer.json';
   static const String LOTTIE_404 = 'assets/lotties/404-error.json';

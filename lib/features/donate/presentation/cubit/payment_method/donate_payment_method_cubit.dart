@@ -7,7 +7,7 @@ part 'donate_payment_method_state.dart';
 class DonatePaymentMethodCubit extends Cubit<DonatePaymentMethodState> {
   DonatePaymentMethodCubit() : super(DonatePaymentMethodEmpty());
 
-  select({
+  void select({
     required PaymentMethod method,
     required PaymentChannel channel,
   }) =>
@@ -17,4 +17,10 @@ class DonatePaymentMethodCubit extends Cubit<DonatePaymentMethodState> {
           channel: channel,
         ),
       );
+  bool isSelected(PaymentChannel channel) {
+    if (state is DonatePaymentMethodSelected) {
+      return channel == (state as DonatePaymentMethodSelected).channel;
+    }
+    return false;
+  }
 }

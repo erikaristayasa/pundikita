@@ -2,7 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
-import 'package:pundi_kita/core/static/enums.dart';
 
 import '../static/config.dart';
 import '../static/dimens.dart';

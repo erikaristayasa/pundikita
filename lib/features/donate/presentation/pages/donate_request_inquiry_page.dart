@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pundi_kita/features/donate/presentation/cubit/payment_method/donate_payment_method_cubit.dart';
+import 'package:pundi_kita/features/donate/presentation/widgets/payment_method_item.dart';
+
 import '../../../../core/presentation/widgets/custom_app_bar.dart';
 import '../../../../core/presentation/widgets/rounded_button.dart';
 import '../../../../core/presentation/widgets/rounded_container.dart';
@@ -10,6 +11,8 @@ import '../../../../core/static/extensions.dart';
 import '../../../../core/utility/app_locale.dart';
 import '../../../../core/utility/helper.dart';
 import '../cubit/donate_pray_dubit.dart';
+import '../cubit/payment_method/donate_payment_method_cubit.dart';
+import '../widgets/bottom_sheet_payment_method.dart';
 import '../widgets/donate_form.dart';
 
 class DonateRequestInquiryPageRouteArguments {
@@ -52,7 +55,7 @@ class DonateRequestInquiryPage extends StatelessWidget {
                     ),
                     Text(
                       getFormattedPrice(nominal),
-                      style: context.textTheme().headlineMedium,
+                      style: context.textTheme().titleLarge,
                     ),
                   ],
                 ),
@@ -70,22 +73,47 @@ class DonateRequestInquiryPage extends StatelessWidget {
               RoundedContainer(
                 padding: const EdgeInsets.all(Dimension.MEDIUM),
                 height: 74,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: Text(
+                child: BlocBuilder<DonatePaymentMethodCubit, DonatePaymentMethodState>(
+                  builder: (context, state) {
+                    Widget? firstChild;
+                    if (state is DonatePaymentMethodEmpty) {
+                      firstChild = Text(
                         AppLocale.loc.paymentMethod,
                         style: context.textTheme().bodyMedium,
-                      ),
-                    ),
-                    RoundedButton(
-                      width: 80,
-                      radius: 20,
-                      onTap: () {},
-                      title: AppLocale.loc.choose,
-                    )
-                  ],
+                      );
+                    } else {
+                      final _state = state as DonatePaymentMethodSelected;
+
+                      firstChild = PaymentMethodItem(
+                        dense: true,
+                        onSelect: (_, __) {},
+                        method: _state.method,
+                        channel: _state.channel,
+                      );
+                    }
+                    return Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: firstChild,
+                        ),
+                        RoundedButton(
+                          width: 80,
+                          radius: 20,
+                          onTap: () => showModalBottomSheet(
+                              context: context,
+                              backgroundColor: Colors.transparent,
+                              builder: (_) {
+                                return BlocProvider<DonatePaymentMethodCubit>.value(
+                                  value: BlocProvider.of<DonatePaymentMethodCubit>(context),
+                                  child: const BottomSheetPaymentMethod(),
+                                );
+                              }),
+                          title: AppLocale.loc.choose,
+                        )
+                      ],
+                    );
+                  },
                 ),
               ),
               mediumVerticalSpacing(),
