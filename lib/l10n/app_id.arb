@@ -83,6 +83,11 @@
     "chooseDonateNominal": "Pilih nominal donasi",
     "otherNominal": "Nominal Lainnya",
     "minimumNominal": "(min. Rp10.000)",
+    "totalPayment": "Total Pembayaran",
+    "paymentMethod": "Cara Pembayaran",
     "choosePaymentMethod": "Pilih Cara Pembayaran",
-    "next": "Selanjutnya"
+    "choose": "Pilih",
+    "paymentWillVerifyAutomatically" : "Pembarayan akan diverifikasi secara otomatis.",
+    "next": "Selanjutnya",
+    "continuePayment": "Lanjut Pembayaran"
 }

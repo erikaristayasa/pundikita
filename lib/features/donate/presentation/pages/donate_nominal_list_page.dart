@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/presentation/widgets/custom_app_bar.dart';
 import '../../../../core/presentation/widgets/custom_text_field.dart';
 import '../../../../core/presentation/widgets/rounded_button.dart';
+import '../../../../core/routes/path.dart' as path;
 import '../../../../core/static/colors.dart';
 import '../../../../core/static/dimens.dart';
 import '../../../../core/static/extensions.dart';
@@ -13,6 +14,7 @@ import '../../../../core/utility/app_locale.dart';
 import '../../../../core/utility/helper.dart';
 import '../cubit/donate_nominal_cubit.dart';
 import '../widgets/nominal_item.dart';
+import 'donate_request_inquiry_page.dart';
 
 class DonateNominalListPageRouteArguments {
   final int campaignId;
@@ -124,9 +126,14 @@ class _DonateNominalListPageState extends State<DonateNominalListPage> {
                         mediumVerticalSpacing(),
                         RoundedButton(
                           enable: state != null,
-                          onTap: () {
-                            logMe(state);
-                          },
+                          onTap: () => Navigator.pushNamed(
+                            context,
+                            path.DONATION_REQUEST_INQURY,
+                            arguments: DonateRequestInquiryPageRouteArguments(
+                              nominal: state!.toInt(),
+                              campaignId: widget.campaignId,
+                            ),
+                          ),
                           title: AppLocale.loc.next,
                         ),
                       ],

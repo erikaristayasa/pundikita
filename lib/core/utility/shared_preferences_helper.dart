@@ -62,4 +62,5 @@ class SharedPreferencesHelper {
 
   String get userToken => prefs.getString(USER_TOKEN) ?? '';
   String get userName => prefs.getString(USER_NAME) ?? '';
+  String get userEmail => prefs.getString(USER_EMAIL) ?? '';
 }
