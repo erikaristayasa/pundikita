@@ -7,8 +7,12 @@ class DonateNominalCubit extends Cubit<int?> {
   bool isSelected(int nominal) => nominal == state;
   void onInput(String? nominal) {
     try {
-      final parsedValue = int.parse(nominal!);
-      emit(parsedValue);
+      final parsedValue = int.parse((nominal ?? '0').replaceAll('.', ''));
+      if (parsedValue >= 10000) {
+        emit(parsedValue);
+      } else {
+        emit(null);
+      }
     } catch (e) {
       emit(null);
     }

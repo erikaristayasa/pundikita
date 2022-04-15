@@ -81,6 +81,8 @@
     "readLess": "Baca lebih ringkas",
 
     "chooseDonateNominal": "Pilih nominal donasi",
+    "otherNominal": "Nominal Lainnya",
+    "minimumNominal": "(min. Rp10.000)",
     "choosePaymentMethod": "Pilih Cara Pembayaran",
     "next": "Selanjutnya"
 }

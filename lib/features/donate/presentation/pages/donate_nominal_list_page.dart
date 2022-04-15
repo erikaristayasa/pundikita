@@ -1,3 +1,4 @@
+import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -94,20 +95,38 @@ class _DonateNominalListPageState extends State<DonateNominalListPage> {
                   padding: const EdgeInsets.all(Dimension.MEDIUM),
                   child: BlocBuilder<DonateNominalCubit, int?>(builder: (context, state) {
                     return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
                       children: [
+                        Text.rich(
+                          TextSpan(
+                            children: [
+                              TextSpan(text: AppLocale.loc.otherNominal + ' ', style: context.textTheme().labelLarge),
+                              TextSpan(text: AppLocale.loc.minimumNominal, style: context.textTheme().labelSmall),
+                            ],
+                          ),
+                        ),
+                        smallVerticalSpacing(),
                         CustomTextField(
-                          title: "Nominal Lainnya",
                           controller: _otherNominalController,
                           inputType: TextInputType.number,
                           prefixText: 'Rp',
                           onChange: (nominal) => context.read<DonateNominalCubit>().onInput(nominal),
-                          formatters: [FilteringTextInputFormatter.digitsOnly],
+                          formatters: [
+                            FilteringTextInputFormatter.digitsOnly,
+                            CurrencyTextInputFormatter(
+                              locale: 'id',
+                              decimalDigits: 0,
+                              symbol: '',
+                            )
+                          ],
                         ),
                         mediumVerticalSpacing(),
                         RoundedButton(
                           enable: state != null,
-                          onTap: () {},
+                          onTap: () {
+                            logMe(state);
+                          },
                           title: AppLocale.loc.next,
                         ),
                       ],
