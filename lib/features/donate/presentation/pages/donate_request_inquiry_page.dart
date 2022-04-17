@@ -7,6 +7,7 @@ import '../../../../core/domain/entities/campaign_entity.dart';
 import '../../../../core/presentation/widgets/custom_app_bar.dart';
 import '../../../../core/presentation/widgets/rounded_button.dart';
 import '../../../../core/presentation/widgets/rounded_container.dart';
+import '../../../../core/routes/path.dart' as path;
 import '../../../../core/static/colors.dart';
 import '../../../../core/static/dimens.dart';
 import '../../../../core/static/extensions.dart';
@@ -19,6 +20,7 @@ import '../cubit/payment_method/donate_payment_method_cubit.dart';
 import '../widgets/bottom_sheet_payment_method.dart';
 import '../widgets/donate_form.dart';
 import '../widgets/payment_method_item.dart';
+import 'donate_request_inquiry_result_page.dart';
 
 class DonateRequestInquiryPageRouteArguments {
   final int nominal;
@@ -145,7 +147,12 @@ class DonateRequestInquiryPage extends StatelessWidget {
                             break;
                           case RequestInquirySuccess:
                             context.loaderOverlay.hide();
-                            Navigator.popAndPushNamed(context, 'PAYMENT_SUCCESS');
+                            final result = (requestState as RequestInquirySuccess).data;
+                            Navigator.popAndPushNamed(
+                              context,
+                              path.DONATION_REQUEST_INQURY_RESULT,
+                              arguments: DonateRequestInquiryResultPageRouteArguments(result: result),
+                            );
                             break;
                           default:
                             if (!context.loaderOverlay.visible) context.loaderOverlay.show();

@@ -15,11 +15,11 @@ extension AdditionalStyle on TextStyle {
 }
 
 extension DateFormatting on DateTime? {
-  String toText() {
+  String toText({String? format}) {
     if (this == null) {
       return '';
     }
-    return DateFormat("yyyy-MM-dd").format(this!);
+    return DateFormat(format ?? "yyyy-MM-dd").format(this!);
   }
 }
 

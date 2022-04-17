@@ -90,6 +90,7 @@
     "paymentWillVerifyAutomatically" : "Pembarayan akan diverifikasi secara otomatis.",
     "next": "Selanjutnya",
     "continuePayment": "Lanjut Pembayaran",
-
-    "donationFailed": "Gagal berdonasi, silahkan coba kembali"
+    "paymentInformation": "Informasi Pembayaran",
+    "donationFailed": "Gagal berdonasi, silahkan coba kembali",
+    "backToMainPage": "Kembali ke halaman awal"
 }

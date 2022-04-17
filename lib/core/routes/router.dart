@@ -5,6 +5,7 @@ import '../../features/campaign/presentation/pages/campaign_detail_page.dart';
 import '../../features/campaign/presentation/pages/fund_usage_detail_page.dart';
 import '../../features/donate/presentation/pages/donate_nominal_list_page.dart';
 import '../../features/donate/presentation/pages/donate_request_inquiry_page.dart';
+import '../../features/donate/presentation/pages/donate_request_inquiry_result_page.dart';
 import '../../features/forgot_password/presentation/pages/forgot_password_page.dart';
 import '../../features/login/presentation/pages/login_page.dart';
 import '../../features/register/presentation/pages/register_page.dart';
@@ -57,6 +58,9 @@ class Router {
             campaign: args.campaign,
           ),
         );
+      case path.DONATION_REQUEST_INQURY_RESULT:
+        final args = settings.arguments as DonateRequestInquiryResultPageRouteArguments;
+        return pageRoute(page: DonateRequestInquiryResultPage(result: args.result));
       default:
         return pageRoute(page: const NotFoundPage());
     }

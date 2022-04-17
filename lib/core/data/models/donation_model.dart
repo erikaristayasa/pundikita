@@ -53,7 +53,7 @@ class DonationModel extends Donation {
         paymentName: json['payment_name'],
         paymentTotal: json['payment_total'],
         paymentFee: json['payment_fee'],
-        paymentExpired: (json['payment_expired'] as String).toDate(),
+        paymentExpired: (json['payment_expired'] as String).toDate(format: "yyyy-MM-dd HH:mm:ss"),
         paymentQRImage: json['payment_qr_image'],
         status: (json['status'] as num).donationPayStatus(),
         likeStatus: json['like_status'],

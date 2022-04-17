@@ -10,6 +10,7 @@ class RoundedButton extends StatelessWidget {
   final double height;
   final double width;
   final Color color;
+  final Color titleColor;
   final dynamic title;
   final VoidCallback? onTap;
   const RoundedButton({
@@ -22,6 +23,7 @@ class RoundedButton extends StatelessWidget {
     this.outline = false,
     required this.onTap,
     this.color = AppColors.PRIMARY,
+    this.titleColor = Colors.white,
   }) : super(key: key);
 
   @override
@@ -44,7 +46,7 @@ class RoundedButton extends StatelessWidget {
       child: (title is String)
           ? Text(
               title,
-              style: context.textTheme().button!.withColor(Colors.white),
+              style: context.textTheme().button!.withColor(titleColor),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             )
