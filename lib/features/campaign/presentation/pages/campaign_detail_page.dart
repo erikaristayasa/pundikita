@@ -130,7 +130,7 @@ class _CampaignDetailPageState extends State<CampaignDetailPage> {
                             onTap: () => Navigator.pushNamed(
                               context,
                               path.DONATION_NOMINAL_LIST,
-                              arguments: DonateNominalListPageRouteArguments(campaignId: campaign.id),
+                              arguments: DonateNominalListPageRouteArguments(campaign: campaign),
                             ),
                             title: widget.service == CampaignService.donasi ? AppLocale.loc.donateNow : AppLocale.loc.zakatNow,
                             color: widget.service == CampaignService.donasi ? Colors.red : Colors.blue,

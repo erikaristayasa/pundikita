@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/domain/entities/campaign_entity.dart';
 import '../../../../core/presentation/widgets/custom_app_bar.dart';
 import '../../../../core/presentation/widgets/custom_text_field.dart';
 import '../../../../core/presentation/widgets/rounded_button.dart';
@@ -17,14 +18,14 @@ import '../widgets/nominal_item.dart';
 import 'donate_request_inquiry_page.dart';
 
 class DonateNominalListPageRouteArguments {
-  final int campaignId;
+  final Campaign campaign;
 
-  DonateNominalListPageRouteArguments({required this.campaignId});
+  DonateNominalListPageRouteArguments({required this.campaign});
 }
 
 class DonateNominalListPage extends StatefulWidget {
-  final int campaignId;
-  const DonateNominalListPage({Key? key, required this.campaignId}) : super(key: key);
+  final Campaign campaign;
+  const DonateNominalListPage({Key? key, required this.campaign}) : super(key: key);
 
   @override
   State<DonateNominalListPage> createState() => _DonateNominalListPageState();
@@ -131,7 +132,7 @@ class _DonateNominalListPageState extends State<DonateNominalListPage> {
                             path.DONATION_REQUEST_INQURY,
                             arguments: DonateRequestInquiryPageRouteArguments(
                               nominal: state!.toInt(),
-                              campaignId: widget.campaignId,
+                              campaign: widget.campaign,
                             ),
                           ),
                           title: AppLocale.loc.next,

@@ -89,5 +89,7 @@
     "choose": "Pilih",
     "paymentWillVerifyAutomatically" : "Pembarayan akan diverifikasi secara otomatis.",
     "next": "Selanjutnya",
-    "continuePayment": "Lanjut Pembayaran"
+    "continuePayment": "Lanjut Pembayaran",
+
+    "donationFailed": "Gagal berdonasi, silahkan coba kembali"
 }

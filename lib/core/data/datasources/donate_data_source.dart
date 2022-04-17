@@ -1,12 +1,12 @@
-import 'dart:io';
-
 import 'package:dio/dio.dart';
 
-import '../../../../core/static/enums.dart';
-import '../../../../core/static/extensions.dart';
+import '../../domain/entities/donation_entity.dart';
+import '../../static/enums.dart';
+import '../../static/extensions.dart';
+import '../models/request_inquiry_response_model.dart';
 
 abstract class DonateDataSource {
-  Future<bool> requestInquiry(Map<String, dynamic> request, {CampaignService? service});
+  Future<Donation> requestInquiry(Map<String, dynamic> request, {CampaignService? service});
 }
 
 class DonateDateSourceImplementation implements DonateDataSource {
@@ -15,17 +15,18 @@ class DonateDateSourceImplementation implements DonateDataSource {
   DonateDateSourceImplementation({required this.dio});
 
   @override
-  Future<bool> requestInquiry(Map<String, dynamic> request, {CampaignService? service}) async {
+  Future<Donation> requestInquiry(Map<String, dynamic> request, {CampaignService? service}) async {
     String path = 'api/user/campaign/donation/create';
     if (service == CampaignService.zakat) {
       path = 'api/user/zakat/donation/create';
     }
-    final data = FormData.fromMap(request);
+    final data = request;
     dio.withToken();
 
     try {
       final response = await dio.post(path, data: data);
-      return response.statusCode == HttpStatus.ok;
+      final model = RequestInquiryResponseModel.fromJson(response.data);
+      return model.data;
     } catch (e) {
       rethrow;
     }

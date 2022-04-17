@@ -52,7 +52,7 @@ class CampaignBasicInfo extends StatelessWidget {
             onTap: () => Navigator.pushNamed(
               context,
               path.DONATION_NOMINAL_LIST,
-              arguments: DonateNominalListPageRouteArguments(campaignId: campaign.id),
+              arguments: DonateNominalListPageRouteArguments(campaign: campaign),
             ),
             title: campaign.campaignService == CampaignService.donasi ? AppLocale.loc.donateNow : AppLocale.loc.zakatNow,
             color: campaign.campaignService == CampaignService.donasi ? Colors.red : Colors.blue,

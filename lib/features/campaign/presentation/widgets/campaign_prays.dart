@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/domain/entities/campaign_entity.dart';
+import '../../../../core/domain/entities/donation_entity.dart';
 import '../../../../core/presentation/widgets/custom_label.dart';
 import '../../../../core/presentation/widgets/rounded_container.dart';
 import '../../../../core/static/colors.dart';
@@ -13,7 +13,7 @@ import '../../../../core/utility/helper.dart';
 import '../cubit/campaign_pray_filter_cubit.dart';
 
 class CampaignPrays extends StatelessWidget {
-  final List<CampaignDonation> donations;
+  final List<Donation> donations;
   const CampaignPrays({Key? key, required this.donations}) : super(key: key);
 
   @override
@@ -54,7 +54,7 @@ class CampaignPrays extends StatelessWidget {
 }
 
 class Prayer extends StatelessWidget {
-  final CampaignDonation donation;
+  final Donation donation;
   const Prayer({Key? key, required this.donation}) : super(key: key);
 
   @override

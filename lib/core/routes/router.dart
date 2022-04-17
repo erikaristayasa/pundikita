@@ -47,14 +47,14 @@ class Router {
       case path.DONATION_NOMINAL_LIST:
         final args = settings.arguments as DonateNominalListPageRouteArguments;
         return pageRoute(
-          page: DonateNominalListPage(campaignId: args.campaignId),
+          page: DonateNominalListPage(campaign: args.campaign),
         );
       case path.DONATION_REQUEST_INQURY:
         final args = settings.arguments as DonateRequestInquiryPageRouteArguments;
         return pageRoute(
           page: DonateRequestInquiryPage(
             nominal: args.nominal,
-            campaignId: args.campaignId,
+            campaign: args.campaign,
           ),
         );
       default:

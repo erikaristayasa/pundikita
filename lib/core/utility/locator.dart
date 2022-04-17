@@ -5,10 +5,8 @@ import 'package:get_it/get_it.dart';
 import '../../features/campaign/presentation/bloc/category_filter/category_filter_bloc.dart';
 import '../../features/campaign/presentation/bloc/detail/campaign_detail_bloc.dart';
 import '../../features/campaign/presentation/bloc/list/campaign_list_bloc.dart';
-import '../../features/donate/data/datasources/donate_data_source.dart';
-import '../../features/donate/data/repositories/donate_repository_implementation.dart';
-import '../../features/donate/domain/repositories/donate_repository.dart';
 import '../../features/donate/domain/usecases/request_inquiry.dart';
+import '../../features/donate/presentation/bloc/request_inquiry_bloc.dart';
 import '../../features/forgot_password/data/datasources/forgot_password_data_source.dart';
 import '../../features/forgot_password/data/repositories/forgot_password_repository_implementation.dart';
 import '../../features/forgot_password/domain/repositories/forgot_password_repository.dart';
@@ -25,8 +23,11 @@ import '../../features/register/domain/repositories/register_repository.dart';
 import '../../features/register/domain/usecases/do_register.dart';
 import '../../features/register/presentation/bloc/register_bloc.dart';
 import '../data/datasources/campaign_data_source.dart';
+import '../data/datasources/donate_data_source.dart';
 import '../data/repositories/campaign_repository_implementation.dart';
+import '../data/repositories/donate_repository_implementation.dart';
 import '../domain/repositories/campaign_repository.dart';
+import '../domain/repositories/donate_repository.dart';
 import '../domain/usecases/get_all_campaign_list.dart';
 import '../domain/usecases/get_campaign_categories.dart';
 import '../domain/usecases/get_campaign_detail.dart';
@@ -50,6 +51,7 @@ Future<void> locatorSetup() async {
         getUserCampaignList: locator(),
       ));
   locator.registerFactory<CategoryFilterBloc>(() => CategoryFilterBloc(getCampaignCategories: locator()));
+  locator.registerFactory<RequestInquiryBloc>(() => RequestInquiryBloc(requestInquiry: locator()));
 
   // use cases
   locator.registerLazySingleton<DoLogin>(() => DoLogin(locator()));

@@ -5,6 +5,7 @@ import '../../domain/entities/campaign_entity.dart';
 import '../../domain/entities/user_entity.dart';
 import '../../static/enums.dart';
 import '../../static/extensions.dart';
+import 'donation_model.dart';
 import 'user_model.dart';
 
 class CampaignModel extends Campaign {
@@ -78,7 +79,7 @@ class CampaignModel extends Campaign {
     required CampaignTypeModel? campaignType,
     required CampaignCategoryModel? campaignCategory,
     required CampaignSubCategoryModel? campaignSubCategory,
-    required List<CampaignDonationModel> donation,
+    required List<DonationModel> donation,
   }) : super(
           id: id,
           campaignService: campaignService,
@@ -221,7 +222,7 @@ class CampaignModel extends Campaign {
         campaignType: json['campaign_type'] != null ? CampaignTypeModel.fromJson(json['campaign_type']) : null,
         campaignCategory: json['campaign_category'] != null ? CampaignCategoryModel.fromJson(json['campaign_category']) : null,
         campaignSubCategory: json['campaign_sub_category'] != null ? CampaignSubCategoryModel.fromJson(json['campaign_sub_category']) : null,
-        donation: json['donation'] != null ? List<CampaignDonationModel>.from(json['donation'].map((x) => CampaignDonationModel.fromJson(x))) : [],
+        donation: json['donation'] != null ? List<DonationModel>.from(json['donation'].map((x) => DonationModel.fromJson(x))) : [],
       );
 
   Future<FormData> createBody({
@@ -313,64 +314,5 @@ class CampaignSubCategoryModel extends CampaignSubCategory {
         campaignCategoryId: json['campaign_category_id'],
         title: json['judul'],
         description: json['deskripsi'],
-      );
-}
-
-class CampaignDonationModel extends CampaignDonation {
-  const CampaignDonationModel({
-    required int id,
-    required int userId,
-    required int campaignId,
-    required num amountOfFunds,
-    required String? pray,
-    required int paymentTransactionId,
-    required PaymentMethod paymentMethod,
-    required PaymentChannel paymentChannel,
-    required String paymentNumber,
-    required String paymentName,
-    required num paymentTotal,
-    required num paymentFee,
-    required DateTime? paymentExpired,
-    required String? paymentQRImage,
-    required DonationPayStatus status,
-    required bool likeStatus,
-    required DateTime? createdAt,
-  }) : super(
-          id: id,
-          userId: userId,
-          campaignId: campaignId,
-          amountOfFunds: amountOfFunds,
-          pray: pray,
-          paymentTransactionId: paymentTransactionId,
-          paymentMethod: paymentMethod,
-          paymentChannel: paymentChannel,
-          paymentNumber: paymentNumber,
-          paymentName: paymentName,
-          paymentTotal: paymentTotal,
-          paymentFee: paymentFee,
-          paymentExpired: paymentExpired,
-          paymentQRImage: paymentQRImage,
-          status: status,
-          likeStatus: likeStatus,
-          createdAt: createdAt,
-        );
-  factory CampaignDonationModel.fromJson(Map<String, dynamic> json) => CampaignDonationModel(
-        id: json['id'],
-        userId: json['user_id'],
-        campaignId: json['campaign_id'],
-        amountOfFunds: json['jumlah_dana'],
-        pray: json['doa'],
-        paymentTransactionId: json['payment_transaction_id'],
-        paymentMethod: PaymentMethod.values.firstWhere((element) => element.name == json['payment_method']),
-        paymentChannel: PaymentChannel.values.firstWhere((element) => element.name == json['payment_channel']),
-        paymentNumber: json['payment_no'],
-        paymentName: json['payment_name'],
-        paymentTotal: json['payment_total'],
-        paymentFee: json['payment_fee'],
-        paymentExpired: (json['payment_expired'] as String).toDate(),
-        paymentQRImage: json['payment_qr_image'],
-        status: (json['status'] as num).donationPayStatus(),
-        likeStatus: json['like_status'],
-        createdAt: (json['created_at'] as String).toDate(),
       );
 }
