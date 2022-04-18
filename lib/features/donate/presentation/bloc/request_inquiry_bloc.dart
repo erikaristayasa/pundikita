@@ -3,9 +3,9 @@ import 'package:equatable/equatable.dart';
 
 import '../../../../core/domain/entities/campaign_entity.dart';
 import '../../../../core/domain/entities/donation_entity.dart';
+import '../../../../core/domain/usecases/request_inquiry.dart';
 import '../../../../core/errors/failure.dart';
 import '../../../../core/static/enums.dart';
-import '../../domain/usecases/request_inquiry.dart';
 
 part 'request_inquiry_event.dart';
 part 'request_inquiry_state.dart';
