@@ -16,7 +16,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       emit(LoginLoading());
 
       final result = await doLogin(email: event.email, password: event.password);
-      result.fold((error) => emit(LoginError(message: error)), (token) {
+      result.fold((error) => emit(LoginError(message: error + '. Pastikan anda telah melakukan verifikasi akun lewat tautan yang dikirim ke email.')), (token) {
         _saveToken(token);
         emit(LoginSuccess());
       });

@@ -57,7 +57,7 @@
     "loginSuccess": "Berhasil masuk",
     "failure": "Gagal",
     "success": "Berhasil",
-    "registerSuccess": "Berhasil mendaftar, periksa email untuk verifikasi akun.",
+    "registerSuccess": "Tautan verifikasi akun telah dikirim ke email. Cek folder spam apabila email tidak masuk ke folder utama.",
     "registerFailure": "Gagal mendaftar, periksa kembali data anda & coba kembali.",
     "ok": "OK",
 

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:pundi_kita/core/presentation/pages/main_page.dart';
+import 'package:pundi_kita/core/static/extensions.dart';
 
 import '../../../../core/presentation/widgets/custom_text_field.dart';
 import '../../../../core/presentation/widgets/rounded_button.dart';
@@ -42,9 +43,18 @@ class _LoginFormState extends State<LoginForm> {
             context.loaderOverlay.hide();
             showDialog(
               context: context,
-              builder: (context) => SimpleAlertDialog(
-                title: AppLocale.loc.failure,
-                message: (state as LoginError).message,
+              builder: (context) => AlertDialog(
+                title: Text(AppLocale.loc.failure),
+                content: Text(
+                  (state as LoginError).message,
+                  maxLines: 5,
+                ),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: const Text('OK'),
+                  ),
+                ],
               ),
             );
             break;
