@@ -15,7 +15,11 @@ class CategoryFilterBloc extends Bloc<CategoryFilterEvent, CategoryFilterState> 
       final result = await getCampaignCategories();
       result.fold(
         (_) => emit(CategoryFilterFailure()),
-        (data) => emit(CategoryFilterLoaded(data: data)),
+        (data) {
+          final _category = [const CampaignCategory(id: 0, icon: '', categoryName: 'Semua')];
+          _category.addAll(data);
+          emit(CategoryFilterLoaded(data: _category));
+        },
       );
     });
 

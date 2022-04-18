@@ -1,15 +1,15 @@
 import 'package:dio/dio.dart';
-import 'package:pundi_kita/core/data/models/campaign_categories_response_model.dart';
-import 'package:pundi_kita/core/utility/helper.dart';
 
 import '../../domain/entities/campaign_entity.dart';
 import '../../static/enums.dart';
 import '../../static/extensions.dart';
+import '../../utility/helper.dart';
+import '../models/campaign_categories_response_model.dart';
 import '../models/campaign_detail_response_model.dart';
 import '../models/campaign_list_response_model.dart';
 
 abstract class CampaignDataSource {
-  Future<List<Campaign>> getCampaignList(CampaignService service, {bool auth});
+  Future<List<Campaign>> getCampaignList(CampaignService service, {bool auth, CampaignCategory? category, bool? sort});
   Future<Campaign> getCampaignDetail(int id, {required CampaignService service});
   Future<List<CampaignType>> getTypes();
   Future<List<CampaignCategory>> getCategories();
@@ -44,7 +44,7 @@ class CampaignDataSourceImplementation implements CampaignDataSource {
   }
 
   @override
-  Future<List<Campaign>> getCampaignList(CampaignService service, {bool auth = false}) async {
+  Future<List<Campaign>> getCampaignList(CampaignService service, {bool auth = false, CampaignCategory? category, bool? sort}) async {
     String path = '';
     switch (service) {
       case CampaignService.donasi:
@@ -55,9 +55,13 @@ class CampaignDataSourceImplementation implements CampaignDataSource {
         break;
     }
     dio.withToken();
+    final params = {
+      if (category != null) 'campaign_category_id': category.id,
+      if (sort != null) 'dana_paling_sedikit': sort,
+    };
 
     try {
-      final response = await dio.get(path);
+      final response = await dio.get(path, queryParameters: params);
       final model = CampaignListResponseModel.fromJson(response.data);
       return model.data;
     } catch (e) {

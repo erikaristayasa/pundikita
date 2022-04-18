@@ -30,7 +30,6 @@ import '../domain/repositories/donate_repository.dart';
 import '../domain/usecases/get_all_campaign_list.dart';
 import '../domain/usecases/get_campaign_categories.dart';
 import '../domain/usecases/get_campaign_detail.dart';
-import '../domain/usecases/get_user_campaign_list.dart';
 import '../domain/usecases/request_inquiry.dart';
 import '../network/dio_client.dart';
 import '../network/network_info.dart';
@@ -46,10 +45,7 @@ Future<void> locatorSetup() async {
   locator.registerFactory<RegisterBloc>(() => RegisterBloc(register: locator()));
   locator.registerFactory<ForgotPasswordBloc>(() => ForgotPasswordBloc(forgotPassword: locator()));
   locator.registerFactory<CampaignDetailBloc>(() => CampaignDetailBloc(getCampaignDetail: locator()));
-  locator.registerFactory<CampaignListBloc>(() => CampaignListBloc(
-        getAllCampaignList: locator(),
-        getUserCampaignList: locator(),
-      ));
+  locator.registerFactory<CampaignListBloc>(() => CampaignListBloc(getAllCampaignList: locator()));
   locator.registerFactory<CategoryFilterBloc>(() => CategoryFilterBloc(getCampaignCategories: locator()));
   locator.registerFactory<RequestInquiryBloc>(() => RequestInquiryBloc(requestInquiry: locator()));
 
@@ -58,7 +54,6 @@ Future<void> locatorSetup() async {
   locator.registerLazySingleton<Register>(() => Register(locator()));
   locator.registerLazySingleton<ForgotPassword>(() => ForgotPassword(locator()));
   locator.registerLazySingleton<GetAllCampaignList>(() => GetAllCampaignList(locator()));
-  locator.registerLazySingleton<GetUserCampaignList>(() => GetUserCampaignList(locator()));
   locator.registerLazySingleton<GetCampaignDetail>(() => GetCampaignDetail(locator()));
   locator.registerLazySingleton<GetCampaignCategories>(() => GetCampaignCategories(locator()));
   locator.registerLazySingleton<RequestInquiry>(() => RequestInquiry(locator()));

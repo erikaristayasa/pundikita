@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pundi_kita/core/presentation/pages/no_data_page.dart';
+import 'package:pundi_kita/core/utility/helper.dart';
 
 import '../../../../core/presentation/pages/loading_page.dart';
 import '../../../../core/presentation/widgets/custom_app_bar.dart';
@@ -47,7 +48,8 @@ class _CampaignAllPageState extends State<CampaignAllPage> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => locator<CampaignListBloc>()..add(GetCampaignList(widget.service))),
+        // BlocProvider(create: (_) => locator<CampaignListBloc>()..add(GetCampaignList(widget.service))),
+        BlocProvider(create: (_) => locator<CampaignListBloc>()),
         BlocProvider(create: (_) => locator<CategoryFilterBloc>()..add(GetCategories())),
       ],
       child: Scaffold(
@@ -68,9 +70,12 @@ class _CampaignAllPageState extends State<CampaignAllPage> {
                   color: Colors.white,
                 ),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: widget.service == CampaignService.zakat ? MainAxisAlignment.center : MainAxisAlignment.spaceEvenly,
                   children: [
                     BlocBuilder<CategoryFilterBloc, CategoryFilterState>(builder: (context, _) {
+                      if (widget.service == CampaignService.zakat) {
+                        return const SizedBox.shrink();
+                      }
                       return TextButton.icon(
                         onPressed: () => showDialog(
                           context: context,
@@ -98,27 +103,37 @@ class _CampaignAllPageState extends State<CampaignAllPage> {
                 ),
               ),
               Expanded(
-                child: BlocBuilder<CampaignListBloc, CampaignListState>(
-                  builder: (context, state) {
-                    if (state is CampaignListLoaded) {
-                      final data = state.data;
-                      return ListView.separated(
-                        itemBuilder: (context, index) => CampaignItem(
-                          campaign: data.elementAt(index),
-                        ),
-                        separatorBuilder: (context, index) => const Divider(),
-                        itemCount: data.length,
-                      );
-                    } else if (state is CampaignListFailure) {
-                      return Center(
-                        child: Text(AppLocale.loc.unexpectedServerError),
-                      );
-                    } else if (state is CampaignListInitial) {
-                      return const NoDataPage();
-                    } else {
-                      return const LoadingPage(isList: true);
+                child: BlocListener<CategoryFilterBloc, CategoryFilterState>(
+                  // listenWhen: (previous, current) {
+                  //   return (previous as CategoryFilterLoaded).selectedData != (current as CategoryFilterLoaded).selectedData;
+                  // },
+                  listener: (context, state) {
+                    if (state is CategoryFilterLoaded) {
+                      context.read<CampaignListBloc>().add(GetCampaignList(widget.service, category: state.selectedData));
                     }
                   },
+                  child: BlocBuilder<CampaignListBloc, CampaignListState>(
+                    builder: (context, state) {
+                      if (state is CampaignListLoaded) {
+                        final data = state.data;
+                        return ListView.separated(
+                          itemBuilder: (context, index) => CampaignItem(
+                            campaign: data.elementAt(index),
+                          ),
+                          separatorBuilder: (context, index) => const Divider(),
+                          itemCount: data.length,
+                        );
+                      } else if (state is CampaignListFailure) {
+                        return Center(
+                          child: Text(AppLocale.loc.unexpectedServerError),
+                        );
+                      } else if (state is CampaignListInitial) {
+                        return const NoDataPage();
+                      } else {
+                        return const LoadingPage(isList: true);
+                      }
+                    },
+                  ),
                 ),
               )
             ],

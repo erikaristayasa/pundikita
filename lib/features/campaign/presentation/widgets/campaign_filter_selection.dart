@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pundi_kita/core/static/dimens.dart';
 
 import '../../../../core/domain/entities/campaign_entity.dart';
 import '../../../../core/presentation/pages/loading_page.dart';
 import '../../../../core/presentation/widgets/rounded_container.dart';
+import '../../../../core/static/dimens.dart';
 import '../../../../core/static/extensions.dart';
 import '../../../../core/utility/app_locale.dart';
 import '../bloc/category_filter/category_filter_bloc.dart';
@@ -46,6 +46,7 @@ class CampaignFilterSelection extends StatelessWidget {
                         groupValue: _selectedData,
                         onChanged: (newValue) {
                           context.read<CategoryFilterBloc>().add(OnSelectCategory(category: newValue!));
+                          Navigator.pop(context);
                         },
                       );
                     },

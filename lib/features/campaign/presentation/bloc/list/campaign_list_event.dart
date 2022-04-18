@@ -10,11 +10,23 @@ abstract class CampaignListEvent extends Equatable {
 class GetCampaignList extends CampaignListEvent {
   final CampaignService service;
   final bool auth;
+  final CampaignCategory? category;
+  final bool? sort;
 
-  const GetCampaignList(this.service, {this.auth = false});
+  const GetCampaignList(
+    this.service, {
+    this.auth = false,
+    this.category,
+    this.sort,
+  });
 
   @override
-  List<Object> get props => [service, auth];
+  List<Object> get props => [
+        service,
+        auth,
+        category ?? const CampaignCategory(id: 0, icon: '', categoryName: ''),
+        sort ?? false,
+      ];
 }
 
 class Filtering extends CampaignListEvent {

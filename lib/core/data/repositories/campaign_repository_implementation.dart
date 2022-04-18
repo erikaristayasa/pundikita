@@ -12,9 +12,9 @@ class CampaignRepositoryImplementation implements CampaignRepository {
   CampaignRepositoryImplementation({required this.dataSource});
 
   @override
-  Future<Either<Failure, List<Campaign>>> getAllCampaignList(CampaignService service) async {
+  Future<Either<Failure, List<Campaign>>> getAllCampaignList(CampaignService service, {bool auth = false, CampaignCategory? category, bool? sort}) async {
     try {
-      final result = await dataSource.getCampaignList(service);
+      final result = await dataSource.getCampaignList(service, auth: auth, category: category, sort: sort);
       return Right(result);
     } catch (e) {
       return Left(ServerFailure());
@@ -25,16 +25,6 @@ class CampaignRepositoryImplementation implements CampaignRepository {
   Future<Either<Failure, Campaign>> getCampaignDetail(int id, {required CampaignService service}) async {
     try {
       final result = await dataSource.getCampaignDetail(id, service: service);
-      return Right(result);
-    } catch (e) {
-      return Left(ServerFailure());
-    }
-  }
-
-  @override
-  Future<Either<Failure, List<Campaign>>> getUserCampaignList(CampaignService service) async {
-    try {
-      final result = await dataSource.getCampaignList(service, auth: true);
       return Right(result);
     } catch (e) {
       return Left(ServerFailure());
