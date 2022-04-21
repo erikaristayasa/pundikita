@@ -2,6 +2,11 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
+import '../../features/banner/data/datasources/banner_data_source.dart';
+import '../../features/banner/data/repositories/banner_repository_implementation.dart';
+import '../../features/banner/domain/repositories/banner_repository.dart';
+import '../../features/banner/domain/usecases/get_banners.dart';
+import '../../features/banner/presentation/bloc/banner_bloc.dart';
 import '../../features/campaign/presentation/bloc/category_filter/category_filter_bloc.dart';
 import '../../features/campaign/presentation/bloc/detail/campaign_detail_bloc.dart';
 import '../../features/campaign/presentation/bloc/list/campaign_list_bloc.dart';
@@ -48,6 +53,7 @@ Future<void> locatorSetup() async {
   locator.registerFactory<CampaignListBloc>(() => CampaignListBloc(getAllCampaignList: locator()));
   locator.registerFactory<CategoryFilterBloc>(() => CategoryFilterBloc(getCampaignCategories: locator()));
   locator.registerFactory<RequestInquiryBloc>(() => RequestInquiryBloc(requestInquiry: locator()));
+  locator.registerFactory<BannerBloc>(() => BannerBloc(getBanners: locator()));
 
   // use cases
   locator.registerLazySingleton<DoLogin>(() => DoLogin(locator()));
@@ -57,6 +63,7 @@ Future<void> locatorSetup() async {
   locator.registerLazySingleton<GetCampaignDetail>(() => GetCampaignDetail(locator()));
   locator.registerLazySingleton<GetCampaignCategories>(() => GetCampaignCategories(locator()));
   locator.registerLazySingleton<RequestInquiry>(() => RequestInquiry(locator()));
+  locator.registerLazySingleton<GetBanners>(() => GetBanners(locator()));
 
   // repositories
   locator.registerLazySingleton<LoginRepository>(() => LoginRepositoryImplementation(dataSource: locator()));
@@ -64,6 +71,7 @@ Future<void> locatorSetup() async {
   locator.registerLazySingleton<ForgotPasswordRepository>(() => ForgotPasswordRepositoryImplementation(dataSource: locator()));
   locator.registerLazySingleton<CampaignRepository>(() => CampaignRepositoryImplementation(dataSource: locator()));
   locator.registerLazySingleton<DonateRepository>(() => DonateRepositoryImplementaion(dataSource: locator(), networkInfo: locator()));
+  locator.registerLazySingleton<BannerRepository>(() => BannerRepositoryImplementation(dataSource: locator(), networkInfo: locator()));
 
   // data sources
   locator.registerLazySingleton<LoginDataSource>(() => LoginDataSourceImplementation(dio: locator()));
@@ -71,6 +79,7 @@ Future<void> locatorSetup() async {
   locator.registerLazySingleton<ForgotPasswordDataSource>(() => ForgotPasswordDataSourceImplementation(dio: locator()));
   locator.registerLazySingleton<CampaignDataSource>(() => CampaignDataSourceImplementation(dio: locator()));
   locator.registerLazySingleton<DonateDataSource>(() => DonateDateSourceImplementation(dio: locator()));
+  locator.registerLazySingleton<BannerDataSource>(() => BannerDataSourceImplementation(dio: locator()));
 
   // core
   locator.registerLazySingleton<Dio>(() => DioClient().dio);
