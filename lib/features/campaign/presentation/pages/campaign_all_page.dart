@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pundi_kita/core/presentation/pages/no_data_page.dart';
-import 'package:pundi_kita/core/utility/helper.dart';
 
 import '../../../../core/presentation/pages/loading_page.dart';
+import '../../../../core/presentation/pages/no_data_page.dart';
 import '../../../../core/presentation/widgets/custom_app_bar.dart';
 import '../../../../core/static/assets.dart';
 import '../../../../core/static/colors.dart';
@@ -12,8 +11,10 @@ import '../../../../core/utility/app_locale.dart';
 import '../../../../core/utility/locator.dart';
 import '../bloc/category_filter/category_filter_bloc.dart';
 import '../bloc/list/campaign_list_bloc.dart';
+import '../bloc/sort/sort_bloc.dart';
 import '../widgets/campaign_filter_selection.dart';
 import '../widgets/campaign_item.dart';
+import '../widgets/campaign_sort_selection.dart';
 
 class CampaignAllPageRouteArguments {
   final CampaignService service;
@@ -48,9 +49,9 @@ class _CampaignAllPageState extends State<CampaignAllPage> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        // BlocProvider(create: (_) => locator<CampaignListBloc>()..add(GetCampaignList(widget.service))),
         BlocProvider(create: (_) => locator<CampaignListBloc>()),
         BlocProvider(create: (_) => locator<CategoryFilterBloc>()..add(GetCategories())),
+        BlocProvider(create: (_) => SortBloc()),
       ],
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -91,27 +92,45 @@ class _CampaignAllPageState extends State<CampaignAllPage> {
                         label: Text(AppLocale.loc.category),
                       );
                     }),
-                    TextButton.icon(
-                      onPressed: () {},
-                      icon: Image.asset(
-                        Assets.SORT,
-                        width: 18.0,
-                      ),
-                      label: Text(AppLocale.loc.sort),
-                    ),
+                    BlocBuilder<SortBloc, SortState>(builder: (context, state) {
+                      return TextButton.icon(
+                        onPressed: () => showDialog(
+                          context: context,
+                          builder: (_) => BlocProvider<SortBloc>.value(
+                            value: BlocProvider.of<SortBloc>(context),
+                            child: const CampaignSortSelection(),
+                          ),
+                        ),
+                        icon: Image.asset(
+                          Assets.SORT,
+                          width: 18.0,
+                        ),
+                        label: Text(AppLocale.loc.sort),
+                      );
+                    }),
                   ],
                 ),
               ),
               Expanded(
-                child: BlocListener<CategoryFilterBloc, CategoryFilterState>(
-                  // listenWhen: (previous, current) {
-                  //   return (previous as CategoryFilterLoaded).selectedData != (current as CategoryFilterLoaded).selectedData;
-                  // },
-                  listener: (context, state) {
-                    if (state is CategoryFilterLoaded) {
-                      context.read<CampaignListBloc>().add(GetCampaignList(widget.service, category: state.selectedData));
-                    }
-                  },
+                child: MultiBlocListener(
+                  listeners: [
+                    BlocListener<SortBloc, SortState>(
+                      listener: (context, state) {
+                        final _categoryState = context.read<CategoryFilterBloc>().state;
+                        if (_categoryState is CategoryFilterLoaded) {
+                          context.read<CampaignListBloc>().add(GetCampaignList(widget.service, category: _categoryState.selectedData, sort: (state as SortInitial).value));
+                        }
+                      },
+                    ),
+                    BlocListener<CategoryFilterBloc, CategoryFilterState>(
+                      listener: (context, state) {
+                        final _sortState = context.read<SortBloc>().state;
+                        if (state is CategoryFilterLoaded) {
+                          context.read<CampaignListBloc>().add(GetCampaignList(widget.service, category: state.selectedData, sort: (_sortState as SortInitial).value));
+                        }
+                      },
+                    ),
+                  ],
                   child: BlocBuilder<CampaignListBloc, CampaignListState>(
                     builder: (context, state) {
                       if (state is CampaignListLoaded) {
@@ -135,7 +154,7 @@ class _CampaignAllPageState extends State<CampaignAllPage> {
                     },
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),

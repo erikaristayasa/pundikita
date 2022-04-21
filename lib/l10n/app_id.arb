@@ -92,5 +92,7 @@
     "continuePayment": "Lanjut Pembayaran",
     "paymentInformation": "Informasi Pembayaran",
     "donationFailed": "Gagal berdonasi, silahkan coba kembali",
-    "backToMainPage": "Kembali ke halaman awal"
+    "backToMainPage": "Kembali ke halaman awal",
+
+    "leastFunds": "Dana Paling Sedikit"
 }
