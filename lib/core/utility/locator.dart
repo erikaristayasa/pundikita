@@ -2,11 +2,6 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
-import '../../features/banner/data/datasources/banner_data_source.dart';
-import '../../features/banner/data/repositories/banner_repository_implementation.dart';
-import '../../features/banner/domain/repositories/banner_repository.dart';
-import '../../features/banner/domain/usecases/get_banners.dart';
-import '../../features/banner/presentation/bloc/banner_bloc.dart';
 import '../../features/campaign/presentation/bloc/category_filter/category_filter_bloc.dart';
 import '../../features/campaign/presentation/bloc/detail/campaign_detail_bloc.dart';
 import '../../features/campaign/presentation/bloc/list/campaign_list_bloc.dart';
@@ -26,18 +21,23 @@ import '../../features/register/data/repositories/register_repository_implementa
 import '../../features/register/domain/repositories/register_repository.dart';
 import '../../features/register/domain/usecases/do_register.dart';
 import '../../features/register/presentation/bloc/register_bloc.dart';
+import '../data/datasources/banner_data_source.dart';
 import '../data/datasources/campaign_data_source.dart';
 import '../data/datasources/donate_data_source.dart';
+import '../data/repositories/banner_repository_implementation.dart';
 import '../data/repositories/campaign_repository_implementation.dart';
 import '../data/repositories/donate_repository_implementation.dart';
+import '../domain/repositories/banner_repository.dart';
 import '../domain/repositories/campaign_repository.dart';
 import '../domain/repositories/donate_repository.dart';
 import '../domain/usecases/get_all_campaign_list.dart';
+import '../domain/usecases/get_banners.dart';
 import '../domain/usecases/get_campaign_categories.dart';
 import '../domain/usecases/get_campaign_detail.dart';
 import '../domain/usecases/request_inquiry.dart';
 import '../network/dio_client.dart';
 import '../network/network_info.dart';
+import '../presentation/blocs/banner/banner_bloc.dart';
 import '../presentation/blocs/text_controller/text_controller_bloc.dart';
 import 'shared_preferences_helper.dart';
 

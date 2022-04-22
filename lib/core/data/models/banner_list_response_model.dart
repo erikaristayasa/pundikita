@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
-import 'package:pundi_kita/features/banner/data/models/banner_model.dart';
+
+import 'banner_model.dart';
 
 class BannerListResponseModel extends Equatable {
   final int status;

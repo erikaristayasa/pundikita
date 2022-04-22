@@ -34,6 +34,7 @@ String getUserImageUrl(String fileName) => Config.BASE_URL + Config.PATH_PHOTO_U
 String getCampaignImageUrl(String fileName) => Config.BASE_URL + Config.PATH_PHOTO_CAMPAIGN + fileName;
 String getCampaignTypeImageUrl(String fileName) => Config.BASE_URL + Config.PATH_PHOTO_CAMPAIGN_TYPE + fileName;
 String getCampaignCategoryImageUrl(String fileName) => Config.BASE_URL + Config.PATH_PHOTO_CAMPAIGN_CATEGORY + fileName;
+String getBannerImageUrl(String fileName) => Config.BASE_URL + Config.PATH_PHOTO_BANNER + fileName;
 
 int daysBetween(DateTime from, DateTime to) {
   from = DateTime(from.year, from.month, from.day);

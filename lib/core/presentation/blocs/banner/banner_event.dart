@@ -7,4 +7,4 @@ abstract class BannerEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class fetchData extends BannerEvent {}
+class FetchData extends BannerEvent {}

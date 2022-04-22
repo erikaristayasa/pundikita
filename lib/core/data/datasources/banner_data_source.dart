@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-import '../../../../core/static/extensions.dart';
+import '../../static/extensions.dart';
 import '../../domain/entities/banner_entity.dart';
 import '../models/banner_list_response_model.dart';
 
