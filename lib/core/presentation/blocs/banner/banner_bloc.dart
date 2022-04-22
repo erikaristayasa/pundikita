@@ -15,11 +15,13 @@ class BannerBloc extends Bloc<BannerEvent, BannerState> {
     on<FetchData>((event, emit) async {
       emit(BannerLoading());
 
-      final result = await getBanners();
-      result.fold(
-        (failure) => emit(BannerFailure(failure: failure)),
-        (data) => emit(BannerLoaded(data: data)),
-      );
+      await Future.delayed(const Duration(milliseconds: 1000), () async {
+        final result = await getBanners();
+        result.fold(
+          (failure) => emit(BannerFailure(failure: failure)),
+          (data) => emit(BannerLoaded(data: data)),
+        );
+      });
     });
   }
 }

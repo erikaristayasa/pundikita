@@ -39,11 +39,19 @@ class Assets {
   static const String PERMATA = 'assets/icons/payment_channel/permata.png';
   static const String QRIS = 'assets/icons/payment_channel/qris.png';
 
+  // profile page
+  static const String ABOUT = 'assets/icons/about.png';
+  static const String FAQ = 'assets/icons/faq.png';
+  static const String TERMS_AND_CONDITION = 'assets/icons/terms_and_condition.png';
+  static const String PRIVACY_POLICY = 'assets/icons/privacy_policy.png';
+  static const String LOGOUT = 'assets/icons/logout.png';
+
   static const String LOTTIE_SHIMMER = 'assets/lotties/shimmer.json';
   static const String LOTTIE_404 = 'assets/lotties/404-error.json';
   static const String LOTTIE_NO_DATA = 'assets/lotties/no-data.json';
   static const String LOTTIE_LOADING_PAGE = 'assets/lotties/loading-page.json';
   static const String LOTTIE_LOADING_LIST = 'assets/lotties/loading-list.json';
+  static const String LOTTIE_LOADING_CAROUSEL = 'assets/lotties/loading-carousel.json';
   // static const String LOTTIE_HOME = 'assets/lottie/home.json';
   // static const String LOTTIE_RAISE_FUNDS = 'assets/lottie/raise_funds.json';
   // static const String LOTTIE_MY_DONATION = 'assets/lottie/my_donation.json';

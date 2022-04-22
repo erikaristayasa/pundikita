@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pundi_kita/core/presentation/pages/not_found_page.dart';
 
 import '../../../features/home/presentation/pages/home_page.dart';
 import '../../../features/profile/presentation/pages/profile_page.dart';
@@ -49,14 +50,19 @@ class _MainPageState extends State<MainPage> {
         statusBarColor: AppColors.PRIMARY,
       ),
       child: Scaffold(
+        backgroundColor: Colors.white,
         body: SafeArea(
           child: BlocBuilder<NavbarCubit, int>(
             bloc: navbar,
             builder: (context, state) {
               if (state == 0) {
                 return const HomePage();
-              } else {
+              } else if (state == 4) {
                 return const ProfilePage();
+              } else {
+                return const NotFoundPage(
+                  enableBack: false,
+                );
               }
             },
           ),
@@ -77,6 +83,7 @@ class _MainPageState extends State<MainPage> {
                 BottomNavigationBarItem(
                   label: AppLocale.loc.home,
                   icon: NavBarIcon(selected: state == 0, asset: Assets.NAV_HOME),
+                  backgroundColor: Colors.white,
                 ),
                 BottomNavigationBarItem(
                   label: AppLocale.loc.raiseFunds,

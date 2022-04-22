@@ -1,6 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
+import 'package:pundi_kita/core/static/assets.dart';
 
 import '../../../../core/presentation/blocs/banner/banner_bloc.dart';
 import '../../../../core/presentation/widgets/rounded_container.dart';
@@ -91,7 +93,12 @@ class _HomeBannerState extends State<HomeBanner> {
               ],
             );
           }
-          return const SizedBox.shrink();
+          return Center(
+            child: LottieBuilder.asset(
+              Assets.LOTTIE_LOADING_CAROUSEL,
+              fit: BoxFit.fitHeight,
+            ),
+          );
         },
       ),
     );

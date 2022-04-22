@@ -94,5 +94,12 @@
     "donationFailed": "Gagal berdonasi, silahkan coba kembali",
     "backToMainPage": "Kembali ke halaman awal",
 
-    "leastFunds": "Dana Paling Sedikit"
+    "leastFunds": "Dana Paling Sedikit",
+
+    "editProfile": "Ubah Profil",
+    "logout": "Keluar",
+    "about": "Tentang PundiKita",
+    "faq": "FAQ",
+    "termsAndConditions": "Syarat & Ketentuan",
+    "privacyPolicy": "Kebijakan Pribadi"
 }
