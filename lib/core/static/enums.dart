@@ -4,3 +4,4 @@ enum PaymentChannel { bag, bca, bni, cimb, mandiri, bmi, bri, bsi, permata, qris
 enum PaymentMethod { va, qris, saldo }
 enum CampaignService { donasi, zakat }
 enum DonationPayStatus { pending, paid, failed }
+enum AccountType { personal, agent }

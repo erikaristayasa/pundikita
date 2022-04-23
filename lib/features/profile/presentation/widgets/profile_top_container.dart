@@ -1,14 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/domain/entities/user_entity.dart';
 import '../../../../core/presentation/widgets/rounded_button.dart';
 import '../../../../core/static/colors.dart';
 import '../../../../core/static/dimens.dart';
 import '../../../../core/static/extensions.dart';
 import '../../../../core/utility/app_locale.dart';
 import '../../../../core/utility/helper.dart';
+import '../bloc/profile_bloc.dart';
 
-class ProfileTopContainer extends StatelessWidget {
+class ProfileTopContainer extends StatefulWidget {
   const ProfileTopContainer({Key? key}) : super(key: key);
+
+  @override
+  State<ProfileTopContainer> createState() => _ProfileTopContainerState();
+}
+
+class _ProfileTopContainerState extends State<ProfileTopContainer> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<ProfileBloc>().add(FetchProfile());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,38 +30,47 @@ class ProfileTopContainer extends StatelessWidget {
       color: Colors.white,
       padding: const EdgeInsets.all(Dimension.MEDIUM),
       height: 110,
-      child: Row(
-        children: [
-          AspectRatio(
-            aspectRatio: 1 / 1,
-            child: CircleAvatar(
-              backgroundColor: AppColors.SECONDARY.withOpacity(0.15),
-            ),
-          ),
-          mediumHorizontalSpacing(),
-          Expanded(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'UserName',
-                  style: context.textTheme().headline6,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
+      child: BlocBuilder<ProfileBloc, ProfileState>(
+        builder: (context, state) {
+          User? _data;
+          if (state is ProfileLoaded) {
+            _data = state.data;
+          }
+          return Row(
+            children: [
+              AspectRatio(
+                aspectRatio: 1 / 1,
+                child: CircleAvatar(
+                  foregroundImage: NetworkImage(getUserImageUrl(_data?.photo ?? "")),
+                  backgroundColor: AppColors.SECONDARY.withOpacity(0.15),
                 ),
-                RoundedButton(
-                  width: 100.0,
-                  height: 30.0,
-                  outline: true,
-                  onTap: () {},
-                  title: AppLocale.loc.editProfile,
-                  titleColor: AppColors.PRIMARY,
+              ),
+              mediumHorizontalSpacing(),
+              Expanded(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      _data?.name ?? '',
+                      style: context.textTheme().headline6,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    RoundedButton(
+                      width: 100.0,
+                      height: 30.0,
+                      outline: true,
+                      onTap: () {},
+                      title: AppLocale.loc.editProfile,
+                      titleColor: AppColors.PRIMARY,
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          )
-        ],
+              )
+            ],
+          );
+        },
       ),
     );
   }

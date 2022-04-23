@@ -16,6 +16,12 @@ import '../../features/login/data/repositories/login_repository_implementation.d
 import '../../features/login/domain/repositories/login_repository.dart';
 import '../../features/login/domain/usecases/do_login.dart';
 import '../../features/login/presentation/bloc/login_bloc.dart';
+import '../../features/profile/data/datasources/profile_data_source.dart';
+import '../../features/profile/data/repositories/profile_repository_implementation.dart';
+import '../../features/profile/domain/repositories/profile_repository.dart';
+import '../../features/profile/domain/usecases/get_profile.dart';
+import '../../features/profile/domain/usecases/verify_account.dart';
+import '../../features/profile/presentation/bloc/profile_bloc.dart';
 import '../../features/register/data/datasources/register_data_source.dart';
 import '../../features/register/data/repositories/register_repository_implementation.dart';
 import '../../features/register/domain/repositories/register_repository.dart';
@@ -54,6 +60,7 @@ Future<void> locatorSetup() async {
   locator.registerFactory<CategoryFilterBloc>(() => CategoryFilterBloc(getCampaignCategories: locator()));
   locator.registerFactory<RequestInquiryBloc>(() => RequestInquiryBloc(requestInquiry: locator()));
   locator.registerFactory<BannerBloc>(() => BannerBloc(getBanners: locator()));
+  locator.registerFactory<ProfileBloc>(() => ProfileBloc(getProfile: locator()));
 
   // use cases
   locator.registerLazySingleton<DoLogin>(() => DoLogin(locator()));
@@ -64,6 +71,8 @@ Future<void> locatorSetup() async {
   locator.registerLazySingleton<GetCampaignCategories>(() => GetCampaignCategories(locator()));
   locator.registerLazySingleton<RequestInquiry>(() => RequestInquiry(locator()));
   locator.registerLazySingleton<GetBanners>(() => GetBanners(locator()));
+  locator.registerLazySingleton<GetProfile>(() => GetProfile(locator()));
+  locator.registerLazySingleton<VerifyAccount>(() => VerifyAccount(locator()));
 
   // repositories
   locator.registerLazySingleton<LoginRepository>(() => LoginRepositoryImplementation(dataSource: locator()));
@@ -72,6 +81,7 @@ Future<void> locatorSetup() async {
   locator.registerLazySingleton<CampaignRepository>(() => CampaignRepositoryImplementation(dataSource: locator()));
   locator.registerLazySingleton<DonateRepository>(() => DonateRepositoryImplementaion(dataSource: locator(), networkInfo: locator()));
   locator.registerLazySingleton<BannerRepository>(() => BannerRepositoryImplementation(dataSource: locator(), networkInfo: locator()));
+  locator.registerLazySingleton<ProfileRepository>(() => ProfileRepositoryImplementation(dataSource: locator(), networkInfo: locator()));
 
   // data sources
   locator.registerLazySingleton<LoginDataSource>(() => LoginDataSourceImplementation(dio: locator()));
@@ -80,6 +90,7 @@ Future<void> locatorSetup() async {
   locator.registerLazySingleton<CampaignDataSource>(() => CampaignDataSourceImplementation(dio: locator()));
   locator.registerLazySingleton<DonateDataSource>(() => DonateDateSourceImplementation(dio: locator()));
   locator.registerLazySingleton<BannerDataSource>(() => BannerDataSourceImplementation(dio: locator()));
+  locator.registerLazySingleton<ProfileDataSource>(() => ProfileDataSourceImplementation(dio: locator()));
 
   // core
   locator.registerLazySingleton<Dio>(() => DioClient().dio);
