@@ -11,6 +11,7 @@ class ProfileMenu extends StatelessWidget {
     return ColoredBox(
       color: Colors.white,
       child: ListTile(
+        onTap: onTap,
         leading: Image.asset(
           asset,
           width: 24.0,

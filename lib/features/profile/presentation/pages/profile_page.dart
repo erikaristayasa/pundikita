@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/routes/path.dart' as path;
 import '../../../../core/static/assets.dart';
 import '../../../../core/static/colors.dart';
 import '../../../../core/utility/app_locale.dart';
 import '../../../../core/utility/helper.dart';
 import '../../../../core/utility/locator.dart';
 import '../bloc/profile_bloc.dart';
+import '../bloc/setting_bloc.dart';
 import '../widgets/profile_menu.dart';
 import '../widgets/profile_top_container.dart';
 
@@ -20,6 +22,9 @@ class ProfilePage extends StatelessWidget {
         BlocProvider(
           create: (context) => locator<ProfileBloc>(),
         ),
+        BlocProvider(
+          create: (context) => locator<SettingBloc>(),
+        ),
       ],
       child: SafeArea(
         child: ColoredBox(
@@ -29,15 +34,15 @@ class ProfilePage extends StatelessWidget {
               const ProfileTopContainer(),
               smallVerticalSpacing(),
               ProfileMenu(
-                asset: Assets.ABOUT,
-                onTap: () {},
-                title: AppLocale.loc.about,
+                asset: Assets.FAQ,
+                onTap: () => Navigator.pushNamed(context, path.FAQ),
+                title: AppLocale.loc.faq,
               ),
               smallVerticalSpacing(),
               ProfileMenu(
-                asset: Assets.FAQ,
+                asset: Assets.ABOUT,
                 onTap: () {},
-                title: AppLocale.loc.faq,
+                title: AppLocale.loc.about,
               ),
               smallVerticalSpacing(),
               ProfileMenu(

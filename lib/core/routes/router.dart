@@ -6,6 +6,7 @@ import '../../features/campaign/presentation/pages/fund_usage_detail_page.dart';
 import '../../features/donate/presentation/pages/donate_nominal_list_page.dart';
 import '../../features/donate/presentation/pages/donate_request_inquiry_page.dart';
 import '../../features/donate/presentation/pages/donate_request_inquiry_result_page.dart';
+import '../../features/faq/presentation/pages/faq_page.dart';
 import '../../features/forgot_password/presentation/pages/forgot_password_page.dart';
 import '../../features/login/presentation/pages/login_page.dart';
 import '../../features/register/presentation/pages/register_page.dart';
@@ -30,6 +31,8 @@ class Router {
         return pageRoute(
           page: MainPage(fromLogin: args?.fromLogin ?? false),
         );
+      case path.FAQ:
+        return pageRoute(page: const FaqPage());
       case path.CAMPAIGN_ALL:
         final args = settings.arguments as CampaignAllPageRouteArguments;
         return pageRoute(
