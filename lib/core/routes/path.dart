@@ -8,6 +8,7 @@ const String FORGOT_PASSWORD = '/forgot_password';
 const String MAIN = '/main';
 const String PROFILE = '/profile';
 const String FAQ = '/faq';
+const String SETTING_DETAIL = '/setting_detail';
 
 const String CAMPAIGN_ALL = '/campaign_all';
 const String CAMPAIGN_DETAIL = '/campaign_detail';

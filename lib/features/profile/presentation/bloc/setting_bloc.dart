@@ -14,8 +14,8 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
     on<FetchSetting>((event, emit) async {
       final result = await getSetting();
       result.fold(
-        (failure) => SettingFailure(failure: failure),
-        (data) => SettingLoaded(data: data),
+        (failure) => emit(SettingFailure(failure: failure)),
+        (data) => emit(SettingLoaded(data: data)),
       );
     });
   }

@@ -9,6 +9,7 @@ import '../../features/donate/presentation/pages/donate_request_inquiry_result_p
 import '../../features/faq/presentation/pages/faq_page.dart';
 import '../../features/forgot_password/presentation/pages/forgot_password_page.dart';
 import '../../features/login/presentation/pages/login_page.dart';
+import '../../features/profile/presentation/pages/setting_detail_page.dart';
 import '../../features/register/presentation/pages/register_page.dart';
 import '../presentation/pages/main_page.dart';
 import '../presentation/pages/not_found_page.dart';
@@ -33,6 +34,11 @@ class Router {
         );
       case path.FAQ:
         return pageRoute(page: const FaqPage());
+      case path.SETTING_DETAIL:
+        final args = settings.arguments as SettingDetailPageRouteArguments;
+        return pageRoute(
+          page: SettingDetailPage(title: args.title, content: args.content),
+        );
       case path.CAMPAIGN_ALL:
         final args = settings.arguments as CampaignAllPageRouteArguments;
         return pageRoute(

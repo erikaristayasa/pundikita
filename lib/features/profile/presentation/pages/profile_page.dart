@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pundi_kita/features/profile/presentation/widgets/profile_setting_container.dart';
 
 import '../../../../core/presentation/widgets/rounded_container.dart';
 import '../../../../core/routes/path.dart' as path;
@@ -48,30 +49,7 @@ class ProfilePage extends StatelessWidget {
                       ),
                     ),
                     smallVerticalSpacing(),
-                    RoundedContainer(
-                      radius: Dimension.MEDIUM,
-                      child: Column(
-                        children: [
-                          ProfileMenu(
-                            asset: Assets.ABOUT,
-                            onTap: () {},
-                            title: AppLocale.loc.about,
-                          ),
-                          const Divider(),
-                          ProfileMenu(
-                            asset: Assets.TERMS_AND_CONDITION,
-                            onTap: () {},
-                            title: AppLocale.loc.termsAndConditions,
-                          ),
-                          const Divider(),
-                          ProfileMenu(
-                            asset: Assets.PRIVACY_POLICY,
-                            onTap: () {},
-                            title: AppLocale.loc.privacyPolicy,
-                          ),
-                        ],
-                      ),
-                    ),
+                    const ProfileSettingContainer(),
                     smallVerticalSpacing(),
                     RoundedContainer(
                       child: ProfileMenu(
