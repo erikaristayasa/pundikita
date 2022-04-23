@@ -2,13 +2,16 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
-import 'package:pundi_kita/core/static/assets.dart';
 
 import '../../../../core/presentation/blocs/banner/banner_bloc.dart';
 import '../../../../core/presentation/widgets/rounded_container.dart';
+import '../../../../core/routes/path.dart' as path;
+import '../../../../core/static/assets.dart';
 import '../../../../core/static/colors.dart';
 import '../../../../core/static/dimens.dart';
+import '../../../../core/static/enums.dart';
 import '../../../../core/utility/helper.dart';
+import '../../../campaign/presentation/pages/campaign_detail_page.dart';
 
 class HomeBanner extends StatefulWidget {
   const HomeBanner({Key? key}) : super(key: key);
@@ -45,9 +48,16 @@ class _HomeBannerState extends State<HomeBanner> {
                   padding: const EdgeInsets.all(0.0),
                   color: Colors.black,
                   clipBerhaviour: Clip.antiAlias,
-                  child: Image.network(
-                    getBannerImageUrl(e.photo),
-                    fit: BoxFit.cover,
+                  child: InkWell(
+                    onTap: () => Navigator.pushNamed(
+                      context,
+                      path.CAMPAIGN_DETAIL,
+                      arguments: CampaignDetailPageRouteArguments(id: e.id, service: CampaignService.donasi),
+                    ),
+                    child: Image.network(
+                      getBannerImageUrl(e.photo),
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),
