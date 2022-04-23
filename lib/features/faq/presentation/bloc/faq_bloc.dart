@@ -12,11 +12,13 @@ class FaqBloc extends Bloc<FaqEvent, FaqState> {
   final GetFaqList getFaqList;
   FaqBloc({required this.getFaqList}) : super(FaqInitial()) {
     on<FetchFaq>((event, emit) async {
-      final result = await getFaqList();
-      result.fold(
-        (failure) => emit(FaqFailure(failure: failure)),
-        (data) => emit(FaqLoaded(data: data)),
-      );
+      await Future.delayed(const Duration(milliseconds: 1300), () async {
+        final result = await getFaqList();
+        result.fold(
+          (failure) => emit(FaqFailure(failure: failure)),
+          (data) => emit(FaqLoaded(data: data)),
+        );
+      });
     });
   }
 }

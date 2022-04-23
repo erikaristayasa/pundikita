@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/presentation/widgets/rounded_container.dart';
 import '../../../../core/routes/path.dart' as path;
 import '../../../../core/static/assets.dart';
 import '../../../../core/static/colors.dart';
+import '../../../../core/static/dimens.dart';
 import '../../../../core/utility/app_locale.dart';
 import '../../../../core/utility/helper.dart';
 import '../../../../core/utility/locator.dart';
@@ -29,38 +31,57 @@ class ProfilePage extends StatelessWidget {
       child: SafeArea(
         child: ColoredBox(
           color: AppColors.BG_Grey,
-          child: ListView(
+          child: Column(
             children: [
               const ProfileTopContainer(),
               smallVerticalSpacing(),
-              ProfileMenu(
-                asset: Assets.FAQ,
-                onTap: () => Navigator.pushNamed(context, path.FAQ),
-                title: AppLocale.loc.faq,
-              ),
-              smallVerticalSpacing(),
-              ProfileMenu(
-                asset: Assets.ABOUT,
-                onTap: () {},
-                title: AppLocale.loc.about,
-              ),
-              smallVerticalSpacing(),
-              ProfileMenu(
-                asset: Assets.TERMS_AND_CONDITION,
-                onTap: () {},
-                title: AppLocale.loc.termsAndConditions,
-              ),
-              smallVerticalSpacing(),
-              ProfileMenu(
-                asset: Assets.PRIVACY_POLICY,
-                onTap: () {},
-                title: AppLocale.loc.privacyPolicy,
-              ),
-              smallVerticalSpacing(),
-              ProfileMenu(
-                asset: Assets.LOGOUT,
-                onTap: () {},
-                title: AppLocale.loc.logout,
+              Expanded(
+                child: ListView(
+                  padding: const EdgeInsets.symmetric(horizontal: Dimension.MEDIUM),
+                  shrinkWrap: true,
+                  children: [
+                    RoundedContainer(
+                      child: ProfileMenu(
+                        asset: Assets.FAQ,
+                        onTap: () => Navigator.pushNamed(context, path.FAQ),
+                        title: AppLocale.loc.faq,
+                      ),
+                    ),
+                    smallVerticalSpacing(),
+                    RoundedContainer(
+                      radius: Dimension.MEDIUM,
+                      child: Column(
+                        children: [
+                          ProfileMenu(
+                            asset: Assets.ABOUT,
+                            onTap: () {},
+                            title: AppLocale.loc.about,
+                          ),
+                          const Divider(),
+                          ProfileMenu(
+                            asset: Assets.TERMS_AND_CONDITION,
+                            onTap: () {},
+                            title: AppLocale.loc.termsAndConditions,
+                          ),
+                          const Divider(),
+                          ProfileMenu(
+                            asset: Assets.PRIVACY_POLICY,
+                            onTap: () {},
+                            title: AppLocale.loc.privacyPolicy,
+                          ),
+                        ],
+                      ),
+                    ),
+                    smallVerticalSpacing(),
+                    RoundedContainer(
+                      child: ProfileMenu(
+                        asset: Assets.LOGOUT,
+                        onTap: () {},
+                        title: AppLocale.loc.logout,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

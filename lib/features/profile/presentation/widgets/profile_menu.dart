@@ -4,12 +4,19 @@ class ProfileMenu extends StatelessWidget {
   final String asset;
   final VoidCallback onTap;
   final String title;
-  const ProfileMenu({Key? key, required this.asset, required this.onTap, required this.title}) : super(key: key);
+  final Color bgColor;
+  const ProfileMenu({
+    Key? key,
+    required this.asset,
+    required this.onTap,
+    required this.title,
+    this.bgColor = Colors.white,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ColoredBox(
-      color: Colors.white,
+      color: bgColor,
       child: ListTile(
         onTap: onTap,
         leading: Image.asset(
