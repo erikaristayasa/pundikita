@@ -25,6 +25,7 @@ import '../../features/profile/data/datasources/profile_data_source.dart';
 import '../../features/profile/data/repositories/profile_repository_implementation.dart';
 import '../../features/profile/domain/repositories/profile_repository.dart';
 import '../../features/profile/domain/usecases/get_profile.dart';
+import '../../features/profile/domain/usecases/update_profile.dart';
 import '../../features/profile/domain/usecases/verify_account.dart';
 import '../../features/profile/presentation/bloc/profile_bloc.dart';
 import '../../features/profile/presentation/bloc/setting_bloc.dart';
@@ -70,7 +71,7 @@ Future<void> locatorSetup() async {
   locator.registerFactory<CategoryFilterBloc>(() => CategoryFilterBloc(getCampaignCategories: locator()));
   locator.registerFactory<RequestInquiryBloc>(() => RequestInquiryBloc(requestInquiry: locator()));
   locator.registerFactory<BannerBloc>(() => BannerBloc(getBanners: locator()));
-  locator.registerFactory<ProfileBloc>(() => ProfileBloc(getProfile: locator()));
+  locator.registerFactory<ProfileBloc>(() => ProfileBloc(getProfile: locator(), updateProfile: locator()));
   locator.registerFactory<SettingBloc>(() => SettingBloc(getSetting: locator()));
   locator.registerFactory<FaqBloc>(() => FaqBloc(getFaqList: locator()));
 
@@ -84,6 +85,7 @@ Future<void> locatorSetup() async {
   locator.registerLazySingleton<RequestInquiry>(() => RequestInquiry(locator()));
   locator.registerLazySingleton<GetBanners>(() => GetBanners(locator()));
   locator.registerLazySingleton<GetProfile>(() => GetProfile(locator()));
+  locator.registerLazySingleton<UpdateProfile>(() => UpdateProfile(locator()));
   locator.registerLazySingleton<VerifyAccount>(() => VerifyAccount(locator()));
   locator.registerLazySingleton<GetSetting>(() => GetSetting(locator()));
   locator.registerLazySingleton<GetFaqList>(() => GetFaqList(locator()));

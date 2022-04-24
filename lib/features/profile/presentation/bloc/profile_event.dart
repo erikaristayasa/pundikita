@@ -8,3 +8,12 @@ abstract class ProfileEvent extends Equatable {
 }
 
 class FetchProfile extends ProfileEvent {}
+
+class SubmitUpdate extends ProfileEvent {
+  final FormData data;
+
+  const SubmitUpdate({required this.data});
+
+  @override
+  List<Object> get props => [data];
+}

@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
+import 'package:pundi_kita/features/profile/domain/usecases/update_profile.dart';
 
 import '../../../../core/domain/entities/user_entity.dart';
 import '../../../../core/errors/failure.dart';
@@ -10,7 +12,11 @@ part 'profile_state.dart';
 
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final GetProfile getProfile;
-  ProfileBloc({required this.getProfile}) : super(ProfileInitial()) {
+  final UpdateProfile updateProfile;
+  ProfileBloc({
+    required this.getProfile,
+    required this.updateProfile,
+  }) : super(ProfileInitial()) {
     on<FetchProfile>((event, emit) async {
       emit(ProfileLoading());
 
@@ -18,6 +24,16 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       result.fold(
         (failure) => emit(ProfileFailure(failure: failure)),
         (data) => emit(ProfileLoaded(data: data)),
+      );
+    });
+
+    on<SubmitUpdate>((event, emit) async {
+      emit(ProfileUpdating());
+
+      final result = await updateProfile(event.data);
+      result.fold(
+        (failure) => emit(ProfileFailure(failure: failure)),
+        (_) => emit(ProfileUpdated()),
       );
     });
   }
