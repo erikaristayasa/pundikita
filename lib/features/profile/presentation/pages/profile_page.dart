@@ -10,6 +10,7 @@ import '../../../../core/static/dimens.dart';
 import '../../../../core/utility/app_locale.dart';
 import '../../../../core/utility/helper.dart';
 import '../../../../core/utility/locator.dart';
+import '../../../../core/utility/shared_preferences_helper.dart';
 import '../bloc/profile_bloc.dart';
 import '../bloc/setting_bloc.dart';
 import '../widgets/profile_menu.dart';
@@ -54,7 +55,32 @@ class ProfilePage extends StatelessWidget {
                     RoundedContainer(
                       child: ProfileMenu(
                         asset: Assets.LOGOUT,
-                        onTap: () {},
+                        onTap: () => showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: Text(AppLocale.loc.logout),
+                            content: Text(
+                              AppLocale.loc.areYouSureWantToLogOut,
+                              maxLines: 3,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.pop(context),
+                                child: Text(AppLocale.loc.cancel),
+                              ),
+                              TextButton(
+                                onPressed: () async {
+                                  final session = await locator.getAsync<SharedPreferencesHelper>();
+                                  await session.logOut().then(
+                                        (_) => Navigator.pushNamedAndRemoveUntil(context, path.LOGIN, (route) => false),
+                                      );
+                                },
+                                child: Text(AppLocale.loc.ok),
+                              )
+                            ],
+                          ),
+                        ),
                         title: AppLocale.loc.logout,
                       ),
                     ),

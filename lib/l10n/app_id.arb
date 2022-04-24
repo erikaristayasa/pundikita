@@ -60,6 +60,7 @@
     "registerSuccess": "Tautan verifikasi akun telah dikirim ke email. Cek folder spam apabila email tidak masuk ke folder utama.",
     "registerFailure": "Gagal mendaftar, periksa kembali data anda & coba kembali.",
     "ok": "OK",
+    "cancel": "Batal",
 
     "forgotPasswordPage": "Halaman Lupa Kata Sandi",
     "forgotPasswordSuccess": "Kata sandi baru anda telah dikirim ke email.",
@@ -101,5 +102,8 @@
     "about": "Tentang PundiKita",
     "faq": "FAQ",
     "termsAndConditions": "Syarat & Ketentuan",
-    "privacyPolicy": "Kebijakan Pribadi"
+    "privacyPolicy": "Kebijakan Pribadi",
+
+    "areYouSureWantToLogOut": "Apakah anda yakin ingin keluar?"
+
 }
