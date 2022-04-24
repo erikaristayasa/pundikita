@@ -104,6 +104,8 @@
     "termsAndConditions": "Syarat & Ketentuan",
     "privacyPolicy": "Kebijakan Pribadi",
 
-    "areYouSureWantToLogOut": "Apakah anda yakin ingin keluar?"
+    "areYouSureWantToLogOut": "Apakah anda yakin ingin keluar?",
+
+    "updateProfile": "Ubah Profil"
 
 }

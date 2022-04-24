@@ -119,7 +119,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
                   errorBorder: errorBorder,
                   focusedErrorBorder: errorBorder,
                   filled: true,
-                  fillColor: state.error ? Colors.red : Colors.grey[200],
+                  fillColor: state.error
+                      ? Colors.red
+                      : widget.enabled
+                          ? Colors.grey[200]
+                          : Colors.grey[400],
                   contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                   prefixIcon: widget.prefixText != null
                       ? Column(

@@ -9,6 +9,7 @@ import '../../../../core/static/extensions.dart';
 import '../../../../core/utility/app_locale.dart';
 import '../../../../core/utility/helper.dart';
 import '../bloc/profile_bloc.dart';
+import '../../../../core/routes/path.dart' as path;
 
 class ProfileTopContainer extends StatefulWidget {
   const ProfileTopContainer({Key? key}) : super(key: key);
@@ -61,7 +62,7 @@ class _ProfileTopContainerState extends State<ProfileTopContainer> {
                       width: 100.0,
                       height: 30.0,
                       outline: true,
-                      onTap: () {},
+                      onTap: () => Navigator.pushNamed(context, path.PROFILE_UPDATE),
                       title: AppLocale.loc.editProfile,
                       titleColor: AppColors.PRIMARY,
                     ),
