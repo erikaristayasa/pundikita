@@ -37,7 +37,7 @@ class _HomeBannerState extends State<HomeBanner> {
     return Container(
       height: 230,
       color: Colors.white,
-      padding: const EdgeInsets.all(Dimension.MEDIUM),
+      padding: const EdgeInsets.all(Dimension.SMALL),
       child: BlocBuilder<BannerBloc, BannerState>(
         builder: (context, state) {
           if (state is BannerLoaded) {
@@ -46,6 +46,7 @@ class _HomeBannerState extends State<HomeBanner> {
               _banners.map(
                 (e) => RoundedContainer(
                   padding: const EdgeInsets.all(0.0),
+                  width: double.maxFinite,
                   color: Colors.black,
                   clipBerhaviour: Clip.antiAlias,
                   child: InkWell(
@@ -73,7 +74,8 @@ class _HomeBannerState extends State<HomeBanner> {
                       autoPlay: true,
                       enlargeCenterPage: true,
                       viewportFraction: 1,
-                      aspectRatio: 4.5 / 2,
+                      // aspectRatio: 4.5 / 2,
+                      aspectRatio: 4 / 2,
                       onPageChanged: (index, reason) {
                         setState(() {
                           _current = index;
@@ -82,7 +84,7 @@ class _HomeBannerState extends State<HomeBanner> {
                     ),
                   ),
                 ),
-                mediumVerticalSpacing(),
+                smallVerticalSpacing(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: _images.asMap().entries.map((entry) {
