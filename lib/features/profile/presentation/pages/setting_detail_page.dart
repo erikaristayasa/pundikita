@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 
 import '../../../../core/presentation/widgets/custom_app_bar.dart';
 import '../../../../core/static/dimens.dart';
@@ -31,10 +32,9 @@ class SettingDetailPage extends StatelessWidget {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(Dimension.MEDIUM),
-          child: Text(
-            content,
-            style: context.textTheme().bodyMedium,
+          padding: const EdgeInsets.all(Dimension.SMALL),
+          child: Html(
+            data: content,
           ),
         ),
       ),

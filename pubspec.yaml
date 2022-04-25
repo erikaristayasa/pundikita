@@ -58,9 +58,6 @@ dependencies:
   # Lottie
   lottie: ^1.2.2
 
-  # Flutter SVG
-  flutter_svg: ^1.0.3
-
   # Carousel Slider
   carousel_slider: ^4.0.0
 
@@ -84,7 +81,16 @@ dependencies:
 
   # Text Input Formatter
   currency_text_input_formatter: ^2.1.5
+
+  # Connectivity Plus
   connectivity_plus: ^2.3.0
+
+  # Flutter HTML
+  flutter_html: ^2.2.1
+
+dependency_overrides:
+  # Flutter SVG
+  flutter_svg: ^1.0.3
 
 dev_dependencies:
   flutter_test:
