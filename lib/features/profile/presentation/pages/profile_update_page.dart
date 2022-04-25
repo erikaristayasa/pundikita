@@ -113,6 +113,7 @@ class _ProfileUpdatePageState extends State<ProfileUpdatePage> {
                   Form(
                     key: _formKey,
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         CustomTextField(
                           title: 'Nama Lengkap',
@@ -136,6 +137,11 @@ class _ProfileUpdatePageState extends State<ProfileUpdatePage> {
                           controller: _phoneController,
                         ),
                         mediumVerticalSpacing(),
+                        Text(
+                          'Tanggal Lahir',
+                          style: context.textTheme().titleSmall,
+                        ),
+                        smallVerticalSpacing(),
                         InkWell(
                           onTap: () => showBirthDatePicker(_user.birthDate),
                           child: RoundedContainer(
