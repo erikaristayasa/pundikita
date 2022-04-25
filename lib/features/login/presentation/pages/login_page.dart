@@ -43,8 +43,8 @@ class LoginPage extends StatelessWidget {
                   child: ListView(
                     children: [
                       LoginSocialButton(onTap: () {}, asset: Assets.GOOGLE, title: AppLocale.loc.loginWithGoogle),
-                      mediumVerticalSpacing(),
-                      LoginSocialButton(onTap: () {}, asset: Assets.FACEBOOK, title: AppLocale.loc.loginWithFacebook)
+                      // mediumVerticalSpacing(),
+                      // LoginSocialButton(onTap: () {}, asset: Assets.FACEBOOK, title: AppLocale.loc.loginWithFacebook)
                     ],
                   ),
                 )
