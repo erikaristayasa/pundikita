@@ -46,6 +46,9 @@ class Assets {
   static const String PRIVACY_POLICY = 'assets/icons/privacy_policy.png';
   static const String LOGOUT = 'assets/icons/logout.png';
 
+  static const String GALLERY = 'assets/icons/gallery.png';
+  static const String CAMERA = 'assets/icons/camera.png';
+
   static const String LOTTIE_SHIMMER = 'assets/lotties/shimmer.json';
   static const String LOTTIE_404 = 'assets/lotties/404-error.json';
   static const String LOTTIE_NO_DATA = 'assets/lotties/no-data.json';
