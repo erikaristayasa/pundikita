@@ -1,6 +1,7 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:pundi_kita/features/login/domain/usecases/do_login_by_google.dart';
 
 import '../../features/campaign/presentation/bloc/category_filter/category_filter_bloc.dart';
 import '../../features/campaign/presentation/bloc/detail/campaign_detail_bloc.dart';
@@ -63,7 +64,7 @@ final locator = GetIt.instance;
 Future<void> locatorSetup() async {
   // bloc
   locator.registerFactory<TextControllerBloc>(() => TextControllerBloc());
-  locator.registerFactory<LoginBloc>(() => LoginBloc(doLogin: locator()));
+  locator.registerFactory<LoginBloc>(() => LoginBloc(doLogin: locator(), doLoginByGoogle: locator()));
   locator.registerFactory<RegisterBloc>(() => RegisterBloc(register: locator()));
   locator.registerFactory<ForgotPasswordBloc>(() => ForgotPasswordBloc(forgotPassword: locator()));
   locator.registerFactory<CampaignDetailBloc>(() => CampaignDetailBloc(getCampaignDetail: locator()));
@@ -77,6 +78,7 @@ Future<void> locatorSetup() async {
 
   // use cases
   locator.registerLazySingleton<DoLogin>(() => DoLogin(locator()));
+  locator.registerLazySingleton<DoLoginByGoogle>(() => DoLoginByGoogle(locator()));
   locator.registerLazySingleton<Register>(() => Register(locator()));
   locator.registerLazySingleton<ForgotPassword>(() => ForgotPassword(locator()));
   locator.registerLazySingleton<GetAllCampaignList>(() => GetAllCampaignList(locator()));

@@ -12,18 +12,21 @@ class LoginSocialButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RoundedContainer(
-      padding: const EdgeInsets.all(Dimension.MEDIUM),
-      shadow: true,
-      child: Row(
-        children: [
-          Image.asset(
-            asset,
-            width: 24.0,
-          ),
-          mediumHorizontalSpacing(),
-          Text(title),
-        ],
+    return InkWell(
+      onTap: onTap,
+      child: RoundedContainer(
+        padding: const EdgeInsets.all(Dimension.MEDIUM),
+        shadow: true,
+        child: Row(
+          children: [
+            Image.asset(
+              asset,
+              width: 24.0,
+            ),
+            mediumHorizontalSpacing(),
+            Text(title),
+          ],
+        ),
       ),
     );
   }

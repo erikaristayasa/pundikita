@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "798869913872",
+    "project_id": "pundikita-a2e27",
+    "storage_bucket": "pundikita-a2e27.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:798869913872:android:7193adf0e1af044f3b6595",
+        "android_client_info": {
+          "package_name": "com.pundikita.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "798869913872-gknb61ul3vda1ogf7cc8j68aciuu4pnu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pundikita.app",
+            "certificate_hash": "eec0869c892a71f720ce180f81705d11f2903827"
+          }
+        },
+        {
+          "client_id": "798869913872-srhukiods01c7omvmqp0vifd91ogr9jg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pundikita.app",
+            "certificate_hash": "a3836921f0cead1a8b43fd7680125e9a309c6fe3"
+          }
+        },
+        {
+          "client_id": "798869913872-qep0nr962matecbluqbtgjfrnmao7lsd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFqdka8iLvzTcdi55a4tQjF3AdDixsbM4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "798869913872-qep0nr962matecbluqbtgjfrnmao7lsd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

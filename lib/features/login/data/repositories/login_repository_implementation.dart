@@ -21,4 +21,17 @@ class LoginRepositoryImplementation implements LoginRepository {
       return Left(AppLocale.loc.unexpectedServerError);
     }
   }
+
+  @override
+  Future<Either<String, String>> loginByGoogle({String? email, String? name, String? googleUid, String? phone}) async {
+    try {
+      final result = await dataSource.loginByGoogle(email: email, name: name, googleUid: googleUid, phone: phone);
+      if (result.status == 200) {
+        return Right(result.data!);
+      }
+      return Left(result.data!);
+    } catch (e) {
+      return Left(AppLocale.loc.unexpectedServerError);
+    }
+  }
 }

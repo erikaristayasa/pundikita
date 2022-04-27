@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:pundi_kita/core/presentation/pages/main_page.dart';
-import 'package:pundi_kita/core/static/extensions.dart';
 
+import '../../../../core/presentation/pages/main_page.dart';
 import '../../../../core/presentation/widgets/custom_text_field.dart';
 import '../../../../core/presentation/widgets/rounded_button.dart';
-import '../../../../core/presentation/widgets/simple_alert_dialog.dart';
 import '../../../../core/routes/path.dart' as path;
 import '../../../../core/static/colors.dart';
 import '../../../../core/utility/app_locale.dart';

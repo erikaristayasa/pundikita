@@ -87,6 +87,7 @@ dependencies:
 
   # Flutter HTML
   flutter_html: ^2.2.1
+  google_sign_in: ^5.3.0
 
 dependency_overrides:
   # Flutter SVG

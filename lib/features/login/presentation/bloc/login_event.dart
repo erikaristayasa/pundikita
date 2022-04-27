@@ -31,3 +31,5 @@ class LoginSubmitted extends LoginEvent {
 
   const LoginSubmitted({required this.email, required this.password});
 }
+
+class LoginByGoogle extends LoginEvent {}
