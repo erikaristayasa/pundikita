@@ -4,7 +4,7 @@ import '../../../../core/data/models/common_response.model.dart';
 import '../../domain/entities/register_request_body.dart';
 
 abstract class RegisterDataSource {
-  Future<CommonResponseModel> register(RegisterRequestBody body);
+  Future<CommonResponseModel> register(RegisterRequestBody body, {required Map<String, dynamic> additionalBody});
 }
 
 class RegisterDataSourceImplementation implements RegisterDataSource {
@@ -13,9 +13,11 @@ class RegisterDataSourceImplementation implements RegisterDataSource {
   RegisterDataSourceImplementation({required this.dio});
 
   @override
-  Future<CommonResponseModel> register(RegisterRequestBody body) async {
+  Future<CommonResponseModel> register(RegisterRequestBody body, {required Map<String, dynamic> additionalBody}) async {
     const path = 'api/user/register';
-    final data = FormData.fromMap(body.toJson());
+    final finalMap = body.toJson();
+    finalMap.addAll(additionalBody);
+    final data = FormData.fromMap(finalMap);
 
     try {
       final response = await dio.post(path, data: data);

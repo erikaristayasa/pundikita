@@ -1,8 +1,9 @@
-import 'package:pundi_kita/core/utility/app_locale.dart';
-import 'package:pundi_kita/features/register/data/datasources/register_data_source.dart';
-import 'package:pundi_kita/features/register/domain/entities/register_request_body.dart';
 import 'package:dartz/dartz.dart';
-import 'package:pundi_kita/features/register/domain/repositories/register_repository.dart';
+
+import '../../../../core/utility/app_locale.dart';
+import '../../domain/entities/register_request_body.dart';
+import '../../domain/repositories/register_repository.dart';
+import '../datasources/register_data_source.dart';
 
 class RegisterRepositoryImplementation implements RegisterRepository {
   final RegisterDataSource dataSource;
@@ -10,9 +11,9 @@ class RegisterRepositoryImplementation implements RegisterRepository {
   RegisterRepositoryImplementation({required this.dataSource});
 
   @override
-  Future<Either<String, String>> register(RegisterRequestBody body) async {
+  Future<Either<String, String>> register(RegisterRequestBody body, {required Map<String, dynamic> additionalBody}) async {
     try {
-      final result = await dataSource.register(body);
+      final result = await dataSource.register(body, additionalBody: additionalBody);
       if (result.status == 200) {
         return Right(result.data!);
       }

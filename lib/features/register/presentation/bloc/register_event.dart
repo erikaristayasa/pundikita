@@ -9,6 +9,7 @@ abstract class RegisterEvent extends Equatable {
 
 class RegisterSubmit extends RegisterEvent {
   final String name, email, phone, password, passwordConfirmation;
+  final int donatureType;
 
   const RegisterSubmit({
     required this.name,
@@ -16,6 +17,7 @@ class RegisterSubmit extends RegisterEvent {
     required this.phone,
     required this.password,
     required this.passwordConfirmation,
+    required this.donatureType,
   });
 
   @override
@@ -25,5 +27,6 @@ class RegisterSubmit extends RegisterEvent {
         phone,
         password,
         passwordConfirmation,
+        donatureType,
       ];
 }

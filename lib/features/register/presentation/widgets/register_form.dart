@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:pundi_kita/core/presentation/widgets/custom_label.dart';
+import 'package:pundi_kita/features/register/presentation/widgets/register_additional_form.dart';
 
 import '../../../../core/presentation/widgets/custom_text_field.dart';
 import '../../../../core/presentation/widgets/rounded_button.dart';
 import '../../../../core/presentation/widgets/simple_alert_dialog.dart';
 import '../../../../core/utility/app_locale.dart';
 import '../../../../core/utility/helper.dart';
-import '../../../../core/utility/locator.dart';
 import '../../../../core/utility/validation_helper.dart';
 import '../bloc/register_bloc.dart';
+import 'register_donature_type_dropdown.dart';
 
 class RegisterForm extends StatefulWidget {
   const RegisterForm({Key? key}) : super(key: key);
@@ -29,9 +31,8 @@ class _RegisterFormState extends State<RegisterForm> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => locator<RegisterBloc>(),
-      child: BlocConsumer<RegisterBloc, RegisterState>(listener: (context, state) {
+    return BlocConsumer<RegisterBloc, RegisterState>(
+      listener: (context, state) {
         switch (state.runtimeType) {
           case RegisterLoading:
             context.loaderOverlay.show();
@@ -58,11 +59,15 @@ class _RegisterFormState extends State<RegisterForm> {
             );
             break;
         }
-      }, builder: (context, state) {
+      },
+      builder: (context, state) {
         return Form(
           key: _formKey,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const CustomLabel(title: "Data Pribadi"),
+              smallVerticalSpacing(),
               CustomTextField(
                 title: AppLocale.loc.name,
                 placeholder: AppLocale.loc.name,
@@ -106,6 +111,14 @@ class _RegisterFormState extends State<RegisterForm> {
                 controllerMatcher: _passwordController,
               ),
               mediumVerticalSpacing(),
+              const Divider(thickness: 1.0),
+              mediumVerticalSpacing(),
+              const CustomLabel(title: 'Verifikasi Akun'),
+              smallVerticalSpacing(),
+              const RegisterDonatureTypeDropDown(),
+              mediumVerticalSpacing(),
+              const RegisterAdditionalForm(),
+              mediumVerticalSpacing(),
               RoundedButton(
                 title: AppLocale.loc.register,
                 onTap: () {
@@ -116,6 +129,7 @@ class _RegisterFormState extends State<RegisterForm> {
                           phone: _phoneController.text,
                           password: _passwordController.text,
                           passwordConfirmation: _passwordConfirmationController.text,
+                          donatureType: 1,
                         ));
                   }
                 },
@@ -123,7 +137,7 @@ class _RegisterFormState extends State<RegisterForm> {
             ],
           ),
         );
-      }),
+      },
     );
   }
 }

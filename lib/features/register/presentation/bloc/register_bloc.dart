@@ -13,7 +13,10 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     on<RegisterSubmit>((event, emit) async {
       emit(RegisterLoading());
 
-      final result = await register(_getBody(event));
+      final result = await register(
+        getBody(event),
+        additionalBody: getAdditionalBody(event),
+      );
       result.fold(
         (message) => emit(RegisterError(message: message)),
         (_) => emit(RegisterSuccess()),
@@ -21,14 +24,19 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     });
   }
 
-  RegisterRequestBody _getBody(RegisterSubmit event) {
+  RegisterRequestBody getBody(RegisterSubmit event) {
     final RegisterRequestBody body = RegisterRequestBody(
       name: event.name,
       email: event.email,
       password: event.password,
       passwordConfirmation: event.passwordConfirmation,
       phone: event.phone,
+      donatureType: event.donatureType,
     );
     return body;
+  }
+
+  Map<String, dynamic> getAdditionalBody(RegisterSubmit event) {
+    return {};
   }
 }

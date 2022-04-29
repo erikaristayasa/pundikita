@@ -140,3 +140,34 @@ extension PaymentInfo on PaymentChannel {
     return 60;
   }
 }
+
+extension TransForm on DonatureType {
+  int toInteger() {
+    switch (this) {
+      case DonatureType.personal:
+        return 1;
+      case DonatureType.foundation:
+        return 2;
+    }
+  }
+
+  String getString() {
+    switch (this) {
+      case DonatureType.personal:
+        return 'Personal';
+      case DonatureType.foundation:
+        return 'Yayasan';
+    }
+  }
+}
+
+extension GenderTransform on Gender {
+  String getString() {
+    switch (this) {
+      case Gender.male:
+        return 'Laki-laki';
+      case Gender.female:
+        return 'Perempuan';
+    }
+  }
+}

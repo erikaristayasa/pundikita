@@ -33,27 +33,27 @@ class LoginPage extends StatelessWidget {
               children: [
                 const LoginForm(),
                 largeVerticalSpacing(),
-                const Divider(
-                  thickness: 2.0,
-                ),
-                largeVerticalSpacing(),
-                Container(
-                  height: 300,
-                  color: Colors.white,
-                  child: ListView(
-                    children: [
-                      BlocBuilder<LoginBloc, LoginState>(
-                        builder: (context, state) => LoginSocialButton(
-                          onTap: () => context.read<LoginBloc>().add(LoginByGoogle()),
-                          asset: Assets.GOOGLE,
-                          title: AppLocale.loc.loginWithGoogle,
-                        ),
-                      ),
-                      // mediumVerticalSpacing(),
-                      // LoginSocialButton(onTap: () {}, asset: Assets.FACEBOOK, title: AppLocale.loc.loginWithFacebook)
-                    ],
-                  ),
-                )
+                // const Divider(
+                //   thickness: 2.0,
+                // ),
+                // largeVerticalSpacing(),
+                // Container(
+                //   height: 300,
+                //   color: Colors.white,
+                //   child: ListView(
+                //     children: [
+                //       BlocBuilder<LoginBloc, LoginState>(
+                //         builder: (context, state) => LoginSocialButton(
+                //           onTap: () => context.read<LoginBloc>().add(LoginByGoogle()),
+                //           asset: Assets.GOOGLE,
+                //           title: AppLocale.loc.loginWithGoogle,
+                //         ),
+                //       ),
+                //       // mediumVerticalSpacing(),
+                //       // LoginSocialButton(onTap: () {}, asset: Assets.FACEBOOK, title: AppLocale.loc.loginWithFacebook)
+                //     ],
+                //   ),
+                // )
               ],
             ),
           ),
