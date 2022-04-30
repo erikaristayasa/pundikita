@@ -15,7 +15,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
 
       final result = await register(
         getBody(event),
-        additionalBody: getAdditionalBody(event),
+        additionalBody: event.additonalBody,
       );
       result.fold(
         (message) => emit(RegisterError(message: message)),
@@ -34,9 +34,5 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       donatureType: event.donatureType,
     );
     return body;
-  }
-
-  Map<String, dynamic> getAdditionalBody(RegisterSubmit event) {
-    return {};
   }
 }

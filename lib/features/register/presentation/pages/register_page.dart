@@ -7,6 +7,7 @@ import '../../../../core/static/dimens.dart';
 import '../../../../core/utility/app_locale.dart';
 import '../../../../core/utility/locator.dart';
 import '../bloc/register_bloc.dart';
+import '../cubit/additional_body_cubit.dart';
 import '../cubit/donature_type_cubit.dart';
 import '../widgets/register_form.dart';
 
@@ -23,6 +24,9 @@ class RegisterPage extends StatelessWidget {
         BlocProvider(
           create: (_) => DonatureTypeCubit(),
         ),
+        BlocProvider(
+          create: (_) => AdditionalBodyCubit(),
+        )
       ],
       child: LoaderOverlay(
         child: Scaffold(
@@ -35,7 +39,9 @@ class RegisterPage extends StatelessWidget {
           body: SafeArea(
             child: ListView(
               padding: const EdgeInsets.all(Dimension.MEDIUM),
-              children: const [RegisterForm()],
+              children: const [
+                RegisterForm(),
+              ],
             ),
           ),
         ),

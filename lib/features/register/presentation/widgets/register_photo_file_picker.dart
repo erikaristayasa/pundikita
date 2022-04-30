@@ -48,7 +48,11 @@ class _RegisterPhotoFilePickerState extends State<RegisterPhotoFilePicker> {
               padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: Dimension.MEDIUM),
               child: Row(
                 children: [
-                  Expanded(child: Text(_file?.name ?? 'Belum dipilih')),
+                  Expanded(
+                      child: Text(
+                    _file?.name ?? 'Belum dipilih',
+                    style: context.textTheme().bodyMedium,
+                  )),
                   TextButton(
                     onPressed: () async {
                       await showModalBottomSheet(

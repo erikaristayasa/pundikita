@@ -12,10 +12,10 @@ import '../../../../core/presentation/blocs/image_picker/image_picker_bloc.dart'
 import '../../../../core/presentation/pages/loading_page.dart';
 import '../../../../core/presentation/widgets/bottom_sheet_image_source.dart';
 import '../../../../core/presentation/widgets/custom_app_bar.dart';
+import '../../../../core/presentation/widgets/custom_birthdate_input.dart';
 import '../../../../core/presentation/widgets/custom_text_area.dart';
 import '../../../../core/presentation/widgets/custom_text_field.dart';
 import '../../../../core/presentation/widgets/rounded_button.dart';
-import '../../../../core/presentation/widgets/rounded_container.dart';
 import '../../../../core/static/dimens.dart';
 import '../../../../core/static/extensions.dart';
 import '../../../../core/utility/app_locale.dart';
@@ -54,18 +54,6 @@ class _ProfileUpdatePageState extends State<ProfileUpdatePage> {
     _phoneController.text = _user.phone ?? '';
     _birthDateController.text = _user.birthDate?.toText() ?? '';
     _bioController.text = _user.biodata ?? '';
-  }
-
-  showBirthDatePicker(DateTime? birthDate) async {
-    final now = DateTime.now();
-    final firstDate = DateTime(1900);
-    await showDatePicker(context: context, initialDate: birthDate ?? now, firstDate: firstDate, lastDate: now).then(
-      (value) {
-        if (value != null) {
-          _birthDateController.text = value.toText();
-        }
-      },
-    );
   }
 
   Future<FormData> generatedFormData() async {
@@ -204,32 +192,9 @@ class _ProfileUpdatePageState extends State<ProfileUpdatePage> {
                               controller: _phoneController,
                             ),
                             mediumVerticalSpacing(),
-                            Text(
-                              'Tanggal Lahir',
-                              style: context.textTheme().titleSmall,
-                            ),
-                            smallVerticalSpacing(),
-                            InkWell(
-                              onTap: () => showBirthDatePicker(_user.birthDate),
-                              child: RoundedContainer(
-                                padding: const EdgeInsets.symmetric(horizontal: Dimension.MEDIUM),
-                                color: Colors.grey[200]!,
-                                height: 46.0,
-                                child: Row(
-                                  children: [
-                                    const Icon(Icons.calendar_month),
-                                    mediumHorizontalSpacing(),
-                                    Expanded(
-                                      child: TextField(
-                                        controller: _birthDateController,
-                                        enabled: false,
-                                        decoration: const InputDecoration(border: InputBorder.none),
-                                      ),
-                                    )
-                                    //
-                                  ],
-                                ),
-                              ),
+                            CustomBirthDateInput(
+                              birthDate: _user.birthDate,
+                              controller: _birthDateController,
                             ),
                             mediumVerticalSpacing(),
                             CustomTextArea(
