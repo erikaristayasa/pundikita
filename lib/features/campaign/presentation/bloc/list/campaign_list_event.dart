@@ -28,20 +28,3 @@ class GetCampaignList extends CampaignListEvent {
         sort ?? false,
       ];
 }
-
-// class Filtering extends CampaignListEvent {
-//   final int categoryId;
-
-//   const Filtering({required this.categoryId});
-
-//   @override
-//   List<Object> get props => [categoryId];
-// }
-
-// class Sorting extends CampaignListEvent {
-//   final SortType type;
-
-//   const Sorting({required this.type});
-//   @override
-//   List<Object> get props => [type];
-// }

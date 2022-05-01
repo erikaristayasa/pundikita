@@ -1,24 +1,31 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/domain/entities/campaign_entity.dart';
 import '../../../../core/presentation/widgets/default_image.dart';
 import '../../../../core/presentation/widgets/rounded_container.dart';
 import '../../../../core/routes/path.dart' as path;
 import '../../../../core/static/colors.dart';
 import '../../../../core/static/dimens.dart';
-import '../../../../core/static/enums.dart';
 import '../../../../core/static/extensions.dart';
 import '../../../../core/utility/app_locale.dart';
 import '../../../../core/utility/helper.dart';
 import '../../../campaign/presentation/pages/campaign_detail_page.dart';
 
 class HomeCampaignItem extends StatelessWidget {
-  const HomeCampaignItem({Key? key}) : super(key: key);
+  final Campaign campaign;
+  const HomeCampaignItem({Key? key, required this.campaign}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      //TODO: implement dinamyc service
-      onTap: () => Navigator.pushNamed(context, path.CAMPAIGN_DETAIL, arguments: CampaignDetailPageRouteArguments(id: 1, service: CampaignService.donasi)),
+      onTap: () => Navigator.pushNamed(
+        context,
+        path.CAMPAIGN_DETAIL,
+        arguments: CampaignDetailPageRouteArguments(
+          id: campaign.id,
+          service: campaign.campaignService,
+        ),
+      ),
       child: AspectRatio(
         aspectRatio: 3 / 4.5,
         child: RoundedContainer(
@@ -34,7 +41,7 @@ class HomeCampaignItem extends StatelessWidget {
               AspectRatio(
                 aspectRatio: 5 / 3,
                 child: Image.network(
-                  getCampaignImageUrl('20220401143431-1648823671-BLE2uNRshhjBoDunrCygd2qu2vDGT2Z9txZmSavjeYUGsmqklB.jpg'),
+                  getCampaignImageUrl(campaign.photo ?? ''),
                   errorBuilder: (context, error, _) => const DefaultImage(),
                   fit: BoxFit.cover,
                 ),
@@ -45,14 +52,14 @@ class HomeCampaignItem extends StatelessWidget {
                 shrinkWrap: true,
                 children: [
                   Text(
-                    'Title Campaing Title Campaing Title Campaing Title Campaing',
+                    campaign.title ?? '',
                     style: context.textTheme().titleSmall,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
                   mediumVerticalSpacing(),
                   Text(
-                    'User Name User Name User Name User Name',
+                    campaign.user?.name ?? "",
                     style: context.textTheme().bodyMedium,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
@@ -60,7 +67,7 @@ class HomeCampaignItem extends StatelessWidget {
                   mediumVerticalSpacing(),
                   LinearProgressIndicator(
                     backgroundColor: AppColors.SECONDARY.withOpacity(0.3),
-                    value: 0.5,
+                    value: campaign.progress,
                   ),
                   mediumVerticalSpacing(),
                   Text(
@@ -69,7 +76,7 @@ class HomeCampaignItem extends StatelessWidget {
                   ),
                   smallVerticalSpacing(),
                   Text(
-                    getFormattedPrice(123456),
+                    getFormattedPrice(campaign.amountOfCollectedFunds.toInt()),
                     style: context.textTheme().titleSmall,
                   ),
                 ],
