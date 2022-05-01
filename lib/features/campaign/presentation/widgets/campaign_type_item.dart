@@ -33,6 +33,7 @@ class CampaignTypeItem extends StatelessWidget {
           ),
           mediumVerticalSpacing(),
           RoundedButton(
+            radius: 22.0,
             onTap: () {},
             title: "Pilih",
           ),

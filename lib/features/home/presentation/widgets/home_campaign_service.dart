@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:pundi_kita/core/static/assets.dart';
-import 'package:pundi_kita/core/static/enums.dart';
-import 'package:pundi_kita/features/campaign/presentation/pages/campaign_all_page.dart';
-import '../../../../core/static/extensions.dart';
 
 import '../../../../core/presentation/widgets/custom_label.dart';
+import '../../../../core/routes/path.dart' as path;
+import '../../../../core/static/assets.dart';
 import '../../../../core/static/dimens.dart';
+import '../../../../core/static/enums.dart';
+import '../../../../core/static/extensions.dart';
 import '../../../../core/utility/app_locale.dart';
 import '../../../../core/utility/helper.dart';
-import 'package:pundi_kita/core/routes/path.dart' as path;
+import '../../../campaign/presentation/pages/campaign_all_page.dart';
 
 class HomeCampaignService extends StatelessWidget {
   const HomeCampaignService({Key? key}) : super(key: key);
@@ -41,7 +40,14 @@ class HomeCampaignService extends StatelessWidget {
                     asset: Assets.HOME_ZAKAT,
                     title: AppLocale.loc.zakat),
               ),
-              Expanded(flex: 1, child: CampaignServiceItem(onTap: () {}, asset: Assets.HOME_FUNDRASING, title: AppLocale.loc.raiseFunds)),
+              Expanded(
+                flex: 1,
+                child: CampaignServiceItem(
+                  onTap: () => Navigator.pushNamed(context, path.CAMPAIGN_CREATE),
+                  asset: Assets.HOME_FUNDRASING,
+                  title: AppLocale.loc.raiseFunds,
+                ),
+              ),
             ],
           ),
         ],
