@@ -48,8 +48,12 @@ class CampaignRepositoryImplementation implements CampaignRepository {
   }
 
   @override
-  Future<Either<Failure, List<CampaignType>>> getCampaignTypes() {
-    // TODO: implement getCampaignTypes
-    throw UnimplementedError();
+  Future<Either<Failure, List<CampaignType>>> getCampaignTypes() async {
+    try {
+      final result = await dataSource.getTypes();
+      return Right(result);
+    } catch (e) {
+      return Left(ServerFailure());
+    }
   }
 }

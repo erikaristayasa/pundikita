@@ -7,6 +7,7 @@ import '../../utility/helper.dart';
 import '../models/campaign_categories_response_model.dart';
 import '../models/campaign_detail_response_model.dart';
 import '../models/campaign_list_response_model.dart';
+import '../models/campaign_type_response_model.dart';
 
 abstract class CampaignDataSource {
   Future<List<Campaign>> getCampaignList(CampaignService service, {bool auth, CampaignCategory? category, bool? sort});
@@ -91,8 +92,15 @@ class CampaignDataSourceImplementation implements CampaignDataSource {
   }
 
   @override
-  Future<List<CampaignType>> getTypes() {
-    // TODO: implement getTypes
-    throw UnimplementedError();
+  Future<List<CampaignType>> getTypes() async {
+    const path = 'api/user/campaign-type/list';
+    dio.withToken();
+    try {
+      final response = await dio.get(path);
+      final model = CampaignTypeResponseModel.fromJson(response.data);
+      return model.data;
+    } catch (e) {
+      rethrow;
+    }
   }
 }

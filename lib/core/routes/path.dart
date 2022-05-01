@@ -14,6 +14,7 @@ const String SETTING_DETAIL = '/setting_ detail';
 const String CAMPAIGN_ALL = '/campaign_all';
 const String CAMPAIGN_DETAIL = '/campaign_detail';
 const String FUND_USAGE_DETAIL = '/fund_usage_detail';
+const String CAMPAIGN_CREATE = '/campaign_create';
 
 const String DONATION_NOMINAL_LIST = '/donation_nominal_list';
 const String DONATION_REQUEST_INQURY = '/dontation_request_inquiry';

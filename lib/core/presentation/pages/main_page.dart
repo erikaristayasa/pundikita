@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pundi_kita/features/campaign/presentation/pages/my_campaign_page.dart';
 
 import '../../../features/donate/presentation/pages/my_donation_page.dart';
 import '../../../features/home/presentation/pages/home_page.dart';
@@ -58,10 +59,12 @@ class _MainPageState extends State<MainPage> {
             builder: (context, state) {
               if (state == 0) {
                 return const HomePage();
-              } else if (state == 4) {
-                return const ProfilePage();
+              } else if (state == 1) {
+                return const MyCampaignPage();
               } else if (state == 2) {
                 return const MyDonationPage();
+              } else if (state == 4) {
+                return const ProfilePage();
               } else {
                 return const NotFoundPage(
                   enableBack: false,

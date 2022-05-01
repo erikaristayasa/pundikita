@@ -26,11 +26,11 @@ class CampaignListBloc extends Bloc<CampaignListEvent, CampaignListState> {
         result.fold(
           (failure) => emit(CampaignListFailure(failure)),
           (data) {
-            if (data.isEmpty) {
-              emit(CampaignListInitial());
-            } else {
-              emit(CampaignListLoaded(data: data));
-            }
+            // if (data.isEmpty) {
+            //   emit(CampaignListInitial());
+            // } else {
+            emit(CampaignListLoaded(data: data));
+            // }
           },
         );
       });
