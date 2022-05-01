@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../features/campaign/presentation/pages/campaign_all_page.dart';
 import '../../features/campaign/presentation/pages/campaign_category_list_page.dart';
 import '../../features/campaign/presentation/pages/campaign_detail_page.dart';
-import '../../features/campaign/presentation/pages/create_campaign_page.dart';
+import '../../features/campaign/presentation/pages/campaign_type_list_page.dart';
 import '../../features/campaign/presentation/pages/fund_usage_detail_page.dart';
 import '../../features/donate/presentation/pages/donate_nominal_list_page.dart';
 import '../../features/donate/presentation/pages/donate_request_inquiry_page.dart';
@@ -59,8 +59,8 @@ class Router {
         return pageRoute(
           page: FundUsageDetailPage(usageDetail: args.usageDetail),
         );
-      case path.CAMPAIGN_CREATE:
-        return pageRoute(page: const CreateCampaginPage());
+      case path.CAMPAIGN_TYPE:
+        return pageRoute(page: const CampaignTypeListPage());
       case path.CAMPAIGN_CATEGORY:
         return pageRoute(page: const CampaignCategoryListPage());
       case path.DONATION_NOMINAL_LIST:

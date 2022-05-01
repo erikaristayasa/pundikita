@@ -47,7 +47,7 @@ class _MyCampaignPageState extends State<MyCampaignPage> {
                   outline: true,
                   title: 'Buat Galang Dana Baru',
                   titleColor: AppColors.PRIMARY,
-                  onTap: () => Navigator.pushNamed(context, path.CAMPAIGN_CREATE),
+                  onTap: () => Navigator.pushNamed(context, path.CAMPAIGN_TYPE),
                 ),
               ),
               Expanded(

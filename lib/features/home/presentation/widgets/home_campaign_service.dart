@@ -43,7 +43,7 @@ class HomeCampaignService extends StatelessWidget {
               Expanded(
                 flex: 1,
                 child: CampaignServiceItem(
-                  onTap: () => Navigator.pushNamed(context, path.CAMPAIGN_CREATE),
+                  onTap: () => Navigator.pushNamed(context, path.CAMPAIGN_TYPE),
                   asset: Assets.HOME_FUNDRASING,
                   title: AppLocale.loc.raiseFunds,
                 ),

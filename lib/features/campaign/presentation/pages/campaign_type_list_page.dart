@@ -11,8 +11,8 @@ import '../../../../core/utility/locator.dart';
 import '../bloc/type/campaign_type_bloc.dart';
 import '../widgets/campaign_type_item.dart';
 
-class CreateCampaginPage extends StatelessWidget {
-  const CreateCampaginPage({Key? key}) : super(key: key);
+class CampaignTypeListPage extends StatelessWidget {
+  const CampaignTypeListPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
