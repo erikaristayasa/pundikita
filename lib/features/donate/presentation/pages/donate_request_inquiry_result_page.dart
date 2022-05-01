@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:pundi_kita/core/static/assets.dart';
 
 import '../../../../core/domain/entities/donation_entity.dart';
 import '../../../../core/presentation/pages/not_found_page.dart';
@@ -43,12 +44,59 @@ class DonateRequestInquiryResultPage extends StatelessWidget {
                 return VirtualAccountResult(
                   result: result,
                 );
-              case PaymentMethod.qris:
               case PaymentMethod.saldo:
+                return DompetResult(result: result);
+              case PaymentMethod.qris:
               default:
                 return const NotFoundPage();
             }
           },
+        ),
+      ),
+    );
+  }
+}
+
+class DompetResult extends StatelessWidget {
+  final Donation result;
+  const DompetResult({Key? key, required this.result}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(Dimension.LARGE),
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            ColorFiltered(
+              colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcATop),
+              child: Image.asset(
+                Assets.PAYMENT_PAID,
+                width: 150,
+              ),
+            ),
+            largeVerticalSpacing(),
+            Text(
+              'Pembayaran berhasil',
+              textAlign: TextAlign.center,
+              style: context.textTheme().titleMedium!.withColor(Colors.white),
+            ),
+            smallVerticalSpacing(),
+            Text(
+              'Saldo telah terpotong otomatis.',
+              textAlign: TextAlign.center,
+              style: context.textTheme().bodySmall!.withColor(Colors.white),
+            ),
+            largeVerticalSpacing(),
+            RoundedButton(
+              color: Colors.white,
+              title: AppLocale.loc.backToMainPage,
+              titleColor: AppColors.PRIMARY,
+              onTap: () => Navigator.pushNamedAndRemoveUntil(context, path.MAIN, (route) => false),
+            )
+          ],
         ),
       ),
     );
@@ -68,10 +116,12 @@ class VirtualAccountResult extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Icon(
-              Icons.check_circle,
-              color: Colors.white,
-              size: 150,
+            ColorFiltered(
+              colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcATop),
+              child: Image.asset(
+                Assets.PAYMENT_PENDING,
+                width: 150,
+              ),
             ),
             largeVerticalSpacing(),
             Text(

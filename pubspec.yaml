@@ -124,6 +124,7 @@ flutter:
       - assets/icons/
       - assets/icons/home/
       - assets/icons/payment_channel/
+      - assets/icons/payment_status/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
