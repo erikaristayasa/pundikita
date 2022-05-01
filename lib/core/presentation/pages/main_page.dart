@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pundi_kita/features/campaign/presentation/pages/my_campaign_page.dart';
 
+import '../../../features/campaign/presentation/pages/my_campaign_page.dart';
 import '../../../features/donate/presentation/pages/my_donation_page.dart';
 import '../../../features/home/presentation/pages/home_page.dart';
 import '../../../features/profile/presentation/pages/profile_page.dart';
@@ -11,7 +11,7 @@ import '../../static/colors.dart';
 import '../../utility/app_locale.dart';
 import '../cubits/navbar_cubit.dart';
 import '../widgets/popup_information_dialog.dart';
-import 'not_found_page.dart';
+import 'work_in_progress_page.dart';
 
 class MainPageRouteArguments {
   final bool fromLogin;
@@ -66,9 +66,7 @@ class _MainPageState extends State<MainPage> {
               } else if (state == 4) {
                 return const ProfilePage();
               } else {
-                return const NotFoundPage(
-                  enableBack: false,
-                );
+                return const WorkInProgressPage(enableBack: false);
               }
             },
           ),

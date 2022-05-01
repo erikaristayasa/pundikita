@@ -1,6 +1,7 @@
 // ignore_for_file: constant_identifier_names
 
 const String SPLASH_SCREEN = '/';
+const String WORK_IN_PROGRESS = '/wip';
 const String LOGIN = '/login';
 const String REGISTER = '/register';
 const String FORGOT_PASSWORD = '/forgot_password';

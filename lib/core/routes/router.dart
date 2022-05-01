@@ -17,6 +17,7 @@ import '../../features/register/presentation/pages/register_page.dart';
 import '../presentation/pages/main_page.dart';
 import '../presentation/pages/not_found_page.dart';
 import '../presentation/pages/splash_screen.dart';
+import '../presentation/pages/work_in_progress_page.dart';
 import 'path.dart' as path;
 
 class Router {
@@ -79,6 +80,8 @@ class Router {
       case path.DONATION_REQUEST_INQURY_RESULT:
         final args = settings.arguments as DonateRequestInquiryResultPageRouteArguments;
         return pageRoute(page: DonateRequestInquiryResultPage(result: args.result));
+      case path.WORK_IN_PROGRESS:
+        return pageRoute(page: const WorkInProgressPage());
       default:
         return pageRoute(page: const NotFoundPage());
     }

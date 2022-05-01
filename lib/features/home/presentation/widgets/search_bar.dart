@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/routes/path.dart' as path;
 import '../../../../core/static/colors.dart';
 import '../../../../core/static/dimens.dart';
 import '../../../../core/static/extensions.dart';
@@ -37,9 +38,12 @@ class SearchBar extends StatelessWidget with PreferredSizeWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Expanded(
-                    child: Text(
-                      AppLocale.loc.search,
-                      style: context.textTheme().bodySmall!.withColor(Colors.white),
+                    child: InkWell(
+                      onTap: () => Navigator.pushNamed(context, path.WORK_IN_PROGRESS),
+                      child: Text(
+                        AppLocale.loc.search,
+                        style: context.textTheme().bodySmall!.withColor(Colors.white),
+                      ),
                     ),
                   ),
                   const Icon(

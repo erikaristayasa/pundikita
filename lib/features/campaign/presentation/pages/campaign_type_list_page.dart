@@ -37,6 +37,8 @@ class CampaignTypeListPage extends StatelessWidget {
                     onTap: () {
                       if (index != 0) {
                         Navigator.pushNamed(context, path.CAMPAIGN_CATEGORY);
+                      } else {
+                        Navigator.pushNamed(context, path.WORK_IN_PROGRESS);
                       }
                     },
                   ),

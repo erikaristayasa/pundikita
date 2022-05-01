@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/domain/entities/campaign_entity.dart';
+import '../../../../core/routes/path.dart' as path;
 import '../../../../core/utility/helper.dart';
 
 class CampaignCategoryItem extends StatelessWidget {
@@ -10,6 +11,7 @@ class CampaignCategoryItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      onTap: () => Navigator.pushNamed(context, path.WORK_IN_PROGRESS),
       leading: Image.network(
         getCampaignCategoryImageUrl(category.icon ?? ''),
         width: 40,
