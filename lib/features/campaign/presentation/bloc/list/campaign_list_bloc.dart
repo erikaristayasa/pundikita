@@ -35,13 +35,5 @@ class CampaignListBloc extends Bloc<CampaignListEvent, CampaignListState> {
         );
       });
     });
-
-    // on<Filtering>((event, emit) {
-    //   //TODO: Implements filtering
-    // });
-
-    // on<Sorting>((event, emit) {
-    //   //TODO: Implements sorting
-    // });
   }
 }

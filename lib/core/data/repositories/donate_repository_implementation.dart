@@ -27,8 +27,15 @@ class DonateRepositoryImplementaion implements DonateRepository {
   }
 
   @override
-  Future<Either<Failure, List<Donation>>> getDonationList({required CampaignService service}) {
-    // TODO: implement getDonationList
-    throw UnimplementedError();
+  Future<Either<Failure, List<Donation>>> getDonationList({required CampaignService service}) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final result = await dataSource.getDonationList(service: service);
+        return Right(result);
+      } catch (e) {
+        return Left(ServerFailure());
+      }
+    }
+    return Left(ConnectionFailure());
   }
 }

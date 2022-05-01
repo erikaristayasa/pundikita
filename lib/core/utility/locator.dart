@@ -1,11 +1,11 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
-import 'package:pundi_kita/features/login/domain/usecases/do_login_by_google.dart';
 
 import '../../features/campaign/presentation/bloc/category_filter/category_filter_bloc.dart';
 import '../../features/campaign/presentation/bloc/detail/campaign_detail_bloc.dart';
 import '../../features/campaign/presentation/bloc/list/campaign_list_bloc.dart';
+import '../../features/donate/presentation/bloc/donation_list_bloc.dart';
 import '../../features/donate/presentation/bloc/request_inquiry_bloc.dart';
 import '../../features/faq/data/datasources/faq_data_source.dart';
 import '../../features/faq/data/repositories/faq_repository_implementaion.dart';
@@ -21,6 +21,7 @@ import '../../features/login/data/datasources/login_data_source.dart';
 import '../../features/login/data/repositories/login_repository_implementation.dart';
 import '../../features/login/domain/repositories/login_repository.dart';
 import '../../features/login/domain/usecases/do_login.dart';
+import '../../features/login/domain/usecases/do_login_by_google.dart';
 import '../../features/login/presentation/bloc/login_bloc.dart';
 import '../../features/profile/data/datasources/profile_data_source.dart';
 import '../../features/profile/data/repositories/profile_repository_implementation.dart';
@@ -51,6 +52,7 @@ import '../domain/usecases/get_all_campaign_list.dart';
 import '../domain/usecases/get_banners.dart';
 import '../domain/usecases/get_campaign_categories.dart';
 import '../domain/usecases/get_campaign_detail.dart';
+import '../domain/usecases/get_donation_list.dart';
 import '../domain/usecases/get_setting.dart';
 import '../domain/usecases/request_inquiry.dart';
 import '../network/dio_client.dart';
@@ -71,6 +73,7 @@ Future<void> locatorSetup() async {
   locator.registerFactory<CampaignListBloc>(() => CampaignListBloc(getAllCampaignList: locator()));
   locator.registerFactory<CategoryFilterBloc>(() => CategoryFilterBloc(getCampaignCategories: locator()));
   locator.registerFactory<RequestInquiryBloc>(() => RequestInquiryBloc(requestInquiry: locator()));
+  locator.registerFactory<DonationListBloc>(() => DonationListBloc(getDonationList: locator()));
   locator.registerFactory<BannerBloc>(() => BannerBloc(getBanners: locator()));
   locator.registerFactory<ProfileBloc>(() => ProfileBloc(getProfile: locator(), updateProfile: locator()));
   locator.registerFactory<SettingBloc>(() => SettingBloc(getSetting: locator()));
@@ -85,6 +88,7 @@ Future<void> locatorSetup() async {
   locator.registerLazySingleton<GetCampaignDetail>(() => GetCampaignDetail(locator()));
   locator.registerLazySingleton<GetCampaignCategories>(() => GetCampaignCategories(locator()));
   locator.registerLazySingleton<RequestInquiry>(() => RequestInquiry(locator()));
+  locator.registerLazySingleton<GetDonationList>(() => GetDonationList(locator()));
   locator.registerLazySingleton<GetBanners>(() => GetBanners(locator()));
   locator.registerLazySingleton<GetProfile>(() => GetProfile(locator()));
   locator.registerLazySingleton<UpdateProfile>(() => UpdateProfile(locator()));

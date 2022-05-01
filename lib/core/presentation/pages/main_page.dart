@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pundi_kita/core/presentation/pages/not_found_page.dart';
 
+import '../../../features/donate/presentation/pages/my_donation_page.dart';
 import '../../../features/home/presentation/pages/home_page.dart';
 import '../../../features/profile/presentation/pages/profile_page.dart';
 import '../../static/assets.dart';
@@ -10,6 +10,7 @@ import '../../static/colors.dart';
 import '../../utility/app_locale.dart';
 import '../cubits/navbar_cubit.dart';
 import '../widgets/popup_information_dialog.dart';
+import 'not_found_page.dart';
 
 class MainPageRouteArguments {
   final bool fromLogin;
@@ -59,6 +60,8 @@ class _MainPageState extends State<MainPage> {
                 return const HomePage();
               } else if (state == 4) {
                 return const ProfilePage();
+              } else if (state == 2) {
+                return const MyDonationPage();
               } else {
                 return const NotFoundPage(
                   enableBack: false,
