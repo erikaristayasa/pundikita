@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:pundi_kita/core/presentation/widgets/custom_text_field.dart';
-import 'package:pundi_kita/core/static/dimens.dart';
-import 'package:pundi_kita/core/static/extensions.dart';
 
 import '../../../../core/presentation/blocs/image_picker/image_picker_bloc.dart';
 import '../../../../core/presentation/blocs/text_controller/text_controller_bloc.dart';
 import '../../../../core/presentation/widgets/bottom_sheet_image_source.dart';
-import '../../../../core/presentation/widgets/rounded_container.dart';
+import '../../../../core/static/extensions.dart';
 import '../../../../core/utility/helper.dart';
 import '../../../../core/utility/locator.dart';
 import '../../../../core/utility/validation_helper.dart';
