@@ -100,7 +100,6 @@ class _PersonalFormState extends State<PersonalForm> {
         CustomTextArea(
           title: 'Alamat KTP',
           controller: _ktpAddress,
-          fieldValidator: (_) => null,
           onChanged: (_) => updateAdditonalValue(),
         )
       ],

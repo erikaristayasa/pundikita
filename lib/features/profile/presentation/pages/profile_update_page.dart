@@ -200,7 +200,6 @@ class _ProfileUpdatePageState extends State<ProfileUpdatePage> {
                             CustomTextArea(
                               title: 'Bio Singkat',
                               controller: _bioController,
-                              fieldValidator: (_) => null,
                             ),
                             largeVerticalSpacing(),
                             RoundedButton(
