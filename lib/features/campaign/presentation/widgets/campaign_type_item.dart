@@ -8,7 +8,8 @@ import 'package:flutter_svg/svg.dart';
 
 class CampaignTypeItem extends StatelessWidget {
   final CampaignType type;
-  const CampaignTypeItem({Key? key, required this.type}) : super(key: key);
+  final VoidCallback onTap;
+  const CampaignTypeItem({Key? key, required this.type, required this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,7 @@ class CampaignTypeItem extends StatelessWidget {
           mediumVerticalSpacing(),
           RoundedButton(
             radius: 22.0,
-            onTap: () {},
+            onTap: onTap,
             title: "Pilih",
           ),
         ],

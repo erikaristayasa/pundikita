@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:pundi_kita/features/campaign/presentation/pages/create_campaign_page.dart';
 
 import '../../features/campaign/presentation/pages/campaign_all_page.dart';
+import '../../features/campaign/presentation/pages/campaign_category_list_page.dart';
 import '../../features/campaign/presentation/pages/campaign_detail_page.dart';
+import '../../features/campaign/presentation/pages/create_campaign_page.dart';
 import '../../features/campaign/presentation/pages/fund_usage_detail_page.dart';
 import '../../features/donate/presentation/pages/donate_nominal_list_page.dart';
 import '../../features/donate/presentation/pages/donate_request_inquiry_page.dart';
@@ -60,6 +61,8 @@ class Router {
         );
       case path.CAMPAIGN_CREATE:
         return pageRoute(page: const CreateCampaginPage());
+      case path.CAMPAIGN_CATEGORY:
+        return pageRoute(page: const CampaignCategoryListPage());
       case path.DONATION_NOMINAL_LIST:
         final args = settings.arguments as DonateNominalListPageRouteArguments;
         return pageRoute(

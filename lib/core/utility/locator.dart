@@ -2,6 +2,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
+import '../../features/campaign/presentation/bloc/category/campaign_category_bloc.dart';
 import '../../features/campaign/presentation/bloc/category_filter/category_filter_bloc.dart';
 import '../../features/campaign/presentation/bloc/detail/campaign_detail_bloc.dart';
 import '../../features/campaign/presentation/bloc/list/campaign_list_bloc.dart';
@@ -74,6 +75,7 @@ Future<void> locatorSetup() async {
   locator.registerFactory<CampaignDetailBloc>(() => CampaignDetailBloc(getCampaignDetail: locator()));
   locator.registerFactory<CampaignListBloc>(() => CampaignListBloc(getAllCampaignList: locator()));
   locator.registerFactory<CampaignTypeBloc>(() => CampaignTypeBloc(getCampaignTypes: locator()));
+  locator.registerFactory<CampaignCategoryBloc>(() => CampaignCategoryBloc(getCampaignCategories: locator()));
   locator.registerFactory<CategoryFilterBloc>(() => CategoryFilterBloc(getCampaignCategories: locator()));
   locator.registerFactory<RequestInquiryBloc>(() => RequestInquiryBloc(requestInquiry: locator()));
   locator.registerFactory<DonationListBloc>(() => DonationListBloc(getDonationList: locator()));

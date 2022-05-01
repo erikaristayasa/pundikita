@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pundi_kita/core/static/dimens.dart';
-import 'package:pundi_kita/core/utility/helper.dart';
-import 'package:pundi_kita/features/campaign/presentation/widgets/campaign_type_item.dart';
 
 import '../../../../core/presentation/pages/loading_page.dart';
 import '../../../../core/presentation/widgets/custom_app_bar.dart';
+import '../../../../core/routes/path.dart' as path;
+import '../../../../core/static/dimens.dart';
 import '../../../../core/utility/app_locale.dart';
+import '../../../../core/utility/helper.dart';
 import '../../../../core/utility/locator.dart';
 import '../bloc/type/campaign_type_bloc.dart';
+import '../widgets/campaign_type_item.dart';
 
 class CreateCampaginPage extends StatelessWidget {
   const CreateCampaginPage({Key? key}) : super(key: key);
@@ -31,7 +32,14 @@ class CreateCampaginPage extends StatelessWidget {
                 return ListView.separated(
                   padding: const EdgeInsets.all(Dimension.MEDIUM),
                   shrinkWrap: true,
-                  itemBuilder: (context, index) => CampaignTypeItem(type: _data.elementAt(index)),
+                  itemBuilder: (context, index) => CampaignTypeItem(
+                    type: _data.elementAt(index),
+                    onTap: () {
+                      if (index != 0) {
+                        Navigator.pushNamed(context, path.CAMPAIGN_CATEGORY);
+                      }
+                    },
+                  ),
                   separatorBuilder: (_, __) => largeVerticalSpacing(),
                   itemCount: _data.length,
                 );
