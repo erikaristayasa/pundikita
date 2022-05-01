@@ -2,8 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:pundi_kita/features/campaign/presentation/bloc/sort/sort_bloc.dart';
-import 'package:pundi_kita/features/register/presentation/cubit/additional_body_cubit.dart';
 
 import '../../../../../core/presentation/widgets/custom_birthdate_input.dart';
 import '../../../../../core/presentation/widgets/custom_gender_selection.dart';
@@ -12,6 +10,7 @@ import '../../../../../core/presentation/widgets/custom_text_field.dart';
 import '../../../../../core/static/enums.dart';
 import '../../../../../core/static/extensions.dart';
 import '../../../../../core/utility/helper.dart';
+import '../../cubit/additional_body_cubit.dart';
 import '../register_photo_file_picker.dart';
 
 class PersonalForm extends StatefulWidget {
@@ -99,6 +98,7 @@ class _PersonalFormState extends State<PersonalForm> {
         smallVerticalSpacing(),
         CustomTextArea(
           title: 'Alamat KTP',
+          placeholder: 'Alamat KTP',
           controller: _ktpAddress,
           onChanged: (_) => updateAdditonalValue(),
         )
