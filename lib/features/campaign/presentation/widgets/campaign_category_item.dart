@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pundi_kita/features/campaign/presentation/pages/campaign_sub_category_list_page.dart';
 
 import '../../../../core/domain/entities/campaign_entity.dart';
 import '../../../../core/routes/path.dart' as path;
@@ -11,7 +12,11 @@ class CampaignCategoryItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      onTap: () => Navigator.pushNamed(context, path.WORK_IN_PROGRESS),
+      onTap: () => Navigator.pushNamed(
+        context,
+        path.CAMPAIGN_SUB_CATEGORY,
+        arguments: CampaignSubCategoryListPageRouteArguments(category: category),
+      ),
       leading: Image.network(
         getCampaignCategoryImageUrl(category.icon ?? ''),
         width: 40,

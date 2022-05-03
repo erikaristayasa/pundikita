@@ -42,9 +42,13 @@ class CampaignRepositoryImplementation implements CampaignRepository {
   }
 
   @override
-  Future<Either<Failure, List<CampaignSubCategory>>> getCampaignSubCategories() {
-    // TODO: implement getCampaignSubCategories
-    throw UnimplementedError();
+  Future<Either<Failure, List<CampaignSubCategory>>> getCampaignSubCategories(int id) async {
+    try {
+      final result = await dataSource.getSubCategories(id);
+      return Right(result);
+    } catch (e) {
+      return Left(ServerFailure());
+    }
   }
 
   @override

@@ -28,7 +28,7 @@ class CampaignCategoryListPage extends StatelessWidget {
               final _data = state.data;
               return ListView.separated(
                 itemBuilder: (context, index) => CampaignCategoryItem(category: _data.elementAt(index)),
-                separatorBuilder: (_, __) => smallVerticalSpacing(),
+                separatorBuilder: (_, __) => const Divider(),
                 itemCount: _data.length,
               );
             } else if (state is CampaignCategoryFailure) {

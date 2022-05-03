@@ -6,6 +6,7 @@ import '../../features/campaign/presentation/bloc/category/campaign_category_blo
 import '../../features/campaign/presentation/bloc/category_filter/category_filter_bloc.dart';
 import '../../features/campaign/presentation/bloc/detail/campaign_detail_bloc.dart';
 import '../../features/campaign/presentation/bloc/list/campaign_list_bloc.dart';
+import '../../features/campaign/presentation/bloc/sub_category/campaign_sub_category_bloc.dart';
 import '../../features/campaign/presentation/bloc/type/campaign_type_bloc.dart';
 import '../../features/donate/presentation/bloc/donation_list_bloc.dart';
 import '../../features/donate/presentation/bloc/request_inquiry_bloc.dart';
@@ -54,6 +55,7 @@ import '../domain/usecases/get_all_campaign_list.dart';
 import '../domain/usecases/get_banners.dart';
 import '../domain/usecases/get_campaign_categories.dart';
 import '../domain/usecases/get_campaign_detail.dart';
+import '../domain/usecases/get_campaign_sub_categories.dart';
 import '../domain/usecases/get_campaign_types.dart';
 import '../domain/usecases/get_donation_list.dart';
 import '../domain/usecases/get_setting.dart';
@@ -76,6 +78,7 @@ Future<void> locatorSetup() async {
   locator.registerFactory<CampaignListBloc>(() => CampaignListBloc(getAllCampaignList: locator()));
   locator.registerFactory<CampaignTypeBloc>(() => CampaignTypeBloc(getCampaignTypes: locator()));
   locator.registerFactory<CampaignCategoryBloc>(() => CampaignCategoryBloc(getCampaignCategories: locator()));
+  locator.registerFactory<CampaignSubCategoryBloc>(() => CampaignSubCategoryBloc(getCampaignSubCategories: locator()));
   locator.registerFactory<CategoryFilterBloc>(() => CategoryFilterBloc(getCampaignCategories: locator()));
   locator.registerFactory<RequestInquiryBloc>(() => RequestInquiryBloc(requestInquiry: locator()));
   locator.registerFactory<DonationListBloc>(() => DonationListBloc(getDonationList: locator()));
@@ -92,6 +95,7 @@ Future<void> locatorSetup() async {
   locator.registerLazySingleton<GetAllCampaignList>(() => GetAllCampaignList(locator()));
   locator.registerLazySingleton<GetCampaignDetail>(() => GetCampaignDetail(locator()));
   locator.registerLazySingleton<GetCampaignCategories>(() => GetCampaignCategories(locator()));
+  locator.registerLazySingleton<GetCampaignSubCategories>(() => GetCampaignSubCategories(locator()));
   locator.registerLazySingleton<GetCampaignTypes>(() => GetCampaignTypes(locator()));
   locator.registerLazySingleton<RequestInquiry>(() => RequestInquiry(locator()));
   locator.registerLazySingleton<GetDonationList>(() => GetDonationList(locator()));

@@ -7,6 +7,7 @@ import '../../utility/helper.dart';
 import '../models/campaign_categories_response_model.dart';
 import '../models/campaign_detail_response_model.dart';
 import '../models/campaign_list_response_model.dart';
+import '../models/campaign_sub_category_response_model.dart';
 import '../models/campaign_type_response_model.dart';
 
 abstract class CampaignDataSource {
@@ -14,7 +15,7 @@ abstract class CampaignDataSource {
   Future<Campaign> getCampaignDetail(int id, {required CampaignService service});
   Future<List<CampaignType>> getTypes();
   Future<List<CampaignCategory>> getCategories();
-  Future<List<CampaignSubCategory>> getSubCategories();
+  Future<List<CampaignSubCategory>> getSubCategories(int id);
 }
 
 class CampaignDataSourceImplementation implements CampaignDataSource {
@@ -86,9 +87,16 @@ class CampaignDataSourceImplementation implements CampaignDataSource {
   }
 
   @override
-  Future<List<CampaignSubCategory>> getSubCategories() {
-    // TODO: implement getSubCategories
-    throw UnimplementedError();
+  Future<List<CampaignSubCategory>> getSubCategories(int id) async {
+    final path = 'api/user/campaign-sub-category/list-by-category-id/$id';
+    dio.withToken();
+    try {
+      final response = await dio.get(path);
+      final model = CampaignSubCategoryResponseModel.fromJson(response.data);
+      return model.data;
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override
