@@ -171,3 +171,24 @@ extension GenderTransform on Gender {
     }
   }
 }
+
+extension CampaignStepTransform on CampaignStep {
+  String getString() {
+    switch (this) {
+      case CampaignStep.prepare:
+        return 'Persiapan';
+      case CampaignStep.patient:
+        return 'Pasien';
+      case CampaignStep.personalData:
+        return 'Data Pribadi';
+      case CampaignStep.fundTarget:
+        return 'Target Donasi';
+      case CampaignStep.recipient:
+        return 'Penerima Dana';
+      case CampaignStep.advertisement:
+        return 'Iklan';
+      case CampaignStep.event:
+        return 'Acara';
+    }
+  }
+}

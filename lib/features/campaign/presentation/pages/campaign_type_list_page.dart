@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pundi_kita/features/campaign/presentation/pages/campaign_create_page.dart';
 
 import '../../../../core/presentation/pages/loading_page.dart';
 import '../../../../core/presentation/widgets/custom_app_bar.dart';
@@ -9,6 +10,7 @@ import '../../../../core/utility/app_locale.dart';
 import '../../../../core/utility/helper.dart';
 import '../../../../core/utility/locator.dart';
 import '../bloc/type/campaign_type_bloc.dart';
+import 'package:pundi_kita/core/static/enums.dart' as e;
 import '../widgets/campaign_type_item.dart';
 
 class CampaignTypeListPage extends StatelessWidget {
@@ -38,7 +40,7 @@ class CampaignTypeListPage extends StatelessWidget {
                       if (index != 0) {
                         Navigator.pushNamed(context, path.CAMPAIGN_CATEGORY);
                       } else {
-                        Navigator.pushNamed(context, path.WORK_IN_PROGRESS);
+                        Navigator.pushNamed(context, path.CAMPAIGN_CREATE, arguments: CampaignCreatePageRouteArguments(type: e.CampaignType.sick));
                       }
                     },
                   ),

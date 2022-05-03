@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 
 import '../../domain/entities/campaign_entity.dart';
-import '../../static/enums.dart';
+import '../../static/enums.dart' as e;
 import '../../static/extensions.dart';
 import '../../utility/helper.dart';
 import '../models/campaign_categories_response_model.dart';
@@ -11,8 +11,8 @@ import '../models/campaign_sub_category_response_model.dart';
 import '../models/campaign_type_response_model.dart';
 
 abstract class CampaignDataSource {
-  Future<List<Campaign>> getCampaignList(CampaignService service, {bool auth, CampaignCategory? category, bool? sort});
-  Future<Campaign> getCampaignDetail(int id, {required CampaignService service});
+  Future<List<Campaign>> getCampaignList(e.CampaignService service, {bool auth, CampaignCategory? category, bool? sort});
+  Future<Campaign> getCampaignDetail(int id, {required e.CampaignService service});
   Future<List<CampaignType>> getTypes();
   Future<List<CampaignCategory>> getCategories();
   Future<List<CampaignSubCategory>> getSubCategories(int id);
@@ -24,13 +24,13 @@ class CampaignDataSourceImplementation implements CampaignDataSource {
   CampaignDataSourceImplementation({required this.dio});
 
   @override
-  Future<Campaign> getCampaignDetail(int id, {required CampaignService service}) async {
+  Future<Campaign> getCampaignDetail(int id, {required e.CampaignService service}) async {
     String path = '';
     switch (service) {
-      case CampaignService.donasi:
+      case e.CampaignService.donasi:
         path = 'api/user/campaign/find/$id';
         break;
-      case CampaignService.zakat:
+      case e.CampaignService.zakat:
         path = 'api/user/zakat/find/$id';
         break;
     }
@@ -46,13 +46,13 @@ class CampaignDataSourceImplementation implements CampaignDataSource {
   }
 
   @override
-  Future<List<Campaign>> getCampaignList(CampaignService service, {bool auth = false, CampaignCategory? category, bool? sort}) async {
+  Future<List<Campaign>> getCampaignList(e.CampaignService service, {bool auth = false, CampaignCategory? category, bool? sort}) async {
     String path = '';
     switch (service) {
-      case CampaignService.donasi:
+      case e.CampaignService.donasi:
         path = auth ? 'api/user/campaign/list-by-auth' : 'api/user/campaign/list';
         break;
-      case CampaignService.zakat:
+      case e.CampaignService.zakat:
         path = 'api/user/zakat/list';
         break;
     }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../features/campaign/presentation/pages/campaign_all_page.dart';
 import '../../features/campaign/presentation/pages/campaign_category_list_page.dart';
+import '../../features/campaign/presentation/pages/campaign_create_page.dart';
 import '../../features/campaign/presentation/pages/campaign_detail_page.dart';
 import '../../features/campaign/presentation/pages/campaign_sub_category_list_page.dart';
 import '../../features/campaign/presentation/pages/campaign_type_list_page.dart';
@@ -67,10 +68,10 @@ class Router {
         return pageRoute(page: const CampaignCategoryListPage());
       case path.CAMPAIGN_SUB_CATEGORY:
         final args = settings.arguments as CampaignSubCategoryListPageRouteArguments;
-        return pageRoute(
-            page: CampaignSubCategoryListPage(
-          category: args.category,
-        ));
+        return pageRoute(page: CampaignSubCategoryListPage(category: args.category));
+      case path.CAMPAIGN_CREATE:
+        final args = settings.arguments as CampaignCreatePageRouteArguments;
+        return pageRoute(page: CampaignCreatePage(type: args.type));
       case path.DONATION_NOMINAL_LIST:
         final args = settings.arguments as DonateNominalListPageRouteArguments;
         return pageRoute(

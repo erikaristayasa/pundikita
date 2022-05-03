@@ -3,7 +3,7 @@ import 'package:dartz/dartz.dart';
 import '../../domain/entities/campaign_entity.dart';
 import '../../domain/repositories/campaign_repository.dart';
 import '../../errors/failure.dart';
-import '../../static/enums.dart';
+import '../../static/enums.dart' as e;
 import '../datasources/campaign_data_source.dart';
 
 class CampaignRepositoryImplementation implements CampaignRepository {
@@ -12,7 +12,7 @@ class CampaignRepositoryImplementation implements CampaignRepository {
   CampaignRepositoryImplementation({required this.dataSource});
 
   @override
-  Future<Either<Failure, List<Campaign>>> getAllCampaignList(CampaignService service, {bool auth = false, CampaignCategory? category, bool? sort}) async {
+  Future<Either<Failure, List<Campaign>>> getAllCampaignList(e.CampaignService service, {bool auth = false, CampaignCategory? category, bool? sort}) async {
     try {
       final result = await dataSource.getCampaignList(service, auth: auth, category: category, sort: sort);
       return Right(result);
@@ -22,7 +22,7 @@ class CampaignRepositoryImplementation implements CampaignRepository {
   }
 
   @override
-  Future<Either<Failure, Campaign>> getCampaignDetail(int id, {required CampaignService service}) async {
+  Future<Either<Failure, Campaign>> getCampaignDetail(int id, {required e.CampaignService service}) async {
     try {
       final result = await dataSource.getCampaignDetail(id, service: service);
       return Right(result);

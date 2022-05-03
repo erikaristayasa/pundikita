@@ -3,7 +3,7 @@ import 'package:image_picker/image_picker.dart';
 
 import '../../domain/entities/campaign_entity.dart';
 import '../../domain/entities/user_entity.dart';
-import '../../static/enums.dart';
+import '../../static/enums.dart' as e;
 import '../../static/extensions.dart';
 import 'donation_model.dart';
 import 'user_model.dart';
@@ -11,7 +11,7 @@ import 'user_model.dart';
 class CampaignModel extends Campaign {
   const CampaignModel({
     required int id,
-    required CampaignService campaignService,
+    required e.CampaignService campaignService,
     required int? userId,
     required int? campaignTypeId,
     required int? campaignCategoryId,
@@ -154,7 +154,7 @@ class CampaignModel extends Campaign {
         );
   factory CampaignModel.fromJson(Map<String, dynamic> json) => CampaignModel(
         id: json['id'],
-        campaignService: json['campaign_service'] == 0 ? CampaignService.donasi : CampaignService.zakat,
+        campaignService: json['campaign_service'] == 0 ? e.CampaignService.donasi : e.CampaignService.zakat,
         userId: json['user_id'],
         campaignTypeId: json['campaign_type_id'],
         campaignCategoryId: json['campaign_category_id'],
