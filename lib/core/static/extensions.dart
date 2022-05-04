@@ -192,3 +192,18 @@ extension CampaignStepTransform on CampaignStep {
     }
   }
 }
+
+extension WhoSickTransform on WhoSick {
+  String getString() {
+    switch (this) {
+      case WhoSick.me:
+        return 'Saya Sendiri';
+      case WhoSick.myFamily:
+        return 'Keluarga yang satu KK dengan saya';
+      case WhoSick.myOtherFamily:
+        return 'Keluarga inti (ayah/ibu/kakak/adik/anak) yang sudah pisah KK dengan saya';
+      case WhoSick.others:
+        return 'Selain pilihan di atas';
+    }
+  }
+}

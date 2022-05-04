@@ -23,3 +23,5 @@ class ChangeStep extends CampaignStepEvent {
   @override
   List<Object> get props => [step];
 }
+
+class ToNextStep extends CampaignStepEvent {}

@@ -41,5 +41,11 @@ class CampaignStepBloc extends Bloc<CampaignStepEvent, CampaignStepState> {
     on<ChangeStep>((event, emit) {
       emit(CampaignStepState(steps: state.steps, currentStep: event.step));
     });
+    on<ToNextStep>((event, emit) {
+      final _steps = state.steps;
+      final _currentIndex = _steps.indexOf(state.currentStep);
+      final _nextStep = _steps.elementAt(_currentIndex + 1);
+      emit(CampaignStepState(steps: _steps, currentStep: _nextStep));
+    });
   }
 }

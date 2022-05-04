@@ -28,7 +28,7 @@ class CampaignTypeItem extends StatelessWidget {
               title: Text(type.title ?? ''),
               subtitle: Text(
                 type.description ?? '',
-                maxLines: 2,
+                maxLines: 5,
               ),
             ),
           ),
