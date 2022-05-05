@@ -10,16 +10,16 @@ import '../../../../core/utility/helper.dart';
 import '../../../../core/utility/locator.dart';
 import '../../../../core/utility/validation_helper.dart';
 
-class RegisterPhotoFilePicker extends StatefulWidget {
+class PhotoFilePicker extends StatefulWidget {
   final String title;
   final Function(XFile? file) onPicked;
-  const RegisterPhotoFilePicker({Key? key, required this.onPicked, required this.title}) : super(key: key);
+  const PhotoFilePicker({Key? key, required this.onPicked, required this.title}) : super(key: key);
 
   @override
-  State<RegisterPhotoFilePicker> createState() => _RegisterPhotoFilePickerState();
+  State<PhotoFilePicker> createState() => _PhotoFilePickerState();
 }
 
-class _RegisterPhotoFilePickerState extends State<RegisterPhotoFilePicker> {
+class _PhotoFilePickerState extends State<PhotoFilePicker> {
   final _imagePicker = ImagePicker();
   XFile? _file;
   final _controller = TextEditingController();

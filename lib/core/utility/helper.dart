@@ -41,3 +41,10 @@ int daysBetween(DateTime from, DateTime to) {
   to = DateTime(to.year, to.month, to.day);
   return (to.difference(from).inHours / 24).round();
 }
+
+OutlineInputBorder get inputFieldBorder => const OutlineInputBorder(
+      borderRadius: BorderRadius.all(
+        Radius.circular(10.0),
+      ),
+      borderSide: BorderSide(color: Colors.white),
+    );

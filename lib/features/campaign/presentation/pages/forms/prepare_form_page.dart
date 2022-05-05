@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pundi_kita/core/presentation/widgets/custom_text_field.dart';
-import 'package:pundi_kita/core/presentation/widgets/rounded_button.dart';
-import 'package:pundi_kita/core/presentation/widgets/rounded_container.dart';
-import 'package:pundi_kita/core/static/colors.dart';
-import 'package:pundi_kita/core/static/dimens.dart';
-import 'package:pundi_kita/core/static/enums.dart';
-import 'package:pundi_kita/core/static/extensions.dart';
-import 'package:pundi_kita/core/utility/app_locale.dart';
-import 'package:pundi_kita/core/utility/helper.dart';
-import 'package:pundi_kita/features/campaign/presentation/bloc/step/campaign_step_bloc.dart';
+
+import '../../../../../core/presentation/widgets/custom_text_field.dart';
+import '../../../../../core/presentation/widgets/rounded_container.dart';
+import '../../../../../core/static/colors.dart';
+import '../../../../../core/static/dimens.dart';
+import '../../../../../core/static/enums.dart';
+import '../../../../../core/static/extensions.dart';
+import '../../../../../core/utility/helper.dart';
+import '../../../../../core/utility/validation_helper.dart';
+import '../../bloc/step/campaign_step_bloc.dart';
+import '../../widgets/bottom_navbar_actions.dart';
 
 class PrepareFormPage extends StatefulWidget {
   const PrepareFormPage({Key? key}) : super(key: key);
@@ -24,20 +25,22 @@ class _PrepareFormPageState extends State<PrepareFormPage> {
   final _patientPhoneController = TextEditingController();
   WhoSick _whoSick = WhoSick.me;
 
-  final _border = const OutlineInputBorder(
-    borderRadius: BorderRadius.all(
-      Radius.circular(10.0),
-    ),
-    borderSide: BorderSide(color: Colors.white),
-  );
+  final _border = inputFieldBorder;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(Dimension.MEDIUM),
-      child: Form(
+    return Scaffold(
+      bottomNavigationBar: BottomNavigationBarActions(
+        onNext: () {
+          if (_formKey.currentState!.validate()) {
+            context.read<CampaignStepBloc>().add(ToNextStep());
+          }
+        },
+      ),
+      body: Form(
         key: _formKey,
         child: ListView(
+          padding: const EdgeInsets.all(Dimension.MEDIUM),
           children: [
             RoundedContainer(
               color: AppColors.SECONDARY.withOpacity(0.15),
@@ -85,6 +88,7 @@ class _PrepareFormPageState extends State<PrepareFormPage> {
             CustomTextField(
               title: 'Nomor Telepon Anda',
               inputType: TextInputType.phone,
+              typeField: TypeField.phone,
               controller: _phoneController,
             ),
             mediumVerticalSpacing(),
@@ -92,18 +96,11 @@ class _PrepareFormPageState extends State<PrepareFormPage> {
                 ? CustomTextField(
                     title: 'Nomor Telepon Pasien',
                     inputType: TextInputType.phone,
+                    typeField: TypeField.phone,
                     controller: _patientPhoneController,
                   )
                 : const SizedBox.shrink(),
             mediumVerticalSpacing(),
-            RoundedButton(
-              title: AppLocale.loc.next,
-              onTap: () {
-                if (_formKey.currentState!.validate()) {
-                  context.read<CampaignStepBloc>().add(ToNextStep());
-                }
-              },
-            )
           ],
         ),
       ),

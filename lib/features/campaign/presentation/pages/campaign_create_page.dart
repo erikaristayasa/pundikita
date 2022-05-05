@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pundi_kita/core/presentation/pages/loading_page.dart';
+import 'package:pundi_kita/features/campaign/presentation/pages/forms/patient_form_page.dart';
 import 'package:pundi_kita/features/campaign/presentation/pages/forms/prepare_form_page.dart';
 
 import '../../../../core/presentation/widgets/custom_app_bar.dart';
@@ -44,8 +45,7 @@ class CampaignCreatePage extends StatelessWidget {
                       case CampaignStep.prepare:
                         return const PrepareFormPage();
                       case CampaignStep.patient:
-                        // TODO: Handle this case.
-                        break;
+                        return const PatientFormPage();
                       case CampaignStep.personalData:
                         // TODO: Handle this case.
                         break;

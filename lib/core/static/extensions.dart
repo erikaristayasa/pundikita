@@ -207,3 +207,14 @@ extension WhoSickTransform on WhoSick {
     }
   }
 }
+
+extension HospitalityStatusTransForm on HospitalityStatus {
+  String getString() {
+    switch (this) {
+      case HospitalityStatus.inpatient:
+        return 'Rawat Inap';
+      case HospitalityStatus.selfCare:
+        return 'Rawat Mandiri';
+    }
+  }
+}

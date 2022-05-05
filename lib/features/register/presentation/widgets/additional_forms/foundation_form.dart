@@ -2,17 +2,17 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:pundi_kita/core/static/enums.dart';
-import 'package:pundi_kita/core/static/extensions.dart';
 
 import '../../../../../core/presentation/widgets/custom_birthdate_input.dart';
 import '../../../../../core/presentation/widgets/custom_gender_selection.dart';
 import '../../../../../core/presentation/widgets/custom_label.dart';
 import '../../../../../core/presentation/widgets/custom_text_area.dart';
 import '../../../../../core/presentation/widgets/custom_text_field.dart';
+import '../../../../../core/presentation/widgets/photo_file_picker.dart';
+import '../../../../../core/static/enums.dart';
+import '../../../../../core/static/extensions.dart';
 import '../../../../../core/utility/helper.dart';
 import '../../cubit/additional_body_cubit.dart';
-import '../register_photo_file_picker.dart';
 
 class FoundationForm extends StatefulWidget {
   const FoundationForm({Key? key}) : super(key: key);
@@ -70,7 +70,7 @@ class _FoundationFormState extends State<FoundationForm> {
           onChanged: (_) => updateAdditonalValue(),
         ),
         smallVerticalSpacing(),
-        RegisterPhotoFilePicker(
+        PhotoFilePicker(
           title: 'Foto Surat Izin Yayasan',
           onPicked: (file) {
             _foundationLicensePhoto = file;
@@ -80,7 +80,7 @@ class _FoundationFormState extends State<FoundationForm> {
         mediumVerticalSpacing(),
         const CustomLabel(title: 'Penanggung Jawab Yayasan'),
         smallVerticalSpacing(),
-        RegisterPhotoFilePicker(
+        PhotoFilePicker(
           title: 'Foto KTP',
           onPicked: (file) {
             _foundationInChargePhoto = file;

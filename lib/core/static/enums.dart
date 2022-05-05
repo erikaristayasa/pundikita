@@ -8,6 +8,7 @@ enum CampaignService { donasi, zakat }
 enum CampaignType { sick, other }
 enum CampaignStep { prepare, patient, personalData, fundTarget, recipient, advertisement, event }
 enum WhoSick { me, myFamily, myOtherFamily, others }
+enum HospitalityStatus { inpatient, selfCare }
 
 enum DonationPayStatus { pending, paid, failed }
 enum DonatureType { personal, foundation }

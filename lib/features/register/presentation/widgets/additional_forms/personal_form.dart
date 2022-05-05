@@ -7,11 +7,11 @@ import '../../../../../core/presentation/widgets/custom_birthdate_input.dart';
 import '../../../../../core/presentation/widgets/custom_gender_selection.dart';
 import '../../../../../core/presentation/widgets/custom_text_area.dart';
 import '../../../../../core/presentation/widgets/custom_text_field.dart';
+import '../../../../../core/presentation/widgets/photo_file_picker.dart';
 import '../../../../../core/static/enums.dart';
 import '../../../../../core/static/extensions.dart';
 import '../../../../../core/utility/helper.dart';
 import '../../cubit/additional_body_cubit.dart';
-import '../register_photo_file_picker.dart';
 
 class PersonalForm extends StatefulWidget {
   const PersonalForm({Key? key}) : super(key: key);
@@ -46,7 +46,7 @@ class _PersonalFormState extends State<PersonalForm> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        RegisterPhotoFilePicker(
+        PhotoFilePicker(
           title: 'Foto KTP',
           onPicked: (file) {
             _ktpPhoto = file;
