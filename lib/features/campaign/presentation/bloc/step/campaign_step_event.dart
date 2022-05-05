@@ -25,3 +25,5 @@ class ChangeStep extends CampaignStepEvent {
 }
 
 class ToNextStep extends CampaignStepEvent {}
+
+class ToPreviousStep extends CampaignStepEvent {}
