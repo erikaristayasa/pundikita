@@ -12,4 +12,5 @@ enum HospitalityStatus { inpatient, selfCare }
 
 enum DonationPayStatus { pending, paid, failed }
 enum DonatureType { personal, foundation }
+enum RecipientType { personal, foundation }
 enum Gender { male, female }

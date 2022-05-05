@@ -35,6 +35,7 @@ class _PatientFormPageState extends State<PatientFormPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       bottomNavigationBar: BottomNavigationBarActions(
         onPrevious: () {
           context.read<CampaignStepBloc>().add(ToPreviousStep());

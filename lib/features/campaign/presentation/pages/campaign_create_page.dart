@@ -4,6 +4,7 @@ import 'package:pundi_kita/core/presentation/pages/loading_page.dart';
 import 'package:pundi_kita/features/campaign/presentation/pages/forms/fund_target_form_page.dart';
 import 'package:pundi_kita/features/campaign/presentation/pages/forms/patient_form_page.dart';
 import 'package:pundi_kita/features/campaign/presentation/pages/forms/prepare_form_page.dart';
+import 'package:pundi_kita/features/campaign/presentation/pages/forms/recipient_form_page.dart';
 
 import '../../../../core/presentation/widgets/custom_app_bar.dart';
 import '../../../../core/static/colors.dart';
@@ -53,8 +54,7 @@ class CampaignCreatePage extends StatelessWidget {
                       case CampaignStep.fundTarget:
                         return const FundTargetFormPage();
                       case CampaignStep.recipient:
-                        // TODO: Handle this case.
-                        break;
+                        return const RecipientFormPage();
                       case CampaignStep.advertisement:
                         // TODO: Handle this case.
                         break;

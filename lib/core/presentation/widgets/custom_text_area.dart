@@ -15,6 +15,7 @@ class CustomTextArea extends StatefulWidget {
   final TypeField typeField;
   final TextInputType inputType;
   final void Function(String value)? onChanged;
+  final int? maxlines;
   const CustomTextArea({
     Key? key,
     required this.title,
@@ -25,6 +26,7 @@ class CustomTextArea extends StatefulWidget {
     this.inputType = TextInputType.multiline,
     this.onChanged,
     this.typeField = TypeField.none,
+    this.maxlines,
   }) : super(key: key);
 
   @override
@@ -68,7 +70,7 @@ class _CustomTextAreaState extends State<CustomTextArea> {
                 obscureText: false,
                 controller: widget.controller,
                 keyboardType: widget.inputType,
-                maxLines: 8,
+                maxLines: widget.maxlines ?? 8,
                 style: TextStyle(
                   color: state.error ? Colors.white : Colors.black,
                 ),

@@ -161,6 +161,17 @@ extension TransForm on DonatureType {
   }
 }
 
+extension RecipientTransForm on RecipientType {
+  String getString() {
+    switch (this) {
+      case RecipientType.personal:
+        return 'Personal';
+      case RecipientType.foundation:
+        return 'Yayasan';
+    }
+  }
+}
+
 extension GenderTransform on Gender {
   String getString() {
     switch (this) {

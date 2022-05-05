@@ -30,6 +30,7 @@ class _FundTargetFormPageState extends State<FundTargetFormPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       bottomNavigationBar: BottomNavigationBarActions(
         onPrevious: () {
           context.read<CampaignStepBloc>().add(ToPreviousStep());
