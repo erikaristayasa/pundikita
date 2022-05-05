@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:pundi_kita/core/presentation/widgets/custom_text_area.dart';
-import 'package:pundi_kita/core/presentation/widgets/custom_text_field.dart';
-import 'package:pundi_kita/core/presentation/widgets/rounded_button.dart';
-import 'package:pundi_kita/core/static/dimens.dart';
-import 'package:pundi_kita/core/static/enums.dart';
-import 'package:pundi_kita/core/static/extensions.dart';
-import 'package:pundi_kita/core/utility/app_locale.dart';
-import 'package:pundi_kita/core/utility/validation_helper.dart';
-import 'package:pundi_kita/features/campaign/presentation/widgets/bottom_navbar_actions.dart';
 
+import '../../../../../core/presentation/widgets/custom_text_area.dart';
+import '../../../../../core/presentation/widgets/custom_text_field.dart';
 import '../../../../../core/presentation/widgets/photo_file_picker.dart';
 import '../../../../../core/presentation/widgets/rounded_container.dart';
 import '../../../../../core/static/colors.dart';
+import '../../../../../core/static/dimens.dart';
+import '../../../../../core/static/enums.dart';
+import '../../../../../core/static/extensions.dart';
 import '../../../../../core/utility/helper.dart';
+import '../../../../../core/utility/validation_helper.dart';
+import '../../widgets/bottom_navbar_actions.dart';
 
 class PatientFormPage extends StatefulWidget {
   const PatientFormPage({Key? key}) : super(key: key);
