@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pundi_kita/core/presentation/pages/loading_page.dart';
+import 'package:pundi_kita/features/campaign/presentation/pages/forms/fund_target_form_page.dart';
 import 'package:pundi_kita/features/campaign/presentation/pages/forms/patient_form_page.dart';
 import 'package:pundi_kita/features/campaign/presentation/pages/forms/prepare_form_page.dart';
 
@@ -50,8 +51,7 @@ class CampaignCreatePage extends StatelessWidget {
                         // TODO: Handle this case.
                         break;
                       case CampaignStep.fundTarget:
-                        // TODO: Handle this case.
-                        break;
+                        return const FundTargetFormPage();
                       case CampaignStep.recipient:
                         // TODO: Handle this case.
                         break;

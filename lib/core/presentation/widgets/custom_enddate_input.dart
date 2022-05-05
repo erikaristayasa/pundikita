@@ -7,12 +7,12 @@ import '../../utility/locator.dart';
 import '../../utility/validation_helper.dart';
 import '../blocs/text_controller/text_controller_bloc.dart';
 
-class CustomBirthDateInput extends StatelessWidget {
+class CustomEndDateInput extends StatelessWidget {
   final String? title;
   final TextEditingController controller;
-  final DateTime? birthDate;
+  final DateTime? date;
 
-  const CustomBirthDateInput({Key? key, required this.controller, this.birthDate, this.title}) : super(key: key);
+  const CustomEndDateInput({Key? key, required this.controller, this.date, this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,10 +33,10 @@ class CustomBirthDateInput extends StatelessWidget {
         color: Colors.red,
       ),
     );
-    showBirthDatePicker(DateTime? birthDate) async {
+    _showDatePicker(DateTime? date) async {
       final now = DateTime.now();
-      final firstDate = DateTime(1900);
-      await showDatePicker(context: context, initialDate: birthDate ?? now, firstDate: firstDate, lastDate: now).then(
+      final lastDate = now.add(const Duration(days: 60));
+      await showDatePicker(context: context, initialDate: date ?? now, firstDate: now, lastDate: lastDate).then(
         (value) {
           if (value != null) {
             controller.text = value.toText();
@@ -92,7 +92,7 @@ class CustomBirthDateInput extends StatelessWidget {
                         ).validate()),
                   ),
                   IconButton(
-                    onPressed: () => showBirthDatePicker(birthDate),
+                    onPressed: () => _showDatePicker(date),
                     icon: const Icon(Icons.calendar_month),
                   ),
                 ],
