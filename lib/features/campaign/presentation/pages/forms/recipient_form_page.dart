@@ -210,17 +210,117 @@ class _PersonalRecipientFormState extends State<PersonalRecipientForm> {
   }
 }
 
-class FoundationRecipientForm extends StatelessWidget {
+class FoundationRecipientForm extends StatefulWidget {
   final GlobalKey formKey;
   const FoundationRecipientForm({Key? key, required this.formKey}) : super(key: key);
 
   @override
+  State<FoundationRecipientForm> createState() => _FoundationRecipientFormState();
+}
+
+class _FoundationRecipientFormState extends State<FoundationRecipientForm> {
+  XFile? _foundationLicensePhoto, _foundationKtpPhoto;
+  final _foundationNameController = TextEditingController();
+  final _foundationAddressController = TextEditingController();
+  final _foundationInChargeKtpNameController = TextEditingController();
+
+  final _foundationRecipientKtpNumberController = TextEditingController();
+  final _foundationRecipientKtpNameController = TextEditingController();
+  final _foundationRecipientKtpBirthPlaceController = TextEditingController();
+  final _foundationRecipientKtpBirthDateController = TextEditingController();
+  Gender _foundationRecipientKtpGender = Gender.male;
+  final _foundationRecipientKtpAddressController = TextEditingController();
+
+  @override
   Widget build(BuildContext context) {
     return Form(
-        key: formKey,
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(Dimension.MEDIUM),
-          child: Column(),
-        ));
+      key: widget.formKey,
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(Dimension.MEDIUM),
+        child: Column(
+          children: [
+            CustomTextField(
+              title: 'Nama Penerima Yayasan',
+              placeholder: 'Nama Penerima Yayasan',
+              inputType: TextInputType.name,
+              controller: _foundationNameController,
+            ),
+            mediumVerticalSpacing(),
+            CustomTextArea(
+              title: 'Alamat Penerima Yayasan',
+              placeholder: 'Alamat Penerima Yayasan',
+              inputType: TextInputType.streetAddress,
+              controller: _foundationAddressController,
+              maxlines: 3,
+            ),
+            mediumVerticalSpacing(),
+            CustomTextField(
+              title: 'Nama Penanggung Jawab Yayasan',
+              placeholder: 'Nama Penanggung Jawab Yayasan',
+              inputType: TextInputType.name,
+              controller: _foundationInChargeKtpNameController,
+            ),
+            mediumVerticalSpacing(),
+            PhotoFilePicker(
+              onPicked: (file) {
+                _foundationLicensePhoto = file;
+              },
+              title: 'Foto Surat Izin Penerima Yayasan',
+            ),
+            mediumVerticalSpacing(),
+            PhotoFilePicker(
+              onPicked: (file) {
+                _foundationKtpPhoto = file;
+              },
+              title: 'Foto KTP Penerima Yayasan',
+            ),
+            mediumVerticalSpacing(),
+            CustomTextField(
+              title: 'Nomor KTP Penerima Yayasan',
+              placeholder: 'Nomor KTP Penerima Yayasan',
+              inputType: TextInputType.number,
+              controller: _foundationRecipientKtpNumberController,
+            ),
+            mediumVerticalSpacing(),
+            CustomTextField(
+              title: 'Nama KTP Penerima Yayasan',
+              placeholder: 'Nama KTP Penerima Yayasan',
+              inputType: TextInputType.name,
+              controller: _foundationRecipientKtpNameController,
+            ),
+            mediumVerticalSpacing(),
+            CustomTextField(
+              title: 'Tempat Lahir KTP Penerima Yayasan',
+              placeholder: 'Tempat Lahir KTP Penerima Yayasan',
+              inputType: TextInputType.streetAddress,
+              controller: _foundationRecipientKtpBirthPlaceController,
+            ),
+            mediumVerticalSpacing(),
+            CustomBirthDateInput(
+              title: "Tanggal Lahir KTP Penerima Yayasan",
+              birthDate: _foundationRecipientKtpBirthDateController.text.toDate(),
+              controller: _foundationRecipientKtpBirthDateController,
+            ),
+            mediumVerticalSpacing(),
+            CustomGenderSelection(
+              title: 'Jenis Kelamin KTP Penerima Yayasan',
+              onChanged: (value) {
+                setState(() {
+                  _foundationRecipientKtpGender = value;
+                });
+              },
+              groupValue: _foundationRecipientKtpGender,
+            ),
+            CustomTextArea(
+              title: 'Alamat KTP Penerima Yayasan',
+              placeholder: 'Alamat KTP Penerima Yayasan',
+              inputType: TextInputType.streetAddress,
+              controller: _foundationRecipientKtpAddressController,
+              maxlines: 3,
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
