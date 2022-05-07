@@ -10,4 +10,5 @@ abstract class CampaignRepository {
   Future<Either<Failure, List<CampaignType>>> getCampaignTypes();
   Future<Either<Failure, List<CampaignCategory>>> getCampaignCategories();
   Future<Either<Failure, List<CampaignSubCategory>>> getCampaignSubCategories(int id);
+  Future<Either<Failure, bool>> createCampaign(Map<String, dynamic> body);
 }

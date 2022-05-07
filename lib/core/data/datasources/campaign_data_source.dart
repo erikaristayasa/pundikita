@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 
 import '../../domain/entities/campaign_entity.dart';
@@ -16,6 +18,7 @@ abstract class CampaignDataSource {
   Future<List<CampaignType>> getTypes();
   Future<List<CampaignCategory>> getCategories();
   Future<List<CampaignSubCategory>> getSubCategories(int id);
+  Future<bool> createCampaign(Map<String, dynamic> body);
 }
 
 class CampaignDataSourceImplementation implements CampaignDataSource {
@@ -107,6 +110,25 @@ class CampaignDataSourceImplementation implements CampaignDataSource {
       final response = await dio.get(path);
       final model = CampaignTypeResponseModel.fromJson(response.data);
       return model.data;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<bool> createCampaign(Map<String, dynamic> body) async {
+    const path = 'api/user/campaign/create';
+    dio.withToken();
+    try {
+      final response = await dio.post(path, data: FormData.fromMap(body));
+      if (response.statusCode == HttpStatus.ok) {
+        return true;
+      } else {
+        throw DioError(
+          response: response,
+          requestOptions: RequestOptions(path: path),
+        );
+      }
     } catch (e) {
       rethrow;
     }

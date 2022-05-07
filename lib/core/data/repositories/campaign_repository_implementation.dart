@@ -1,10 +1,12 @@
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 
 import '../../domain/entities/campaign_entity.dart';
 import '../../domain/repositories/campaign_repository.dart';
 import '../../errors/failure.dart';
 import '../../static/enums.dart' as e;
 import '../datasources/campaign_data_source.dart';
+import '../models/common_response.model.dart';
 
 class CampaignRepositoryImplementation implements CampaignRepository {
   final CampaignDataSource dataSource;
@@ -58,6 +60,21 @@ class CampaignRepositoryImplementation implements CampaignRepository {
       return Right(result);
     } catch (e) {
       return Left(ServerFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> createCampaign(Map<String, dynamic> body) async {
+    try {
+      final result = await dataSource.createCampaign(body);
+      return Right(result);
+    } on DioError catch (e) {
+      try {
+        final errorModel = CommonResponseModel.fromJson(e.response?.data);
+        return Left(RequestFailure(message: errorModel.data ?? ''));
+      } catch (e) {
+        return Left(ServerFailure());
+      }
     }
   }
 }
