@@ -4,10 +4,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/domain/entities/campaign_entity.dart';
 import '../../../../core/presentation/pages/loading_page.dart';
 import '../../../../core/presentation/widgets/custom_app_bar.dart';
-import '../../../../core/utility/helper.dart';
+import '../../../../core/routes/path.dart' as path;
+import '../../../../core/static/enums.dart' as e;
 import '../../../../core/utility/locator.dart';
 import '../bloc/sub_category/campaign_sub_category_bloc.dart';
 import '../widgets/campaign_sub_category_item.dart';
+import 'campaign_create_page.dart';
 
 class CampaignSubCategoryListPageRouteArguments {
   final CampaignCategory category;
@@ -35,6 +37,9 @@ class CampaignSubCategoryListPage extends StatelessWidget {
               return ListView.separated(
                 itemBuilder: (context, index) => CampaignSubCategoryItem(
                   subCategory: _data.elementAt(index),
+                  onTap: () {
+                    Navigator.pushNamed(context, path.CAMPAIGN_CREATE, arguments: CampaignCreatePageRouteArguments(type: e.CampaignType.other));
+                  },
                 ),
                 separatorBuilder: (_, __) => const Divider(),
                 itemCount: _data.length,

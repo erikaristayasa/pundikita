@@ -28,7 +28,6 @@ class CampaignStepBloc extends Bloc<CampaignStepEvent, CampaignStepState> {
           break;
         case CampaignType.other:
           _steps = [
-            CampaignStep.prepare,
             CampaignStep.personalData,
             CampaignStep.fundTarget,
             CampaignStep.recipient,
@@ -36,7 +35,7 @@ class CampaignStepBloc extends Bloc<CampaignStepEvent, CampaignStepState> {
           ];
           break;
       }
-      emit(CampaignStepState(steps: _steps, currentStep: state.currentStep));
+      emit(CampaignStepState(steps: _steps, currentStep: _steps.first));
     });
     on<ChangeStep>((event, emit) {
       emit(CampaignStepState(steps: state.steps, currentStep: event.step));

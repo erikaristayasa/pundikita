@@ -5,13 +5,14 @@ import '../../../../core/presentation/widgets/rounded_container.dart';
 
 class CampaignSubCategoryItem extends StatelessWidget {
   final CampaignSubCategory subCategory;
-  const CampaignSubCategoryItem({Key? key, required this.subCategory}) : super(key: key);
+  final VoidCallback onTap;
+  const CampaignSubCategoryItem({Key? key, required this.subCategory, required this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return RoundedContainer(
       child: ListTile(
-        onTap: () {},
+        onTap: onTap,
         title: Text(subCategory.title ?? ''),
         subtitle: Text(subCategory.description ?? ''),
         trailing: const Icon(Icons.keyboard_arrow_right_rounded),

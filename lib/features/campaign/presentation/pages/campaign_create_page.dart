@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pundi_kita/core/presentation/pages/loading_page.dart';
-import 'package:pundi_kita/features/campaign/presentation/pages/forms/fund_target_form_page.dart';
-import 'package:pundi_kita/features/campaign/presentation/pages/forms/patient_form_page.dart';
-import 'package:pundi_kita/features/campaign/presentation/pages/forms/prepare_form_page.dart';
-import 'package:pundi_kita/features/campaign/presentation/pages/forms/recipient_form_page.dart';
+import 'package:pundi_kita/features/campaign/presentation/pages/forms/event_form_page.dart';
 
+import '../../../../core/presentation/pages/loading_page.dart';
 import '../../../../core/presentation/widgets/custom_app_bar.dart';
-import '../../../../core/static/colors.dart';
 import '../../../../core/static/enums.dart' as e;
 import '../../../../core/static/enums.dart';
 import '../bloc/step/campaign_step_bloc.dart';
 import '../widgets/campaign_create_step.dart';
+import 'forms/advertisement_form_page.dart';
+import 'forms/fund_target_form_page.dart';
+import 'forms/patient_form_page.dart';
+import 'forms/personal_data_form_page.dart';
+import 'forms/prepare_form_page.dart';
+import 'forms/recipient_form_page.dart';
 
 class CampaignCreatePageRouteArguments {
   final e.CampaignType type;
@@ -49,20 +51,16 @@ class CampaignCreatePage extends StatelessWidget {
                       case CampaignStep.patient:
                         return const PatientFormPage();
                       case CampaignStep.personalData:
-                        // TODO: Handle this case.
-                        break;
+                        return const PersonalDataFormPage();
                       case CampaignStep.fundTarget:
                         return const FundTargetFormPage();
                       case CampaignStep.recipient:
                         return const RecipientFormPage();
                       case CampaignStep.advertisement:
-                        // TODO: Handle this case.
-                        break;
+                        return const AdvertisementFormPage();
                       case CampaignStep.event:
-                        // TODO: Handle this case.
-                        break;
+                        return const EventFormPage();
                     }
-                    return const LoadingPage(isList: true);
                   },
                 ),
               )

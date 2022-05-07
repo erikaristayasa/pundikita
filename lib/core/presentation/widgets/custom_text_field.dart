@@ -24,6 +24,7 @@ class CustomTextField extends StatefulWidget {
   final String valueMatcher;
   final Function(String value)? onChange;
   final List<TextInputFormatter>? formatters;
+  final bool validating;
   const CustomTextField({
     Key? key,
     this.placeholder = '',
@@ -42,6 +43,7 @@ class CustomTextField extends StatefulWidget {
     this.prefixText,
     this.onChange,
     this.formatters,
+    this.validating = true,
   }) : super(key: key);
 
   @override
@@ -157,11 +159,13 @@ class _CustomTextFieldState extends State<CustomTextField> {
                             )
                           : null,
                 ),
-                validator: ValidationHelper(
-                  valueMatcher: widget.controllerMatcher?.text,
-                  isError: (error) => bloc.add(TextControllerOnError(error)),
-                  typeField: widget.typeField,
-                ).validate(),
+                validator: widget.validating
+                    ? ValidationHelper(
+                        valueMatcher: widget.controllerMatcher?.text,
+                        isError: (error) => bloc.add(TextControllerOnError(error)),
+                        typeField: widget.typeField,
+                      ).validate()
+                    : (_) => null,
               ),
             ],
           );
