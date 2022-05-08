@@ -9,6 +9,7 @@ import '../../../../../core/static/enums.dart';
 import '../../../../../core/static/extensions.dart';
 import '../../../../../core/utility/helper.dart';
 import '../../../../../core/utility/validation_helper.dart';
+import '../../bloc/create/campaign_create_bloc.dart';
 import '../../bloc/step/campaign_step_bloc.dart';
 import '../../widgets/bottom_navbar_actions.dart';
 
@@ -27,6 +28,11 @@ class _PrepareFormPageState extends State<PrepareFormPage> {
 
   final _border = inputFieldBorder;
 
+  Map<String, dynamic> mapValue() => {
+        'telepon': _phoneController.text,
+        if (_patientPhoneController.text.isNotEmpty) 'telepon_pasien': _patientPhoneController.text,
+      };
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,6 +40,7 @@ class _PrepareFormPageState extends State<PrepareFormPage> {
         onNext: () {
           if (_formKey.currentState!.validate()) {
             context.read<CampaignStepBloc>().add(ToNextStep());
+            context.read<CampaignCreateBloc>().add(UpdateBody(body: mapValue()));
           }
         },
       ),

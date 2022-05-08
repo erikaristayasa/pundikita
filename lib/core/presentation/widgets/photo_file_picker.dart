@@ -13,7 +13,8 @@ import '../../../../core/utility/validation_helper.dart';
 class PhotoFilePicker extends StatefulWidget {
   final String title;
   final Function(XFile? file) onPicked;
-  const PhotoFilePicker({Key? key, required this.onPicked, required this.title}) : super(key: key);
+  final bool validation;
+  const PhotoFilePicker({Key? key, required this.onPicked, required this.title, this.validation = false}) : super(key: key);
 
   @override
   State<PhotoFilePicker> createState() => _PhotoFilePickerState();
@@ -85,29 +86,32 @@ class _PhotoFilePickerState extends State<PhotoFilePicker> {
                   children: [
                     Expanded(
                       child: TextFormField(
-                          enabled: false,
-                          controller: _controller,
-                          style: context.textTheme().bodyMedium,
-                          decoration: InputDecoration(
-                            focusColor: Colors.white,
-                            border: InputBorder.none,
-                            hintText: _file?.name ?? 'Belum dipilih',
-                            enabledBorder: normalBorder,
-                            disabledBorder: normalBorder,
-                            focusedBorder: normalBorder,
-                            errorBorder: errorBorder,
-                            focusedErrorBorder: errorBorder,
-                            filled: true,
-                            fillColor: state.error ? Colors.red : Colors.grey[200],
-                            contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                            errorStyle: const TextStyle(
-                              color: Colors.red,
-                            ),
+                        enabled: false,
+                        controller: _controller,
+                        style: context.textTheme().bodyMedium,
+                        decoration: InputDecoration(
+                          focusColor: Colors.white,
+                          border: InputBorder.none,
+                          hintText: _file?.name ?? 'Belum dipilih',
+                          enabledBorder: normalBorder,
+                          disabledBorder: normalBorder,
+                          focusedBorder: normalBorder,
+                          errorBorder: errorBorder,
+                          focusedErrorBorder: errorBorder,
+                          filled: true,
+                          fillColor: state.error ? Colors.red : Colors.grey[200],
+                          contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                          errorStyle: const TextStyle(
+                            color: Colors.red,
                           ),
-                          validator: ValidationHelper(
-                            isError: (error) => bloc.add(TextControllerOnError(error)),
-                            typeField: TypeField.none,
-                          ).validate()),
+                        ),
+                        validator: widget.validation
+                            ? ValidationHelper(
+                                isError: (error) => bloc.add(TextControllerOnError(error)),
+                                typeField: TypeField.none,
+                              ).validate()
+                            : (_) => null,
+                      ),
                     ),
                     TextButton(
                       onPressed: () async {

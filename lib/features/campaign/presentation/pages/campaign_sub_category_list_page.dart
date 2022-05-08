@@ -12,13 +12,22 @@ import '../widgets/campaign_sub_category_item.dart';
 import 'campaign_create_page.dart';
 
 class CampaignSubCategoryListPageRouteArguments {
+  final CampaignType type;
   final CampaignCategory category;
-  CampaignSubCategoryListPageRouteArguments({required this.category});
+  CampaignSubCategoryListPageRouteArguments({
+    required this.category,
+    required this.type,
+  });
 }
 
 class CampaignSubCategoryListPage extends StatelessWidget {
+  final CampaignType type;
   final CampaignCategory category;
-  const CampaignSubCategoryListPage({Key? key, required this.category}) : super(key: key);
+  const CampaignSubCategoryListPage({
+    Key? key,
+    required this.category,
+    required this.type,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +47,16 @@ class CampaignSubCategoryListPage extends StatelessWidget {
                 itemBuilder: (context, index) => CampaignSubCategoryItem(
                   subCategory: _data.elementAt(index),
                   onTap: () {
-                    Navigator.pushNamed(context, path.CAMPAIGN_CREATE, arguments: CampaignCreatePageRouteArguments(type: e.CampaignType.other));
+                    Navigator.pushNamed(
+                      context,
+                      path.CAMPAIGN_CREATE,
+                      arguments: CampaignCreatePageRouteArguments(
+                        type: e.CampaignType.other,
+                        typeId: type.id,
+                        categoryId: category.id,
+                        subCategoryId: _data.elementAt(index).id,
+                      ),
+                    );
                   },
                 ),
                 separatorBuilder: (_, __) => const Divider(),

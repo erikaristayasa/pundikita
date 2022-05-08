@@ -32,6 +32,7 @@ class CampaignStepBloc extends Bloc<CampaignStepEvent, CampaignStepState> {
             CampaignStep.fundTarget,
             CampaignStep.recipient,
             CampaignStep.event,
+            CampaignStep.advertisement,
           ];
           break;
       }

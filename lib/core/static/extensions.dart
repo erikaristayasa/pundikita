@@ -170,6 +170,15 @@ extension RecipientTransForm on RecipientType {
         return 'Yayasan';
     }
   }
+
+  int toInteger() {
+    switch (this) {
+      case RecipientType.personal:
+        return 1;
+      case RecipientType.foundation:
+        return 2;
+    }
+  }
 }
 
 extension GenderTransform on Gender {
@@ -226,6 +235,15 @@ extension HospitalityStatusTransForm on HospitalityStatus {
         return 'Rawat Inap';
       case HospitalityStatus.selfCare:
         return 'Rawat Mandiri';
+    }
+  }
+
+  int toInteger() {
+    switch (this) {
+      case HospitalityStatus.inpatient:
+        return 1;
+      case HospitalityStatus.selfCare:
+        return 2;
     }
   }
 }

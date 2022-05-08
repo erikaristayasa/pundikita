@@ -1,6 +1,8 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:pundi_kita/features/campaign/presentation/bloc/create/campaign_create_bloc.dart';
 
 import '../../../../../core/presentation/widgets/custom_text_area.dart';
 import '../../../../../core/presentation/widgets/custom_text_field.dart';
@@ -32,6 +34,19 @@ class _PatientFormPageState extends State<PatientFormPage> {
   final _medicalFundSourceController = TextEditingController();
   XFile? _patientKtpPhoto, _patientMedicalCertificatePhoto, _patientMedicalResultPhoto;
 
+  Future<Map<String, dynamic>> mapValue() async => {
+        'nama_pasien': _patientNameController.text,
+        'nama_penyakit': _patientSicknessController.text,
+        'status_rawat_inap': _hospitalityStatus.toInteger(),
+        if (_hospitalityStatus == HospitalityStatus.inpatient) 'nama_rumah_sakit_rawat_inap': _hospitalNameController.text,
+        'upaya_pengobatan': _treatmentEffortsController.text,
+        'sumber_dana_pengobatan': _medicalFundSourceController.text,
+        if (_patientKtpPhoto != null) 'foto_surat_identitas_pasien': await MultipartFile.fromFile(_patientKtpPhoto!.path, filename: _patientKtpPhoto!.name),
+        if (_patientMedicalCertificatePhoto != null)
+          'foto_surat_keterangan_medis': await MultipartFile.fromFile(_patientMedicalCertificatePhoto!.path, filename: _patientMedicalCertificatePhoto!.name),
+        if (_patientMedicalResultPhoto != null) 'foto_surat_hasil_pemeriksaan': await MultipartFile.fromFile(_patientMedicalResultPhoto!.path, filename: _patientMedicalResultPhoto!.name),
+      };
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,9 +55,10 @@ class _PatientFormPageState extends State<PatientFormPage> {
         onPrevious: () {
           context.read<CampaignStepBloc>().add(ToPreviousStep());
         },
-        onNext: () {
+        onNext: () async {
           if (_formKey.currentState!.validate()) {
             context.read<CampaignStepBloc>().add(ToNextStep());
+            context.read<CampaignCreateBloc>().add(UpdateBody(body: await mapValue()));
           }
         },
       ),

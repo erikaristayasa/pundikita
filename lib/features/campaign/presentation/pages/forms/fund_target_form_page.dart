@@ -12,6 +12,7 @@ import '../../../../../core/static/dimens.dart';
 import '../../../../../core/static/extensions.dart';
 import '../../../../../core/utility/helper.dart';
 import '../../../../../core/utility/validation_helper.dart';
+import '../../bloc/create/campaign_create_bloc.dart';
 import '../../bloc/step/campaign_step_bloc.dart';
 import '../../widgets/bottom_navbar_actions.dart';
 
@@ -27,6 +28,12 @@ class _FundTargetFormPageState extends State<FundTargetFormPage> {
   final _fundAmountController = TextEditingController();
   final _endDateController = TextEditingController();
   final _fundUsageDetailController = TextEditingController();
+  Map<String, dynamic> mapValue() => {
+        'jumlah_dana': int.parse((_fundAmountController.text).replaceAll('.', '')),
+        'tanggal_selesai': _endDateController.text,
+        'rincian_penggunaan_dana': _fundUsageDetailController.text,
+      };
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,6 +45,7 @@ class _FundTargetFormPageState extends State<FundTargetFormPage> {
         onNext: () {
           if (_formKey.currentState!.validate()) {
             context.read<CampaignStepBloc>().add(ToNextStep());
+            context.read<CampaignCreateBloc>().add(UpdateBody(body: mapValue()));
           }
         },
       ),

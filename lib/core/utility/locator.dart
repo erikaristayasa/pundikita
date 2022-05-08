@@ -1,6 +1,8 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:pundi_kita/core/domain/usecases/create_campaign.dart';
+import 'package:pundi_kita/features/campaign/presentation/bloc/create/campaign_create_bloc.dart';
 
 import '../../features/campaign/presentation/bloc/category/campaign_category_bloc.dart';
 import '../../features/campaign/presentation/bloc/category_filter/category_filter_bloc.dart';
@@ -86,6 +88,7 @@ Future<void> locatorSetup() async {
   locator.registerFactory<ProfileBloc>(() => ProfileBloc(getProfile: locator(), updateProfile: locator()));
   locator.registerFactory<SettingBloc>(() => SettingBloc(getSetting: locator()));
   locator.registerFactory<FaqBloc>(() => FaqBloc(getFaqList: locator()));
+  locator.registerFactory<CampaignCreateBloc>(() => CampaignCreateBloc(createCampaign: locator()));
 
   // use cases
   locator.registerLazySingleton<DoLogin>(() => DoLogin(locator()));
@@ -105,6 +108,7 @@ Future<void> locatorSetup() async {
   locator.registerLazySingleton<VerifyAccount>(() => VerifyAccount(locator()));
   locator.registerLazySingleton<GetSetting>(() => GetSetting(locator()));
   locator.registerLazySingleton<GetFaqList>(() => GetFaqList(locator()));
+  locator.registerLazySingleton<CreateCampaign>(() => CreateCampaign(locator()));
 
   // repositories
   locator.registerLazySingleton<LoginRepository>(() => LoginRepositoryImplementation(dataSource: locator()));

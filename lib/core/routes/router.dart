@@ -65,13 +65,28 @@ class Router {
       case path.CAMPAIGN_TYPE:
         return pageRoute(page: const CampaignTypeListPage());
       case path.CAMPAIGN_CATEGORY:
-        return pageRoute(page: const CampaignCategoryListPage());
+        final args = settings.arguments as CampaignCategoryListPageRouteArguments;
+        return pageRoute(
+          page: CampaignCategoryListPage(type: args.type),
+        );
       case path.CAMPAIGN_SUB_CATEGORY:
         final args = settings.arguments as CampaignSubCategoryListPageRouteArguments;
-        return pageRoute(page: CampaignSubCategoryListPage(category: args.category));
+        return pageRoute(
+          page: CampaignSubCategoryListPage(
+            type: args.type,
+            category: args.category,
+          ),
+        );
       case path.CAMPAIGN_CREATE:
         final args = settings.arguments as CampaignCreatePageRouteArguments;
-        return pageRoute(page: CampaignCreatePage(type: args.type));
+        return pageRoute(
+          page: CampaignCreatePage(
+            type: args.type,
+            typeId: args.typeId,
+            categoryId: args.categoryId,
+            subCategoryId: args.subCategoryId,
+          ),
+        );
       case path.DONATION_NOMINAL_LIST:
         final args = settings.arguments as DonateNominalListPageRouteArguments;
         return pageRoute(

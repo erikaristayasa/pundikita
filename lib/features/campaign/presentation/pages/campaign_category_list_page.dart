@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/domain/entities/campaign_entity.dart';
 import '../../../../core/presentation/pages/loading_page.dart';
 import '../../../../core/presentation/pages/not_found_page.dart';
 import '../../../../core/presentation/widgets/custom_app_bar.dart';
-import '../../../../core/utility/helper.dart';
 import '../../../../core/utility/locator.dart';
 import '../bloc/category/campaign_category_bloc.dart';
 import '../widgets/campaign_category_item.dart';
 
+class CampaignCategoryListPageRouteArguments {
+  final CampaignType type;
+
+  CampaignCategoryListPageRouteArguments({required this.type});
+}
+
 class CampaignCategoryListPage extends StatelessWidget {
-  const CampaignCategoryListPage({Key? key}) : super(key: key);
+  final CampaignType type;
+  const CampaignCategoryListPage({Key? key, required this.type}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +34,10 @@ class CampaignCategoryListPage extends StatelessWidget {
             if (state is CampaignCategoryLoaded) {
               final _data = state.data;
               return ListView.separated(
-                itemBuilder: (context, index) => CampaignCategoryItem(category: _data.elementAt(index)),
+                itemBuilder: (context, index) => CampaignCategoryItem(
+                  type: type,
+                  category: _data.elementAt(index),
+                ),
                 separatorBuilder: (_, __) => const Divider(),
                 itemCount: _data.length,
               );

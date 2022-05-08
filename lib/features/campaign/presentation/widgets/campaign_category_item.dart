@@ -6,8 +6,9 @@ import '../../../../core/routes/path.dart' as path;
 import '../../../../core/utility/helper.dart';
 
 class CampaignCategoryItem extends StatelessWidget {
+  final CampaignType type;
   final CampaignCategory category;
-  const CampaignCategoryItem({Key? key, required this.category}) : super(key: key);
+  const CampaignCategoryItem({Key? key, required this.category, required this.type}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,7 @@ class CampaignCategoryItem extends StatelessWidget {
       onTap: () => Navigator.pushNamed(
         context,
         path.CAMPAIGN_SUB_CATEGORY,
-        arguments: CampaignSubCategoryListPageRouteArguments(category: category),
+        arguments: CampaignSubCategoryListPageRouteArguments(type: type, category: category),
       ),
       leading: Image.network(
         getCampaignCategoryImageUrl(category.icon ?? ''),

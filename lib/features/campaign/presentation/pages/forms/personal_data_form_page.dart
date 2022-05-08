@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pundi_kita/core/static/dimens.dart';
 import 'package:pundi_kita/core/static/extensions.dart';
 import 'package:pundi_kita/core/utility/helper.dart';
+import 'package:pundi_kita/features/campaign/presentation/bloc/create/campaign_create_bloc.dart';
 
 import '../../../../../core/presentation/widgets/custom_text_field.dart';
 import '../../../../../core/presentation/widgets/rounded_container.dart';
@@ -27,6 +28,18 @@ class _PersonalDataFormPageState extends State<PersonalDataFormPage> {
   final _instagramAccountController = TextEditingController();
   final _twitterAccountController = TextEditingController();
   final _linkedInAccountController = TextEditingController();
+
+  Future<Map<String, dynamic>> mapValue() async => {
+        'nama_ktp': _ktpNameController.text,
+        'telepon': _phoneController.text,
+        'pekerjaan': _jobController.text,
+        'nama_sekolah_atau_tempat_kerja': _workPlaceController.text,
+        if (_facebookAccountController.text.isNotEmpty) 'link_akun_facebook': _facebookAccountController.text,
+        if (_instagramAccountController.text.isNotEmpty) 'link_akun_instagram': _instagramAccountController.text,
+        if (_twitterAccountController.text.isNotEmpty) 'link_akun_twitter': _twitterAccountController.text,
+        if (_linkedInAccountController.text.isNotEmpty) 'link_akun_linkedin': _linkedInAccountController.text,
+      };
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,9 +48,10 @@ class _PersonalDataFormPageState extends State<PersonalDataFormPage> {
         onPrevious: () {
           context.read<CampaignStepBloc>().add(ToPreviousStep());
         },
-        onNext: () {
+        onNext: () async {
           if (_formKey.currentState!.validate()) {
             context.read<CampaignStepBloc>().add(ToNextStep());
+            context.read<CampaignCreateBloc>().add(UpdateBody(body: await mapValue()));
           }
         },
       ),
@@ -73,46 +87,46 @@ class _PersonalDataFormPageState extends State<PersonalDataFormPage> {
               CustomTextField(
                 title: 'Pekerjaan/Kesibukan',
                 placeholder: 'Pekerjaan/Kesibukan',
-                inputType: TextInputType.none,
+                inputType: TextInputType.text,
                 controller: _jobController,
               ),
               mediumVerticalSpacing(),
               CustomTextField(
                 title: 'Nama Sekolah/Tempat Bekerja',
                 placeholder: 'Nama Sekolah/Tempat Bekerja',
-                inputType: TextInputType.none,
+                inputType: TextInputType.text,
                 controller: _workPlaceController,
               ),
               mediumVerticalSpacing(),
               const Divider(thickness: 1),
               CustomTextField(
                 title: 'Facebook Akun',
-                placeholder: 'Facebook Akun',
-                inputType: TextInputType.none,
+                placeholder: 'www.facebook.com/[username]',
+                inputType: TextInputType.url,
                 controller: _facebookAccountController,
                 validating: false,
               ),
               mediumVerticalSpacing(),
               CustomTextField(
                 title: 'Instagram Akun',
-                placeholder: 'Instagram Akun',
-                inputType: TextInputType.none,
+                placeholder: 'www.instagram.com/[username]',
+                inputType: TextInputType.url,
                 controller: _instagramAccountController,
                 validating: false,
               ),
               mediumVerticalSpacing(),
               CustomTextField(
                 title: 'Twitter Akun',
-                placeholder: 'Twitter Akun',
-                inputType: TextInputType.none,
+                placeholder: 'www.twitter.com/[username]',
+                inputType: TextInputType.url,
                 controller: _twitterAccountController,
                 validating: false,
               ),
               mediumVerticalSpacing(),
               CustomTextField(
                 title: 'Linked In Akun',
-                placeholder: 'Linked In Akun',
-                inputType: TextInputType.none,
+                placeholder: 'www.linkedin.com/in/[username]',
+                inputType: TextInputType.url,
                 controller: _linkedInAccountController,
                 validating: false,
               ),

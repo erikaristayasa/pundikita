@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -7,6 +8,7 @@ import '../../../../../core/presentation/widgets/custom_text_field.dart';
 import '../../../../../core/presentation/widgets/photo_file_picker.dart';
 import '../../../../../core/static/dimens.dart';
 import '../../../../../core/utility/helper.dart';
+import '../../bloc/create/campaign_create_bloc.dart';
 import '../../bloc/step/campaign_step_bloc.dart';
 import '../../widgets/bottom_navbar_actions.dart';
 
@@ -24,6 +26,13 @@ class _AdvertisementFormPageState extends State<AdvertisementFormPage> {
   final _invitationSpeechController = TextEditingController();
   XFile? _photo;
 
+  Future<Map<String, dynamic>> mapValue() async => {
+        if (_photo != null) 'foto': await MultipartFile.fromFile(_photo!.path, filename: _photo!.name),
+        'judul': _titleController.text,
+        'cerita': _storyController.text,
+        'ajakan_singkat': _invitationSpeechController.text,
+      };
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,9 +41,11 @@ class _AdvertisementFormPageState extends State<AdvertisementFormPage> {
         onPrevious: () {
           context.read<CampaignStepBloc>().add(ToPreviousStep());
         },
-        onNext: () {
+        onNext: () async {
           if (_formKey.currentState!.validate()) {
-            context.read<CampaignStepBloc>().add(ToNextStep());
+            // context.read<CampaignStepBloc>().add(ToNextStep());
+            context.read<CampaignCreateBloc>().add(UpdateBody(body: await mapValue()));
+            context.read<CampaignCreateBloc>().add(Submit());
           }
         },
       ),
@@ -48,6 +59,7 @@ class _AdvertisementFormPageState extends State<AdvertisementFormPage> {
               PhotoFilePicker(
                 onPicked: (file) => _photo = file,
                 title: 'Foto Sampul',
+                validation: true,
               ),
               mediumVerticalSpacing(),
               CustomTextField(

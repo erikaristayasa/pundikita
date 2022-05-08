@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:pundi_kita/core/presentation/widgets/custom_text_area.dart';
-import 'package:pundi_kita/core/static/dimens.dart';
 
+import '../../../../../core/presentation/widgets/custom_text_area.dart';
 import '../../../../../core/presentation/widgets/custom_text_field.dart';
-import '../../../../../core/presentation/widgets/photo_file_picker.dart';
+import '../../../../../core/static/dimens.dart';
 import '../../../../../core/utility/helper.dart';
+import '../../bloc/create/campaign_create_bloc.dart';
 import '../../bloc/step/campaign_step_bloc.dart';
 import '../../widgets/bottom_navbar_actions.dart';
 
@@ -19,10 +18,15 @@ class EventFormPage extends StatefulWidget {
 
 class _EventFormPageState extends State<EventFormPage> {
   final _formKey = GlobalKey<FormState>();
-  XFile? _photo;
   final _eventNameController = TextEditingController();
   final _eventPurposeController = TextEditingController();
   final _eventAddressController = TextEditingController();
+
+  Future<Map<String, dynamic>> mapValue() async => {
+        'nama_acara': _eventNameController.text,
+        'tujuan_acara': _eventPurposeController.text,
+        'lokasi_acara': _eventAddressController.text,
+      };
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,9 +35,10 @@ class _EventFormPageState extends State<EventFormPage> {
         onPrevious: () {
           context.read<CampaignStepBloc>().add(ToPreviousStep());
         },
-        onNext: () {
+        onNext: () async {
           if (_formKey.currentState!.validate()) {
             context.read<CampaignStepBloc>().add(ToNextStep());
+            context.read<CampaignCreateBloc>().add(UpdateBody(body: await mapValue()));
           }
         },
       ),
@@ -43,11 +48,6 @@ class _EventFormPageState extends State<EventFormPage> {
           key: _formKey,
           child: Column(
             children: [
-              PhotoFilePicker(
-                onPicked: (file) => _photo = file,
-                title: 'Foto Sampul',
-              ),
-              mediumVerticalSpacing(),
               CustomTextField(
                 title: 'Nama Acara',
                 placeholder: 'Nama Acara',

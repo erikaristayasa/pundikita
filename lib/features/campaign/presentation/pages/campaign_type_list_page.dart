@@ -12,6 +12,7 @@ import '../../../../core/utility/locator.dart';
 import '../bloc/type/campaign_type_bloc.dart';
 import 'package:pundi_kita/core/static/enums.dart' as e;
 import '../widgets/campaign_type_item.dart';
+import 'campaign_category_list_page.dart';
 
 class CampaignTypeListPage extends StatelessWidget {
   const CampaignTypeListPage({Key? key}) : super(key: key);
@@ -38,9 +39,22 @@ class CampaignTypeListPage extends StatelessWidget {
                     type: _data.elementAt(index),
                     onTap: () {
                       if (index != 0) {
-                        Navigator.pushNamed(context, path.CAMPAIGN_CATEGORY);
+                        Navigator.pushNamed(
+                          context,
+                          path.CAMPAIGN_CATEGORY,
+                          arguments: CampaignCategoryListPageRouteArguments(
+                            type: _data.elementAt(index),
+                          ),
+                        );
                       } else {
-                        Navigator.pushNamed(context, path.CAMPAIGN_CREATE, arguments: CampaignCreatePageRouteArguments(type: e.CampaignType.sick));
+                        Navigator.pushNamed(
+                          context,
+                          path.CAMPAIGN_CREATE,
+                          arguments: CampaignCreatePageRouteArguments(
+                            type: e.CampaignType.sick,
+                            typeId: _data.elementAt(index).id,
+                          ),
+                        );
                       }
                     },
                   ),
