@@ -38,4 +38,14 @@ class DonateRepositoryImplementaion implements DonateRepository {
     }
     return Left(ConnectionFailure());
   }
+
+  @override
+  Future<bool> like({required int donationId}) async {
+    return await dataSource.like(donationId: donationId);
+  }
+
+  @override
+  Future<bool> unlike({required int donationId}) async {
+    return await dataSource.unlike(donationId: donationId);
+  }
 }

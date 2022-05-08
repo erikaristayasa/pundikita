@@ -1,11 +1,11 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
-import 'package:pundi_kita/core/domain/usecases/create_campaign.dart';
-import 'package:pundi_kita/features/campaign/presentation/bloc/create/campaign_create_bloc.dart';
 
+import '../../features/campaign/presentation/bloc/aamin/aamin_bloc.dart';
 import '../../features/campaign/presentation/bloc/category/campaign_category_bloc.dart';
 import '../../features/campaign/presentation/bloc/category_filter/category_filter_bloc.dart';
+import '../../features/campaign/presentation/bloc/create/campaign_create_bloc.dart';
 import '../../features/campaign/presentation/bloc/detail/campaign_detail_bloc.dart';
 import '../../features/campaign/presentation/bloc/list/campaign_list_bloc.dart';
 import '../../features/campaign/presentation/bloc/sub_category/campaign_sub_category_bloc.dart';
@@ -53,6 +53,7 @@ import '../domain/repositories/banner_repository.dart';
 import '../domain/repositories/campaign_repository.dart';
 import '../domain/repositories/donate_repository.dart';
 import '../domain/repositories/setting_repository.dart';
+import '../domain/usecases/create_campaign.dart';
 import '../domain/usecases/get_all_campaign_list.dart';
 import '../domain/usecases/get_banners.dart';
 import '../domain/usecases/get_campaign_categories.dart';
@@ -61,6 +62,7 @@ import '../domain/usecases/get_campaign_sub_categories.dart';
 import '../domain/usecases/get_campaign_types.dart';
 import '../domain/usecases/get_donation_list.dart';
 import '../domain/usecases/get_setting.dart';
+import '../domain/usecases/like_unlike.dart';
 import '../domain/usecases/request_inquiry.dart';
 import '../network/dio_client.dart';
 import '../network/network_info.dart';
@@ -89,6 +91,7 @@ Future<void> locatorSetup() async {
   locator.registerFactory<SettingBloc>(() => SettingBloc(getSetting: locator()));
   locator.registerFactory<FaqBloc>(() => FaqBloc(getFaqList: locator()));
   locator.registerFactory<CampaignCreateBloc>(() => CampaignCreateBloc(createCampaign: locator()));
+  locator.registerFactory<AaminBloc>(() => AaminBloc(doLike: locator(), doUnLike: locator()));
 
   // use cases
   locator.registerLazySingleton<DoLogin>(() => DoLogin(locator()));
@@ -109,6 +112,8 @@ Future<void> locatorSetup() async {
   locator.registerLazySingleton<GetSetting>(() => GetSetting(locator()));
   locator.registerLazySingleton<GetFaqList>(() => GetFaqList(locator()));
   locator.registerLazySingleton<CreateCampaign>(() => CreateCampaign(locator()));
+  locator.registerLazySingleton<DoLike>(() => DoLike(locator()));
+  locator.registerLazySingleton<DoUnLike>(() => DoUnLike(locator()));
 
   // repositories
   locator.registerLazySingleton<LoginRepository>(() => LoginRepositoryImplementation(dataSource: locator()));

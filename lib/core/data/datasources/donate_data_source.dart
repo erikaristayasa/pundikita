@@ -9,6 +9,8 @@ import '../models/request_inquiry_response_model.dart';
 abstract class DonateDataSource {
   Future<Donation> requestInquiry(Map<String, dynamic> request, {CampaignService? service});
   Future<List<Donation>> getDonationList({CampaignService? service});
+  Future<bool> like({required int donationId});
+  Future<bool> unlike({required int donationId});
 }
 
 class DonateDateSourceImplementation implements DonateDataSource {
@@ -47,6 +49,30 @@ class DonateDateSourceImplementation implements DonateDataSource {
       return model.data;
     } catch (e) {
       rethrow;
+    }
+  }
+
+  @override
+  Future<bool> like({required int donationId}) async {
+    final path = 'api/user/campaign/donation/like/$donationId';
+    dio.withToken();
+    try {
+      final response = await dio.get(path);
+      return response.statusCode == 200;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  @override
+  Future<bool> unlike({required int donationId}) async {
+    final path = 'api/user/campaign/donation/unlike/$donationId';
+    dio.withToken();
+    try {
+      final response = await dio.get(path);
+      return response.statusCode == 200;
+    } catch (e) {
+      return false;
     }
   }
 }

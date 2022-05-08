@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pundi_kita/features/campaign/presentation/widgets/aamin_button.dart';
 
 import '../../../../core/domain/entities/donation_entity.dart';
 import '../../../../core/presentation/widgets/custom_label.dart';
@@ -78,10 +79,10 @@ class Prayer extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        '_name: missing', //TODO: missing
-                        style: context.textTheme().titleSmall,
-                      ),
+                      // Text(
+                      //   '_name: missing', //TODO: missing
+                      //   style: context.textTheme().titleSmall,
+                      // ),
                       Text.rich(
                         TextSpan(
                           children: [
@@ -114,20 +115,17 @@ class Prayer extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
           ),
           mediumVerticalSpacing(),
-          Text.rich(
-            TextSpan(children: [
-              TextSpan(text: '5 ', style: context.textTheme().titleSmall), //TODO: missing likes count
-              TextSpan(text: AppLocale.loc.prayForThis, style: context.textTheme().bodySmall),
-            ]),
-          ),
+          // Text.rich(
+          //   TextSpan(children: [
+          //     TextSpan(text: '5 ', style: context.textTheme().titleSmall), //TODO: missing likes count
+          //     TextSpan(text: AppLocale.loc.prayForThis, style: context.textTheme().bodySmall),
+          //   ]),
+          // ),
           const Divider(thickness: 1.5),
           Center(
-            child: TextButton.icon(
-              onPressed: () {
-                //TODO: Implement like action
-              },
-              icon: Icon(donation.likeStatus ? Icons.favorite_rounded : Icons.favorite_border_rounded),
-              label: Text(AppLocale.loc.aamiin),
+            child: AaminButton(
+              donationId: donation.id,
+              likeStatus: donation.likeStatus,
             ),
           )
         ],
