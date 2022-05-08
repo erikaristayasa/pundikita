@@ -22,13 +22,17 @@ class AaminBloc extends Bloc<AaminEvent, AaminState> {
         await doUnLike(donationId: event.donationId).then((ok) {
           if (ok) {
             emit(const AaminUnliked(false)); // unlike
+          } else {
+            emit(AaminInitial(state.status));
           }
         });
       } else {
         // do like
         await doLike(donationId: event.donationId).then((ok) {
           if (ok) {
-            emit(const AaminUnliked(true)); // like
+            emit(const AaminLiked(true)); // like
+          } else {
+            emit(AaminInitial(state.status));
           }
         });
       }

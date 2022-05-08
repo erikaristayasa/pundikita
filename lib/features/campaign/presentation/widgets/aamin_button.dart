@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../../../core/utility/app_locale.dart';
 import '../../../../core/utility/locator.dart';
@@ -23,7 +24,14 @@ class _AaminButtonState extends State<AaminButton> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => locator<AaminBloc>()..add(Initial(likeStatus: widget.likeStatus)),
-      child: BlocBuilder<AaminBloc, AaminState>(
+      child: BlocConsumer<AaminBloc, AaminState>(
+        listener: (context, state) {
+          if (state is AaminLiked) {
+            Fluttertoast.showToast(msg: 'Disukai');
+          } else if (state is AaminUnliked) {
+            Fluttertoast.showToast(msg: 'Batal disukai');
+          }
+        },
         builder: (context, state) {
           switch (state.runtimeType) {
             case AaminLoading:
