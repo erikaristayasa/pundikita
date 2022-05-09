@@ -20,6 +20,8 @@ const String CAMPAIGN_CATEGORY = '/campaign_category';
 const String CAMPAIGN_SUB_CATEGORY = '/campaign_sub_category';
 const String CAMPAIGN_CREATE = '/campaign_create';
 
+const String ZAKAT_CALCULATE = '/zakat_calculate';
+
 const String DONATION_NOMINAL_LIST = '/donation_nominal_list';
 const String DONATION_REQUEST_INQURY = '/dontation_request_inquiry';
 const String DONATION_REQUEST_INQURY_RESULT = '/dontation_request_inquiry_result';

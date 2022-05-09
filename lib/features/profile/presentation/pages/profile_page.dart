@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'profile_update_page.dart';
 import 'package:pundi_kita/features/profile/presentation/widgets/profile_setting_container.dart';
 
 import '../../../../core/presentation/widgets/rounded_container.dart';

@@ -3,7 +3,6 @@ import 'package:flutter_html/flutter_html.dart';
 
 import '../../../../core/presentation/widgets/custom_app_bar.dart';
 import '../../../../core/static/dimens.dart';
-import '../../../../core/static/extensions.dart';
 
 class SettingDetailPageRouteArguments {
   final String title, content;

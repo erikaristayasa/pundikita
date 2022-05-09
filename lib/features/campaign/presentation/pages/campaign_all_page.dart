@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/presentation/pages/loading_page.dart';
 import '../../../../core/presentation/pages/no_data_page.dart';
 import '../../../../core/presentation/widgets/custom_app_bar.dart';
+import '../../../../core/routes/path.dart' as path;
 import '../../../../core/static/assets.dart';
 import '../../../../core/static/colors.dart';
 import '../../../../core/static/enums.dart';
@@ -58,6 +59,17 @@ class _CampaignAllPageState extends State<CampaignAllPage> {
         appBar: CustomAppBar(
           title: title,
           canBack: true,
+          actions: widget.service == CampaignService.zakat
+              ? [
+                  IconButton(
+                    onPressed: () => Navigator.pushNamed(context, path.ZAKAT_CALCULATE),
+                    icon: const Icon(
+                      Icons.calculate_rounded,
+                      color: AppColors.PRIMARY,
+                    ),
+                  )
+                ]
+              : null,
         ),
         body: SafeArea(
           child: Column(

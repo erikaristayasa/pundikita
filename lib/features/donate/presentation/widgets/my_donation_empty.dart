@@ -41,6 +41,5 @@ class MyDonationEmpty extends StatelessWidget {
         ),
       ),
     );
-    ;
   }
 }

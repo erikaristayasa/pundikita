@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pundi_kita/core/static/extensions.dart';
-import 'package:pundi_kita/core/utility/app_locale.dart';
 
 import '../../../../core/domain/entities/donation_entity.dart';
 import '../../../../core/presentation/widgets/rounded_container.dart';

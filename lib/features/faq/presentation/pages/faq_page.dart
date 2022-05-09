@@ -29,7 +29,7 @@ class FaqPage extends StatelessWidget {
           listener: (context, state) {},
           builder: (context, state) {
             if (state is FaqLoaded) {
-              final List<Faq> _data = state.data as List<Faq>;
+              final List<Faq> _data = state.data;
               return ListView.separated(
                 padding: const EdgeInsets.all(Dimension.SMALL),
                 shrinkWrap: true,

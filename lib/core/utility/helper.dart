@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
+import 'package:pundi_kita/core/errors/failure.dart';
 
 import '../static/config.dart';
 import '../static/dimens.dart';
@@ -48,3 +49,13 @@ OutlineInputBorder get inputFieldBorder => const OutlineInputBorder(
       ),
       borderSide: BorderSide(color: Colors.white),
     );
+
+String errorMessage(Failure failure) {
+  switch (failure.runtimeType) {
+    case ConnectionFailure:
+      return 'Koneksi tidak terhubung';
+    case ServerFailure:
+    default:
+      return 'Kesalahan server';
+  }
+}

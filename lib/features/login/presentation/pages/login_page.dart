@@ -3,14 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
 import '../../../../core/presentation/widgets/custom_app_bar.dart';
-import '../../../../core/static/assets.dart';
 import '../../../../core/static/dimens.dart';
 import '../../../../core/utility/app_locale.dart';
 import '../../../../core/utility/helper.dart';
 import '../../../../core/utility/locator.dart';
 import '../bloc/login_bloc.dart';
 import '../widgets/login_form.dart';
-import '../widgets/login_social_button.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);

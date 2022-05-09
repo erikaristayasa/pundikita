@@ -41,6 +41,11 @@ import '../../features/register/data/repositories/register_repository_implementa
 import '../../features/register/domain/repositories/register_repository.dart';
 import '../../features/register/domain/usecases/do_register.dart';
 import '../../features/register/presentation/bloc/register_bloc.dart';
+import '../../features/zakat_calculate/data/datasources/zakat_calculate_data_source.dart';
+import '../../features/zakat_calculate/data/repositories/zakat_calculate_repository_implementation.dart';
+import '../../features/zakat_calculate/domain/repositories/zakat_calculate_repository.dart';
+import '../../features/zakat_calculate/domain/usecases/calculate.dart' as uc;
+import '../../features/zakat_calculate/presentation/bloc/zakat_calculate_bloc.dart';
 import '../data/datasources/banner_data_source.dart';
 import '../data/datasources/campaign_data_source.dart';
 import '../data/datasources/donate_data_source.dart';
@@ -92,6 +97,7 @@ Future<void> locatorSetup() async {
   locator.registerFactory<FaqBloc>(() => FaqBloc(getFaqList: locator()));
   locator.registerFactory<CampaignCreateBloc>(() => CampaignCreateBloc(createCampaign: locator()));
   locator.registerFactory<AaminBloc>(() => AaminBloc(doLike: locator(), doUnLike: locator()));
+  locator.registerFactory<ZakatCalculateBloc>(() => ZakatCalculateBloc(calculate: locator()));
 
   // use cases
   locator.registerLazySingleton<DoLogin>(() => DoLogin(locator()));
@@ -114,6 +120,7 @@ Future<void> locatorSetup() async {
   locator.registerLazySingleton<CreateCampaign>(() => CreateCampaign(locator()));
   locator.registerLazySingleton<DoLike>(() => DoLike(locator()));
   locator.registerLazySingleton<DoUnLike>(() => DoUnLike(locator()));
+  locator.registerLazySingleton<uc.Calculate>(() => uc.Calculate(locator()));
 
   // repositories
   locator.registerLazySingleton<LoginRepository>(() => LoginRepositoryImplementation(dataSource: locator()));
@@ -125,6 +132,7 @@ Future<void> locatorSetup() async {
   locator.registerLazySingleton<ProfileRepository>(() => ProfileRepositoryImplementation(dataSource: locator(), networkInfo: locator()));
   locator.registerLazySingleton<SettingRepository>(() => SettingRepositoryImplementation(dataSource: locator(), networkInfo: locator()));
   locator.registerLazySingleton<FaqRepository>(() => FaqRepositoryImplementation(dataSource: locator(), networkInfo: locator()));
+  locator.registerLazySingleton<ZakatCalculateRepository>(() => ZakatCalculateRepositoryImplementation(dataSource: locator(), networkInfo: locator()));
 
   // data sources
   locator.registerLazySingleton<LoginDataSource>(() => LoginDataSourceImplementation(dio: locator()));
@@ -136,6 +144,7 @@ Future<void> locatorSetup() async {
   locator.registerLazySingleton<ProfileDataSource>(() => ProfileDataSourceImplementation(dio: locator()));
   locator.registerLazySingleton<SettingDataSource>(() => SettingDataSourceImplementation(dio: locator()));
   locator.registerLazySingleton<FaqDataSource>(() => FaqDataSourceImplementation(dio: locator()));
+  locator.registerLazySingleton<ZakatCalculateDataSource>(() => ZakatCalculateDataSourceImplementation(dio: locator()));
 
   // core
   locator.registerLazySingleton<Dio>(() => DioClient().dio);

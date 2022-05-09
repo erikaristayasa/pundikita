@@ -16,6 +16,7 @@ import '../../features/login/presentation/pages/login_page.dart';
 import '../../features/profile/presentation/pages/profile_update_page.dart';
 import '../../features/profile/presentation/pages/setting_detail_page.dart';
 import '../../features/register/presentation/pages/register_page.dart';
+import '../../features/zakat_calculate/presentation/pages/zakat_calculate_page.dart';
 import '../presentation/pages/main_page.dart';
 import '../presentation/pages/not_found_page.dart';
 import '../presentation/pages/splash_screen.dart';
@@ -87,6 +88,8 @@ class Router {
             subCategoryId: args.subCategoryId,
           ),
         );
+      case path.ZAKAT_CALCULATE:
+        return pageRoute(page: const ZakatCalculatePage());
       case path.DONATION_NOMINAL_LIST:
         final args = settings.arguments as DonateNominalListPageRouteArguments;
         return pageRoute(
