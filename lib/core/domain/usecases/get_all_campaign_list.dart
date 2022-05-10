@@ -6,7 +6,7 @@ import '../entities/campaign_entity.dart';
 import '../repositories/campaign_repository.dart';
 
 abstract class CampaignListUseCase<Type> {
-  Future<Either<Failure, List<Campaign>>> call(CampaignService service, {bool auth, CampaignCategory? category, bool? sort});
+  Future<Either<Failure, List<Campaign>>> call(CampaignService service, {bool auth, CampaignCategory? category, bool? sort, String? keyword});
 }
 
 class GetAllCampaignList extends CampaignListUseCase<List<Campaign>> {
@@ -15,12 +15,13 @@ class GetAllCampaignList extends CampaignListUseCase<List<Campaign>> {
   GetAllCampaignList(this.repository);
 
   @override
-  Future<Either<Failure, List<Campaign>>> call(CampaignService service, {bool auth = false, CampaignCategory? category, bool? sort}) async {
+  Future<Either<Failure, List<Campaign>>> call(CampaignService service, {bool auth = false, CampaignCategory? category, bool? sort, String? keyword}) async {
     return await repository.getAllCampaignList(
       service,
       auth: auth,
       category: category,
       sort: sort,
+      keyword: keyword,
     );
   }
 }

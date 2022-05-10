@@ -39,7 +39,7 @@ class SearchBar extends StatelessWidget with PreferredSizeWidget {
                 children: [
                   Expanded(
                     child: InkWell(
-                      onTap: () => Navigator.pushNamed(context, path.WORK_IN_PROGRESS),
+                      onTap: () => Navigator.pushNamed(context, path.SEARCH),
                       child: Text(
                         AppLocale.loc.search,
                         style: context.textTheme().bodySmall!.withColor(Colors.white),

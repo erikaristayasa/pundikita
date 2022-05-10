@@ -43,6 +43,9 @@ class _CampaignAllPageState extends State<CampaignAllPage> {
       case CampaignService.zakat:
         title = AppLocale.loc.zakat;
         break;
+      case CampaignService.all:
+        title = '';
+        break;
     }
   }
 

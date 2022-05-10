@@ -4,7 +4,7 @@ abstract class CampaignListEvent extends Equatable {
   const CampaignListEvent();
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
 
 class GetCampaignList extends CampaignListEvent {
@@ -21,10 +21,21 @@ class GetCampaignList extends CampaignListEvent {
   });
 
   @override
-  List<Object> get props => [
+  List<Object?> get props => [
         service,
         auth,
-        category ?? const CampaignCategory(id: 0, icon: '', categoryName: ''),
-        sort ?? false,
+        category,
+        false
+        // category ?? const CampaignCategory(id: 0, icon: '', categoryName: ''),
+        // sort ?? false,
       ];
+}
+
+class SearchingCampaign extends CampaignListEvent {
+  final String? keyword;
+
+  const SearchingCampaign({this.keyword});
+
+  @override
+  List<Object?> get props => [keyword];
 }

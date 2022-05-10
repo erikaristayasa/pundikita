@@ -25,3 +25,5 @@ const String ZAKAT_CALCULATE = '/zakat_calculate';
 const String DONATION_NOMINAL_LIST = '/donation_nominal_list';
 const String DONATION_REQUEST_INQURY = '/dontation_request_inquiry';
 const String DONATION_REQUEST_INQURY_RESULT = '/dontation_request_inquiry_result';
+
+const String SEARCH = '/search';

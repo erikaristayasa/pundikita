@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../features/campaign/presentation/pages/campaign_search_page.dart';
 import '../../features/campaign/presentation/pages/campaign_all_page.dart';
 import '../../features/campaign/presentation/pages/campaign_category_list_page.dart';
 import '../../features/campaign/presentation/pages/campaign_create_page.dart';
@@ -88,6 +89,8 @@ class Router {
             subCategoryId: args.subCategoryId,
           ),
         );
+      case path.SEARCH:
+        return pageRoute(page: const CampaignSearchPage());
       case path.ZAKAT_CALCULATE:
         return pageRoute(page: const ZakatCalculatePage());
       case path.DONATION_NOMINAL_LIST:

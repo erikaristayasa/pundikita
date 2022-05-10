@@ -13,7 +13,7 @@ import '../models/campaign_sub_category_response_model.dart';
 import '../models/campaign_type_response_model.dart';
 
 abstract class CampaignDataSource {
-  Future<List<Campaign>> getCampaignList(e.CampaignService service, {bool auth, CampaignCategory? category, bool? sort});
+  Future<List<Campaign>> getCampaignList(e.CampaignService service, {bool auth, CampaignCategory? category, bool? sort, String? keyword});
   Future<Campaign> getCampaignDetail(int id, {required e.CampaignService service});
   Future<List<CampaignType>> getTypes();
   Future<List<CampaignCategory>> getCategories();
@@ -36,6 +36,8 @@ class CampaignDataSourceImplementation implements CampaignDataSource {
       case e.CampaignService.zakat:
         path = 'api/user/zakat/find/$id';
         break;
+      default:
+        break;
     }
     dio.withToken();
 
@@ -49,7 +51,7 @@ class CampaignDataSourceImplementation implements CampaignDataSource {
   }
 
   @override
-  Future<List<Campaign>> getCampaignList(e.CampaignService service, {bool auth = false, CampaignCategory? category, bool? sort}) async {
+  Future<List<Campaign>> getCampaignList(e.CampaignService service, {bool auth = false, CampaignCategory? category, bool? sort, String? keyword}) async {
     String path = '';
     switch (service) {
       case e.CampaignService.donasi:
@@ -58,11 +60,14 @@ class CampaignDataSourceImplementation implements CampaignDataSource {
       case e.CampaignService.zakat:
         path = 'api/user/zakat/list';
         break;
+      default:
+        break;
     }
     dio.withToken();
     final params = {
       if (category != null) 'campaign_category_id': category.id,
       if (sort != null) 'dana_paling_sedikit': sort,
+      if (keyword != null) 'keyword': keyword,
     };
 
     try {

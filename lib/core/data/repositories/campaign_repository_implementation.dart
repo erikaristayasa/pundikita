@@ -14,9 +14,9 @@ class CampaignRepositoryImplementation implements CampaignRepository {
   CampaignRepositoryImplementation({required this.dataSource});
 
   @override
-  Future<Either<Failure, List<Campaign>>> getAllCampaignList(e.CampaignService service, {bool auth = false, CampaignCategory? category, bool? sort}) async {
+  Future<Either<Failure, List<Campaign>>> getAllCampaignList(e.CampaignService service, {bool auth = false, CampaignCategory? category, bool? sort, String? keyword}) async {
     try {
-      final result = await dataSource.getCampaignList(service, auth: auth, category: category, sort: sort);
+      final result = await dataSource.getCampaignList(service, auth: auth, category: category, sort: sort, keyword: keyword);
       return Right(result);
     } catch (e) {
       return Left(ServerFailure());
