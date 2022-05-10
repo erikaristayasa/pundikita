@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../features/campaign/presentation/pages/my_campaign_page.dart';
 import '../../../features/donate/presentation/pages/my_donation_page.dart';
 import '../../../features/home/presentation/pages/home_page.dart';
+import '../../../features/inbox/presentation/pages/inbox_page.dart';
 import '../../../features/profile/presentation/pages/profile_page.dart';
 import '../../static/assets.dart';
 import '../../static/colors.dart';
@@ -63,6 +64,8 @@ class _MainPageState extends State<MainPage> {
                 return const MyCampaignPage();
               } else if (state == 2) {
                 return const MyDonationPage();
+              } else if (state == 3) {
+                return const InboxPage();
               } else if (state == 4) {
                 return const ProfilePage();
               } else {

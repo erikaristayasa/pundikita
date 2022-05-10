@@ -5,6 +5,7 @@ class Assets {
   static const String DEFAULT_IMAGE = 'assets/images/default_image.png';
   static const String POPUP_INFORMATION = 'assets/images/popup_information.jpeg';
   static const String WORK_IN_PROGRESS = 'assets/icons/work-in-progress.png';
+  static const String BELL = 'assets/icons/bell.png';
 
   static const String GOOGLE = 'assets/icons/google.png';
   static const String FACEBOOK = 'assets/icons/facebook.png';

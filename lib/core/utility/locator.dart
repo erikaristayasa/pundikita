@@ -22,6 +22,11 @@ import '../../features/forgot_password/data/repositories/forgot_password_reposit
 import '../../features/forgot_password/domain/repositories/forgot_password_repository.dart';
 import '../../features/forgot_password/domain/usecases/forgot_password.dart';
 import '../../features/forgot_password/presentation/bloc/forgot_password_bloc.dart';
+import '../../features/inbox/data/datasources/inbox_data_source.dart';
+import '../../features/inbox/data/repositories/inbox_repostory_implementation.dart';
+import '../../features/inbox/domain/repositories/inbox_repository.dart';
+import '../../features/inbox/domain/usecases/get_inbox_list.dart';
+import '../../features/inbox/presentation/bloc/inbox_bloc.dart';
 import '../../features/login/data/datasources/login_data_source.dart';
 import '../../features/login/data/repositories/login_repository_implementation.dart';
 import '../../features/login/domain/repositories/login_repository.dart';
@@ -98,6 +103,7 @@ Future<void> locatorSetup() async {
   locator.registerFactory<CampaignCreateBloc>(() => CampaignCreateBloc(createCampaign: locator()));
   locator.registerFactory<AaminBloc>(() => AaminBloc(doLike: locator(), doUnLike: locator()));
   locator.registerFactory<ZakatCalculateBloc>(() => ZakatCalculateBloc(calculate: locator()));
+  locator.registerFactory<InboxBloc>(() => InboxBloc(getInboxList: locator()));
 
   // use cases
   locator.registerLazySingleton<DoLogin>(() => DoLogin(locator()));
@@ -121,6 +127,7 @@ Future<void> locatorSetup() async {
   locator.registerLazySingleton<DoLike>(() => DoLike(locator()));
   locator.registerLazySingleton<DoUnLike>(() => DoUnLike(locator()));
   locator.registerLazySingleton<uc.Calculate>(() => uc.Calculate(locator()));
+  locator.registerLazySingleton<GetInboxList>(() => GetInboxList(locator()));
 
   // repositories
   locator.registerLazySingleton<LoginRepository>(() => LoginRepositoryImplementation(dataSource: locator()));
@@ -133,6 +140,7 @@ Future<void> locatorSetup() async {
   locator.registerLazySingleton<SettingRepository>(() => SettingRepositoryImplementation(dataSource: locator(), networkInfo: locator()));
   locator.registerLazySingleton<FaqRepository>(() => FaqRepositoryImplementation(dataSource: locator(), networkInfo: locator()));
   locator.registerLazySingleton<ZakatCalculateRepository>(() => ZakatCalculateRepositoryImplementation(dataSource: locator(), networkInfo: locator()));
+  locator.registerLazySingleton<InboxRepository>(() => InboxRepositoryImplementation(dataSource: locator(), networkInfo: locator()));
 
   // data sources
   locator.registerLazySingleton<LoginDataSource>(() => LoginDataSourceImplementation(dio: locator()));
@@ -145,6 +153,7 @@ Future<void> locatorSetup() async {
   locator.registerLazySingleton<SettingDataSource>(() => SettingDataSourceImplementation(dio: locator()));
   locator.registerLazySingleton<FaqDataSource>(() => FaqDataSourceImplementation(dio: locator()));
   locator.registerLazySingleton<ZakatCalculateDataSource>(() => ZakatCalculateDataSourceImplementation(dio: locator()));
+  locator.registerLazySingleton<InboxDataSource>(() => InboxDataSourceImplementation(dio: locator()));
 
   // core
   locator.registerLazySingleton<Dio>(() => DioClient().dio);
