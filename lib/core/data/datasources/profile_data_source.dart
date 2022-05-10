@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 
-import '../../../../core/domain/entities/user_entity.dart';
-import '../../../../core/static/extensions.dart';
+import '../../domain/entities/user_entity.dart';
+import '../../static/extensions.dart';
 import '../models/profile_response_model.dart';
 
 abstract class ProfileDataSource {

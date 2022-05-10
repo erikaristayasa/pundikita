@@ -19,6 +19,7 @@ class UserModel extends User {
     required String? facebookUid,
     required String? firebaseUid,
     required int? agencyStatus,
+    required bool campaignStatus,
   }) : super(
           id: id,
           name: name,
@@ -36,6 +37,7 @@ class UserModel extends User {
           facebookUid: facebookUid,
           firebaseUid: firebaseUid,
           agencyStatus: agencyStatus,
+          campaignStatus: campaignStatus,
         );
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
         id: json['id'],
@@ -54,5 +56,6 @@ class UserModel extends User {
         facebookUid: json['facebook_uid'],
         firebaseUid: json['firebase_uid'],
         agencyStatus: json['status_lembaga'],
+        campaignStatus: json['status_campaign'] ?? false,
       );
 }

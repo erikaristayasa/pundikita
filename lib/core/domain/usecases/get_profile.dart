@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 
-import '../../../../core/domain/entities/user_entity.dart';
-import '../../../../core/errors/failure.dart';
+import '../entities/user_entity.dart';
+import '../../errors/failure.dart';
 import '../repositories/profile_repository.dart';
 
 abstract class GetProfileUseCase<Type> {

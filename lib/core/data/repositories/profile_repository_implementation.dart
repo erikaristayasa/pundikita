@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
-import '../../../../core/domain/entities/user_entity.dart';
-import '../../../../core/errors/failure.dart';
-import '../../../../core/network/network_info.dart';
+import '../../domain/entities/user_entity.dart';
+import '../../errors/failure.dart';
+import '../../network/network_info.dart';
 import '../../domain/repositories/profile_repository.dart';
 import '../datasources/profile_data_source.dart';
 

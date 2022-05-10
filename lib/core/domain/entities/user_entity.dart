@@ -17,6 +17,7 @@ class User extends Equatable {
   final String? facebookUid;
   final String? firebaseUid;
   final int? agencyStatus;
+  final bool campaignStatus;
 
   const User({
     required this.id,
@@ -35,6 +36,7 @@ class User extends Equatable {
     required this.facebookUid,
     required this.firebaseUid,
     required this.agencyStatus,
+    required this.campaignStatus,
   });
 
   @override
@@ -55,5 +57,6 @@ class User extends Equatable {
         facebookUid,
         firebaseUid,
         agencyStatus,
+        campaignStatus,
       ];
 }

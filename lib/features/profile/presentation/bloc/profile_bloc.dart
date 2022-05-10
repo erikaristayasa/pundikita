@@ -5,7 +5,7 @@ import 'package:pundi_kita/features/profile/domain/usecases/update_profile.dart'
 
 import '../../../../core/domain/entities/user_entity.dart';
 import '../../../../core/errors/failure.dart';
-import '../../domain/usecases/get_profile.dart';
+import '../../../../core/domain/usecases/get_profile.dart';
 
 part 'profile_event.dart';
 part 'profile_state.dart';
