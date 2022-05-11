@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../../../core/domain/entities/user_entity.dart';
 import '../../../../core/presentation/cubits/user_info_cubit.dart';
 import '../../../../core/presentation/pages/loading_page.dart';
-import '../../../../core/presentation/pages/no_data_page.dart';
 import '../../../../core/presentation/widgets/custom_app_bar.dart';
+import '../../../../core/presentation/widgets/simple_alert_dialog.dart';
 import '../../../../core/routes/path.dart' as path;
 import '../../../../core/static/dimens.dart';
 import '../../../../core/static/enums.dart' as e;
@@ -28,9 +27,15 @@ class CampaignTypeListPage extends StatelessWidget {
       listener: (context, state) async {
         if (state != null) {
           if (!state.campaignStatus) {
-            Fluttertoast.showToast(msg: 'Maaf, akun Anda belum bisa untuk membuat Galang Dana.');
             await Future.delayed(const Duration(milliseconds: 1300), () {
               Navigator.pop(context);
+              showDialog(
+                context: context,
+                builder: (context) => SimpleAlertDialog(
+                  title: AppLocale.loc.failure,
+                  message: 'Maaf, akun Anda belum bisa untuk membuat Galang Dana.',
+                ),
+              );
             });
           }
         }
@@ -90,7 +95,7 @@ class CampaignTypeListPage extends StatelessWidget {
           );
         }
 
-        return const NoDataPage();
+        return const LoadingPage(isList: true);
       },
     );
   }
