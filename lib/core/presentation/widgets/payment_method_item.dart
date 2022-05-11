@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/static/colors.dart';
-import '../../../../core/static/dimens.dart';
-import '../../../../core/static/enums.dart';
-import '../../../../core/static/extensions.dart';
+import '../../static/colors.dart';
+import '../../static/dimens.dart';
+import '../../static/enums.dart';
+import '../../static/extensions.dart';
 
 class PaymentMethodItem extends StatelessWidget {
   final String? subtitle;

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/presentation/widgets/rounded_container.dart';
-import '../../../../core/static/assets.dart';
-import '../../../../core/static/colors.dart';
-import '../../../../core/static/dimens.dart';
-import '../../../../core/static/extensions.dart';
-import '../../../../core/utility/helper.dart';
+import 'rounded_container.dart';
+import '../../static/assets.dart';
+import '../../static/colors.dart';
+import '../../static/dimens.dart';
+import '../../static/extensions.dart';
+import '../../utility/helper.dart';
 
 class NominalItem extends StatelessWidget {
   final Function(int nominal) onSelect;

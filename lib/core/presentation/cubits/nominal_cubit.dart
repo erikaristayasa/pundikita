@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 
-class DonateNominalCubit extends Cubit<int?> {
-  DonateNominalCubit() : super(null);
+class NominalCubit extends Cubit<int?> {
+  NominalCubit() : super(null);
 
   void onSelect(int nominal) => emit(nominal);
   bool isSelected(int nominal) => nominal == state;

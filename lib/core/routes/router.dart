@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pundi_kita/features/wallet/presentation/pages/wallet_topup_page.dart';
 
 import '../../features/campaign/presentation/pages/campaign_search_page.dart';
 import '../../features/campaign/presentation/pages/campaign_all_page.dart';
@@ -109,6 +110,8 @@ class Router {
       case path.DONATION_REQUEST_INQURY_RESULT:
         final args = settings.arguments as DonateRequestInquiryResultPageRouteArguments;
         return pageRoute(page: DonateRequestInquiryResultPage(result: args.result));
+      case path.WALLET_TOP_UP:
+        return pageRoute(page: const WalletTopUpPage());
       case path.WORK_IN_PROGRESS:
         return pageRoute(page: const WorkInProgressPage());
       default:

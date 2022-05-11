@@ -27,3 +27,5 @@ const String DONATION_REQUEST_INQURY = '/dontation_request_inquiry';
 const String DONATION_REQUEST_INQURY_RESULT = '/dontation_request_inquiry_result';
 
 const String SEARCH = '/search';
+
+const String WALLET_TOP_UP = '/wallet_topup';

@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/static/colors.dart';
-import '../../../../core/static/dimens.dart';
-import '../../../../core/static/enums.dart';
-import '../../../../core/static/extensions.dart';
-import '../../../../core/utility/app_locale.dart';
-import '../cubit/payment_method/donate_payment_method_cubit.dart';
+import '../cubits/payment_method/payment_method_cubit.dart';
+import '../../static/colors.dart';
+import '../../static/dimens.dart';
+import '../../static/enums.dart';
+import '../../static/extensions.dart';
+import '../../utility/app_locale.dart';
+
 import 'payment_method_item.dart';
 
 class BottomSheetPaymentMethod extends StatelessWidget {
-  const BottomSheetPaymentMethod({Key? key}) : super(key: key);
+  final bool showWallet;
+  const BottomSheetPaymentMethod({Key? key, this.showWallet = true}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,79 +38,86 @@ class BottomSheetPaymentMethod extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: BlocBuilder<DonatePaymentMethodCubit, DonatePaymentMethodState>(
+              child: BlocBuilder<PaymentMethodCubit, PaymentMethodState>(
                 builder: (context, state) {
-                  final bloc = context.read<DonatePaymentMethodCubit>();
+                  final bloc = context.read<PaymentMethodCubit>();
                   return ListView(
                     shrinkWrap: true,
                     children: [
-                      const PaymentSection(sectionName: 'Dompet'),
-                      PaymentMethodItem(
-                        subtitle: 'Saldo anda saat ini Rp0',
-                        onSelect: (method, channel) => bloc.select(method: method, channel: channel),
-                        selected: context.watch<DonatePaymentMethodCubit>().isSelected(PaymentChannel.saldo),
-                        method: PaymentMethod.saldo,
-                        channel: PaymentChannel.saldo,
-                      ),
+                      showWallet
+                          ? Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                const PaymentSection(sectionName: 'Dompet'),
+                                PaymentMethodItem(
+                                  subtitle: 'Saldo anda saat ini Rp0',
+                                  onSelect: (method, channel) => bloc.select(method: method, channel: channel),
+                                  selected: context.watch<PaymentMethodCubit>().isSelected(PaymentChannel.saldo),
+                                  method: PaymentMethod.saldo,
+                                  channel: PaymentChannel.saldo,
+                                ),
+                              ],
+                            )
+                          : const SizedBox.shrink(),
                       const PaymentSection(sectionName: 'QRIS'),
                       PaymentMethodItem(
                         onSelect: (method, channel) => bloc.select(method: method, channel: channel),
-                        selected: context.watch<DonatePaymentMethodCubit>().isSelected(PaymentChannel.qris),
+                        selected: context.watch<PaymentMethodCubit>().isSelected(PaymentChannel.qris),
                         method: PaymentMethod.qris,
                         channel: PaymentChannel.qris,
                       ),
                       const PaymentSection(sectionName: 'Virtual Account'),
                       PaymentMethodItem(
                         onSelect: (method, channel) => bloc.select(method: method, channel: channel),
-                        selected: context.watch<DonatePaymentMethodCubit>().isSelected(PaymentChannel.bag),
+                        selected: context.watch<PaymentMethodCubit>().isSelected(PaymentChannel.bag),
                         method: PaymentMethod.va,
                         channel: PaymentChannel.bag,
                       ),
                       PaymentMethodItem(
                         onSelect: (method, channel) => bloc.select(method: method, channel: channel),
-                        selected: context.watch<DonatePaymentMethodCubit>().isSelected(PaymentChannel.bca),
+                        selected: context.watch<PaymentMethodCubit>().isSelected(PaymentChannel.bca),
                         method: PaymentMethod.va,
                         channel: PaymentChannel.bca,
                       ),
                       PaymentMethodItem(
                         onSelect: (method, channel) => bloc.select(method: method, channel: channel),
-                        selected: context.watch<DonatePaymentMethodCubit>().isSelected(PaymentChannel.bni),
+                        selected: context.watch<PaymentMethodCubit>().isSelected(PaymentChannel.bni),
                         method: PaymentMethod.va,
                         channel: PaymentChannel.bni,
                       ),
                       PaymentMethodItem(
                         onSelect: (method, channel) => bloc.select(method: method, channel: channel),
-                        selected: context.watch<DonatePaymentMethodCubit>().isSelected(PaymentChannel.cimb),
+                        selected: context.watch<PaymentMethodCubit>().isSelected(PaymentChannel.cimb),
                         method: PaymentMethod.va,
                         channel: PaymentChannel.cimb,
                       ),
                       PaymentMethodItem(
                         onSelect: (method, channel) => bloc.select(method: method, channel: channel),
-                        selected: context.watch<DonatePaymentMethodCubit>().isSelected(PaymentChannel.mandiri),
+                        selected: context.watch<PaymentMethodCubit>().isSelected(PaymentChannel.mandiri),
                         method: PaymentMethod.va,
                         channel: PaymentChannel.mandiri,
                       ),
                       PaymentMethodItem(
                         onSelect: (method, channel) => bloc.select(method: method, channel: channel),
-                        selected: context.watch<DonatePaymentMethodCubit>().isSelected(PaymentChannel.bmi),
+                        selected: context.watch<PaymentMethodCubit>().isSelected(PaymentChannel.bmi),
                         method: PaymentMethod.va,
                         channel: PaymentChannel.bmi,
                       ),
                       PaymentMethodItem(
                         onSelect: (method, channel) => bloc.select(method: method, channel: channel),
-                        selected: context.watch<DonatePaymentMethodCubit>().isSelected(PaymentChannel.bri),
+                        selected: context.watch<PaymentMethodCubit>().isSelected(PaymentChannel.bri),
                         method: PaymentMethod.va,
                         channel: PaymentChannel.bri,
                       ),
                       PaymentMethodItem(
                         onSelect: (method, channel) => bloc.select(method: method, channel: channel),
-                        selected: context.watch<DonatePaymentMethodCubit>().isSelected(PaymentChannel.bsi),
+                        selected: context.watch<PaymentMethodCubit>().isSelected(PaymentChannel.bsi),
                         method: PaymentMethod.va,
                         channel: PaymentChannel.bsi,
                       ),
                       PaymentMethodItem(
                         onSelect: (method, channel) => bloc.select(method: method, channel: channel),
-                        selected: context.watch<DonatePaymentMethodCubit>().isSelected(PaymentChannel.permata),
+                        selected: context.watch<PaymentMethodCubit>().isSelected(PaymentChannel.permata),
                         method: PaymentMethod.va,
                         channel: PaymentChannel.permata,
                       ),

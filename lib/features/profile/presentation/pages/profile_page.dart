@@ -44,6 +44,15 @@ class ProfilePage extends StatelessWidget {
                   children: [
                     RoundedContainer(
                       child: ProfileMenu(
+                        asset: Assets.WALLET,
+                        onTap: () => Navigator.pushNamed(context, path.WALLET_TOP_UP),
+                        title: 'Dompet',
+                        subtitle: 'Saldo anda saat ini Rp0',
+                      ),
+                    ),
+                    smallVerticalSpacing(),
+                    RoundedContainer(
+                      child: ProfileMenu(
                         asset: Assets.FAQ,
                         onTap: () => Navigator.pushNamed(context, path.FAQ),
                         title: AppLocale.loc.faq,

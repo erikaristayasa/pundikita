@@ -4,6 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
 import '../../../../core/domain/entities/campaign_entity.dart';
+import '../../../../core/presentation/cubits/payment_method/payment_method_cubit.dart';
 import '../../../../core/presentation/widgets/custom_app_bar.dart';
 import '../../../../core/presentation/widgets/rounded_button.dart';
 import '../../../../core/presentation/widgets/rounded_container.dart';
@@ -16,10 +17,9 @@ import '../../../../core/utility/helper.dart';
 import '../../../../core/utility/locator.dart';
 import '../bloc/request_inquiry_bloc.dart';
 import '../cubit/donate_pray_dubit.dart';
-import '../cubit/payment_method/donate_payment_method_cubit.dart';
-import '../widgets/bottom_sheet_payment_method.dart';
+import '../../../../core/presentation/widgets/bottom_sheet_payment_method.dart';
 import '../widgets/donate_form.dart';
-import '../widgets/payment_method_item.dart';
+import '../../../../core/presentation/widgets/payment_method_item.dart';
 import 'donate_request_inquiry_result_page.dart';
 
 class DonateRequestInquiryPageRouteArguments {
@@ -40,7 +40,7 @@ class DonateRequestInquiryPage extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider<DonatePrayCubit>(create: (_) => DonatePrayCubit()),
-          BlocProvider<DonatePaymentMethodCubit>(create: (_) => DonatePaymentMethodCubit()),
+          BlocProvider<PaymentMethodCubit>(create: (_) => PaymentMethodCubit()),
           BlocProvider<RequestInquiryBloc>(create: (_) => locator<RequestInquiryBloc>()),
         ],
         child: Scaffold(
@@ -82,16 +82,16 @@ class DonateRequestInquiryPage extends StatelessWidget {
                 RoundedContainer(
                   padding: const EdgeInsets.all(Dimension.MEDIUM),
                   height: 74,
-                  child: BlocBuilder<DonatePaymentMethodCubit, DonatePaymentMethodState>(
+                  child: BlocBuilder<PaymentMethodCubit, PaymentMethodState>(
                     builder: (context, state) {
                       Widget? firstChild;
-                      if (state is DonatePaymentMethodEmpty) {
+                      if (state is PaymentMethodEmpty) {
                         firstChild = Text(
                           AppLocale.loc.paymentMethod,
                           style: context.textTheme().bodyMedium,
                         );
                       } else {
-                        final _state = state as DonatePaymentMethodSelected;
+                        final _state = state as PaymentMethodSelected;
 
                         firstChild = PaymentMethodItem(
                           dense: true,
@@ -114,8 +114,8 @@ class DonateRequestInquiryPage extends StatelessWidget {
                                 backgroundColor: Colors.transparent,
                                 isScrollControlled: true,
                                 builder: (_) {
-                                  return BlocProvider<DonatePaymentMethodCubit>.value(
-                                    value: BlocProvider.of<DonatePaymentMethodCubit>(context),
+                                  return BlocProvider<PaymentMethodCubit>.value(
+                                    value: BlocProvider.of<PaymentMethodCubit>(context),
                                     child: const BottomSheetPaymentMethod(),
                                   );
                                 }),
@@ -135,9 +135,9 @@ class DonateRequestInquiryPage extends StatelessWidget {
             padding: const EdgeInsets.all(Dimension.MEDIUM),
             child: BlocBuilder<DonatePrayCubit, String>(
               builder: (context, pray) {
-                return BlocBuilder<DonatePaymentMethodCubit, DonatePaymentMethodState>(
+                return BlocBuilder<PaymentMethodCubit, PaymentMethodState>(
                   builder: (context, paymentState) {
-                    final _enable = paymentState is DonatePaymentMethodSelected;
+                    final _enable = paymentState is PaymentMethodSelected;
                     return BlocConsumer<RequestInquiryBloc, RequestInquiryState>(
                       listener: (context, requestState) {
                         switch (requestState.runtimeType) {
@@ -162,7 +162,7 @@ class DonateRequestInquiryPage extends StatelessWidget {
                         return RoundedButton(
                           enable: _enable,
                           onTap: () {
-                            final _payment = (paymentState as DonatePaymentMethodSelected);
+                            final _payment = (paymentState as PaymentMethodSelected);
                             context.read<RequestInquiryBloc>().add(OnSubmit(
                                   campaign: campaign,
                                   method: _payment.method,
