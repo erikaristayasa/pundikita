@@ -17,11 +17,15 @@ class MyDonationItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return RoundedContainer(
       child: ListTile(
-        onTap: () => Navigator.pushNamed(
-          context,
-          path.DONATION_REQUEST_INQURY_RESULT,
-          arguments: DonateRequestInquiryResultPageRouteArguments(result: donation),
-        ),
+        onTap: () {
+          if (donation.status == DonationPayStatus.pending) {
+            Navigator.pushNamed(
+              context,
+              path.DONATION_REQUEST_INQURY_RESULT,
+              arguments: DonateRequestInquiryResultPageRouteArguments(result: donation),
+            );
+          }
+        },
         title: Text(
           getFormattedPrice(donation.amountOfFunds.toInt()),
         ),
