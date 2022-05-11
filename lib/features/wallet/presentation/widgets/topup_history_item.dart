@@ -34,11 +34,11 @@ class TopUpHistoryItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              result.paymentMethod.name,
+              result.paymentMethod?.name ?? '',
               style: context.textTheme().labelSmall,
             ),
             Text(
-              result.paymentChannel.title,
+              result.paymentChannel?.title ?? '',
               style: context.textTheme().labelSmall,
             )
           ],

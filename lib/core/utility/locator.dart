@@ -46,7 +46,9 @@ import '../../features/wallet/data/datasources/wallet_data_source.dart';
 import '../../features/wallet/data/repositories/wallet_repository_implementation.dart';
 import '../../features/wallet/domain/repositories/wallet_repository.dart';
 import '../../features/wallet/domain/usecases/get_topup_histories.dart';
+import '../../features/wallet/domain/usecases/topup.dart';
 import '../../features/wallet/presentation/bloc/history/wallet_topup_history_bloc.dart';
+import '../../features/wallet/presentation/bloc/topup/wallet_topup_bloc.dart';
 import '../../features/zakat_calculate/data/datasources/zakat_calculate_data_source.dart';
 import '../../features/zakat_calculate/data/repositories/zakat_calculate_repository_implementation.dart';
 import '../../features/zakat_calculate/domain/repositories/zakat_calculate_repository.dart';
@@ -111,6 +113,7 @@ Future<void> locatorSetup() async {
   locator.registerFactory<ZakatCalculateBloc>(() => ZakatCalculateBloc(calculate: locator()));
   locator.registerFactory<InboxBloc>(() => InboxBloc(getInboxList: locator()));
   locator.registerFactory<WalletTopupHistoryBloc>(() => WalletTopupHistoryBloc(getTopUpHistories: locator()));
+  locator.registerFactory<WalletTopupBloc>(() => WalletTopupBloc(topUp: locator()));
 
   // use cases
   locator.registerLazySingleton<DoLogin>(() => DoLogin(locator()));
@@ -137,6 +140,7 @@ Future<void> locatorSetup() async {
   locator.registerLazySingleton<GetInboxList>(() => GetInboxList(locator()));
   locator.registerLazySingleton<SearchCampaign>(() => SearchCampaign(locator()));
   locator.registerLazySingleton<GetTopUpHistories>(() => GetTopUpHistories(locator()));
+  locator.registerLazySingleton<TopUp>(() => TopUp(locator()));
 
   // repositories
   locator.registerLazySingleton<LoginRepository>(() => LoginRepositoryImplementation(dataSource: locator()));

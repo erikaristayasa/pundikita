@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import '../../../../core/static/enums.dart';
 import '../../../../core/static/extensions.dart';
 import '../../domain/entities/topup_result_entity.dart';
+import '../models/topup_create_response_model.dart';
 import '../models/topup_history_result_model.dart';
 
 abstract class WalletDataSource {
@@ -33,8 +34,20 @@ class WalletDataSourceImplementation implements WalletDataSource {
   }
 
   @override
-  Future<TopUpResult> topUp({required String amount, required PaymentMethod paymentMethod, required PaymentChannel paymentChannel}) {
-    // TODO: implement topUp
-    throw UnimplementedError();
+  Future<TopUpResult> topUp({required String amount, required PaymentMethod paymentMethod, required PaymentChannel paymentChannel}) async {
+    const path = 'api/user/top-up/create';
+    final data = FormData.fromMap({
+      'jumlah': amount,
+      'payment_method': paymentMethod.name,
+      'payment_channel': paymentChannel.name,
+    });
+    dio.withToken();
+    try {
+      final response = await dio.post(path, data: data);
+      final model = TopUpCreateResponseModel.fromJson(response.data);
+      return model.data;
+    } catch (e) {
+      rethrow;
+    }
   }
 }

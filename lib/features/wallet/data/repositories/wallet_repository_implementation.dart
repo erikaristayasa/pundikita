@@ -30,8 +30,15 @@ class WalletRepositoryImplementation implements WalletRepository {
   }
 
   @override
-  Future<Either<Failure, TopUpResult>> topUp({required String amount, required PaymentMethod paymentMethod, required PaymentChannel paymentChannel}) {
-    // TODO: implement topUp
-    throw UnimplementedError();
+  Future<Either<Failure, TopUpResult>> topUp({required String amount, required PaymentMethod paymentMethod, required PaymentChannel paymentChannel}) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final result = await dataSource.topUp(amount: amount, paymentMethod: paymentMethod, paymentChannel: paymentChannel);
+        return Right(result);
+      } catch (e) {
+        return Left(ServerFailure());
+      }
+    }
+    return Left(ConnectionFailure());
   }
 }
