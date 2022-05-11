@@ -14,3 +14,5 @@ enum DonationPayStatus { pending, paid, failed }
 enum DonatureType { personal, foundation }
 enum RecipientType { personal, foundation }
 enum Gender { male, female }
+
+enum WalletTopUpPayStatus { pending, paid, failed }

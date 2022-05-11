@@ -20,12 +20,6 @@ class ProfileTopContainer extends StatefulWidget {
 
 class _ProfileTopContainerState extends State<ProfileTopContainer> {
   @override
-  void initState() {
-    super.initState();
-    context.read<ProfileBloc>().add(FetchProfile());
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,

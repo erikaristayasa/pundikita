@@ -57,6 +57,16 @@ extension DonationPaymentStatus on num {
       return DonationPayStatus.failed;
     }
   }
+
+  WalletTopUpPayStatus walletTopUpPayStatus() {
+    if (this == 0) {
+      return WalletTopUpPayStatus.pending;
+    } else if (this == 1) {
+      return WalletTopUpPayStatus.paid;
+    } else {
+      return WalletTopUpPayStatus.failed;
+    }
+  }
 }
 
 extension PaymentInfo on PaymentChannel {

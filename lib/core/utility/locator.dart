@@ -33,10 +33,6 @@ import '../../features/login/domain/repositories/login_repository.dart';
 import '../../features/login/domain/usecases/do_login.dart';
 import '../../features/login/domain/usecases/do_login_by_google.dart';
 import '../../features/login/presentation/bloc/login_bloc.dart';
-import '../data/datasources/profile_data_source.dart';
-import '../data/repositories/profile_repository_implementation.dart';
-import '../domain/repositories/profile_repository.dart';
-import '../domain/usecases/get_profile.dart';
 import '../../features/profile/domain/usecases/update_profile.dart';
 import '../../features/profile/domain/usecases/verify_account.dart';
 import '../../features/profile/presentation/bloc/profile_bloc.dart';
@@ -46,6 +42,11 @@ import '../../features/register/data/repositories/register_repository_implementa
 import '../../features/register/domain/repositories/register_repository.dart';
 import '../../features/register/domain/usecases/do_register.dart';
 import '../../features/register/presentation/bloc/register_bloc.dart';
+import '../../features/wallet/data/datasources/wallet_data_source.dart';
+import '../../features/wallet/data/repositories/wallet_repository_implementation.dart';
+import '../../features/wallet/domain/repositories/wallet_repository.dart';
+import '../../features/wallet/domain/usecases/get_topup_histories.dart';
+import '../../features/wallet/presentation/bloc/history/wallet_topup_history_bloc.dart';
 import '../../features/zakat_calculate/data/datasources/zakat_calculate_data_source.dart';
 import '../../features/zakat_calculate/data/repositories/zakat_calculate_repository_implementation.dart';
 import '../../features/zakat_calculate/domain/repositories/zakat_calculate_repository.dart';
@@ -54,14 +55,17 @@ import '../../features/zakat_calculate/presentation/bloc/zakat_calculate_bloc.da
 import '../data/datasources/banner_data_source.dart';
 import '../data/datasources/campaign_data_source.dart';
 import '../data/datasources/donate_data_source.dart';
+import '../data/datasources/profile_data_source.dart';
 import '../data/datasources/setting_data_source.dart';
 import '../data/repositories/banner_repository_implementation.dart';
 import '../data/repositories/campaign_repository_implementation.dart';
 import '../data/repositories/donate_repository_implementation.dart';
+import '../data/repositories/profile_repository_implementation.dart';
 import '../data/repositories/setting_repository_implementation.dart';
 import '../domain/repositories/banner_repository.dart';
 import '../domain/repositories/campaign_repository.dart';
 import '../domain/repositories/donate_repository.dart';
+import '../domain/repositories/profile_repository.dart';
 import '../domain/repositories/setting_repository.dart';
 import '../domain/usecases/create_campaign.dart';
 import '../domain/usecases/get_all_campaign_list.dart';
@@ -71,6 +75,7 @@ import '../domain/usecases/get_campaign_detail.dart';
 import '../domain/usecases/get_campaign_sub_categories.dart';
 import '../domain/usecases/get_campaign_types.dart';
 import '../domain/usecases/get_donation_list.dart';
+import '../domain/usecases/get_profile.dart';
 import '../domain/usecases/get_setting.dart';
 import '../domain/usecases/like_unlike.dart';
 import '../domain/usecases/request_inquiry.dart';
@@ -105,6 +110,7 @@ Future<void> locatorSetup() async {
   locator.registerFactory<AaminBloc>(() => AaminBloc(doLike: locator(), doUnLike: locator()));
   locator.registerFactory<ZakatCalculateBloc>(() => ZakatCalculateBloc(calculate: locator()));
   locator.registerFactory<InboxBloc>(() => InboxBloc(getInboxList: locator()));
+  locator.registerFactory<WalletTopupHistoryBloc>(() => WalletTopupHistoryBloc(getTopUpHistories: locator()));
 
   // use cases
   locator.registerLazySingleton<DoLogin>(() => DoLogin(locator()));
@@ -130,6 +136,8 @@ Future<void> locatorSetup() async {
   locator.registerLazySingleton<uc.Calculate>(() => uc.Calculate(locator()));
   locator.registerLazySingleton<GetInboxList>(() => GetInboxList(locator()));
   locator.registerLazySingleton<SearchCampaign>(() => SearchCampaign(locator()));
+  locator.registerLazySingleton<GetTopUpHistories>(() => GetTopUpHistories(locator()));
+
   // repositories
   locator.registerLazySingleton<LoginRepository>(() => LoginRepositoryImplementation(dataSource: locator()));
   locator.registerLazySingleton<RegisterRepository>(() => RegisterRepositoryImplementation(dataSource: locator()));
@@ -142,6 +150,7 @@ Future<void> locatorSetup() async {
   locator.registerLazySingleton<FaqRepository>(() => FaqRepositoryImplementation(dataSource: locator(), networkInfo: locator()));
   locator.registerLazySingleton<ZakatCalculateRepository>(() => ZakatCalculateRepositoryImplementation(dataSource: locator(), networkInfo: locator()));
   locator.registerLazySingleton<InboxRepository>(() => InboxRepositoryImplementation(dataSource: locator(), networkInfo: locator()));
+  locator.registerLazySingleton<WalletRepository>(() => WalletRepositoryImplementation(dataSource: locator(), networkInfo: locator()));
 
   // data sources
   locator.registerLazySingleton<LoginDataSource>(() => LoginDataSourceImplementation(dio: locator()));
@@ -155,6 +164,7 @@ Future<void> locatorSetup() async {
   locator.registerLazySingleton<FaqDataSource>(() => FaqDataSourceImplementation(dio: locator()));
   locator.registerLazySingleton<ZakatCalculateDataSource>(() => ZakatCalculateDataSourceImplementation(dio: locator()));
   locator.registerLazySingleton<InboxDataSource>(() => InboxDataSourceImplementation(dio: locator()));
+  locator.registerLazySingleton<WalletDataSource>(() => WalletDataSourceImplementation(dio: locator()));
 
   // core
   locator.registerLazySingleton<Dio>(() => DioClient().dio);

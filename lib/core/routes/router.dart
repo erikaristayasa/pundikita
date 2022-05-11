@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:pundi_kita/features/wallet/presentation/pages/wallet_topup_page.dart';
 
-import '../../features/campaign/presentation/pages/campaign_search_page.dart';
 import '../../features/campaign/presentation/pages/campaign_all_page.dart';
 import '../../features/campaign/presentation/pages/campaign_category_list_page.dart';
 import '../../features/campaign/presentation/pages/campaign_create_page.dart';
 import '../../features/campaign/presentation/pages/campaign_detail_page.dart';
+import '../../features/campaign/presentation/pages/campaign_search_page.dart';
 import '../../features/campaign/presentation/pages/campaign_sub_category_list_page.dart';
 import '../../features/campaign/presentation/pages/campaign_type_list_page.dart';
 import '../../features/campaign/presentation/pages/fund_usage_detail_page.dart';
@@ -18,6 +17,8 @@ import '../../features/login/presentation/pages/login_page.dart';
 import '../../features/profile/presentation/pages/profile_update_page.dart';
 import '../../features/profile/presentation/pages/setting_detail_page.dart';
 import '../../features/register/presentation/pages/register_page.dart';
+import '../../features/wallet/presentation/pages/wallet_topup_history_page.dart';
+import '../../features/wallet/presentation/pages/wallet_topup_page.dart';
 import '../../features/zakat_calculate/presentation/pages/zakat_calculate_page.dart';
 import '../presentation/pages/main_page.dart';
 import '../presentation/pages/not_found_page.dart';
@@ -112,6 +113,8 @@ class Router {
         return pageRoute(page: DonateRequestInquiryResultPage(result: args.result));
       case path.WALLET_TOP_UP:
         return pageRoute(page: const WalletTopUpPage());
+      case path.WALLET_TOP_UP_HISTORY:
+        return pageRoute(page: const WalletTopUpHistoryPage());
       case path.WORK_IN_PROGRESS:
         return pageRoute(page: const WorkInProgressPage());
       default:

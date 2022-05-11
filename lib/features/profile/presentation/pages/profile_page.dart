@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pundi_kita/features/profile/presentation/widgets/profile_setting_container.dart';
 
+import '../../../../core/domain/entities/user_entity.dart';
 import '../../../../core/presentation/widgets/rounded_container.dart';
 import '../../../../core/routes/path.dart' as path;
 import '../../../../core/static/assets.dart';
@@ -24,7 +25,7 @@ class ProfilePage extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => locator<ProfileBloc>(),
+          create: (context) => locator<ProfileBloc>()..add(FetchProfile()),
         ),
         BlocProvider(
           create: (context) => locator<SettingBloc>(),
@@ -42,13 +43,22 @@ class ProfilePage extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: Dimension.MEDIUM),
                   shrinkWrap: true,
                   children: [
-                    RoundedContainer(
-                      child: ProfileMenu(
-                        asset: Assets.WALLET,
-                        onTap: () => Navigator.pushNamed(context, path.WALLET_TOP_UP),
-                        title: 'Dompet',
-                        subtitle: 'Saldo anda saat ini Rp0',
-                      ),
+                    BlocBuilder<ProfileBloc, ProfileState>(
+                      builder: (context, state) {
+                        User? _data;
+                        if (state is ProfileLoaded) {
+                          _data = state.data;
+                        }
+
+                        return RoundedContainer(
+                          child: ProfileMenu(
+                            asset: Assets.WALLET,
+                            onTap: () => Navigator.pushNamed(context, path.WALLET_TOP_UP),
+                            title: 'Dompet',
+                            subtitle: 'Saldo anda saat ini ${getFormattedPrice(_data?.saldo?.toInt() ?? 0)}',
+                          ),
+                        );
+                      },
                     ),
                     smallVerticalSpacing(),
                     RoundedContainer(

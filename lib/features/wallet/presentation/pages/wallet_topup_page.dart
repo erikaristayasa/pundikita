@@ -17,6 +17,7 @@ import '../../../../core/static/extensions.dart';
 import '../../../../core/utility/app_locale.dart';
 import '../../../../core/utility/helper.dart';
 import '../../../../core/presentation/widgets/payment_method_item.dart';
+import 'package:pundi_kita/core/routes/path.dart' as path;
 
 class WalletTopUpPage extends StatefulWidget {
   const WalletTopUpPage({Key? key}) : super(key: key);
@@ -53,9 +54,18 @@ class _WalletTopUpPageState extends State<WalletTopUpPage> {
       ],
       child: Scaffold(
         backgroundColor: Colors.white,
-        appBar: const CustomAppBar(
+        appBar: CustomAppBar(
           title: 'Isi Ulang Dompet',
           canBack: true,
+          actions: [
+            IconButton(
+              onPressed: () => Navigator.pushNamed(context, path.WALLET_TOP_UP_HISTORY),
+              icon: const Icon(
+                Icons.history_rounded,
+                color: AppColors.PRIMARY,
+              ),
+            ),
+          ],
         ),
         body: SafeArea(
           child: SizedBox(
