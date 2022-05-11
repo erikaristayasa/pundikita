@@ -28,8 +28,18 @@ class MyDonationItem extends StatelessWidget {
         },
         title: Text(
           getFormattedPrice(donation.amountOfFunds.toInt()),
+          style: context.textTheme().titleSmall,
         ),
-        subtitle: Text(donation.pray ?? ''),
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(donation.pray ?? ''),
+            Text(
+              '(${donation.paymentMethod.name}) ' + donation.paymentChannel.title,
+              style: context.textTheme().labelSmall,
+            ),
+          ],
+        ),
         trailing: Builder(builder: (_) {
           String _asset = '';
           String _status = '';

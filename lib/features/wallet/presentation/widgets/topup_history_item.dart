@@ -30,18 +30,9 @@ class TopUpHistoryItem extends StatelessWidget {
           getFormattedPrice(result.amount.toInt()),
           style: context.textTheme().titleSmall,
         ),
-        subtitle: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              result.paymentMethod?.name ?? '',
-              style: context.textTheme().labelSmall,
-            ),
-            Text(
-              result.paymentChannel?.title ?? '',
-              style: context.textTheme().labelSmall,
-            )
-          ],
+        subtitle: Text(
+          '(${result.paymentMethod?.name ?? ''}) ' + (result.paymentChannel?.title ?? ''),
+          style: context.textTheme().labelSmall,
         ),
         trailing: Builder(builder: (_) {
           String _asset = '';
