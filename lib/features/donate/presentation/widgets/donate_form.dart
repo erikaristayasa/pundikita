@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pundi_kita/features/donate/presentation/cubit/donate_pray_dubit.dart';
 
+import '../../../../core/domain/entities/user_entity.dart';
+import '../../../../core/presentation/cubits/user_info_cubit.dart';
 import '../../../../core/presentation/widgets/rounded_container.dart';
 import '../../../../core/static/dimens.dart';
 import '../../../../core/static/extensions.dart';
 import '../../../../core/utility/helper.dart';
 import '../../../../core/utility/locator.dart';
-import '../../../../core/utility/shared_preferences_helper.dart';
+import '../cubit/donate_pray_dubit.dart';
 
 class DonateForm extends StatelessWidget {
   const DonateForm({Key? key}) : super(key: key);
@@ -20,26 +21,25 @@ class DonateForm extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          FutureBuilder<SharedPreferencesHelper>(
-            future: locator.getAsync<SharedPreferencesHelper>(),
-            builder: (context, snap) {
-              if (snap.hasData) {
-                final _ = snap.data!;
-                //TODO: get profile data.
+          BlocBuilder<UserInfoCubit, User?>(
+            bloc: locator<UserInfoCubit>()..getData(),
+            builder: (context, state) {
+              if (state != null) {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'session.userName',
+                      state.name ?? '',
                       style: context.textTheme().titleSmall,
                     ),
                     Text(
-                      'session.userEmail',
+                      state.email ?? '',
                       style: context.textTheme().bodySmall,
                     ),
                   ],
                 );
               }
+
               return const SizedBox.shrink();
             },
           ),

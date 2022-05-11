@@ -86,6 +86,7 @@ import '../network/dio_client.dart';
 import '../network/network_info.dart';
 import '../presentation/blocs/banner/banner_bloc.dart';
 import '../presentation/blocs/text_controller/text_controller_bloc.dart';
+import '../presentation/cubits/user_info_cubit.dart';
 import '../presentation/cubits/wallet_saldo_cubit.dart';
 import 'shared_preferences_helper.dart';
 
@@ -116,6 +117,7 @@ Future<void> locatorSetup() async {
   locator.registerFactory<WalletTopupHistoryBloc>(() => WalletTopupHistoryBloc(getTopUpHistories: locator()));
   locator.registerFactory<WalletTopupBloc>(() => WalletTopupBloc(topUp: locator()));
   locator.registerFactory<WalletSaldoCubit>(() => WalletSaldoCubit(getProfile: locator()));
+  locator.registerFactory<UserInfoCubit>(() => UserInfoCubit(getProfile: locator()));
 
   // use cases
   locator.registerLazySingleton<DoLogin>(() => DoLogin(locator()));
