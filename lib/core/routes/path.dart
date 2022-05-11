@@ -30,3 +30,4 @@ const String SEARCH = '/search';
 
 const String WALLET_TOP_UP = '/wallet_topup';
 const String WALLET_TOP_UP_HISTORY = '/wallet_topup_history';
+const String WALLET_TOP_UP_RESULT = '/wallet_topup_result';

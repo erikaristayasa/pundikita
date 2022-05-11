@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/presentation/widgets/rounded_container.dart';
+import '../../../../core/routes/path.dart' as path;
 import '../../../../core/static/assets.dart';
 import '../../../../core/static/enums.dart';
 import '../../../../core/static/extensions.dart';
 import '../../../../core/utility/helper.dart';
 import '../../domain/entities/topup_result_entity.dart';
+import '../pages/wallet_topup_result_page.dart';
 
 class TopUpHistoryItem extends StatelessWidget {
   final TopUpResult result;
@@ -15,6 +17,15 @@ class TopUpHistoryItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return RoundedContainer(
       child: ListTile(
+        onTap: () {
+          if (result.status == WalletTopUpPayStatus.pending) {
+            Navigator.pushNamed(
+              context,
+              path.WALLET_TOP_UP_RESULT,
+              arguments: WalletTopUpResultPageRouteArguments(result: result),
+            );
+          }
+        },
         title: Text(
           getFormattedPrice(result.amount.toInt()),
           style: context.textTheme().titleSmall,

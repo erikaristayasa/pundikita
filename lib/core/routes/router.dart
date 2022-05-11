@@ -19,6 +19,7 @@ import '../../features/profile/presentation/pages/setting_detail_page.dart';
 import '../../features/register/presentation/pages/register_page.dart';
 import '../../features/wallet/presentation/pages/wallet_topup_history_page.dart';
 import '../../features/wallet/presentation/pages/wallet_topup_page.dart';
+import '../../features/wallet/presentation/pages/wallet_topup_result_page.dart';
 import '../../features/zakat_calculate/presentation/pages/zakat_calculate_page.dart';
 import '../presentation/pages/main_page.dart';
 import '../presentation/pages/not_found_page.dart';
@@ -115,6 +116,9 @@ class Router {
         return pageRoute(page: const WalletTopUpPage());
       case path.WALLET_TOP_UP_HISTORY:
         return pageRoute(page: const WalletTopUpHistoryPage());
+      case path.WALLET_TOP_UP_RESULT:
+        final args = settings.arguments as WalletTopUpResultPageRouteArguments;
+        return pageRoute(page: WalletTopUpResultPage(result: args.result));
       case path.WORK_IN_PROGRESS:
         return pageRoute(page: const WorkInProgressPage());
       default:
