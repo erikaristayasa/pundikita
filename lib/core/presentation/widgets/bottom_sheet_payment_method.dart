@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
-import '../cubits/payment_method/payment_method_cubit.dart';
 import '../../static/colors.dart';
 import '../../static/dimens.dart';
 import '../../static/enums.dart';
 import '../../static/extensions.dart';
 import '../../utility/app_locale.dart';
-
+import '../../utility/helper.dart';
+import '../../utility/locator.dart';
+import '../cubits/payment_method/payment_method_cubit.dart';
+import '../cubits/wallet_saldo_cubit.dart';
 import 'payment_method_item.dart';
 
 class BottomSheetPaymentMethod extends StatelessWidget {
   final bool showWallet;
-  const BottomSheetPaymentMethod({Key? key, this.showWallet = true}) : super(key: key);
+  final num? nominal;
+  const BottomSheetPaymentMethod({Key? key, this.showWallet = true, this.nominal}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -45,18 +49,30 @@ class BottomSheetPaymentMethod extends StatelessWidget {
                     shrinkWrap: true,
                     children: [
                       showWallet
-                          ? Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                const PaymentSection(sectionName: 'Dompet'),
-                                PaymentMethodItem(
-                                  subtitle: 'Saldo anda saat ini Rp0',
-                                  onSelect: (method, channel) => bloc.select(method: method, channel: channel),
-                                  selected: context.watch<PaymentMethodCubit>().isSelected(PaymentChannel.saldo),
-                                  method: PaymentMethod.saldo,
-                                  channel: PaymentChannel.saldo,
-                                ),
-                              ],
+                          ? BlocProvider(
+                              create: (context) => locator<WalletSaldoCubit>()..getSaldo(),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  const PaymentSection(sectionName: 'Dompet'),
+                                  BlocBuilder<WalletSaldoCubit, num>(builder: (context, state) {
+                                    final _isEnough = state >= (nominal ?? 0);
+                                    return PaymentMethodItem(
+                                      subtitle: 'Saldo anda saat ini ${getFormattedPrice(state.toInt())}',
+                                      onSelect: (method, channel) {
+                                        if (_isEnough) {
+                                          bloc.select(method: method, channel: channel);
+                                        } else {
+                                          Fluttertoast.showToast(msg: 'Maaf saldo anda tidak mencukupi.');
+                                        }
+                                      },
+                                      selected: context.watch<PaymentMethodCubit>().isSelected(PaymentChannel.saldo),
+                                      method: PaymentMethod.saldo,
+                                      channel: PaymentChannel.saldo,
+                                    );
+                                  }),
+                                ],
+                              ),
                             )
                           : const SizedBox.shrink(),
                       const PaymentSection(sectionName: 'QRIS'),

@@ -116,7 +116,7 @@ class DonateRequestInquiryPage extends StatelessWidget {
                                 builder: (_) {
                                   return BlocProvider<PaymentMethodCubit>.value(
                                     value: BlocProvider.of<PaymentMethodCubit>(context),
-                                    child: const BottomSheetPaymentMethod(),
+                                    child: BottomSheetPaymentMethod(nominal: nominal),
                                   );
                                 }),
                             title: AppLocale.loc.choose,
