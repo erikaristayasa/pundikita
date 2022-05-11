@@ -8,8 +8,8 @@ class TopUpResultModel extends TopUpResult {
     required int userId,
     required num amount,
     required int? paymentTransactionId,
-    required PaymentMethod paymentMethod,
-    required PaymentChannel paymentChannel,
+    required PaymentMethod? paymentMethod,
+    required PaymentChannel? paymentChannel,
     required String? paymentNumber,
     required String? paymentName,
     required num paymentTotal,
@@ -34,20 +34,24 @@ class TopUpResultModel extends TopUpResult {
           status: status,
           createdAt: createdAt,
         );
-  factory TopUpResultModel.fromJson(Map<String, dynamic> json) => TopUpResultModel(
-        id: json['id'],
-        userId: json['user_id'],
-        amount: json['jumlah'],
-        paymentTransactionId: json['payment_transaction_id'],
-        paymentMethod: PaymentMethod.values.firstWhere((element) => element.name == json['payment_method']),
-        paymentChannel: PaymentChannel.values.firstWhere((element) => element.name == json['payment_channel']),
-        paymentNumber: json['payment_no'],
-        paymentName: json['payment_name'],
-        paymentTotal: json['payment_total'],
-        paymentFee: json['payment_fee'],
-        paymentExpired: (json['payment_expired'] as String).toDate(format: "yyyy-MM-dd HH:mm:ss"),
-        paymentQRImage: json['payment_qr_image'],
-        status: (json['status'] as num).walletTopUpPayStatus(),
-        createdAt: (json['created_at'] as String).toDate(),
-      );
+  factory TopUpResultModel.fromJson(Map<String, dynamic> json) {
+    final PaymentMethod method = PaymentMethod.values.firstWhere((element) => element.name == json['payment_method'], orElse: () => PaymentMethod.saldo);
+    final PaymentChannel channel = PaymentChannel.values.firstWhere((element) => element.name == json['payment_channel'], orElse: () => PaymentChannel.saldo);
+    return TopUpResultModel(
+      id: json['id'],
+      userId: json['user_id'],
+      amount: json['jumlah'],
+      paymentTransactionId: json['payment_transaction_id'],
+      paymentMethod: method,
+      paymentChannel: channel,
+      paymentNumber: json['payment_no'],
+      paymentName: json['payment_name'],
+      paymentTotal: json['payment_total'],
+      paymentFee: json['payment_fee'],
+      paymentExpired: (json['payment_expired'] as String).toDate(format: "yyyy-MM-dd HH:mm:ss"),
+      paymentQRImage: json['payment_qr_image'],
+      status: (json['status'] as num).walletTopUpPayStatus(),
+      createdAt: (json['created_at'] as String).toDate(),
+    );
+  }
 }

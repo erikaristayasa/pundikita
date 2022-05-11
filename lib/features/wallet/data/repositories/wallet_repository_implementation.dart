@@ -21,6 +21,7 @@ class WalletRepositoryImplementation implements WalletRepository {
     if (await networkInfo.isConnected) {
       try {
         final result = await dataSource.getTopUpHistories();
+        result.removeWhere((e) => e.paymentMethod == PaymentMethod.saldo);
         return Right(result);
       } catch (e) {
         return Left(ServerFailure());

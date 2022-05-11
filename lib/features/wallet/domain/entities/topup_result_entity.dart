@@ -7,8 +7,8 @@ class TopUpResult extends Equatable {
   final int userId;
   final num amount;
   final int? paymentTransactionId;
-  final PaymentMethod paymentMethod;
-  final PaymentChannel paymentChannel;
+  final PaymentMethod? paymentMethod;
+  final PaymentChannel? paymentChannel;
   final String? paymentNumber;
   final String? paymentName;
   final num paymentTotal;
