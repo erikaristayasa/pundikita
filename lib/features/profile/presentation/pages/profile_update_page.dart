@@ -60,7 +60,7 @@ class _ProfileUpdatePageState extends State<ProfileUpdatePage> {
     return FormData.fromMap({
       'nama': _nameController.text,
       'telepon': _phoneController.text,
-      'tanggal_lahir': _birthDateController.text,
+      if (_birthDateController.text.isNotEmpty) 'tanggal_lahir': _birthDateController.text,
       'biodata': _bioController.text,
       if (_file != null) 'foto': await MultipartFile.fromFile(_file!.path, filename: _file!.name)
     });
@@ -192,11 +192,11 @@ class _ProfileUpdatePageState extends State<ProfileUpdatePage> {
                               controller: _phoneController,
                             ),
                             mediumVerticalSpacing(),
-                            CustomBirthDateInput(
-                              birthDate: _user.birthDate,
-                              controller: _birthDateController,
-                            ),
-                            mediumVerticalSpacing(),
+                            // CustomBirthDateInput(
+                            //   birthDate: _user.birthDate,
+                            //   controller: _birthDateController,
+                            // ),
+                            // mediumVerticalSpacing(),
                             CustomTextArea(
                               title: 'Bio Singkat',
                               controller: _bioController,
