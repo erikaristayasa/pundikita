@@ -34,6 +34,6 @@ class RegisterRequestBody extends Equatable {
         'password': password,
         'password_confirmation': passwordConfirmation,
         'telepon': phone,
-        'tipe_donature': donatureType,
+        'tipe_donatur': donatureType,
       };
 }
