@@ -1,7 +1,8 @@
 import 'package:equatable/equatable.dart';
 
 class Banner extends Equatable {
-  final int id, campaingId;
+  final int id;
+  final int? campaingId;
   final String photo;
 
   const Banner({
@@ -11,5 +12,9 @@ class Banner extends Equatable {
   });
 
   @override
-  List<Object?> get props => [id, campaingId, photo];
+  List<Object?> get props => [
+        id,
+        campaingId,
+        photo,
+      ];
 }

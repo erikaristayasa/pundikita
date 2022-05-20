@@ -50,11 +50,15 @@ class _HomeBannerState extends State<HomeBanner> {
                   color: Colors.black,
                   clipBerhaviour: Clip.antiAlias,
                   child: InkWell(
-                    onTap: () => Navigator.pushNamed(
-                      context,
-                      path.CAMPAIGN_DETAIL,
-                      arguments: CampaignDetailPageRouteArguments(id: e.id, service: CampaignService.donasi),
-                    ),
+                    onTap: () {
+                      if (e.campaingId != null) {
+                        Navigator.pushNamed(
+                          context,
+                          path.CAMPAIGN_DETAIL,
+                          arguments: CampaignDetailPageRouteArguments(id: e.campaingId!, service: CampaignService.donasi),
+                        );
+                      }
+                    },
                     child: Image.network(
                       getBannerImageUrl(e.photo),
                       fit: BoxFit.cover,
