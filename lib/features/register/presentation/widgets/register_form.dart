@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
 import '../../../../core/presentation/widgets/custom_label.dart';
 import '../../../../core/presentation/widgets/custom_text_field.dart';
+import '../../../../core/presentation/widgets/photo_file_picker.dart';
 import '../../../../core/presentation/widgets/rounded_button.dart';
 import '../../../../core/presentation/widgets/simple_alert_dialog.dart';
 import '../../../../core/static/extensions.dart';
@@ -24,6 +26,7 @@ class RegisterForm extends StatefulWidget {
 }
 
 class _RegisterFormState extends State<RegisterForm> {
+  XFile? _photo;
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -83,6 +86,14 @@ class _RegisterFormState extends State<RegisterForm> {
               children: [
                 const CustomLabel(title: "Data Pribadi"),
                 smallVerticalSpacing(),
+                PhotoFilePicker(
+                  title: 'Foto',
+                  validation: true,
+                  onPicked: (file) {
+                    _photo = file;
+                  },
+                ),
+                mediumVerticalSpacing(),
                 CustomTextField(
                   title: AppLocale.loc.name,
                   placeholder: AppLocale.loc.name,
@@ -141,6 +152,7 @@ class _RegisterFormState extends State<RegisterForm> {
                     if (_formKey.currentState!.validate()) {
                       context.read<RegisterBloc>().add(
                             RegisterSubmit(
+                              photo: _photo!,
                               name: _nameController.text,
                               email: _emailController.text,
                               phone: _phoneController.text,

@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../domain/entities/register_request_body.dart';
 import '../../domain/usecases/do_register.dart';
@@ -26,6 +27,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
 
   RegisterRequestBody getBody(RegisterSubmit event) {
     final RegisterRequestBody body = RegisterRequestBody(
+      photo: event.photo,
       name: event.name,
       email: event.email,
       password: event.password,

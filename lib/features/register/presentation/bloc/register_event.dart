@@ -8,11 +8,13 @@ abstract class RegisterEvent extends Equatable {
 }
 
 class RegisterSubmit extends RegisterEvent {
+  final XFile photo;
   final String name, email, phone, password, passwordConfirmation;
   final int donatureType;
   final Map<String, dynamic> additonalBody;
 
   const RegisterSubmit({
+    required this.photo,
     required this.name,
     required this.email,
     required this.phone,
@@ -24,6 +26,7 @@ class RegisterSubmit extends RegisterEvent {
 
   @override
   List<Object> get props => [
+        photo,
         name,
         email,
         phone,
