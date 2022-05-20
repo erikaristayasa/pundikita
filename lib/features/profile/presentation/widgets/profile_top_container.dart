@@ -52,13 +52,16 @@ class _ProfileTopContainerState extends State<ProfileTopContainer> {
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    RoundedButton(
-                      width: 100.0,
-                      height: 30.0,
-                      outline: true,
-                      onTap: () => Navigator.pushNamed(context, path.PROFILE_UPDATE),
-                      title: AppLocale.loc.editProfile,
-                      titleColor: AppColors.PRIMARY,
+                    smallVerticalSpacing(),
+                    Expanded(
+                      child: RoundedButton(
+                        width: 100.0,
+                        // height: 30.0,
+                        outline: true,
+                        onTap: () => Navigator.pushNamed(context, path.PROFILE_UPDATE),
+                        title: AppLocale.loc.editProfile,
+                        titleColor: AppColors.PRIMARY,
+                      ),
                     ),
                   ],
                 ),
