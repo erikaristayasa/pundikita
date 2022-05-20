@@ -120,7 +120,7 @@ extension PaymentInfo on PaymentChannel {
       case PaymentChannel.qris:
         return 'QRIS';
       case PaymentChannel.saldo:
-        return 'Dompet';
+        return 'Pundi Kebaikan';
     }
   }
 

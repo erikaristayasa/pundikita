@@ -54,7 +54,7 @@ class BottomSheetPaymentMethod extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: [
-                                  const PaymentSection(sectionName: 'Dompet'),
+                                  const PaymentSection(sectionName: 'Pundi Kebaikan'),
                                   BlocBuilder<WalletSaldoCubit, num>(builder: (context, state) {
                                     final _isEnough = state >= (nominal ?? 0);
                                     return PaymentMethodItem(

@@ -54,7 +54,7 @@ class ProfilePage extends StatelessWidget {
                           child: ProfileMenu(
                             asset: Assets.WALLET,
                             onTap: () => Navigator.pushNamed(context, path.WALLET_TOP_UP),
-                            title: 'Dompet',
+                            title: 'Pundi Kebaikan',
                             subtitle: 'Saldo anda saat ini ${getFormattedPrice(_data?.saldo?.toInt() ?? 0)}',
                           ),
                         );

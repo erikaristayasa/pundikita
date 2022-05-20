@@ -62,7 +62,7 @@ class _WalletTopUpPageState extends State<WalletTopUpPage> {
         child: Scaffold(
           backgroundColor: Colors.white,
           appBar: CustomAppBar(
-            title: 'Isi Ulang Dompet',
+            title: 'Isi Ulang Pundi Kebaikan',
             canBack: true,
             actions: [
               IconButton(
