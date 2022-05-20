@@ -11,7 +11,7 @@ class SimpleAlertDialog extends StatelessWidget {
       title: Text(title),
       content: Text(
         message,
-        maxLines: 3,
+        maxLines: 6,
         overflow: TextOverflow.ellipsis,
       ),
       actions: [TextButton(onPressed: ()=> Navigator.pop(context), child: Text(AppLocale.loc.ok))],
