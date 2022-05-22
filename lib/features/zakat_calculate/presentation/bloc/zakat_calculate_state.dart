@@ -12,7 +12,7 @@ class ZakatCalculateInitial extends ZakatCalculateState {}
 class ZakatCalculateLoading extends ZakatCalculateState {}
 
 class ZakatCalculateSuccess extends ZakatCalculateState {
-  final int data;
+  final num data;
 
   const ZakatCalculateSuccess({required this.data});
   @override

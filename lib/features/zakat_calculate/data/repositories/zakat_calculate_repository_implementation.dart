@@ -15,10 +15,10 @@ class ZakatCalculateRepositoryImplementation implements ZakatCalculateRepository
   });
 
   @override
-  Future<Either<Failure, int>> calculate(int monthlyIncome, int monthlyOtherIncome) async {
+  Future<Either<Failure, num>> calculate(int monthlyIncome, int monthlyOtherIncome, int monthlyInstallmentDebt) async {
     if (await networkInfo.isConnected) {
       try {
-        final result = await dataSource.calculate(monthlyIncome, monthlyOtherIncome);
+        final result = await dataSource.calculate(monthlyIncome, monthlyOtherIncome, monthlyInstallmentDebt);
         return Right(result);
       } catch (e) {
         return Left(ServerFailure());

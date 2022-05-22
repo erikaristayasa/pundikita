@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
-import 'package:pundi_kita/features/zakat_calculate/domain/repositories/zakat_calculate_repository.dart';
 
 import '../../../../core/errors/failure.dart';
+import '../repositories/zakat_calculate_repository.dart';
 
 abstract class ZakatCalculateUseCase<Type> {
-  Future<Either<Failure, int>> call(int monthlyIncome, int monthlyOtherIncome);
+  Future<Either<Failure, num>> call(int monthlyIncome, int monthlyOtherIncome, int monthlyInstallmentDebt);
 }
 
 class Calculate implements ZakatCalculateUseCase<int> {
@@ -13,7 +13,7 @@ class Calculate implements ZakatCalculateUseCase<int> {
   Calculate(this.repository);
 
   @override
-  Future<Either<Failure, int>> call(int monthlyIncome, int monthlyOtherIncome) async {
-    return await repository.calculate(monthlyIncome, monthlyOtherIncome);
+  Future<Either<Failure, num>> call(int monthlyIncome, int monthlyOtherIncome, int monthlyInstallmentDebt) async {
+    return await repository.calculate(monthlyIncome, monthlyOtherIncome, monthlyInstallmentDebt);
   }
 }

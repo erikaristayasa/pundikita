@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:pundi_kita/core/static/colors.dart';
 
 import '../../../../core/static/dimens.dart';
 import '../../../../core/static/extensions.dart';
 import '../../../../core/utility/helper.dart';
 
 class BottomSheetResult extends StatelessWidget {
-  final int result;
+  final num result;
   const BottomSheetResult({Key? key, required this.result}) : super(key: key);
 
   @override
@@ -38,9 +41,25 @@ class BottomSheetResult extends StatelessWidget {
                   style: context.textTheme().titleMedium,
                 ),
                 smallVerticalSpacing(),
-                Text(
-                  getFormattedPrice(result),
-                  style: context.textTheme().headline6,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      getFormattedPrice(result.round()),
+                      style: context.textTheme().headline6,
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        Clipboard.setData(
+                          ClipboardData(text: (result.round()).toString()),
+                        ).then((value) => Fluttertoast.showToast(msg: "Disalin"));
+                      },
+                      icon: const Icon(
+                        Icons.copy_rounded,
+                        color: AppColors.PRIMARY,
+                      ),
+                    )
+                  ],
                 ),
               ],
             ),

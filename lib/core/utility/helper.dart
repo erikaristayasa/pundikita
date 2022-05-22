@@ -11,7 +11,7 @@ AppLocalizations getLocalizationString(BuildContext context) {
   return AppLocalizations.of(context)!;
 }
 
-String getFormattedPrice(int price) {
+String getFormattedPrice(num price) {
   final formatter = NumberFormat.currency(locale: "id_ID", symbol: 'Rp');
   formatter.maximumFractionDigits = 0;
   return formatter.format(price);

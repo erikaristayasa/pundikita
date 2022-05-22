@@ -4,7 +4,7 @@ import '../../../../core/static/extensions.dart';
 import '../models/zakat_calculate_response_model.dart';
 
 abstract class ZakatCalculateDataSource {
-  Future<int> calculate(int monthlyIncome, int monthlyOtherIncome);
+  Future<num> calculate(int monthlyIncome, int monthlyOtherIncome, int monthlyInstallmentDebt);
 }
 
 class ZakatCalculateDataSourceImplementation implements ZakatCalculateDataSource {
@@ -13,11 +13,12 @@ class ZakatCalculateDataSourceImplementation implements ZakatCalculateDataSource
   ZakatCalculateDataSourceImplementation({required this.dio});
 
   @override
-  Future<int> calculate(int monthlyIncome, int monthlyOtherIncome) async {
-    const path = 'api/user/zakat/calculate';
+  Future<num> calculate(int monthlyIncome, int monthlyOtherIncome, int monthlyInstallmentDebt) async {
+    const path = 'api/user/zakat/calculate/profesi';
     final data = FormData.fromMap({
       'penghasilan_perbulan': monthlyIncome,
       'penghasilan_lain_perbulan': monthlyOtherIncome,
+      'utang_cicilan_perbulan': monthlyInstallmentDebt,
     });
     dio.withToken();
 

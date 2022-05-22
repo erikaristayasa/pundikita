@@ -16,6 +16,7 @@ class ZakatCalculateBloc extends Bloc<ZakatCalculateEvent, ZakatCalculateState> 
       final result = await calculate(
         parseToInteger(event.monthlyIncome),
         parseToInteger(event.monthlyOtherIncome),
+        parseToInteger(event.monthlyInstallmentDebt),
       );
       result.fold(
         (failure) => emit(ZakatCalculateFailure(failure: failure)),

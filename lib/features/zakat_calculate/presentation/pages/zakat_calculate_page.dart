@@ -25,6 +25,7 @@ class _ZakatCalculatePageState extends State<ZakatCalculatePage> {
   final _formKey = GlobalKey<FormState>();
   final _mothlyIncomeController = TextEditingController();
   final _mothlyOtherIncomeController = TextEditingController();
+  final _mothlyInstallmentDebtController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -74,6 +75,22 @@ class _ZakatCalculatePageState extends State<ZakatCalculatePage> {
                       )
                     ],
                   ),
+                  mediumVerticalSpacing(),
+                  CustomTextField(
+                    title: "Hutang Cicilan Perbulan",
+                    inputType: TextInputType.number,
+                    controller: _mothlyInstallmentDebtController,
+                    validating: false,
+                    prefixText: 'Rp',
+                    formatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                      CurrencyTextInputFormatter(
+                        locale: 'id',
+                        decimalDigits: 0,
+                        symbol: '',
+                      )
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -105,6 +122,7 @@ class _ZakatCalculatePageState extends State<ZakatCalculatePage> {
                           Calculate(
                             monthlyIncome: _mothlyIncomeController.text,
                             monthlyOtherIncome: _mothlyOtherIncomeController.text,
+                            monthlyInstallmentDebt: _mothlyInstallmentDebtController.text,
                           ),
                         );
                   },

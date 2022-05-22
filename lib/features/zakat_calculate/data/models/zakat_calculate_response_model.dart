@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 
 class ZakatCalculateResponseModel extends Equatable {
   final int status;
-  final int data;
+  final num data;
 
   const ZakatCalculateResponseModel({
     required this.status,
