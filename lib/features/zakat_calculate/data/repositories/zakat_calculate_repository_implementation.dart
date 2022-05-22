@@ -26,4 +26,29 @@ class ZakatCalculateRepositoryImplementation implements ZakatCalculateRepository
     }
     return Left(ConnectionFailure());
   }
+
+  @override
+  Future<Either<Failure, num>> calculateMaal({
+    required int giroSavingsDepositValue,
+    required int vehiclePropertyValue,
+    required int goldSilverGgemsOrOthers,
+    required int sharesReceivablesAndOtherSecurities,
+    required int personalDebtDueThisYear,
+  }) async {
+    if (await networkInfo.isConnected) {
+      try {
+        final result = await dataSource.calculateMaal(
+          giroSavingsDepositValue: giroSavingsDepositValue,
+          vehiclePropertyValue: vehiclePropertyValue,
+          goldSilverGgemsOrOthers: goldSilverGgemsOrOthers,
+          sharesReceivablesAndOtherSecurities: sharesReceivablesAndOtherSecurities,
+          personalDebtDueThisYear: personalDebtDueThisYear,
+        );
+        return Right(result);
+      } catch (e) {
+        return Left(ServerFailure());
+      }
+    }
+    return Left(ConnectionFailure());
+  }
 }

@@ -27,6 +27,8 @@ class Assets {
 
   static const String FILTER = 'assets/icons/filter.png';
   static const String SORT = 'assets/icons/sort.png';
+  static const String PROFESSION = 'assets/icons/profession.png';
+  static const String MAAL = 'assets/icons/maal.png';
 
   static const String COIN = 'assets/icons/coin.png';
   static const String WALLET = 'assets/icons/wallet.png';

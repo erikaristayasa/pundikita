@@ -53,6 +53,7 @@ import '../../features/zakat_calculate/data/datasources/zakat_calculate_data_sou
 import '../../features/zakat_calculate/data/repositories/zakat_calculate_repository_implementation.dart';
 import '../../features/zakat_calculate/domain/repositories/zakat_calculate_repository.dart';
 import '../../features/zakat_calculate/domain/usecases/calculate.dart' as uc;
+import '../../features/zakat_calculate/domain/usecases/calculating_maal.dart' as uc2;
 import '../../features/zakat_calculate/presentation/bloc/zakat_calculate_bloc.dart';
 import '../data/datasources/banner_data_source.dart';
 import '../data/datasources/campaign_data_source.dart';
@@ -112,7 +113,7 @@ Future<void> locatorSetup() async {
   locator.registerFactory<FaqBloc>(() => FaqBloc(getFaqList: locator()));
   locator.registerFactory<CampaignCreateBloc>(() => CampaignCreateBloc(createCampaign: locator()));
   locator.registerFactory<AaminBloc>(() => AaminBloc(doLike: locator(), doUnLike: locator()));
-  locator.registerFactory<ZakatCalculateBloc>(() => ZakatCalculateBloc(calculate: locator()));
+  locator.registerFactory<ZakatCalculateBloc>(() => ZakatCalculateBloc(calculate: locator(), calculatingMaal: locator()));
   locator.registerFactory<InboxBloc>(() => InboxBloc(getInboxList: locator()));
   locator.registerFactory<WalletTopupHistoryBloc>(() => WalletTopupHistoryBloc(getTopUpHistories: locator()));
   locator.registerFactory<WalletTopupBloc>(() => WalletTopupBloc(topUp: locator()));
@@ -141,6 +142,7 @@ Future<void> locatorSetup() async {
   locator.registerLazySingleton<DoLike>(() => DoLike(locator()));
   locator.registerLazySingleton<DoUnLike>(() => DoUnLike(locator()));
   locator.registerLazySingleton<uc.Calculate>(() => uc.Calculate(locator()));
+  locator.registerLazySingleton<uc2.CalculatingMaal>(() => uc2.CalculatingMaal(locator()));
   locator.registerLazySingleton<GetInboxList>(() => GetInboxList(locator()));
   locator.registerLazySingleton<SearchCampaign>(() => SearchCampaign(locator()));
   locator.registerLazySingleton<GetTopUpHistories>(() => GetTopUpHistories(locator()));

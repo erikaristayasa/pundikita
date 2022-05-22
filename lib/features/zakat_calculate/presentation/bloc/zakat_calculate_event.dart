@@ -22,3 +22,24 @@ class Calculate extends ZakatCalculateEvent {
         monthlyInstallmentDebt,
       ];
 }
+
+class CalculatingMaal extends ZakatCalculateEvent {
+  final String giroSavingsDepositValue, vehiclePropertyValue, goldSilverGgemsOrOthers, sharesReceivablesAndOtherSecurities, personalDebtDueThisYear;
+
+  const CalculatingMaal({
+    required this.giroSavingsDepositValue,
+    required this.vehiclePropertyValue,
+    required this.goldSilverGgemsOrOthers,
+    required this.sharesReceivablesAndOtherSecurities,
+    required this.personalDebtDueThisYear,
+  });
+
+  @override
+  List<Object> get props => [
+        giroSavingsDepositValue,
+        vehiclePropertyValue,
+        goldSilverGgemsOrOthers,
+        sharesReceivablesAndOtherSecurities,
+        personalDebtDueThisYear,
+      ];
+}
