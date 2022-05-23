@@ -26,4 +26,16 @@ class BannerRepositoryImplementation implements BannerRepository {
     }
     return Left(ConnectionFailure());
   }
+
+  @override
+  Future<Either<Failure, Banner>> getRandomBanner() async {
+    if (await networkInfo.isConnected) {
+      try {
+        return Right(await dataSource.getRandomBanner());
+      } catch (e) {
+        return Left(ServerFailure());
+      }
+    }
+    return Left(ConnectionFailure());
+  }
 }

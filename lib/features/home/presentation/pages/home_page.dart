@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pundi_kita/core/static/enums.dart';
+import 'package:pundi_kita/features/home/presentation/widgets/home_single_banner.dart';
 
 import '../../../../core/presentation/blocs/banner/banner_bloc.dart';
+import '../../../../core/presentation/blocs/banner/random_banner_bloc.dart';
 import '../../../../core/static/colors.dart';
 import '../../../../core/utility/helper.dart';
 import '../../../../core/utility/locator.dart';
@@ -26,6 +28,9 @@ class _HomePageState extends State<HomePage> {
         BlocProvider(
           create: (context) => locator<BannerBloc>(),
         ),
+        BlocProvider(
+          create: (context) => locator<RandomBannerBloc>(),
+        ),
       ],
       child: Scaffold(
         backgroundColor: AppColors.BG_Grey,
@@ -42,6 +47,8 @@ class _HomePageState extends State<HomePage> {
                 labelText: 'Mulai Berbagi Yuk...',
                 service: CampaignService.donasi,
               ),
+              smallVerticalSpacing(),
+              const HomeSingleBanner(),
               smallVerticalSpacing(),
               const HomeCampaignList(
                 labelText: 'Program Khusus Pundikita',
