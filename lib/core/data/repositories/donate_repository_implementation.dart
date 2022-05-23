@@ -48,4 +48,17 @@ class DonateRepositoryImplementaion implements DonateRepository {
   Future<bool> unlike({required int donationId}) async {
     return await dataSource.unlike(donationId: donationId);
   }
+
+  @override
+  Future<Either<Failure, List<Donation>>> getDonationAllList() async {
+    if (await networkInfo.isConnected) {
+      try {
+        final result = await dataSource.getDonationAllList();
+        return Right(result);
+      } catch (e) {
+        return Left(ServerFailure());
+      }
+    }
+    return Left(ConnectionFailure());
+  }
 }

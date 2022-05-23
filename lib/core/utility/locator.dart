@@ -2,7 +2,6 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
-import '../../features/campaign/presentation/bloc/aamin/aamin_bloc.dart';
 import '../../features/campaign/presentation/bloc/category/campaign_category_bloc.dart';
 import '../../features/campaign/presentation/bloc/category_filter/category_filter_bloc.dart';
 import '../../features/campaign/presentation/bloc/create/campaign_create_bloc.dart';
@@ -72,6 +71,7 @@ import '../domain/repositories/profile_repository.dart';
 import '../domain/repositories/setting_repository.dart';
 import '../domain/usecases/create_campaign.dart';
 import '../domain/usecases/get_all_campaign_list.dart';
+import '../domain/usecases/get_all_donation.dart';
 import '../domain/usecases/get_banners.dart';
 import '../domain/usecases/get_campaign_categories.dart';
 import '../domain/usecases/get_campaign_detail.dart';
@@ -86,6 +86,8 @@ import '../domain/usecases/request_inquiry.dart';
 import '../domain/usecases/search_campaign.dart';
 import '../network/dio_client.dart';
 import '../network/network_info.dart';
+import '../presentation/blocs/aamin/aamin_bloc.dart';
+import '../presentation/blocs/all_donation/all_donation_bloc.dart';
 import '../presentation/blocs/banner/banner_bloc.dart';
 import '../presentation/blocs/banner/random_banner_bloc.dart';
 import '../presentation/blocs/text_controller/text_controller_bloc.dart';
@@ -122,6 +124,7 @@ Future<void> locatorSetup() async {
   locator.registerFactory<WalletTopupBloc>(() => WalletTopupBloc(topUp: locator()));
   locator.registerFactory<WalletSaldoCubit>(() => WalletSaldoCubit(getProfile: locator()));
   locator.registerFactory<UserInfoCubit>(() => UserInfoCubit(getProfile: locator()));
+  locator.registerFactory<AllDonationBloc>(() => AllDonationBloc(getAllDonation: locator()));
 
   // use cases
   locator.registerLazySingleton<DoLogin>(() => DoLogin(locator()));
@@ -151,6 +154,7 @@ Future<void> locatorSetup() async {
   locator.registerLazySingleton<SearchCampaign>(() => SearchCampaign(locator()));
   locator.registerLazySingleton<GetTopUpHistories>(() => GetTopUpHistories(locator()));
   locator.registerLazySingleton<TopUp>(() => TopUp(locator()));
+  locator.registerLazySingleton<GetAllDonation>(() => GetAllDonation(locator()));
 
   // repositories
   locator.registerLazySingleton<LoginRepository>(() => LoginRepositoryImplementation(dataSource: locator()));

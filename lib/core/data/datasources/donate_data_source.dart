@@ -9,6 +9,7 @@ import '../models/request_inquiry_response_model.dart';
 abstract class DonateDataSource {
   Future<Donation> requestInquiry(Map<String, dynamic> request, {CampaignService? service});
   Future<List<Donation>> getDonationList({CampaignService? service});
+  Future<List<Donation>> getDonationAllList();
   Future<bool> like({required int donationId});
   Future<bool> unlike({required int donationId});
 }
@@ -73,6 +74,19 @@ class DonateDateSourceImplementation implements DonateDataSource {
       return response.statusCode == 200;
     } catch (e) {
       return false;
+    }
+  }
+
+  @override
+  Future<List<Donation>> getDonationAllList() async {
+    String path = 'api/user/donation/list';
+    dio.withToken();
+    try {
+      final response = await dio.get(path);
+      final model = DonationListResponseModel.fromJson(response.data);
+      return model.data;
+    } catch (e) {
+      rethrow;
     }
   }
 }

@@ -1,21 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pundi_kita/features/campaign/presentation/widgets/aamin_button.dart';
 
-import '../../../../core/domain/entities/donation_entity.dart';
-import '../../../../core/presentation/widgets/custom_label.dart';
-import '../../../../core/presentation/widgets/rounded_container.dart';
-import '../../../../core/static/colors.dart';
-import '../../../../core/static/dimens.dart';
-import '../../../../core/static/enums.dart';
-import '../../../../core/static/extensions.dart';
-import '../../../../core/utility/app_locale.dart';
-import '../../../../core/utility/helper.dart';
-import '../cubit/campaign_pray_filter_cubit.dart';
+import '../../domain/entities/donation_entity.dart';
+import '../../static/colors.dart';
+import '../../static/dimens.dart';
+import '../../static/enums.dart';
+import '../../static/extensions.dart';
+import '../../utility/app_locale.dart';
+import '../../utility/helper.dart';
+import '../cubits/donation_filter_cubit.dart';
+import 'aamin_button.dart';
+import 'custom_label.dart';
+import 'rounded_container.dart';
 
-class CampaignPrays extends StatelessWidget {
+class DonationList extends StatelessWidget {
+  final String labelText;
   final List<Donation> donations;
-  const CampaignPrays({Key? key, required this.donations}) : super(key: key);
+  const DonationList({
+    Key? key,
+    required this.donations,
+    required this.labelText,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +34,7 @@ class CampaignPrays extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              CustomLabel(title: AppLocale.loc.praysGoodPeople),
+              CustomLabel(title: labelText),
               Flexible(
                 flex: 1,
                 fit: FlexFit.loose,
@@ -135,7 +140,7 @@ class Prayer extends StatelessWidget {
 }
 
 class Filter extends StatefulWidget {
-  final Function(PrayFilter filter) onCallback;
+  final Function(DonationFilter filter) onCallback;
   const Filter({Key? key, required this.onCallback}) : super(key: key);
 
   @override
@@ -143,19 +148,19 @@ class Filter extends StatefulWidget {
 }
 
 class _FilterState extends State<Filter> {
-  final CampaignPrayFilterCubit cubit = CampaignPrayFilterCubit();
+  final DonationFilterCubit cubit = DonationFilterCubit();
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      child: BlocBuilder<CampaignPrayFilterCubit, PrayFilter>(
+      child: BlocBuilder<DonationFilterCubit, DonationFilter>(
         bloc: cubit,
-        builder: (context, state) => DropdownButton<PrayFilter>(
+        builder: (context, state) => DropdownButton<DonationFilter>(
           value: cubit.state,
           icon: const Icon(Icons.arrow_drop_down_rounded),
           onChanged: (filter) => cubit.setFiler = filter!,
-          items: PrayFilter.values.map<DropdownMenuItem<PrayFilter>>((PrayFilter value) {
-            return DropdownMenuItem<PrayFilter>(
+          items: DonationFilter.values.map<DropdownMenuItem<DonationFilter>>((DonationFilter value) {
+            return DropdownMenuItem<DonationFilter>(
               value: value,
               child: Text(
                 value.name.toCapitalized(),

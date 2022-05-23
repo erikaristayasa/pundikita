@@ -1,4 +1,4 @@
-enum PrayFilter { terbaru, terpopuler }
+enum DonationFilter { terbaru, terpopuler }
 enum SortType { palingMendesak, palingSesuai, terbaru, danaPalingSedikit }
 
 enum PaymentChannel { bag, bca, bni, cimb, mandiri, bmi, bri, bsi, permata, qris, saldo }

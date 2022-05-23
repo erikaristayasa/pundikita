@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/domain/entities/campaign_entity.dart';
 import '../../../../core/presentation/pages/loading_page.dart';
 import '../../../../core/presentation/pages/not_found_page.dart';
+import '../../../../core/presentation/widgets/donation_list.dart';
 import '../../../../core/presentation/widgets/rounded_button.dart';
 import '../../../../core/routes/path.dart' as path;
 import '../../../../core/static/colors.dart';
@@ -18,7 +19,6 @@ import '../cubit/campaign_bottom_button.dart';
 import '../cubit/campaign_title_cubit.dart';
 import '../widgets/campaign_basic_info.dart';
 import '../widgets/campaign_fundraiser_info.dart';
-import '../widgets/campaign_prays.dart';
 import '../widgets/campaign_story.dart';
 
 class CampaignDetailPageRouteArguments {
@@ -111,7 +111,10 @@ class _CampaignDetailPageState extends State<CampaignDetailPage> {
                             smallVerticalSpacing(),
                             CampaignStory(story: campaign.story ?? ''),
                             smallVerticalSpacing(),
-                            CampaignPrays(donations: campaign.donation),
+                            DonationList(
+                              donations: campaign.donation,
+                              labelText: AppLocale.loc.praysGoodPeople,
+                            ),
                           ],
                         ),
                         childCount: 1,

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import '../../../../core/utility/app_locale.dart';
-import '../../../../core/utility/locator.dart';
-import '../bloc/aamin/aamin_bloc.dart';
+import '../../utility/app_locale.dart';
+import '../../utility/locator.dart';
+import '../blocs/aamin/aamin_bloc.dart';
 
 class AaminButton extends StatefulWidget {
   final int donationId;
