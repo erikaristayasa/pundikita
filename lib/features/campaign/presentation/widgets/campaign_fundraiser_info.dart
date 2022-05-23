@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pundi_kita/core/static/enums.dart';
 import 'package:pundi_kita/features/campaign/presentation/pages/fund_usage_detail_page.dart';
 
 import '../../../../core/domain/entities/campaign_entity.dart';
@@ -33,8 +34,14 @@ class CampaignFundraiserInfo extends StatelessWidget {
           mediumVerticalSpacing(),
 
           // Patient
-          PatientField(campaign: campaign),
-          mediumVerticalSpacing(),
+          campaign.campaignService == CampaignService.donasi
+              ? Column(
+                  children: [
+                    PatientField(campaign: campaign),
+                    mediumVerticalSpacing(),
+                  ],
+                )
+              : const SizedBox.shrink(),
 
           // Recipient
           RecipientField(campaign: campaign),
@@ -54,6 +61,7 @@ class FundrasierField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _user = campaign.user;
     return RoundedContainer(
       padding: const EdgeInsets.all(Dimension.MEDIUM),
       radius: Dimension.MEDIUM,
@@ -75,7 +83,7 @@ class FundrasierField extends StatelessWidget {
                   aspectRatio: 1 / 1,
                   child: CircleAvatar(
                     backgroundColor: AppColors.SECONDARY.withOpacity(0.15),
-                    foregroundImage: (campaign.user?.photo != null) ? NetworkImage(getUserImageUrl((campaign.user?.photo)!)) : null,
+                    foregroundImage: (_user?.photo != null) ? NetworkImage(getUserImageUrl((_user?.photo)!)) : null,
                   ),
                 ),
                 mediumHorizontalSpacing(),
@@ -84,11 +92,11 @@ class FundrasierField extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      campaign.user?.name ?? '-',
+                      campaign.userId == null ? 'Pundikita' : _user?.name ?? '-',
                       style: context.textTheme().titleSmall,
                     ),
                     Text(
-                      '${campaign.user?.agencyStatus ?? ''}', //TODO: get status verification
+                      '${_user?.agencyStatus ?? ''}', //TODO: get status verification
                       style: context.textTheme().bodySmall,
                     )
                   ],

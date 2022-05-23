@@ -59,7 +59,7 @@ class CampaignItem extends StatelessWidget {
                     ),
                     smallVerticalSpacing(),
                     Text(
-                      campaign.user?.name ?? '',
+                      campaign.userId == null ? 'Pundikita' : campaign.user?.name ?? '',
                       style: context.textTheme().bodyMedium,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
