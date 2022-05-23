@@ -17,12 +17,14 @@ import '../../../campaign/presentation/pages/campaign_all_page.dart';
 import 'home_campaign_item.dart';
 
 class HomeCampaignList extends StatelessWidget {
-  const HomeCampaignList({Key? key}) : super(key: key);
+  final String labelText;
+  final CampaignService service;
+  const HomeCampaignList({Key? key, required this.labelText, required this.service}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => locator<CampaignListBloc>()..add(const GetCampaignList(CampaignService.donasi, auth: false, sort: true)),
+      create: (context) => locator<CampaignListBloc>()..add(GetCampaignList(service, auth: false, sort: true)),
       child: Container(
         color: Colors.white,
         padding: const EdgeInsets.all(Dimension.MEDIUM),
@@ -32,9 +34,9 @@ class HomeCampaignList extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CustomLabel(title: AppLocale.loc.donationOptions),
+                CustomLabel(title: labelText),
                 TextButton(
-                  onPressed: () => Navigator.pushNamed(context, path.CAMPAIGN_ALL, arguments: CampaignAllPageRouteArguments(service: CampaignService.donasi)),
+                  onPressed: () => Navigator.pushNamed(context, path.CAMPAIGN_ALL, arguments: CampaignAllPageRouteArguments(service: service)),
                   child: Text(
                     AppLocale.loc.seeMore,
                     style: context.textTheme().bodySmall!.withColor(AppColors.SECONDARY),

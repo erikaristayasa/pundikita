@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pundi_kita/core/static/enums.dart';
 
 import '../../../../core/presentation/blocs/banner/banner_bloc.dart';
 import '../../../../core/static/colors.dart';
@@ -37,7 +38,15 @@ class _HomePageState extends State<HomePage> {
               smallVerticalSpacing(),
               const HomeCampaignService(),
               smallVerticalSpacing(),
-              const HomeCampaignList(),
+              const HomeCampaignList(
+                labelText: 'Mulai Berbagi Yuk...',
+                service: CampaignService.donasi,
+              ),
+              smallVerticalSpacing(),
+              const HomeCampaignList(
+                labelText: 'Program Khusus Pundikita',
+                service: CampaignService.zakat,
+              ),
             ],
           ),
         ),
