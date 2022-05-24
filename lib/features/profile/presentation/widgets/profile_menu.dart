@@ -6,6 +6,7 @@ class ProfileMenu extends StatelessWidget {
   final VoidCallback onTap;
   final String title;
   final String? subtitle;
+  final Widget? subtitleWidget;
   final Color bgColor;
   const ProfileMenu({
     Key? key,
@@ -13,6 +14,7 @@ class ProfileMenu extends StatelessWidget {
     required this.onTap,
     required this.title,
     this.subtitle,
+    this.subtitleWidget,
     this.bgColor = Colors.white,
   }) : super(key: key);
 
@@ -37,7 +39,7 @@ class ProfileMenu extends StatelessWidget {
                 subtitle!,
                 style: context.textTheme().labelSmall,
               )
-            : null,
+            : subtitleWidget,
         dense: subtitle != null,
         trailing: const Icon(
           Icons.arrow_forward_ios_rounded,

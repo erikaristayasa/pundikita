@@ -44,6 +44,7 @@ class Assets {
   static const String QRIS = 'assets/icons/payment_channel/qris.png';
 
   // profile page
+  static const String ACCOUNT_VERIFICATION = 'assets/icons/account_verification.png';
   static const String ABOUT = 'assets/icons/about.png';
   static const String FAQ = 'assets/icons/faq.png';
   static const String TERMS_AND_CONDITION = 'assets/icons/terms_and_condition.png';

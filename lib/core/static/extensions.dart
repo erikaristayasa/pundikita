@@ -257,3 +257,13 @@ extension HospitalityStatusTransForm on HospitalityStatus {
     }
   }
 }
+
+extension IntegerTransform on int {
+  DonatureType getDonatureType() {
+    if (this == 1) {
+      return DonatureType.personal;
+    } else {
+      return DonatureType.foundation;
+    }
+  }
+}

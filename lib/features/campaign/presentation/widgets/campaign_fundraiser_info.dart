@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pundi_kita/core/static/enums.dart';
-import 'package:pundi_kita/features/campaign/presentation/pages/fund_usage_detail_page.dart';
 
 import '../../../../core/domain/entities/campaign_entity.dart';
+import '../../../../core/presentation/widgets/account_verification.dart';
 import '../../../../core/presentation/widgets/custom_label.dart';
 import '../../../../core/presentation/widgets/rounded_container.dart';
 import '../../../../core/presentation/widgets/validation_icon.dart';
@@ -10,9 +9,11 @@ import '../../../../core/routes/path.dart' as path;
 import '../../../../core/static/assets.dart';
 import '../../../../core/static/colors.dart';
 import '../../../../core/static/dimens.dart';
+import '../../../../core/static/enums.dart';
 import '../../../../core/static/extensions.dart';
 import '../../../../core/utility/app_locale.dart';
 import '../../../../core/utility/helper.dart';
+import '../pages/fund_usage_detail_page.dart';
 
 class CampaignFundraiserInfo extends StatelessWidget {
   final Campaign campaign;
@@ -95,10 +96,11 @@ class FundrasierField extends StatelessWidget {
                       campaign.userId == null ? 'Pundikita' : _user?.name ?? '-',
                       style: context.textTheme().titleSmall,
                     ),
-                    Text(
-                      '${_user?.agencyStatus ?? ''}', //TODO: get status verification
-                      style: context.textTheme().bodySmall,
-                    )
+                    AccountVerificationField(user: campaign.user),
+                    // Text(
+                    //   getAccountVerificationInfo(campaign.user), //TODO: get status verification
+                    //   style: context.textTheme().bodySmall,
+                    // )
                   ],
                 )
               ],

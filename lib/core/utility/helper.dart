@@ -2,7 +2,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
+import 'package:pundi_kita/core/domain/entities/user_entity.dart';
 import 'package:pundi_kita/core/errors/failure.dart';
+import 'package:pundi_kita/core/static/enums.dart';
 
 import '../static/config.dart';
 import '../static/dimens.dart';
@@ -57,5 +59,47 @@ String errorMessage(Failure failure) {
     case ServerFailure:
     default:
       return 'Kesalahan server';
+  }
+}
+
+// String getAccountVerificationInfo(User? user) {
+//   if (user == null) {
+//     return '';
+//   }
+//   if (user.donatureType == DonatureType.personal) {
+//     // check personal status
+//     var text = 'Akun Personal: ${user.personalVerified ? 'Terverifikasi' : 'Belum terverifikasi'}';
+//     return text;
+//   } else {
+//     // check foundation status
+//     var text = 'Akun Yayasan: ${user.foundationVerified ? 'Terverifikasi' : 'Belum terverifikasi'}';
+//     return text;
+//   }
+// }
+
+String getAccountVerificationType(User? user) {
+  if (user == null) {
+    return '';
+  }
+  if (user.donatureType == DonatureType.personal) {
+    // check personal status
+    return 'Akun Personal';
+  } else {
+    // check foundation status
+    return 'Akun Yayasan';
+  }
+}
+
+bool getAccountVerificationStatus(User? user) {
+  if (user == null) {
+    return false;
+  }
+
+  if (user.donatureType == DonatureType.personal) {
+    // check personal status
+    return user.personalVerified;
+  } else {
+    // check foundation status
+    return user.foundationVerified;
   }
 }

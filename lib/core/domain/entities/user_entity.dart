@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:pundi_kita/core/static/enums.dart';
 
 class User extends Equatable {
   final num id;
@@ -16,8 +17,11 @@ class User extends Equatable {
   final String? googleUid;
   final String? facebookUid;
   final String? firebaseUid;
-  final int? agencyStatus;
+  // final int? agencyStatus;
   final bool campaignStatus;
+  final bool personalVerified;
+  final bool foundationVerified;
+  final DonatureType donatureType;
 
   const User({
     required this.id,
@@ -35,8 +39,11 @@ class User extends Equatable {
     required this.googleUid,
     required this.facebookUid,
     required this.firebaseUid,
-    required this.agencyStatus,
+    // required this.agencyStatus,
     required this.campaignStatus,
+    required this.personalVerified,
+    required this.foundationVerified,
+    required this.donatureType,
   });
 
   @override
@@ -56,7 +63,10 @@ class User extends Equatable {
         googleUid,
         facebookUid,
         firebaseUid,
-        agencyStatus,
+        // agencyStatus,
         campaignStatus,
+        personalVerified,
+        foundationVerified,
+        donatureType,
       ];
 }

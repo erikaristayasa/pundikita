@@ -1,3 +1,5 @@
+import 'package:pundi_kita/core/static/enums.dart';
+
 import '../../domain/entities/user_entity.dart';
 import '../../static/extensions.dart';
 
@@ -18,8 +20,11 @@ class UserModel extends User {
     required String? googleUid,
     required String? facebookUid,
     required String? firebaseUid,
-    required int? agencyStatus,
+    // required int? agencyStatus,
     required bool campaignStatus,
+    required bool personalVerified,
+    required bool foundationVerified,
+    required DonatureType donatureType,
   }) : super(
           id: id,
           name: name,
@@ -36,8 +41,11 @@ class UserModel extends User {
           googleUid: googleUid,
           facebookUid: facebookUid,
           firebaseUid: firebaseUid,
-          agencyStatus: agencyStatus,
+          // agencyStatus: agencyStatus,
           campaignStatus: campaignStatus,
+          personalVerified: personalVerified,
+          foundationVerified: foundationVerified,
+          donatureType: donatureType,
         );
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
         id: json['id'],
@@ -55,7 +63,10 @@ class UserModel extends User {
         googleUid: json['google_uid'],
         facebookUid: json['facebook_uid'],
         firebaseUid: json['firebase_uid'],
-        agencyStatus: json['status_lembaga'],
+        // agencyStatus: json['status_lembaga'],
         campaignStatus: json['status_campaign'] ?? false,
+        personalVerified: json['status_personal'] ?? false,
+        foundationVerified: json['status_yayasan'] ?? false,
+        donatureType: (json['tipe_donatur'] as int).getDonatureType(),
       );
 }
