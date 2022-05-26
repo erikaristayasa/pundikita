@@ -9,6 +9,7 @@ const String FORGOT_PASSWORD = '/forgot_password';
 const String MAIN = '/main';
 const String PROFILE = '/profile';
 const String PROFILE_UPDATE = '/profile_update';
+const String PROFILE_ACCOUNT_VERIFICATION = '/profile_account_verification';
 const String FAQ = '/faq';
 const String SETTING_DETAIL = '/setting_ detail';
 

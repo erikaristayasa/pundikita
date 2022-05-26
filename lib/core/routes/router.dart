@@ -14,6 +14,7 @@ import '../../features/donate/presentation/pages/donate_request_inquiry_result_p
 import '../../features/faq/presentation/pages/faq_page.dart';
 import '../../features/forgot_password/presentation/pages/forgot_password_page.dart';
 import '../../features/login/presentation/pages/login_page.dart';
+import '../../features/profile/presentation/pages/profile_account_verification_page.dart';
 import '../../features/profile/presentation/pages/profile_update_page.dart';
 import '../../features/profile/presentation/pages/setting_detail_page.dart';
 import '../../features/register/presentation/pages/register_page.dart';
@@ -45,6 +46,8 @@ class Router {
         );
       case path.PROFILE_UPDATE:
         return pageRoute(page: const ProfileUpdatePage());
+      case path.PROFILE_ACCOUNT_VERIFICATION:
+        return pageRoute(page: const ProfileAccountVerificationPage());
       case path.FAQ:
         return pageRoute(page: const FaqPage());
       case path.SETTING_DETAIL:

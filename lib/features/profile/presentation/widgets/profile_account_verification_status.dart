@@ -5,6 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import '../../../../core/domain/entities/user_entity.dart';
 import '../../../../core/presentation/widgets/account_verification.dart';
 import '../../../../core/presentation/widgets/rounded_container.dart';
+import '../../../../core/routes/path.dart';
 import '../../../../core/static/assets.dart';
 import '../../../../core/utility/helper.dart';
 import '../bloc/profile_bloc.dart';
@@ -28,7 +29,9 @@ class ProfileAccountVerificationStatus extends StatelessWidget {
             onTap: () {
               if (getAccountVerificationStatus(_data)) {
                 Fluttertoast.showToast(msg: "Akun anda telah terverifikasi.");
-              } else {}
+              } else {
+                Navigator.pushNamed(context, PROFILE_ACCOUNT_VERIFICATION);
+              }
             },
             title: 'Status akun Anda',
             subtitleWidget: AccountVerificationField(user: _data),
