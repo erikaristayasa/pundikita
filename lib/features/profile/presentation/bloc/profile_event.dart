@@ -17,3 +17,14 @@ class SubmitUpdate extends ProfileEvent {
   @override
   List<Object> get props => [data];
 }
+
+class SubmitVerificationData extends ProfileEvent {
+  final Map<String, dynamic> map;
+
+  const SubmitVerificationData({
+    required this.map,
+  });
+
+  @override
+  List<Object> get props => [map];
+}

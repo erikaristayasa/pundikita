@@ -36,5 +36,17 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         (_) => emit(ProfileUpdated()),
       );
     });
+
+    on<SubmitVerificationData>((event, emit) async {
+      emit(ProfileUpdating());
+
+      final formData = FormData.fromMap(event.map);
+
+      final result = await updateProfile(formData);
+      result.fold(
+        (failure) => emit(ProfileFailure(failure: failure)),
+        (_) => emit(ProfileUpdated()),
+      );
+    });
   }
 }

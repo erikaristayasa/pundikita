@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:pundi_kita/core/static/colors.dart';
-import 'package:pundi_kita/core/static/dimens.dart';
-import 'package:pundi_kita/core/utility/helper.dart';
 
 import '../../../../core/presentation/pages/loading_page.dart';
 import '../../../../core/presentation/widgets/custom_app_bar.dart';
 import '../../../../core/presentation/widgets/rounded_button.dart';
+import '../../../../core/static/dimens.dart';
 import '../../../../core/static/enums.dart';
+import '../../../../core/utility/helper.dart';
 import '../../../../core/utility/locator.dart';
+import '../../../register/presentation/cubit/additional_body_cubit.dart';
 import '../../../register/presentation/widgets/additional_forms/foundation_form.dart';
 import '../../../register/presentation/widgets/additional_forms/personal_form.dart';
 import '../bloc/profile_bloc.dart';
@@ -21,8 +21,15 @@ class ProfileAccountVerificationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LoaderOverlay(
-      child: BlocProvider(
-        create: (context) => locator<ProfileBloc>()..add(FetchProfile()),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => locator<ProfileBloc>()..add(FetchProfile()),
+          ),
+          BlocProvider(
+            create: (context) => AdditionalBodyCubit(),
+          ),
+        ],
         child: Scaffold(
           backgroundColor: Colors.white,
           appBar: const CustomAppBar(
@@ -33,6 +40,9 @@ class ProfileAccountVerificationPage extends StatelessWidget {
           body: SafeArea(
             child: BlocConsumer<ProfileBloc, ProfileState>(
               listener: (context, state) {
+                if (state is ProfileFailure) {
+                  context.read<ProfileBloc>().add(FetchProfile());
+                }
                 if (state is ProfileUpdating) {
                   context.loaderOverlay.show();
                 } else {
@@ -82,11 +92,18 @@ class _FormContainerState extends State<FormContainer> {
         children: [
           widget.child,
           mediumVerticalSpacing(),
-          RoundedButton(
-            title: 'Simpan',
-            onTap: () async {
-              if (_formKey.currentState!.validate()) {}
-              // context.read<ProfileBloc>().add(SubmitUpdate(data: await generatedFormData()));
+          BlocConsumer<AdditionalBodyCubit, Map<String, dynamic>>(
+            listener: (context, state) {
+              logMe(state);
+            },
+            builder: (context, state) {
+              return RoundedButton(
+                title: 'Simpan',
+                onTap: () async {
+                  if (_formKey.currentState!.validate()) {}
+                  context.read<ProfileBloc>().add(SubmitVerificationData(map: state));
+                },
+              );
             },
           )
         ],

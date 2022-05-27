@@ -33,7 +33,6 @@ import '../../features/login/domain/usecases/do_login.dart';
 import '../../features/login/domain/usecases/do_login_by_google.dart';
 import '../../features/login/presentation/bloc/login_bloc.dart';
 import '../../features/profile/domain/usecases/update_profile.dart';
-import '../../features/profile/domain/usecases/verify_account.dart';
 import '../../features/profile/presentation/bloc/profile_bloc.dart';
 import '../../features/profile/presentation/bloc/setting_bloc.dart';
 import '../../features/register/data/datasources/register_data_source.dart';
@@ -142,7 +141,6 @@ Future<void> locatorSetup() async {
   locator.registerLazySingleton<GetRandomBanner>(() => GetRandomBanner(locator()));
   locator.registerLazySingleton<GetProfile>(() => GetProfile(locator()));
   locator.registerLazySingleton<UpdateProfile>(() => UpdateProfile(locator()));
-  locator.registerLazySingleton<VerifyAccount>(() => VerifyAccount(locator()));
   locator.registerLazySingleton<GetSetting>(() => GetSetting(locator()));
   locator.registerLazySingleton<GetFaqList>(() => GetFaqList(locator()));
   locator.registerLazySingleton<CreateCampaign>(() => CreateCampaign(locator()));
