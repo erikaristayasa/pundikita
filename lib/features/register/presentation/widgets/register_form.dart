@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:pundi_kita/features/register/presentation/widgets/register_password_container.dart';
 
 import '../../../../core/presentation/widgets/custom_label.dart';
 import '../../../../core/presentation/widgets/custom_text_field.dart';
@@ -118,23 +119,9 @@ class _RegisterFormState extends State<RegisterForm> {
                   controller: _phoneController,
                 ),
                 mediumVerticalSpacing(),
-                CustomTextField(
-                  title: AppLocale.loc.password,
-                  placeholder: AppLocale.loc.password,
-                  inputType: TextInputType.visiblePassword,
-                  typeField: TypeField.password,
-                  isSecure: true,
-                  controller: _passwordController,
-                ),
-                mediumVerticalSpacing(),
-                CustomTextField(
-                  title: AppLocale.loc.passwordConfirmation,
-                  placeholder: AppLocale.loc.passwordConfirmation,
-                  inputType: TextInputType.visiblePassword,
-                  typeField: TypeField.confirmationPassword,
-                  isSecure: true,
-                  controller: _passwordConfirmationController,
-                  controllerMatcher: _passwordController,
+                RegisterPasswordContainer(
+                  passwordController: _passwordController,
+                  passwordConfirmationController: _passwordConfirmationController,
                 ),
                 mediumVerticalSpacing(),
                 const Divider(thickness: 1.0),
