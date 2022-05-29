@@ -23,9 +23,7 @@ class _HomeAllDonationState extends State<HomeAllDonation> {
   Widget build(BuildContext context) {
     return BlocBuilder<AllDonationBloc, AllDonationState>(
       builder: (context, state) {
-        if (state is AllDonationLoading) {
-          return const LoadingPage(isList: true);
-        } else if (state is AllDonationLoaded) {
+        if (state is AllDonationLoaded) {
           return DonationList(
             donations: state.data,
             labelText: "Do'a-doa#Kebaikan",

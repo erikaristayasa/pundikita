@@ -21,6 +21,7 @@ class DonationModel extends Donation {
     required DonationPayStatus status,
     required bool likeStatus,
     required DateTime? createdAt,
+    required List<LikeModel> likes,
   }) : super(
           id: id,
           userId: userId,
@@ -39,6 +40,7 @@ class DonationModel extends Donation {
           status: status,
           likeStatus: likeStatus,
           createdAt: createdAt,
+          likes: likes,
         );
   factory DonationModel.fromJson(Map<String, dynamic> json) => DonationModel(
         id: json['id'],
@@ -58,5 +60,15 @@ class DonationModel extends Donation {
         status: (json['status'] as num).donationPayStatus(),
         likeStatus: json['like_status'],
         createdAt: (json['created_at'] as String).toDate(),
+        likes: json['like'] != null ? json['like'].map((x) => LikeModel.fromJson(x)) : [],
+      );
+}
+
+class LikeModel extends Like {
+  const LikeModel({required int id, required int userId}) : super(id: id, userId: userId);
+
+  factory LikeModel.fromJson(Map<String, dynamic> json) => LikeModel(
+        id: json['id'],
+        userId: json['user_id'],
       );
 }

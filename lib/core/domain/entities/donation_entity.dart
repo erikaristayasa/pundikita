@@ -20,6 +20,7 @@ class Donation extends Equatable {
   final DonationPayStatus status;
   final bool likeStatus;
   final DateTime? createdAt;
+  final List<Like> likes;
 
   const Donation({
     required this.id,
@@ -39,6 +40,7 @@ class Donation extends Equatable {
     required this.status,
     required this.likeStatus,
     required this.createdAt,
+    required this.likes,
   });
 
   @override
@@ -60,5 +62,18 @@ class Donation extends Equatable {
         status,
         likeStatus,
         createdAt,
+        likes
       ];
+}
+
+class Like extends Equatable {
+  final int id, userId;
+
+  const Like({
+    required this.id,
+    required this.userId,
+  });
+
+  @override
+  List<Object?> get props => [id, userId];
 }

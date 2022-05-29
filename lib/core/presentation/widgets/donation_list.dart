@@ -9,11 +9,12 @@ import '../../static/extensions.dart';
 import '../../utility/app_locale.dart';
 import '../../utility/helper.dart';
 import '../cubits/donation_filter_cubit.dart';
+import '../cubits/donation_items_cubit.dart';
 import 'aamin_button.dart';
 import 'custom_label.dart';
 import 'rounded_container.dart';
 
-class DonationList extends StatelessWidget {
+class DonationList extends StatefulWidget {
   final String labelText;
   final List<Donation> donations;
   const DonationList({
@@ -21,6 +22,18 @@ class DonationList extends StatelessWidget {
     required this.donations,
     required this.labelText,
   }) : super(key: key);
+
+  @override
+  State<DonationList> createState() => _DonationListState();
+}
+
+class _DonationListState extends State<DonationList> {
+  late DonationItemsCubit donationItemsCubit;
+  @override
+  void initState() {
+    super.initState();
+    donationItemsCubit = DonationItemsCubit(donation: widget.donations);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,24 +47,35 @@ class DonationList extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              CustomLabel(title: labelText),
+              CustomLabel(title: widget.labelText),
               Flexible(
                 flex: 1,
                 fit: FlexFit.loose,
                 child: Filter(
-                  onCallback: (filter) {},
+                  onCallback: (filter) {
+                    donationItemsCubit.filter(filter);
+                  },
                 ),
               ),
             ],
           ),
-          ListView.separated(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: donations.length,
-            itemBuilder: (context, index) => Prayer(
-              donation: donations.elementAt(index),
-            ),
-            separatorBuilder: (context, index) => smallVerticalSpacing(),
+          BlocBuilder<DonationItemsCubit, List<Donation>>(
+            bloc: donationItemsCubit,
+            builder: (context, state) {
+              if (state.isEmpty) {
+                return const SizedBox.shrink();
+              } else {
+                return ListView.separated(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: state.length,
+                  itemBuilder: (context, index) => Prayer(
+                    donation: state.elementAt(index),
+                  ),
+                  separatorBuilder: (context, index) => smallVerticalSpacing(),
+                );
+              }
+            },
           )
         ],
       ),
@@ -158,7 +182,10 @@ class _FilterState extends State<Filter> {
         builder: (context, state) => DropdownButton<DonationFilter>(
           value: cubit.state,
           icon: const Icon(Icons.arrow_drop_down_rounded),
-          onChanged: (filter) => cubit.setFiler = filter!,
+          onChanged: (filter) {
+            cubit.setFiler = filter!;
+            widget.onCallback(filter);
+          },
           items: DonationFilter.values.map<DropdownMenuItem<DonationFilter>>((DonationFilter value) {
             return DropdownMenuItem<DonationFilter>(
               value: value,
