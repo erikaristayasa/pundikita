@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pundi_kita/core/static/assets.dart';
 
 import '../../../../core/routes/path.dart' as path;
 import '../../../../core/static/colors.dart';
@@ -19,9 +20,13 @@ class SearchBar extends StatelessWidget with PreferredSizeWidget {
       child: Row(
         children: [
           // TODO: change with app logo
-          const AspectRatio(
+          AspectRatio(
             aspectRatio: 1 / 1,
             child: CircleAvatar(
+              child: Padding(
+                padding: const EdgeInsets.all(1.5),
+                child: Image.asset(Assets.LOGO),
+              ),
               backgroundColor: Colors.white,
             ),
           ),

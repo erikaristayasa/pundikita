@@ -1,7 +1,8 @@
 // ignore_for_file: constant_identifier_names
 
 class Assets {
-  static const String LOGO = '';
+  static const String LOGO = 'assets/icons/logo.png';
+  static const String SPLASH_SCREEN = 'assets/images/splash_screen.png';
   static const String DEFAULT_IMAGE = 'assets/images/default_image.png';
   static const String POPUP_INFORMATION = 'assets/images/popup_information.jpeg';
   static const String WORK_IN_PROGRESS = 'assets/icons/work-in-progress.png';

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pundi_kita/core/static/assets.dart';
 
 import '../../routes/path.dart' as path;
 import '../../static/colors.dart';
@@ -33,13 +34,17 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     AppLocale.setLoc = getLocalizationString(context);
 
-    return const Scaffold(
+    return Scaffold(
       backgroundColor: AppColors.PRIMARY,
       body: SafeArea(
         child: SizedBox.expand(
           child: Center(
-            child: CircularProgressIndicator(
-              color: Colors.white,
+            // child: CircularProgressIndicator(
+            //   color: Colors.white,
+            // ),
+            child: Image.asset(
+              Assets.SPLASH_SCREEN,
+              fit: BoxFit.fitWidth,
             ),
           ),
         ),
