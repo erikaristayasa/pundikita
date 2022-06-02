@@ -17,7 +17,7 @@ class DonationItemsCubit extends Cubit<List<Donation>> {
         break;
       case DonationFilter.terpopuler:
         emit([]);
-        donation.sort((a, b) => b.likeStatus ? 1 : -1);
+        donation.sort((a, b) => b.likes.length.compareTo(a.likes.length));
         emit(donation);
         break;
     }

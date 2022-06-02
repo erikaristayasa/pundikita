@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:pundi_kita/core/utility/helper.dart';
 
 import '../../domain/entities/donation_entity.dart';
 import '../../domain/repositories/donate_repository.dart';
@@ -56,6 +57,7 @@ class DonateRepositoryImplementaion implements DonateRepository {
         final result = await dataSource.getDonationAllList();
         return Right(result);
       } catch (e) {
+        logMe(e);
         return Left(ServerFailure());
       }
     }

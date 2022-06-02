@@ -1,6 +1,9 @@
+import 'package:pundi_kita/core/data/models/user_model.dart';
+
 import '../../domain/entities/donation_entity.dart';
 import '../../static/enums.dart';
 import '../../static/extensions.dart';
+import 'campaign_model.dart';
 
 class DonationModel extends Donation {
   const DonationModel({
@@ -22,6 +25,8 @@ class DonationModel extends Donation {
     required bool likeStatus,
     required DateTime? createdAt,
     required List<LikeModel> likes,
+    required CampaignModel? campaign,
+    required UserModel? user,
   }) : super(
           id: id,
           userId: userId,
@@ -41,6 +46,8 @@ class DonationModel extends Donation {
           likeStatus: likeStatus,
           createdAt: createdAt,
           likes: likes,
+          campaign: campaign,
+          user: user,
         );
   factory DonationModel.fromJson(Map<String, dynamic> json) => DonationModel(
         id: json['id'],
@@ -60,7 +67,9 @@ class DonationModel extends Donation {
         status: (json['status'] as num).donationPayStatus(),
         likeStatus: json['like_status'],
         createdAt: (json['created_at'] as String).toDate(),
-        likes: json['like'] != null ? json['like'].map((x) => LikeModel.fromJson(x)) : [],
+        likes: json['like'] != null ? List<LikeModel>.from(json['like'].map((x) => LikeModel.fromJson(x))) : [],
+        campaign: json['campaign'] != null ? CampaignModel.fromJson(json['campaign']) : null,
+        user: json['user'] != null ? UserModel.fromJson(json['user']) : null,
       );
 }
 

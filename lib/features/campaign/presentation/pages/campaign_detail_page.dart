@@ -112,6 +112,7 @@ class _CampaignDetailPageState extends State<CampaignDetailPage> {
                             CampaignStory(story: campaign.story ?? ''),
                             smallVerticalSpacing(),
                             DonationList(
+                              globalCampaign: campaign,
                               donations: campaign.donation,
                               labelText: AppLocale.loc.praysGoodPeople,
                             ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../domain/entities/campaign_entity.dart';
 import '../../domain/entities/donation_entity.dart';
 import '../../static/colors.dart';
 import '../../static/dimens.dart';
@@ -17,10 +18,12 @@ import 'rounded_container.dart';
 class DonationList extends StatefulWidget {
   final String labelText;
   final List<Donation> donations;
+  final Campaign? globalCampaign;
   const DonationList({
     Key? key,
     required this.donations,
     required this.labelText,
+    this.globalCampaign,
   }) : super(key: key);
 
   @override
@@ -71,6 +74,7 @@ class _DonationListState extends State<DonationList> {
                   itemCount: state.length,
                   itemBuilder: (context, index) => Prayer(
                     donation: state.elementAt(index),
+                    campaign: widget.globalCampaign ?? state.elementAt(index).campaign,
                   ),
                   separatorBuilder: (context, index) => smallVerticalSpacing(),
                 );
@@ -85,10 +89,15 @@ class _DonationListState extends State<DonationList> {
 
 class Prayer extends StatelessWidget {
   final Donation donation;
-  const Prayer({Key? key, required this.donation}) : super(key: key);
+  final Campaign? campaign;
+  const Prayer({Key? key, required this.donation, required this.campaign}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final _profilePhoto = donation.user?.photo ?? '';
+    final _name = donation.user?.name ?? '';
+    final _campaignTitle = campaign?.title ?? '';
+    final _likeCount = donation.likes.length;
     return RoundedContainer(
       color: AppColors.BG_Grey,
       padding: const EdgeInsets.all(Dimension.MEDIUM),
@@ -101,6 +110,7 @@ class Prayer extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CircleAvatar(
+                  foregroundImage: NetworkImage(getUserImageUrl(_profilePhoto)),
                   backgroundColor: AppColors.PRIMARY.withOpacity(0.5),
                 ),
                 smallHorizontalSpacing(),
@@ -108,35 +118,47 @@ class Prayer extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Text(
-                      //   '_name: missing', //TODO: missing
-                      //   style: context.textTheme().titleSmall,
-                      // ),
-                      Text.rich(
-                        TextSpan(
-                          children: [
-                            TextSpan(
-                              text: AppLocale.loc.donate + ': ',
-                              style: context.textTheme().bodySmall,
-                            ),
-                            TextSpan(
-                              text: getFormattedPrice(donation.amountOfFunds.toInt()),
-                              style: context.textTheme().titleSmall,
-                            ),
-                          ],
-                        ),
-                      )
+                      Text(
+                        _name,
+                        style: context.textTheme().titleSmall,
+                      ),
+                      Text(
+                        _campaignTitle,
+                        style: context.textTheme().caption?.withColor(AppColors.PRIMARY),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      // Text.rich(
+                      //   TextSpan(
+                      //     children: [
+                      //       TextSpan(
+                      //         text: AppLocale.loc.donate + ': ',
+                      //         style: context.textTheme().bodySmall,
+                      //       ),
+                      //       TextSpan(
+                      //         text: getFormattedPrice(donation.amountOfFunds.toInt()),
+                      //         style: context.textTheme().titleSmall,
+                      //       ),
+                      //     ],
+                      //   ),
+                      // )
                     ],
                   ),
                 ),
                 Text(
-                  donation.createdAt.toText(),
-                  style: context.textTheme().labelSmall,
+                  '•' + donation.createdAt.toText(format: 'dd/MM/yyyy'),
+                  style: context.textTheme().labelSmall?.withColor(AppColors.PRIMARY),
                 )
               ],
             ),
           ),
           mediumVerticalSpacing(),
+          Text.rich(
+            TextSpan(children: [
+              TextSpan(text: '$_likeCount ', style: context.textTheme().titleSmall?.withColor(AppColors.PRIMARY)), //TODO: missing likes count
+              TextSpan(text: AppLocale.loc.prayForThis, style: context.textTheme().bodySmall?.withColor(AppColors.PRIMARY)),
+            ]),
+          ),
           Text(
             donation.pray ?? '',
             style: context.textTheme().bodyMedium,
@@ -144,12 +166,6 @@ class Prayer extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
           ),
           mediumVerticalSpacing(),
-          // Text.rich(
-          //   TextSpan(children: [
-          //     TextSpan(text: '5 ', style: context.textTheme().titleSmall), //TODO: missing likes count
-          //     TextSpan(text: AppLocale.loc.prayForThis, style: context.textTheme().bodySmall),
-          //   ]),
-          // ),
           const Divider(thickness: 1.5),
           Center(
             child: AaminButton(

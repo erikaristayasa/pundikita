@@ -1,4 +1,6 @@
 import 'package:equatable/equatable.dart';
+import 'package:pundi_kita/core/domain/entities/campaign_entity.dart';
+import 'package:pundi_kita/core/domain/entities/user_entity.dart';
 
 import '../../static/enums.dart';
 
@@ -21,6 +23,8 @@ class Donation extends Equatable {
   final bool likeStatus;
   final DateTime? createdAt;
   final List<Like> likes;
+  final Campaign? campaign;
+  final User? user;
 
   const Donation({
     required this.id,
@@ -41,6 +45,8 @@ class Donation extends Equatable {
     required this.likeStatus,
     required this.createdAt,
     required this.likes,
+    required this.campaign,
+    required this.user,
   });
 
   @override
@@ -62,7 +68,9 @@ class Donation extends Equatable {
         status,
         likeStatus,
         createdAt,
-        likes
+        likes,
+        campaign,
+        user,
       ];
 }
 
