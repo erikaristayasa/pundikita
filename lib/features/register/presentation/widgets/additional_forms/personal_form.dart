@@ -31,7 +31,8 @@ class _PersonalFormState extends State<PersonalForm> {
 
   updateAdditonalValue() async {
     final _map = {
-      if (_ktpPhoto != null) 'foto_ktp': await MultipartFile.fromFile(_ktpPhoto!.path, filename: _ktpPhoto!.name),
+      // if (_ktpPhoto != null) 'foto_ktp': await MultipartFile.fromFile(_ktpPhoto!.path, filename: _ktpPhoto!.name),
+      if (_ktpPhoto != null) 'foto_ktp': _ktpPhoto,
       'nomor_ktp': _ktpNumberController.text,
       'nama_ktp': _ktpNameController.text,
       'tempat_lahir_ktp': _ktpBirthPlaceController.text,

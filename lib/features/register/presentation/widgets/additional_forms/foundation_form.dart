@@ -36,8 +36,10 @@ class _FoundationFormState extends State<FoundationForm> {
 
   updateAdditonalValue() async {
     final _map = {
-      if (_foundationLicensePhoto != null) 'foto_surat_izin_yayasan': await MultipartFile.fromFile(_foundationLicensePhoto!.path, filename: _foundationLicensePhoto!.name),
-      if (_foundationInChargePhoto != null) 'foto_ktp_penanggung_jawab_yayasan': await MultipartFile.fromFile(_foundationInChargePhoto!.path, filename: _foundationInChargePhoto!.name),
+      // if (_foundationLicensePhoto != null) 'foto_surat_izin_yayasan': await MultipartFile.fromFile(_foundationLicensePhoto!.path, filename: _foundationLicensePhoto!.name),
+      if (_foundationLicensePhoto != null) 'foto_surat_izin': _foundationLicensePhoto,
+      // if (_foundationInChargePhoto != null) 'foto_ktp_penanggung_jawab_yayasan': await MultipartFile.fromFile(_foundationInChargePhoto!.path, filename: _foundationInChargePhoto!.name),
+      if (_foundationInChargePhoto != null) 'foto_ktp_penanggung_jawab_yayasan': _foundationInChargePhoto,
       'nama_yayasan': _foundationNameController.text,
       'alamat_yayasan': _foundationAddressController.text,
       'nomor_ktp_penanggung_jawab_yayasan': _foundationInChargeKtpNumberController.text,

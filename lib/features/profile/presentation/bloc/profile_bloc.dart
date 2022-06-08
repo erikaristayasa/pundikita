@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
+import 'package:pundi_kita/core/utility/helper.dart';
 import 'package:pundi_kita/features/profile/domain/usecases/update_profile.dart';
 
 import '../../../../core/domain/entities/user_entity.dart';
@@ -39,8 +40,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
     on<SubmitVerificationData>((event, emit) async {
       emit(ProfileUpdating());
-
-      final formData = FormData.fromMap(event.map);
+      final map = convertFileToMultipartFile(event.map);
+      final formData = FormData.fromMap(map);
 
       final result = await updateProfile(formData);
       result.fold(
